@@ -1,4 +1,26 @@
+@import url("https://fonts.googleapis.com/css2?family=DM+Sans:opsz@9..40&family=Roboto:ital,wght@0,100..900;1,100..900&display=swap");
 @import "tailwindcss";
+
+@theme {
+  --color-primary: #1844b5;
+  --color-secondary1: #4276fc;
+  --color-secondary2: #6291e1;
+  --color-secondary3: #d997de;
+  --color-secondary4: #c0e2d5;
+  --color-secondary5: #b3e9ce;
+
+  --color-black: #1a1c28;
+  --color-gray1: #626364;
+  --color-gray2: #626364;
+  --color-gray3: #f5f7ff;
+  --color-gray4: #fefefe;
+
+}
+
+@theme {
+  --font-roboto: "Roboto", sans-serif; 
+}
+
 @plugin "daisyui" {
-   themes: light --default;
- }
+  themes: light --default;
+}

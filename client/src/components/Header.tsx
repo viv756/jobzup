@@ -16,12 +16,12 @@ const Header = () => {
           <button className="btn rounded-3xl text-lg p-6 w-36">
             <LuCirclePower /> Login
           </button>
-          <button className="btn rounded-3xl text-lg bg-black text-white p-6 w-36 hover:bg-blue-700">
+          <button className="btn rounded-3xl text-lg bg-black text-white p-6 w-36 hover:bg-primary">
             Post a job
           </button>
         </div>
         <div className=" flex items-center sm:hidden">
-          <button className="rounded-xl p-2 bg-blue-700 text-white ">
+          <button className="rounded-xl p-2 bg-primary text-white ">
             <GiHamburgerMenu size={25} />
           </button>
         </div>

@@ -7,7 +7,7 @@ const Header = () => {
       <div className=" mx-auto flex justify-between h-[100px] ">
         <img src="/jobzup_logo.svg" className="sm:w-[170px] w-[150px] " alt="" />
         <ul className="sm:flex gap-7 items-center hidden ">
-          <li className="text-xl">Home</li>
+          <li className="text-xl font-roboto">Home</li>
           <li>Jobs</li>
           <li>About</li>
           <li>Contact</li>

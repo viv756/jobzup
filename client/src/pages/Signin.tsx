@@ -2,7 +2,7 @@ import React from "react";
 
 const Signin = () => {
   return (
-    <div className="min-h-[600px] bg-[#3367EC] max-w-[700px] p-15 rounded-2xl">
+    <div className="min-h-[600px] bg-[#3367EC] max-w-[700px] p-15 rounded-2xl mx-auto">
       <div className="flex items-center flex-col gap-4">
         <h1 className="text-6xl text-white font-semibold font-roboto">Sign Up</h1>
         <p className="text-2xl text-white font-roboto">Create an account and start using Jobzup.</p>

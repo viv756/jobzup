@@ -1,11 +1,14 @@
-
 import Header from "./components/Header";
 import Signin from "./pages/Signin";
 
 const App = () => {
-  return <div>
-    <Signin/>
-  </div>;
+  return (
+    <div>
+      <Header />
+
+      <Signin />
+    </div>
+  );
 };
 
 export default App;

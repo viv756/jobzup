@@ -7,7 +7,7 @@ const SingleJob = () => {
   return (
     <div className="sm:px-15">
       {/* Header */}
-      <div className="bg-[#2453CC] flex rounded-2xl min-h-[180px] items-center p-5 pl-13 gap-5">
+      <div className="bg-[#2453CC] flex rounded-2xl min-h-[180px] items-center p-5 pl-13 gap-7">
         <div className="bg-white rounded-full p-3">
           <img src="c_logo1.svg" alt="" className="w-18" />
         </div>

@@ -4,7 +4,7 @@ import { CiLocationOn } from "react-icons/ci";
 
 const Card = () => {
   return (
-    <div className=" max-w-md overflow-hidden rounded-xl bg-white shadow p-6 border border-secondary2">
+    <div className=" max-w-[450px] overflow-hidden rounded-xl bg-gray3 hover:bg-white shadow p-6 border border-secondary2">
       <div className="flex items-center gap-3">
         <img src="/c_logo1.svg" className="w-15" />
         <h1 className="text-[26px] font-roboto font-semibold">Swift works Inc</h1>

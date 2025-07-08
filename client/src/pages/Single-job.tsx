@@ -22,7 +22,7 @@ const SingleJob = () => {
         </div>
       </div>
 
-      <div className="mt-20 flex gap-30">
+      <div className="mt-20 sm:flex gap-30">
         <div>
           <h2 className="text-3xl font-semibold font-roboto text-gray-800">Job description</h2>
           <hr className="border border-gray-300 mt-5" />
@@ -106,7 +106,7 @@ const SingleJob = () => {
             <h3 className="text-white text-2xl font-roboto font-semibold">
               Interested in this job?
             </h3>
-            <button className="bg-[#2453CC] p-3 rounded-2xl text-white w-40">Apply now</button>
+            <button className="bg-[#2453CC] p-3 rounded-3xl text-md font-roboto text-white w-40 hover:bg-blue-900 transition duration-200 ">Apply now</button>
           </div>
 
       
@@ -134,7 +134,7 @@ const SingleJob = () => {
                 <p className="text-lg ">http://example@gmail.com</p>
               </div>
 
-              <button className="p-3 text-md bg-black text-white w-full mt-8  rounded-3xl hover:bg-blue-800 transition duration-300">
+              <button className="p-3 text-[18px] font-roboto bg-black text-white w-full mt-8  rounded-3xl hover:bg-blue-800 transition duration-300">
                 View Company
               </button>
             </div>

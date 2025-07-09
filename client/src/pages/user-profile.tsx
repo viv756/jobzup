@@ -83,8 +83,6 @@ const UserProfile = () => {
           </p>
 
           <h1 className="text-xl mt-6 font-semibold font-roboto">Work Experience</h1>
- 
-        
         </div>
       </div>
     </div>

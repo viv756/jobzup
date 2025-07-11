@@ -79,7 +79,7 @@ const UserProfile = () => {
             turn-around of quality work. For over 20 years I have served as a peer-reviewer focusing
             on writing and APA formatting for a national journal. Because of this, my proofreading
             skills are very honed causing errors to practically jump off the page. I have a recently
-            completed letter of recommendation from a journal editor filed here.
+          
           </p>
 
           <h1 className="text-xl mt-6 font-semibold font-roboto">Work Experience</h1>

@@ -1,17 +1,13 @@
-import Card from "./components/Card";
-import Header from "./components/Header";
-import Postjob from "./pages/Post-job";
-import Signin from "./pages/Signin";
-import SingleJob from "./pages/Single-job";
-import UserProfile from "./pages/user-profile";
+import { BrowserRouter, Route, Routes } from "react-router-dom";
+import SignUp from "./pages/SignUp";
 
 const App = () => {
   return (
-    <div>
-      
-      <Header />
-      <UserProfile/>
-    </div>
+    <BrowserRouter>
+      <Routes>
+        <Route path="/sign-up" element={<SignUp />} />
+      </Routes>
+    </BrowserRouter>
   );
 };
 

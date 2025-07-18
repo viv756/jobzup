@@ -24,4 +24,4 @@ const httpConfig = () => ({
 
 export const HTTPSTATUS = httpConfig();
 
-export type HttpStatusCodeType = (typeof HTTPSTATUS)[keyof typeof HTTPSTATUS];
+export type HttpStatusCodeType = (typeof HTTPSTATUS)[keyof typeof HTTPSTATUS]; // 200 | 201 | 404;

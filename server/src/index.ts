@@ -15,7 +15,6 @@ app.get(
     res.status(HTTPSTATUS.OK).json({
       message: "Hello",
     });
-    // throw new Error("error")
   })
 );
 

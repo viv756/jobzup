@@ -17,6 +17,13 @@ export class AppError extends Error {
   }
 }
 
+export class BadRequestException extends AppError {
+  constructor(message = "Bad Request", errorCode?: ErrorCodeEnumType) {
+    super(message, HTTPSTATUS.BAD_REQUEST, errorCode || ErrorCodeEnum.VALIDATION_ERROR);
+  }
+}
+
+
 export class NOTFoundExeption extends AppError {
   constructor(message = "Resource not found", errorCode?: ErrorCodeEnumType) {
     super(message, HTTPSTATUS.NOT_FOUND, errorCode || ErrorCodeEnum.RESOURCE_NOT_FOUND);

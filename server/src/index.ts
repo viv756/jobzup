@@ -6,8 +6,12 @@ import connectDatabase from "./config/database.config";
 import asyncHandler from "./middlewares/asyncHandler.middlewares";
 import { HTTPSTATUS } from "./config/http.config";
 import { errorHandler } from "./middlewares/errorHandler.middleware";
+import authRoutes from "./routes/auth.route";
 
 const app = express();
+const BASE_PATH = config.BASE_PATH;
+
+app.use(express.json())
 
 app.get(
   "/",
@@ -17,6 +21,8 @@ app.get(
     });
   })
 );
+
+app.use(`${BASE_PATH}/auth`, authRoutes);
 
 app.use(errorHandler);
 

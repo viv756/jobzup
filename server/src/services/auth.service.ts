@@ -1,5 +1,5 @@
 import UserModel from "../models/user.model";
-import { BadRequestException } from "../utils/appError";
+import { BadRequestException, UnauthorizedException } from "../utils/appError";
 
 export const registerService = async (body: {
   name: string;
@@ -29,4 +29,20 @@ export const registerService = async (body: {
   } catch (error) {
     throw error;
   }
+};
+
+export const validateUserService = async (body: { email: string; password: string }) => {
+  const { email, password } = body;
+
+  const user = await UserModel.findOne({ email });
+  if (!user) {
+    throw new BadRequestException("User not found");
+  }
+
+  const isMatch = await user.comparePassword(password);
+  if (!isMatch) {
+    throw new UnauthorizedException("Invalid email or password");
+  }
+
+  return user.omitPassword();
 };

@@ -1,3 +1,4 @@
+import { SignOptions } from "jsonwebtoken";
 import { getEnv } from "../utils/get-env";
 
 const appConfig = () => ({
@@ -5,6 +6,11 @@ const appConfig = () => ({
   PORT: getEnv("PORT", "5000"),
   BASE_PATH: getEnv("BASE_PATH", "/api"),
   MONGO_URI: getEnv("MONGO_URI", ""),
+
+  JWT_SECRET: getEnv("JWT_SECRET"),
+  // this value is of the same type as the expiresIn   property from the SignOptions type provided by jsonwebtoken.
+  JWT_EXPIRES_IN: getEnv("JWT_EXPIRES_IN", "1d") as SignOptions["expiresIn"],
+  COOKIE_EXPIRE : getEnv("COOKIE_EXPIRE")
 });
 
 export const config = appConfig();

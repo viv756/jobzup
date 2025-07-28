@@ -1,5 +1,6 @@
 import "dotenv/config";
 import express, { NextFunction, Request, Response } from "express";
+import cookieParser from "cookie-parser";
 
 import { config } from "./config/app.config";
 import connectDatabase from "./config/database.config";
@@ -7,11 +8,14 @@ import asyncHandler from "./middlewares/asyncHandler.middlewares";
 import { HTTPSTATUS } from "./config/http.config";
 import { errorHandler } from "./middlewares/errorHandler.middleware";
 import authRoutes from "./routes/auth.route";
+import userRoutes from "./routes/user.route";
+import { isAuthenticated } from "./middlewares/isAuthenticated.middleware";
 
 const app = express();
 const BASE_PATH = config.BASE_PATH;
 
-app.use(express.json())
+app.use(express.json());
+app.use(cookieParser())
 
 app.get(
   "/",
@@ -23,6 +27,7 @@ app.get(
 );
 
 app.use(`${BASE_PATH}/auth`, authRoutes);
+app.use(`${BASE_PATH}/user`, isAuthenticated, userRoutes);
 
 app.use(errorHandler);
 

@@ -1,55 +1,129 @@
 import mongoose, { Document, Schema } from "mongoose";
-import { GenderEnumType } from "../enums/profile.enum";
+import { GenderEnum, GenderEnumType } from "../enums/profile.enum";
 
-export interface WorkExperiance {
+type WorkExperiance = {
   company: string;
   position: string;
   startDate: Date | null;
-  endDate?: Date | null;
-  description?: string;
-}
+  endDate: Date | null;
+  description: string;
+};
 
-export interface Education {
+type Education = {
   collegeName: string;
   department: string;
   startDate: Date | null;
   endDate: Date | null;
-  description?: string;
-}
+  description: string | null;
+};
 
-export interface Awards {
+type Awards = {
   name: string;
   date: Date | null;
-  description?: string;
-}
+  description: string | null;
+};
 
 export interface ProfileDocument extends Document {
   userId: mongoose.Types.ObjectId;
-  bio: string;
-  location: string;
-  language: string[];
-  skills: string[];
-  workExperiance?: WorkExperiance[];
-  education: Education[];
-  awards?: Awards[];
-  qualification: string;
-  gender: GenderEnumType;
-  age: number;
+  bio: string | null;
+  location: string | null;
+  language: string[] | null;
+  skills: string[] | null;
+  workExperiance: WorkExperiance[] | null;
+  education: Education[] | null;
+  awards: Awards[] | null;
+  qualification: string | null;
+  gender: GenderEnumType | null;
+  age: string | null;
 }
 
 const profileSchema = new Schema<ProfileDocument>({
   userId: {
     type: Schema.Types.ObjectId,
     ref: "User",
+    required: true,
   },
   bio: {
     type: String,
-    default:null,
-    trim:true
+    default: null,
+    trim: true,
   },
   location: {
     type: String,
-    trim:true
+    default: null,
+    trim: true,
   },
-
+  language: {
+    type: [String],
+    default: null,
+  },
+  skills: {
+    type: [String],
+    default: null,
+  },
+  workExperiance: [
+    {
+      company: String,
+      position: String,
+      startDate: {
+        type: Date,
+        default: null,
+      },
+      endDate: {
+        type: Date,
+        default: null,
+      },
+      description: {
+        type: String,
+        default: null,
+      },
+    },
+  ],
+  education: [
+    {
+      collegeName: String,
+      department: String,
+      startDate: {
+        type: Date,
+        default: null,
+      },
+      endDate: {
+        type: Date,
+        default: null,
+      },
+      description: {
+        type: String,
+        default: null,
+      },
+    },
+  ],
+  awards: [
+    {
+      name: String,
+      date: {
+        type: Date,
+        default: null,
+      },
+      description: {
+        type: String,
+        default: null,
+      },
+    },
+  ],
+  qualification: {
+    type: String,
+    default: null,
+  },
+  gender: {
+    type: String,
+    enum: Object.values(GenderEnum),
+    default: null,
+  },
+  age: {
+    type: String,
+    default: null,
+  },
 });
+
+const Profilemodel = mongoose.model<ProfileDocument>("Profile", profileSchema);
+export default Profilemodel;

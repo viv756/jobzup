@@ -7,15 +7,16 @@ import connectDatabase from "./config/database.config";
 import asyncHandler from "./middlewares/asyncHandler.middlewares";
 import { HTTPSTATUS } from "./config/http.config";
 import { errorHandler } from "./middlewares/errorHandler.middleware";
+import { isAuthenticated } from "./middlewares/isAuthenticated.middleware";
 import authRoutes from "./routes/auth.route";
 import userRoutes from "./routes/user.route";
-import { isAuthenticated } from "./middlewares/isAuthenticated.middleware";
+import companyRoutes from "./routes/company.route";
 
 const app = express();
 const BASE_PATH = config.BASE_PATH;
 
 app.use(express.json());
-app.use(cookieParser())
+app.use(cookieParser());
 
 app.get(
   "/",
@@ -28,6 +29,7 @@ app.get(
 
 app.use(`${BASE_PATH}/auth`, authRoutes);
 app.use(`${BASE_PATH}/user`, isAuthenticated, userRoutes);
+app.use(`${BASE_PATH}/company`, isAuthenticated, companyRoutes);
 
 app.use(errorHandler);
 

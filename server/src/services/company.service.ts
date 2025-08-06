@@ -17,7 +17,7 @@ export const createCompanyService = async (
 ) => {
   const company = new CompanyModel({
     companyName: body.companyName,
-    comapanySize: body.companySize,
+    companySize: body.companySize,
     avgSalary: body.avgSalary,
     location: body.location,
     about: body.about,

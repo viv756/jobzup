@@ -2,7 +2,7 @@ import mongoose, { Document, Schema } from "mongoose";
 
 interface CompanyDocument extends Document {
   companyName: string;
-  comapanySize: string;
+  companySize: string;
   avgSalary: string;
   location: string;
   about: string;
@@ -23,7 +23,7 @@ const companySchema = new Schema<CompanyDocument>(
       required: true,
       trim: true,
     },
-    comapanySize: {
+    companySize: {
       type: String,
       required: true,
     },

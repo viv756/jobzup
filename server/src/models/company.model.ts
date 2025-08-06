@@ -12,6 +12,7 @@ interface CompanyDocument extends Document {
   companyLogo: string;
   createdAt: Date;
   updatedAt: Date;
+  createdBy: mongoose.Types.ObjectId;
   websiteLink: string | null;
 }
 
@@ -52,6 +53,11 @@ const companySchema = new Schema<CompanyDocument>(
     },
     companyLogo: {
       type: String,
+      required: true,
+    },
+    createdBy: {
+      type: Schema.Types.ObjectId,
+      ref: "User",
       required: true,
     },
     websiteLink: {

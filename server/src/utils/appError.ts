@@ -33,7 +33,7 @@ export class BadRequestException extends AppError {
   }
 }
 
-export class NOTFoundExeption extends AppError {
+export class NotFoundExeption extends AppError {
   constructor(message = "Resource not found", errorCode?: ErrorCodeEnumType) {
     super(message, HTTPSTATUS.NOT_FOUND, errorCode || ErrorCodeEnum.RESOURCE_NOT_FOUND);
   }

@@ -1,9 +1,10 @@
 import { Router } from "express";
-import { createCompanyController } from "../controllers/company.controller";
+import { createCompanyController, getRecruiterCurrentCompany } from "../controllers/company.controller";
 
 const companyRoutes = Router();
 
-companyRoutes.post("/create", createCompanyController);
+companyRoutes.post("/create/new", createCompanyController);
+companyRoutes.get("/currentCompany",getRecruiterCurrentCompany)
 
 
 export default companyRoutes

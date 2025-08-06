@@ -4,10 +4,13 @@ import asyncHandler from "../middlewares/asyncHandler.middlewares";
 import { HTTPSTATUS } from "../config/http.config";
 import { UnauthorizedException } from "../utils/appError";
 import { createCompanySchema } from "../validation/company.validation";
-import { createCompanyService } from "../services/company.service";
+import {
+  createCompanyService,
+  getRecruiterCurrentCompanyService,
+} from "../services/company.service";
 
 export const createCompanyController = asyncHandler(async (req: Request, res: Response) => {
-  if (req.user?.role === "RECRUITER") {
+  if (!(req.user?.role === "RECRUITER")) {
     throw new UnauthorizedException(
       "You do not have the necessary permissions to perform this action"
     );
@@ -20,6 +23,23 @@ export const createCompanyController = asyncHandler(async (req: Request, res: Re
 
   res.status(HTTPSTATUS.CREATED).json({
     message: "Company is created",
+    company,
+  });
+});
+
+export const getRecruiterCurrentCompany = asyncHandler(async (req: Request, res: Response) => {
+  if (!(req.user?.role === "RECRUITER")) {
+    throw new UnauthorizedException(
+      "You do not have the necessary permissions to perform this action"
+    );
+  }
+
+  const userId = req.user?._id as string;
+
+  const { company } = await getRecruiterCurrentCompanyService(userId);
+
+  res.status(HTTPSTATUS.OK).json({
+    message: "compnay fetched successfully",
     company,
   });
 });

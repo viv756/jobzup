@@ -6,6 +6,7 @@ import { UnauthorizedException } from "../utils/appError";
 import { createCompanySchema } from "../validation/company.validation";
 import {
   createCompanyService,
+  deleteComapnyService,
   getRecruiterCurrentCompanyService,
 } from "../services/company.service";
 
@@ -27,7 +28,26 @@ export const createCompanyController = asyncHandler(async (req: Request, res: Re
   });
 });
 
-export const getRecruiterCurrentCompany = asyncHandler(async (req: Request, res: Response) => {
+export const getRecruiterCurrentCompanyController = asyncHandler(
+  async (req: Request, res: Response) => {
+    if (!(req.user?.role === "RECRUITER")) {
+      throw new UnauthorizedException(
+        "You do not have the necessary permissions to perform this action"
+      );
+    }
+
+    const userId = req.user?._id as string;
+
+    const { company } = await getRecruiterCurrentCompanyService(userId);
+
+    res.status(HTTPSTATUS.OK).json({
+      message: "compnay fetched successfully",
+      company,
+    });
+  }
+);
+
+export const deleteCompanyController = asyncHandler(async (req: Request, res: Response) => {
   if (!(req.user?.role === "RECRUITER")) {
     throw new UnauthorizedException(
       "You do not have the necessary permissions to perform this action"
@@ -35,11 +55,11 @@ export const getRecruiterCurrentCompany = asyncHandler(async (req: Request, res:
   }
 
   const userId = req.user?._id as string;
+  const companyId = req.params.id;
 
-  const { company } = await getRecruiterCurrentCompanyService(userId);
+  await deleteComapnyService(userId, companyId);
 
-  res.status(HTTPSTATUS.OK).json({
-    message: "compnay fetched successfully",
-    company,
+  return res.status(HTTPSTATUS.OK).json({
+    message: "Company deleted successfully",
   });
 });

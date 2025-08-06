@@ -1,10 +1,14 @@
 import { Router } from "express";
-import { createCompanyController, getRecruiterCurrentCompany } from "../controllers/company.controller";
+import {
+  createCompanyController,
+  deleteCompanyController,
+  getRecruiterCurrentCompanyController,
+} from "../controllers/company.controller";
 
 const companyRoutes = Router();
 
 companyRoutes.post("/create/new", createCompanyController);
-companyRoutes.get("/currentCompany",getRecruiterCurrentCompany)
+companyRoutes.get("/currentCompany", getRecruiterCurrentCompanyController);
+companyRoutes.delete("/:id/delete", deleteCompanyController);
 
-
-export default companyRoutes
+export default companyRoutes;

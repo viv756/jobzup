@@ -16,10 +16,9 @@ export const createCompanyService = async (
     websiteLink?: string;
   }
 ) => {
-
-  const userCurrentCompany = await CompanyModel.findOne({ createdBy: userId })
+  const userCurrentCompany = await CompanyModel.findOne({ createdBy: userId });
   if (userCurrentCompany) {
-    throw new BadRequestException("You have already registered a company")
+    throw new BadRequestException("You have already registered a company");
   }
 
   const company = new CompanyModel({
@@ -49,4 +48,20 @@ export const getRecruiterCurrentCompanyService = async (userId: string) => {
   }
 
   return { company };
+};
+
+export const deleteComapnyService = async (userId: string, companyId: string) => {
+  const company = await CompanyModel.findById(companyId);
+  if (!company) {
+    throw new NotFoundExeption("Company not found");
+  }
+
+  // equals() is a method on ObjectId that can compare an ObjectId to either another objectId or string like userId
+  if (!company.createdBy.equals(userId)) {
+    throw new BadRequestException("You can only delete your company");
+  }
+
+  await company.deleteOne();
+
+  return company;
 };

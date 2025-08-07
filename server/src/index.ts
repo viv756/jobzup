@@ -11,6 +11,7 @@ import { isAuthenticated } from "./middlewares/isAuthenticated.middleware";
 import authRoutes from "./routes/auth.route";
 import userRoutes from "./routes/user.route";
 import companyRoutes from "./routes/company.route";
+import profileRoutes from "./routes/profile.routes";
 
 const app = express();
 const BASE_PATH = config.BASE_PATH;
@@ -30,6 +31,7 @@ app.get(
 app.use(`${BASE_PATH}/auth`, authRoutes);
 app.use(`${BASE_PATH}/user`, isAuthenticated, userRoutes);
 app.use(`${BASE_PATH}/company`, isAuthenticated, companyRoutes);
+app.use(`${BASE_PATH}/profile`, isAuthenticated, profileRoutes);
 
 app.use(errorHandler);
 

@@ -22,7 +22,7 @@ export const createCompanyController = asyncHandler(async (req: Request, res: Re
   const body = createCompanySchema.parse(req.body);
   const { company } = await createCompanyService(userId, body);
 
-  res.status(HTTPSTATUS.CREATED).json({
+  return res.status(HTTPSTATUS.CREATED).json({
     message: "Company is created",
     company,
   });
@@ -40,7 +40,7 @@ export const getRecruiterCurrentCompanyController = asyncHandler(
 
     const { company } = await getRecruiterCurrentCompanyService(userId);
 
-    res.status(HTTPSTATUS.OK).json({
+    return res.status(HTTPSTATUS.OK).json({
       message: "compnay fetched successfully",
       company,
     });

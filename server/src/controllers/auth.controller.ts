@@ -13,7 +13,7 @@ export const registerController = asyncHandler(async (req: Request, res: Respons
   });
 
   await registerService(body);
-  res.status(HTTPSTATUS.CREATED).json({
+  return res.status(HTTPSTATUS.CREATED).json({
     message: "User created successfully",
   });
 });
@@ -26,7 +26,7 @@ export const loginController = asyncHandler(async (req: Request, res: Response) 
   const user = await validateUserService(body);
   const accessToken = signJwtToken({ userId: user._id });
 
-  res
+  return res
     .status(HTTPSTATUS.OK)
     .cookie("access_token", accessToken, {
       httpOnly: true,

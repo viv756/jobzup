@@ -12,6 +12,8 @@ export interface JobDocument extends Document {
   salary: string;
   responsibilities: string;
   requirements: string;
+  createdBy:mongoose.Types.ObjectId;
+  companyId: mongoose.Types.ObjectId;
 }
 
 const jobSchema = new Schema<JobDocument>({
@@ -63,6 +65,16 @@ const jobSchema = new Schema<JobDocument>({
     type: String,
     trim: true,
   },
+  createdBy: {
+    type: Schema.Types.ObjectId,
+    ref: "User",
+    required:true
+  },
+  companyId: {
+    type: Schema.Types.ObjectId,
+    ref: "Company",
+    required:true
+  }
 });
 
 const JobModel = mongoose.model<JobDocument>("Job", jobSchema);

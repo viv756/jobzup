@@ -12,6 +12,7 @@ import authRoutes from "./routes/auth.route";
 import userRoutes from "./routes/user.route";
 import companyRoutes from "./routes/company.route";
 import profileRoutes from "./routes/profile.routes";
+import jobRoutes from "./routes/job.route";
 
 const app = express();
 const BASE_PATH = config.BASE_PATH;
@@ -32,6 +33,7 @@ app.use(`${BASE_PATH}/auth`, authRoutes);
 app.use(`${BASE_PATH}/user`, isAuthenticated, userRoutes);
 app.use(`${BASE_PATH}/company`, isAuthenticated, companyRoutes);
 app.use(`${BASE_PATH}/profile`, isAuthenticated, profileRoutes);
+app.use(`${BASE_PATH}/job`, isAuthenticated, jobRoutes);
 
 app.use(errorHandler);
 

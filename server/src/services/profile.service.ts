@@ -1,8 +1,15 @@
+import { Types } from "mongoose";
 import Profilemodel from "../models/profile.model";
+import UserModel from "../models/user.model";
 import { BadRequestException, NotFoundExeption } from "../utils/appError";
 import { CreateProfileType, UpdateProfileType } from "../validation/profile.validation";
 
 export const createProfileService = async (body: CreateProfileType, userId: string) => {
+  const user = await UserModel.findById(userId);
+  if (!user) {
+    throw new NotFoundExeption("User is not found");
+  }
+
   const userProfile = new Profilemodel({
     userId: userId,
     bio: body.bio,
@@ -18,6 +25,10 @@ export const createProfileService = async (body: CreateProfileType, userId: stri
   });
 
   await userProfile.save();
+  
+  // add the profile _id to user
+  user.profile = userProfile._id as Types.ObjectId;
+  await user.save()
 
   return { userProfile };
 };

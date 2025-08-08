@@ -32,3 +32,13 @@ export const createJobService = async (userId: string, compnayId: string, body: 
 
   return { job };
 };
+
+export const getJpbByIdservice = async (jobId: string) => {
+
+  const job = await JobModel.findById(jobId);
+  if (!job) {
+    throw new BadRequestException("Job is not found");
+  }
+
+  return { job };
+};

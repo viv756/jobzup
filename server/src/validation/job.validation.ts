@@ -1,6 +1,7 @@
 import z from "zod";
 
 export const companyIdSchema = z.string().trim().min(1, { message: "Company ID is required" });
+export const jobIdSchema = z.string().trim().min(1, { message: "Job ID is required" });
 
 export const closeDateSchema = z
   .string()

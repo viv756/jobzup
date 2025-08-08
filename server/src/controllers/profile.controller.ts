@@ -1,4 +1,5 @@
 import { Request, Response } from "express";
+
 import asyncHandler from "../middlewares/asyncHandler.middlewares";
 import { createProfileSchema } from "../validation/profile.validation";
 import { createProfileService } from "../services/profile.service";

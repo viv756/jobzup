@@ -1,5 +1,6 @@
 import Profilemodel from "../models/profile.model";
-import { CreateProfileType } from "../validation/profile.validation";
+import { BadRequestException, NotFoundExeption } from "../utils/appError";
+import { CreateProfileType, UpdateProfileType } from "../validation/profile.validation";
 
 export const createProfileService = async (body: CreateProfileType, userId: string) => {
   const userProfile = new Profilemodel({
@@ -19,4 +20,32 @@ export const createProfileService = async (body: CreateProfileType, userId: stri
   await userProfile.save();
 
   return { userProfile };
+};
+
+export const getUserProfileService = async (userId: string) => {
+  const userProfile = await Profilemodel.findOne({ userId });
+  if (!userProfile) {
+    throw new NotFoundExeption("Profile not found");
+  }
+
+  return { userProfile };
+};
+
+export const updateProfileService = async (userId: string, body: UpdateProfileType) => {
+  const profile = await Profilemodel.findOne({ userId });
+  if (!profile) {
+    throw new NotFoundExeption("Profile not found");
+  }
+
+  const updatedProfile = await Profilemodel.findByIdAndUpdate(
+    profile._id,
+    { ...body },
+    { new: true }
+  );
+
+  if (!updatedProfile) {
+    throw new BadRequestException("Failed to update profile");
+  }
+
+  return { updatedProfile };
 };

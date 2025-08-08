@@ -102,4 +102,18 @@ export const createProfileSchema = z.object({
   age: z.string().trim().nullable().default(null),
 });
 
+export const updateProfileSchema = z.object({
+  bio: z.string().trim().optional(),
+  location: z.string().trim().optional(),
+  language: z.array(z.string().trim()).optional(),
+  skills: z.array(z.string().trim()).optional(),
+  workExperiance: workExperianceSchema,
+  education: educationSchema,
+  awards: awardSchema,
+  qualification: z.string().trim().nullable().default(null),
+  gender: z.enum(["Male", "Female", "Other"]).nullable().default(null),
+  age: z.string().trim().nullable().default(null),
+});
+
 export type CreateProfileType = z.infer<typeof createProfileSchema>;
+export type UpdateProfileType = z.infer<typeof updateProfileSchema>;

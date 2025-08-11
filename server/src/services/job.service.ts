@@ -34,11 +34,52 @@ export const createJobService = async (userId: string, compnayId: string, body: 
 };
 
 export const getJpbByIdservice = async (jobId: string) => {
-
   const job = await JobModel.findById(jobId);
   if (!job) {
     throw new BadRequestException("Job is not found");
   }
 
   return { job };
+};
+
+export const getAllJobsService = async (
+  filters: {
+    category?: string;
+    keyword?: string;
+  },
+  pagination: {
+    pageSize: number;
+    pageNumber: number;
+  }
+) => {
+  const query: Record<string, any> = {};
+
+  if (filters.category) {
+    query.category = filters.category;
+  }
+
+  if (filters.keyword && filters.keyword !== undefined) {
+    query.title = { $regex: filters.keyword, $options: "i" };
+  }
+
+  const { pageSize, pageNumber } = pagination;
+  const skip = (pageNumber - 1) * pageSize;
+
+  const [jobs, totalCount] = await Promise.all([
+    JobModel.find(query).skip(skip).limit(pageSize).sort({ createdAt: -1 }),
+    JobModel.countDocuments(query),
+  ]);
+
+  const totalPages = Math.ceil(totalCount / pageSize);
+
+  return {
+    jobs,
+    pagination: {
+      pageSize,
+      pageNumber,
+      totalCount,
+      totalPages,
+      skip,
+    },
+  };
 };

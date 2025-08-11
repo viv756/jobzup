@@ -1,7 +1,7 @@
 import { Request, Response } from "express";
 import asyncHandler from "../middlewares/asyncHandler.middlewares";
 import { companyIdSchema, createJobSchema, jobIdSchema } from "../validation/job.validation";
-import { createJobService, getJpbByIdservice } from "../services/job.service";
+import { createJobService, getAllJobsService, getJpbByIdservice } from "../services/job.service";
 import { HTTPSTATUS } from "../config/http.config";
 
 export const createJobController = asyncHandler(async (req: Request, res: Response) => {
@@ -26,5 +26,24 @@ export const getJobByIdController = asyncHandler(async (req: Request, res: Respo
   return res.status(HTTPSTATUS.OK).json({
     message: "Job fetched successfully",
     job,
+  });
+});
+
+export const getAllJobsController = asyncHandler(async (req: Request, res: Response) => {
+  const filters = {
+    category: req.query.category as string | undefined,
+    keyword: req.query.keyword as string | undefined,
+  };
+
+  const pagination = {
+    pageSize: parseInt(req.query.pageSize as string) || 10,
+    pageNumber: parseInt(req.query.pageNumber as string) || 1,
+  };
+
+  const result = await getAllJobsService(filters, pagination);
+
+  return res.status(HTTPSTATUS.OK).json({
+    message: "All jobs fetched successfully",
+    ...result,
   });
 });

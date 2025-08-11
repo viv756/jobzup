@@ -21,13 +21,22 @@ export const applyToAJobService = async (
   }
 
   const application = new ApplictionModel({
-    userId: userId,
-    companyid: companyId,
-    jobId: jobId,
-    recruiterId: recruiterId,
+    user: userId,
+    company: companyId,
+    job: jobId,
+    recruiter: recruiterId,
   });
 
   await application.save();
 
   return { application };
+};
+
+export const getuserAppliedJobsService = async (userId: string) => {
+  const appliedJobs = await ApplictionModel.find({ user: userId }).select("job").populate("job");
+  if (!appliedJobs) {
+    throw new BadRequestException("You are not applied to any jobs");
+  }
+
+  return { appliedJobs };
 };

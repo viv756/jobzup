@@ -1,34 +1,34 @@
 import mongoose, { Document, Schema } from "mongoose";
 
-export interface ApplicationDocument extends Document{
-  userId: mongoose.Types.ObjectId,
-  jobId: mongoose.Types.ObjectId,
-  companyid: mongoose.Types.ObjectId,
-  recruiterId: mongoose.Types.ObjectId
+export interface ApplicationDocument extends Document {
+  user: mongoose.Types.ObjectId;
+  job: mongoose.Types.ObjectId;
+  company: mongoose.Types.ObjectId;
+  recruiter: mongoose.Types.ObjectId;
 }
 
- const applicationSchema = new Schema<ApplicationDocument>({
-  userId: {
+const applicationSchema = new Schema<ApplicationDocument>({
+  user: {
     type: Schema.Types.ObjectId,
-     ref: "User",
-    required:true
+    ref: "User",
+    required: true,
   },
-  jobId: {
+  job: {
     type: Schema.Types.ObjectId,
-    ref:"Job",
-    required:true
+    ref: "Job",
+    required: true,
   },
-  companyid: {
+  company: {
     type: Schema.Types.ObjectId,
-    ref:"Company",
-    required:true
+    ref: "Company",
+    required: true,
   },
-  recruiterId: {
+  recruiter: {
     type: Schema.Types.ObjectId,
-    ref:"User",
-    required:true
-  }
-})
+    ref: "User",
+    required: true,
+  },
+});
 
- const ApplictionModel = mongoose.model<ApplicationDocument>("Application",applicationSchema)
-export default ApplictionModel
+const ApplictionModel = mongoose.model<ApplicationDocument>("Application", applicationSchema);
+export default ApplictionModel;

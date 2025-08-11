@@ -2,9 +2,14 @@ import { Request, Response } from "express";
 
 import asyncHandler from "../middlewares/asyncHandler.middlewares";
 import { createProfileSchema, updateProfileSchema } from "../validation/profile.validation";
-import { createProfileService, getUserProfileService, updateProfileService } from "../services/profile.service";
-import { UnauthorizedException } from "../utils/appError";
+import {
+  createProfileService,
+  getUserProfileService,
+  updateProfileService,
+} from "../services/profile.service";
+import { BadRequestException, UnauthorizedException } from "../utils/appError";
 import { HTTPSTATUS } from "../config/http.config";
+import { userIdSchema } from "../validation/user.validation";
 
 export const createProfileController = asyncHandler(async (req: Request, res: Response) => {
   if (!(req.user?.role === "CANDIDATE")) {
@@ -13,7 +18,7 @@ export const createProfileController = asyncHandler(async (req: Request, res: Re
     );
   }
 
-  const userId = req.user?.id;
+  const userId = userIdSchema.parse(req.params.userId);
   const body = createProfileSchema.parse(req.body);
 
   const { userProfile } = await createProfileService(body, userId);
@@ -25,23 +30,21 @@ export const createProfileController = asyncHandler(async (req: Request, res: Re
 });
 
 export const getUserProfileController = asyncHandler(async (req: Request, res: Response) => {
-  
   // if (!(req.user?.role === "CANDIDATE")) {
   //   throw new UnauthorizedException(
   //     "You do not have the necessary permissions to perform this action"
   //   );
   // }
 
-  const userId = req.user?.id;
-  
-  const { userProfile } = await getUserProfileService(userId)
-  
+  const userId = userIdSchema.parse(req.params.userId);
+
+  const { userProfile } = await getUserProfileService(userId);
+
   return res.status(HTTPSTATUS.OK).json({
     message: "Userprofile fetched successfully",
-    userProfile
-  })
-
-})
+    userProfile,
+  });
+});
 
 export const updateProfileController = asyncHandler(async (req: Request, res: Response) => {
   // if (!(req.user?.role === "CANDIDATE")) {
@@ -50,7 +53,12 @@ export const updateProfileController = asyncHandler(async (req: Request, res: Re
   //   );
   // }
 
-  const userId = req.user?.id;
+  const loggedInuserId = req.user?.id;
+  const userId = userIdSchema.parse(req.params.userId);
+
+  if (loggedInuserId !== userId) {
+    throw new BadRequestException("You are not allowed to update this user");
+  }
   const body = updateProfileSchema.parse(req.body);
 
   const { updatedProfile } = await updateProfileService(userId, body);

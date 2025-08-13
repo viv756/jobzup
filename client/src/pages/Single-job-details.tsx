@@ -3,7 +3,7 @@ import React from "react";
 import { CalendarPlus2 } from "lucide-react";
 import { CalendarX } from "lucide-react";
 
-const SingleJob = () => {
+const SingleJobDetails = () => {
   return (
     <div className="sm:px-15">
       {/* Header */}
@@ -145,4 +145,4 @@ const SingleJob = () => {
   );
 };
 
-export default SingleJob;
+export default SingleJobDetails

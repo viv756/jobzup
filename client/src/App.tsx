@@ -1,20 +1,7 @@
-import { BrowserRouter, Route, Routes } from "react-router-dom";
-import SignUp from "./pages/SignUp";
-import UserProfile from "./pages/user-profile";
-import SingleJob from "./pages/Single-job";
+import AppRoutes from "./routes";
 
 const App = () => {
-  return (
-    // <BrowserRouter>
-    //   <Routes>
-    //     <Route path="/sign-up" element={<SignUp />} />
-    //   </Routes>
-    // </BrowserRouter>
-    <div>
-      <UserProfile />
-      <SingleJob/>
-    </div>
-  );
+  return <AppRoutes />;
 };
 
 export default App;

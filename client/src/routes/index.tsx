@@ -8,9 +8,7 @@ const AppRoutes = () => {
         {publicRoutePaths.map((route) => (
           <Route key={route.path} path={route.path} element={route.element} />
         ))}
-      </Routes>
 
-      <Routes>
         {authenticationRoutePaths.map((route) => (
           <Route key={route.path} path={route.path} element={route.element} />
         ))}

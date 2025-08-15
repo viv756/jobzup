@@ -10,7 +10,8 @@ const appConfig = () => ({
   JWT_SECRET: getEnv("JWT_SECRET"),
   // this value is of the same type as the expiresIn   property from the SignOptions type provided by jsonwebtoken.
   JWT_EXPIRES_IN: getEnv("JWT_EXPIRES_IN", "1d") as SignOptions["expiresIn"],
-  COOKIE_EXPIRE : getEnv("COOKIE_EXPIRE")
+  COOKIE_EXPIRE: getEnv("COOKIE_EXPIRE"),
+  FRONTEND_ORIGIN: getEnv("FRONTEND_ORIGIN", "localhost"),
 });
 
 export const config = appConfig();

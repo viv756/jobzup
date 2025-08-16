@@ -99,8 +99,6 @@ const SignUp = () => {
     }
   };
 
-  console.log(errors);
-
   return (
     <div className="min-h-[600px] bg-[#3367EC] max-w-[650px] p-15 rounded-2xl mx-auto">
       <div className="flex items-center flex-col gap-4">

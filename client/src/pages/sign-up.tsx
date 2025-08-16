@@ -1,8 +1,8 @@
 import React, { useState } from "react";
-import { useNavigate } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import toast from "react-hot-toast";
 
-import { baseURL } from "../lib/baseUrl";
+import { registerApiFn } from "../lib/api";
 
 interface Errors {
   name?: string;
@@ -72,30 +72,13 @@ const SignUp = () => {
     setErrors({});
 
     try {
-      const res = await fetch(`${baseURL}/auth/register`, {
-        method: "POST",
-        headers: { "Content-Type": "application/json" },
-        body: JSON.stringify({
-          name,
-          email,
-          password,
-          confirmPassword,
-          role,
-        }),
-      });
-
-      const data = await res.json();
-      if (!res.ok || data.success === false) {
-        toast.error(data.message);
-        return;
-      }
-
-      if (res.ok) {
+      const data = await registerApiFn({ name, email, password, confirmPassword, role });
+      if (data) {
         toast.success(data.message);
         navigateTo("/sign-in");
       }
-    } catch (error) {
-      console.log(error);
+    } catch (error: any) {
+      toast.error(error.message);
     }
   };
 
@@ -196,7 +179,13 @@ const SignUp = () => {
         </div>
       </form>
 
-      <p className="text-white text-center text-xl">Have an account? login</p>
+      <p className="text-white text-center text-xl">
+        Have an account?
+        <Link to={"/sign-in"} className="underline">
+          {" "}
+          login
+        </Link>
+      </p>
     </div>
   );
 };

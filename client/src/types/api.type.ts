@@ -25,5 +25,6 @@ export type LoginResponseType = {
     profilePicture: string;
     createdAt: Date;
     updatedAt: Date;
+    role: "recruiter" | "candidate";
   };
 };

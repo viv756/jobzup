@@ -1,8 +1,10 @@
 import { useState } from "react";
+import { Link, useNavigate } from "react-router-dom";
 import toast from "react-hot-toast";
 
 import { loginApiFn } from "../lib/api";
-import { Link } from "react-router-dom";
+import { useAppDispatch } from "../hooks/useReducer";
+import { signInSuccess } from "../redux/user/user.slice";
 
 interface Errors {
   email?: string;
@@ -12,8 +14,10 @@ interface Errors {
 const SignIn = () => {
   const [email, setEmail] = useState<string>("");
   const [password, setPassword] = useState<string>("");
-
   const [errors, setErrors] = useState<Errors>({});
+
+  const navigate = useNavigate();
+  const dispatch = useAppDispatch();
 
   const validateForm = (): boolean => {
     let formErrors: Errors = {};
@@ -47,7 +51,9 @@ const SignIn = () => {
     try {
       const data = await loginApiFn({ email, password });
       if (data) {
+        dispatch(signInSuccess(data.user));
         toast.success(data.message);
+        navigate("/");
       }
     } catch (err: any) {
       toast.error(err.message);

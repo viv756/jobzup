@@ -1,8 +1,7 @@
 import { useAppSelector } from "../hooks/useSelector";
 import { Outlet,Navigate } from "react-router-dom";
 
-const ProtectedRoute = () => {
-  console.log("first");
+const ProtectedRoute = () => {;
   
   const { currentUser, loading } = useAppSelector((state) => state.user);
 

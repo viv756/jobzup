@@ -1,18 +1,7 @@
 import { createAsyncThunk, createSlice } from "@reduxjs/toolkit";
 import type { PayloadAction } from "@reduxjs/toolkit";
 import { apiFetch } from "../../lib/fetch";
-import type { CurrentUserResponseType } from "../../types/api.type";
-
-type UserType = {
-  _id: string;
-  name: string;
-  email: string;
-  profile: string | null;
-  profilePicture: string;
-  createdAt: Date;
-  updatedAt: Date;
-  role: "recruiter" | "candidate";
-};
+import type { CurrentUserResponseType, UserType } from "../../types/api.type";
 
 type UserStateType = {
   currentUser: UserType | null;

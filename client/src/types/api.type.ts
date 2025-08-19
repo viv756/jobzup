@@ -6,7 +6,7 @@ export type UserType = {
   profilePicture: string;
   createdAt: Date;
   updatedAt: Date;
-  role: "recruiter" | "candidate";
+  role: "RECRUITER" | "CANDIDATE";
 };
 
 export type RegisterPayloadType = {

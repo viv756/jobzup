@@ -1,9 +1,16 @@
 import { BrowserRouter, Route, Routes } from "react-router-dom";
 
-import { authenticationRoutePaths, protectedRoutePaths, publicRoutePaths } from "./common/routes";
+import {
+  authenticationRoutePaths,
+  protectedRoutePaths,
+  publicRoutePaths,
+  recruiterOnlyRoutePaths,
+} from "./common/routes";
 import Header from "../components/Header";
 import ProtectedRoute from "./Protected.route";
 import AuthRoute from "./Auth.route";
+import RoleBasedRote from "./RoleBased.route";
+import { RECRUITER_ONLY_ROUTES } from "./common/routePaths";
 
 const AppRoutes = () => {
   return (
@@ -22,8 +29,14 @@ const AppRoutes = () => {
           ))}
         </Route>
 
-        <Route element={<ProtectedRoute />}>
+        <Route path="/" element={<ProtectedRoute />}>
           {protectedRoutePaths.map((route) => (
+            <Route key={route.path} path={route.path} element={route.element} />
+          ))}
+        </Route>
+
+        <Route path="/" element={<RoleBasedRote allowedRoles={["RECRUITER"]} />}>
+          {recruiterOnlyRoutePaths.map((route) => (
             <Route key={route.path} path={route.path} element={route.element} />
           ))}
         </Route>

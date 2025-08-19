@@ -1,3 +1,4 @@
+import { RoleEnumType } from "../enums/user.enum";
 import UserModel from "../models/user.model";
 import { BadRequestException, UnauthorizedException } from "../utils/appError";
 
@@ -6,8 +7,9 @@ export const registerService = async (body: {
   email: string;
   password: string;
   confirmPassword: string;
+  role:RoleEnumType
 }) => {
-  const { name, email, password, confirmPassword } = body;
+  const { name, email, password, confirmPassword,role } = body;
 
   if (password !== confirmPassword) {
     throw new BadRequestException("Password not matching");
@@ -22,6 +24,7 @@ export const registerService = async (body: {
       name,
       email,
       password,
+      role
     });
     await user.save();
 

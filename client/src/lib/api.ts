@@ -1,4 +1,10 @@
-import type { LoginPayLoadType, LoginResponseType, RegisterPayloadType, RegisterResponseType } from "../types/api.type";
+import type {
+  CurrentUserResponseType,
+  LoginPayLoadType,
+  LoginResponseType,
+  RegisterPayloadType,
+  RegisterResponseType,
+} from "../types/api.type";
 import { apiFetch } from "./fetch";
 
 export const registerApiFn = async (data: RegisterPayloadType) => {
@@ -13,6 +19,12 @@ export const loginApiFn = async (data: LoginPayLoadType) => {
   return apiFetch<LoginResponseType>("/auth/login", {
     method: "POST",
     body: JSON.stringify(data),
+    auth: true,
+  });
+};
+
+export const getCurrentUserFn = async () => {
+  return apiFetch<CurrentUserResponseType>("/user/current", {
     auth: true,
   });
 };

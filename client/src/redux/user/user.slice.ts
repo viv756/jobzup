@@ -1,5 +1,7 @@
-import { createSlice } from "@reduxjs/toolkit";
+import { createAsyncThunk, createSlice } from "@reduxjs/toolkit";
 import type { PayloadAction } from "@reduxjs/toolkit";
+import { apiFetch } from "../../lib/fetch";
+import type { CurrentUserResponseType } from "../../types/api.type";
 
 type UserType = {
   _id: string;
@@ -21,8 +23,20 @@ type UserStateType = {
 const initialState: UserStateType = {
   currentUser: null,
   error: null,
-  loading: false,
+  loading: true,
 };
+
+// thunk to fetch current user
+export const fetchCurrentUser = createAsyncThunk<CurrentUserResponseType>(
+  "auth/fetchCurrentUser",
+  async (_, thunkAPI) => {
+    try {
+      return await apiFetch<CurrentUserResponseType>("/user/current", { auth: true });
+    } catch (err: any) {
+      return thunkAPI.rejectWithValue(err.message || "Failed to fetch user");
+    }
+  }
+);
 
 const userSlice = createSlice({
   name: "user",
@@ -33,6 +47,25 @@ const userSlice = createSlice({
       state.loading = false;
       state.error = null;
     },
+    logout: (state) => {
+      state.currentUser = null;
+    },
+  },
+  extraReducers: (builder) => {
+    builder
+      .addCase(fetchCurrentUser.pending, (state) => {
+        state.loading = true;
+        state.error = null;
+      })
+      .addCase(fetchCurrentUser.fulfilled, (state, action) => {
+        state.loading = false;
+        state.currentUser = action.payload.user;
+      })
+      .addCase(fetchCurrentUser.rejected, (state, action) => {
+        state.loading = false;
+        state.currentUser = null;
+        state.error = action.payload as string;
+      });
   },
 });
 

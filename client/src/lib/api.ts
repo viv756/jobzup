@@ -1,5 +1,8 @@
 import type {
+  CreateCompanyPayLoadType,
+  CreateCompanyResponseType,
   CurrentUserResponseType,
+  GetCurrentCompanyResponseType,
   LoginPayLoadType,
   LoginResponseType,
   RegisterPayloadType,
@@ -23,8 +26,27 @@ export const loginApiFn = async (data: LoginPayLoadType) => {
   });
 };
 
-export const getCurrentUserFn = async () => {
+export const getCurrentUserApiFn = async () => {
   return apiFetch<CurrentUserResponseType>("/user/current", {
+    auth: true,
+  });
+};
+
+export const createCompanyApiFn = async (data: CreateCompanyPayLoadType) => {
+  return apiFetch<CreateCompanyResponseType>("/company/create/new", {
+    method: "POST",
+    body: JSON.stringify(data),
+    auth: true,
+  });
+};
+export const getCurrentCompanyApiFn = async () => {
+  return apiFetch<GetCurrentCompanyResponseType>("/company/currentCompany", {
+    auth: true,
+  });
+};
+
+export const deleteCompanyApiFn = async (companyId: string) => {
+  return apiFetch<{ message: string }>(`company/${companyId}/delete`, {
     auth: true,
   });
 };

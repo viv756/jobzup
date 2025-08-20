@@ -41,7 +41,7 @@ export const getRecruiterCurrentCompanyController = asyncHandler(
     const { company } = await getRecruiterCurrentCompanyService(userId);
 
     return res.status(HTTPSTATUS.OK).json({
-      message: "compnay fetched successfully",
+      message: "company fetched successfully",
       company,
     });
   }

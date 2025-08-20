@@ -9,6 +9,25 @@ export type UserType = {
   role: "RECRUITER" | "CANDIDATE";
 };
 
+export type CompanyType = {
+  _id: string;
+  companyName: string;
+  companySize: string;
+  avgSalary: string;
+  location: string;
+  about: string;
+  facebook: string | null;
+  instagram: string | null;
+  twitter: string | null;
+  companyLogo: string;
+  websiteLink: string | null;
+  createdBy: string;
+  createdAt: string;
+  updatedAt: string;
+};
+
+// **************Authentication Types**********************//
+
 export type RegisterPayloadType = {
   email: string;
   name: string;
@@ -34,4 +53,30 @@ export type LoginResponseType = {
 export type CurrentUserResponseType = {
   message: string;
   user: UserType;
+};
+
+
+// *********************Company Types********************//
+
+export type CreateCompanyPayLoadType = {
+  companyName: string;
+  companySize: string;
+  avgSalary: string;
+  location: string;
+  about: string;
+  facebook: string | null;
+  instagram: string | null;
+  twitter: string | null;
+  companyLogo: string;
+  websiteLink: string | null;
+};
+
+export type CreateCompanyResponseType = {
+  message: string;
+  company: CompanyType;
+};
+
+export type GetCurrentCompanyResponseType = {
+  message: string;
+  company: CompanyType;
 };

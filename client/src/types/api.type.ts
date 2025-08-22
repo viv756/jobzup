@@ -6,6 +6,7 @@ export type UserType = {
   profilePicture: string;
   createdAt: Date;
   updatedAt: Date;
+  company: string | null;
   role: "RECRUITER" | "CANDIDATE";
 };
 
@@ -143,7 +144,7 @@ export type GetCurrentCompanyResponseType = {
   company: CompanyType;
 };
 
-export type CreateJobPyloadType = {
+export type CreateJobPayloadType = {
   title: string;
   location: string;
   category: string;
@@ -152,8 +153,8 @@ export type CreateJobPyloadType = {
   hiringLocation: string;
   experience: string;
   salary: string;
-  responsibilities: string;
-  requirements: string;
+  responsibilities: string[];
+  requirements: string[];
 };
 
 export type CreateJobResponseType = {

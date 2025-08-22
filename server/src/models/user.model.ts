@@ -9,7 +9,8 @@ export interface UserDocument extends Document {
   profilePicture: string;
   createdAt: Date;
   updatedAt: Date;
-  profile: mongoose.Types.ObjectId | null
+  profile: mongoose.Types.ObjectId | null;
+  company: mongoose.Types.ObjectId | null;
   role: RoleEnumType;
   comparePassword(value: string): Promise<boolean>;
   omitPassword(): Omit<UserDocument, "password">;
@@ -37,7 +38,12 @@ const userSchema = new Schema<UserDocument>(
     profile: {
       type: Schema.Types.ObjectId,
       ref: "Profile",
-      default:null
+      default: null,
+    },
+    company: {
+      type: Schema.Types.ObjectId,
+      ref: "Company",
+      default: null,
     },
     role: {
       type: String,

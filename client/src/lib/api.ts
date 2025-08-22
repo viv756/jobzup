@@ -1,7 +1,7 @@
 import type {
   CreateCompanyPayLoadType,
   CreateCompanyResponseType,
-  CreateJobPyloadType,
+  CreateJobPayloadType,
   CreateJobResponseType,
   CreateProfilePayloadType,
   CreateProfileResponseType,
@@ -61,7 +61,7 @@ export const deleteCompanyApiFn = async (companyId: string) => {
   });
 };
 
-export const createJobApiFn = async (data: CreateJobPyloadType, companyId: string) => {
+export const createJobApiFn = async (data: CreateJobPayloadType, companyId: string) => {
   return apiFetch<CreateJobResponseType>(`/job/company/${companyId}/create/new`, {
     method: "POST",
     body: JSON.stringify(data),

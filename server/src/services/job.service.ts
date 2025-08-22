@@ -3,8 +3,8 @@ import JobModel from "../models/job.model";
 import { BadRequestException, NotFoundExeption } from "../utils/appError";
 import { CreateJobType } from "../validation/job.validation";
 
-export const createJobService = async (userId: string, compnayId: string, body: CreateJobType) => {
-  const company = await CompanyModel.findById(compnayId);
+export const createJobService = async (userId: string, companyId: string, body: CreateJobType) => {
+  const company = await CompanyModel.findById(companyId);
   if (!company) {
     throw new NotFoundExeption("Company not found");
   }
@@ -25,7 +25,7 @@ export const createJobService = async (userId: string, compnayId: string, body: 
     responsibilities: body.responsibilities,
     requirements: body.requirements,
     createdBy: userId,
-    companyId: compnayId,
+    companyId: companyId,
   });
 
   await job.save();

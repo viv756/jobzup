@@ -24,8 +24,8 @@ export const createJobSchema = z.object({
   hiringLocation: z.string().trim().min(1).max(255),
   experience: z.string().trim().optional(),
   salary: z.string().trim().min(1).max(255),
-  responsibilities: z.string().trim().optional(),
-  requirements: z.string().trim().optional(),
+  responsibilities: z.array(z.string().trim()).optional(),
+  requirements: z.array(z.string().trim()).optional(),
 });
 
 export type CreateJobType = z.infer<typeof createJobSchema>;

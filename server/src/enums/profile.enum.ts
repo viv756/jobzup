@@ -1,7 +1,7 @@
 export const GenderEnum ={
-  Male : "Male",
-  Female : "Female",
-  Other : "Other",
+  male : "male",
+  female : "female",
+  other : "other",
 } as const
 
 export type GenderEnumType = keyof typeof GenderEnum

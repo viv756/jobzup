@@ -22,9 +22,72 @@ export type CompanyType = {
   companyLogo: string;
   websiteLink: string | null;
   createdBy: string;
-  createdAt: string;
-  updatedAt: string;
+  createdAt: Date;
+  updatedAt: Date;
 };
+
+export type JobType = {
+  title: string;
+  location: string;
+  category: string;
+  description: string;
+  closeDate: Date | null;
+  hiringLocation: string;
+  experience: string;
+  salary: string;
+  responsibilities: string;
+  requirements: string;
+  createdBy: string;
+  createdAt: Date;
+  updatedAt: Date;
+};
+
+type ProfileType = {
+  _id: string;
+  userId: string;
+  bio: string;
+  location: string;
+  language: string;
+  skills: string[];
+  workExperiance: WorkExperiance[];
+  education: Education[];
+  awards: Awards[];
+  qualification: string | null;
+  gender: GenderEnumType;
+  age: string | null;
+  createdAt: Date;
+  updatedAt: Date;
+};
+
+type WorkExperiance = {
+  company: string;
+  position: string;
+  startDate: Date | null;
+  endDate: Date | null;
+  description: string;
+};
+
+type Education = {
+  collegeName: string;
+  department: string;
+  startDate: Date | null;
+  endDate: Date | null;
+  description: string | null;
+};
+
+type Awards = {
+  name: string;
+  date: Date | null;
+  description: string | null;
+};
+
+export const GenderEnum = {
+  male: "male",
+  female: "female",
+  other: "other",
+} as const;
+
+export type GenderEnumType = keyof typeof GenderEnum;
 
 // **************Authentication Types**********************//
 
@@ -55,7 +118,6 @@ export type CurrentUserResponseType = {
   user: UserType;
 };
 
-
 // *********************Company Types********************//
 
 export type CreateCompanyPayLoadType = {
@@ -79,4 +141,73 @@ export type CreateCompanyResponseType = {
 export type GetCurrentCompanyResponseType = {
   message: string;
   company: CompanyType;
+};
+
+export type CreateJobPyloadType = {
+  title: string;
+  location: string;
+  category: string;
+  description: string;
+  closeDate: Date | null;
+  hiringLocation: string;
+  experience: string;
+  salary: string;
+  responsibilities: string;
+  requirements: string;
+};
+
+export type CreateJobResponseType = {
+  message: string;
+  job: JobType;
+};
+
+export type GetJobByIdResponse = {
+  message: string;
+  job: JobType;
+};
+
+export type GetAllJobsResponse = {
+  message: string;
+  job: JobType[];
+};
+
+export type CreateProfilePayloadType = {
+  bio: string;
+  location: string;
+  language: string;
+  skills: string[];
+  workExperiance: WorkExperiance[];
+  education: Education[];
+  awards: Awards[];
+  qualification: string | null;
+  gender: GenderEnumType;
+  age: string | null;
+};
+
+export type CreateProfileResponseType = {
+  message: string;
+  userProfile: ProfileType;
+};
+
+export type GetCurrentUserProfileResponseType = {
+  message: string;
+  userProfile: ProfileType;
+};
+
+export type UpdateUserProfilePayloadType = {
+  bio: string;
+  location: string;
+  language: string;
+  skills: string[];
+  workExperiance: WorkExperiance[];
+  education: Education[];
+  awards: Awards[];
+  qualification: string | null;
+  gender: GenderEnumType;
+  age: string | null;
+};
+
+export type UpdateUserProfileResponseType = {
+  message: string;
+  userProfile: ProfileType;
 };

@@ -98,7 +98,7 @@ export const createProfileSchema = z.object({
   education: educationSchema,
   awards: awardSchema,
   qualification: z.string().trim().nullable().default(null),
-  gender: z.enum(["Male", "Female", "Other"]).nullable().default(null),
+  gender: z.enum(["male", "female", "other"]).nullable().default(null),
   age: z.string().trim().nullable().default(null),
 });
 

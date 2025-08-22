@@ -1,6 +1,6 @@
-import React from "react";
 
-const Postjob = () => {
+const CreateJob = () => {
+  
   return (
     <div className="bg-gray3 max-w-[800px] p-10">
       <h1 className="text-2xl font-gray3 font-semibold font-roboto">Job Details</h1>
@@ -156,4 +156,4 @@ const Postjob = () => {
   );
 };
 
-export default Postjob;
+export default CreateJob

@@ -24,7 +24,7 @@ export const createProfileController = asyncHandler(async (req: Request, res: Re
   const { userProfile } = await createProfileService(body, userId);
 
   return res.status(HTTPSTATUS.CREATED).json({
-    message: "Profile updated successfully",
+    message: "Profile created successfully",
     userProfile,
   });
 });

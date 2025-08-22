@@ -1,12 +1,22 @@
 import type {
   CreateCompanyPayLoadType,
   CreateCompanyResponseType,
+  CreateJobPyloadType,
+  CreateJobResponseType,
+  CreateProfilePayloadType,
+  CreateProfileResponseType,
+  
   CurrentUserResponseType,
+  GetAllJobsResponse,
   GetCurrentCompanyResponseType,
+  GetCurrentUserProfileResponseType,
+  GetJobByIdResponse,
   LoginPayLoadType,
   LoginResponseType,
   RegisterPayloadType,
   RegisterResponseType,
+  UpdateUserProfilePayloadType,
+  UpdateUserProfileResponseType,
 } from "../types/api.type";
 import { apiFetch } from "./fetch";
 
@@ -46,7 +56,49 @@ export const getCurrentCompanyApiFn = async () => {
 };
 
 export const deleteCompanyApiFn = async (companyId: string) => {
-  return apiFetch<{ message: string }>(`company/${companyId}/delete`, {
+  return apiFetch<{ message: string }>(`/company/${companyId}/delete`, {
     auth: true,
   });
 };
+
+export const createJobApiFn = async (data: CreateJobPyloadType, companyId: string) => {
+  return apiFetch<CreateJobResponseType>(`/job/company/${companyId}/create/new`, {
+    method: "POST",
+    body: JSON.stringify(data),
+    auth: true,
+  });
+};
+
+export const getJobByIdApiFn = async (jobId: string) => {
+  return apiFetch<GetJobByIdResponse>(`/job/${jobId}`, {
+    auth: true,
+  });
+};
+
+export const getAllJobsApiFn = async () => {
+  return apiFetch<GetAllJobsResponse>(`/job/all`, {
+    auth: true,
+  });
+};
+
+export const createProfileApiFn = async (userId: string, data:CreateProfilePayloadType) => {
+  return apiFetch<CreateProfileResponseType>(`/profile/create/new/${userId}`, {
+    method: "POST",
+    body: JSON.stringify(data),
+    auth: true,
+  });
+};
+
+export const getUserProfileApiFn = async (userId: string) => {
+  return apiFetch<GetCurrentUserProfileResponseType>(`/profile/getProfile/user/${userId}`, {
+    auth:true
+  })
+}
+
+export const updateUserProfile = async (userId: string, data:UpdateUserProfilePayloadType) => {
+  return apiFetch<UpdateUserProfileResponseType>(`/profile/update/user/${userId}`, {
+    method: "POST",
+    body: JSON.stringify(data),
+    auth:true
+  })
+}

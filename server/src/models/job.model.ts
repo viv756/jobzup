@@ -1,19 +1,20 @@
 import mongoose, { Document, Schema } from "mongoose";
+import { JobTypeEnum, JobTypeEnumType } from "../enums/job.enum";
 
 export interface JobDocument extends Document {
   title: string;
-  location: string;
   category: string;
   description: string;
   datePosted: Date | null;
   closeDate: Date | null;
   hiringLocation: string;
-  experiance: string;
+  jobType: JobTypeEnumType;
+  experience: string;
   salary: string;
   responsibilities: string[];
   requirements: string[];
   createdBy: mongoose.Types.ObjectId;
-  companyId: mongoose.Types.ObjectId;
+  company: mongoose.Types.ObjectId;
 }
 
 const jobSchema = new Schema<JobDocument>({
@@ -21,11 +22,6 @@ const jobSchema = new Schema<JobDocument>({
     type: String,
     trim: true,
     required: true,
-  },
-  location: {
-    type: String,
-    required: true,
-    trim: true,
   },
   category: {
     type: String,
@@ -49,9 +45,14 @@ const jobSchema = new Schema<JobDocument>({
     required: true,
     trim: true,
   },
-  experiance: {
+  experience: {
     type: String,
     trim: true,
+  },
+  jobType: {
+    type: String,
+    enum: Object.values(JobTypeEnum), // ["fulltime", "parttime", "fresher"]
+    required: true,
   },
   salary: {
     type: String,
@@ -70,7 +71,7 @@ const jobSchema = new Schema<JobDocument>({
     ref: "User",
     required: true,
   },
-  companyId: {
+  company: {
     type: Schema.Types.ObjectId,
     ref: "Company",
     required: true,

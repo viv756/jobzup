@@ -1,3 +1,5 @@
+import type { JobTypeEnumType } from "../constant";
+
 export type UserType = {
   _id: string;
   name: string;
@@ -20,6 +22,9 @@ export type CompanyType = {
   facebook: string | null;
   instagram: string | null;
   twitter: string | null;
+  foundedIn: string
+  phone: string
+  email:string
   companyLogo: string;
   websiteLink: string | null;
   createdBy: string;
@@ -29,15 +34,17 @@ export type CompanyType = {
 
 export type JobType = {
   title: string;
-  location: string;
   category: string;
-  description: string;
+  description: string[];
   closeDate: Date | null;
+  datePosted: Date | null;
   hiringLocation: string;
+  jobType: JobTypeEnumType
+  company: CompanyType
   experience: string;
   salary: string;
-  responsibilities: string;
-  requirements: string;
+  responsibilities: string[];
+  requirements: string[];
   createdBy: string;
   createdAt: Date;
   updatedAt: Date;
@@ -149,6 +156,7 @@ export type CreateJobPayloadType = {
   location: string;
   category: string;
   description: string;
+  jobType: JobTypeEnumType | string
   closeDate: Date | null;
   hiringLocation: string;
   experience: string;

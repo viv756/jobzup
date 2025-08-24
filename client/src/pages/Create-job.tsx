@@ -3,7 +3,7 @@ import { useParams } from "react-router-dom";
 import DatePicker from "react-datepicker";
 import toast from "react-hot-toast";
 
-import { JobCategories, type JobCategoriesType } from "../constant";
+import { JobCategories, type JobCategoriesType, type JobTypeEnumType } from "../constant";
 import { createJobApiFn } from "../lib/api";
 import type { CreateJobPayloadType } from "../types/api.type";
 import "react-datepicker/dist/react-datepicker.css";
@@ -11,7 +11,7 @@ import "react-datepicker/dist/react-datepicker.css";
 const CreateJob = () => {
   const [jobTitle, setJobTitle] = useState<string>("");
   const [hiringLocation, setHiringLocation] = useState<string>("");
-  const [jobType, setJobType] = useState<string>("");
+  const [jobType, setJobType] = useState<JobTypeEnumType | string>("");
   const [salary, setSalary] = useState<string>("");
   const [experiance, setExperiance] = useState<string>("");
   const [jobQualification, setJobQualification] = useState<string>("");
@@ -41,6 +41,7 @@ const CreateJob = () => {
       location: hiringLocation,
       category: jobCategory,
       description: description,
+      jobType: jobType,
       closeDate: closingDate,
       hiringLocation: hiringLocation,
       experience: experiance,
@@ -101,13 +102,13 @@ const CreateJob = () => {
               Job Type
             </label>
             <select
-              value={jobType}
-              onChange={(e) => setJobType(e.target.value)}
+              value={jobType as JobTypeEnumType}
+              onChange={(e) => setJobType(e.target.value as JobTypeEnumType)}
               className="p-3 rounded-2xl outline-none border border-gray-500 bg-white">
               <option value="">Select job type</option>
-              <option value="fulltime">Fulltime</option>
-              <option value="partime">Partime</option>
-              <option value="fresher">Fresher</option>
+              <option value="Full_Time">Full-time</option>
+              <option value="Part_Time">Part-Time</option>
+              <option value="Fresher">Fresher</option>
             </select>
           </div>
 

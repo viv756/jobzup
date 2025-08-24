@@ -1,23 +1,59 @@
-import React from "react";
-
-import { CalendarPlus2 } from "lucide-react";
-import { CalendarX } from "lucide-react";
+import { BriefcaseBusiness, CalendarPlus2, LocateFixed, PieChart, Search } from "lucide-react";
+import { CalendarX2 } from "lucide-react";
+import { format } from "date-fns";
+import { useEffect, useState } from "react";
+import { getJobByIdApiFn } from "../lib/api";
+import { Link, useParams } from "react-router-dom";
+import type { JobType } from "../types/api.type";
+import toast from "react-hot-toast";
+import InfoCard from "../components/InfoCard";
+import { MapPin } from "lucide-react";
 
 const SingleJobDetails = () => {
+  const [job, setJob] = useState<JobType>();
+  const { jobId } = useParams();
+
+  useEffect(() => {
+    console.log("first");
+
+    try {
+      const fetchPost = async () => {
+        const data = await getJobByIdApiFn(jobId as string);
+        if (data) {
+          setJob(data.job);
+        }
+      };
+      fetchPost();
+    } catch (error: any) {
+      toast.error(error.message);
+    }
+  }, []);
+
+  if (!job) {
+    return <div>Loading.....</div>;
+  }
+
+  console.log(job);
+
   return (
     <div className="sm:px-15">
       {/* Header */}
       <div className="bg-[#2453CC] flex rounded-2xl min-h-[180px] items-center p-5 pl-13 gap-7">
         <div className="bg-white rounded-full p-3">
-          <img src="c_logo1.svg" alt="" className="w-18" />
+          <img src="/c_logo1.svg" alt="" className="w-18" />
         </div>
         <div className="flex flex-col gap-2">
-          <h1 className="text-white text-4xl font-roboto font-semibold ">
-            Customer service representative
-          </h1>
+          <h1 className="text-white text-4xl font-roboto font-semibold ">{job.title}</h1>
           <div className="text-white flex gap-6 text-md ">
-            <span className="text-white">Amsterdam, Holland</span> <span>UI/UX design</span>{" "}
-            <span>Full-Time</span>
+            <span className="text-white text-lg flex items-center gap-2">
+              <MapPin size={17} /> {job.hiringLocation}
+            </span>
+            <span className="text-white text-lg flex items-center gap-2">
+              <BriefcaseBusiness size={17} /> {job.category}
+            </span>
+            <span className="text-white text-lg flex items-center gap-2">
+              <PieChart size={17} /> {job.jobType.replace("_", "-")}
+            </span>
           </div>
         </div>
       </div>
@@ -26,78 +62,64 @@ const SingleJobDetails = () => {
         <div>
           <h2 className="text-3xl font-semibold font-roboto text-gray-800">Job description</h2>
           <hr className="border border-gray-300 mt-5" />
-          <p className="text-lg mt-6">
-            We're seeking a talented React Native Front End Developer to join our growing team and
-            contribute to the development of cutting-edge mobile applications. Google is an
-            equal-opportunity employer. We encourage candidates from all backgrounds to apply.
-          </p>
+          <p className="text-lg mt-6">{job.description}</p>
 
           <div className="grid grid-cols-3 gap-4 mt-10">
-            <div className="bg-[#F5F7FF] max-w-[250px] flex flex-col items-center justify-center p-6 gap-3 rounded-2xl ">
-              <CalendarPlus2 className="" color="#2453CC" />
-              <p className="text-gray1 text-lg font-roboto">Date Posted</p>
-              <p className="text-gray-600 font-semibold text-xl font-roboto">February 9, 2024</p>
-            </div>
-            <div className="bg-[#F5F7FF] max-w-[250px] flex flex-col items-center justify-center p-6 gap-3 rounded-2xl ">
-              <CalendarPlus2 className="" />
-              <p className="text-gray1 text-lg font-roboto">Date Posted</p>
-              <p className="text-gray-600 font-semibold text-xl font-roboto">February 9, 2024</p>
-            </div>
-            <div className="bg-[#F5F7FF] max-w-[250px] flex flex-col items-center justify-center p-6 gap-3 rounded-2xl ">
-              <CalendarPlus2 className="" />
-              <p className="text-gray1 text-lg font-roboto">Date Posted</p>
-              <p className="text-gray-600 font-semibold text-xl font-roboto">February 9, 2024</p>
-            </div>
-            <div className="bg-[#F5F7FF] max-w-[250px] flex flex-col items-center justify-center p-6 gap-3 rounded-2xl ">
-              <CalendarPlus2 className="" />
-              <p className="text-gray1 text-lg font-roboto">Date Posted</p>
-              <p className="text-gray-600 font-semibold text-xl font-roboto">February 9, 2024</p>
-            </div>
-            <div className="bg-[#F5F7FF] max-w-[250px] flex flex-col items-center justify-center p-6 gap-3 rounded-2xl ">
-              <CalendarPlus2 className="" />
-              <p className="text-gray1 text-lg font-roboto">Date Posted</p>
-              <p className="text-gray-600 font-semibold text-xl font-roboto">February 9, 2024</p>
-            </div>
+            <InfoCard
+              icon={<CalendarPlus2 color="#2A5AD8" />}
+              title="Date posted"
+              content={job?.datePosted ? format(new Date(job.datePosted), "MMMM d, yyyy") : "N/A"}
+            />
+            <InfoCard
+              icon={<CalendarX2 color="#2A5AD8" />}
+              title="Close date"
+              content={job?.closeDate ? format(new Date(job.closeDate), "MMMM d,yyyy") : "N/A"}
+            />
+            <InfoCard
+              icon={<LocateFixed color="#2A5AD8" />}
+              title="Hiring Location"
+              content={job.hiringLocation}
+            />
+            <InfoCard
+              icon={<Search color="#2A5AD8" />}
+              title="Experience"
+              content={job?.experience}
+            />
+            <InfoCard
+              icon={<BriefcaseBusiness color="#2A5AD8" />}
+              title="Department"
+              content={job?.category}
+            />
+            <InfoCard
+              icon={<BriefcaseBusiness color="#2A5AD8" />}
+              title="Salary"
+              content={`$ ${job?.salary} USD`}
+            />
           </div>
 
           <div className="mt-10">
             <h1 className="text-gray-800 text-3xl font-roboto font-semibold ">Responsibilities</h1>
             <hr className="border border-gray-300 mt-5" />
-            <p className="mt-6 text-xl text-gray-800 ">
-              Google is an equal-opportunity employer. We encourage candidates from all backgrounds
-              to apply. How promotion excellent curiosity yet attempted happiness Gay prosperous
-              impression had conviction For every delay.
-            </p>
-
-            <ul className="mt-5">
-              <li className="text-xl">
-                Develop high-quality and performant mobile applications using React Native.
-              </li>
-              <li>
-                Collaborate with cross-functional teams, including designers and backend developers,
-                to implement user-friendly features.
-              </li>
-              <li>
-                Create visually appealing and responsive user interfaces that provide a seamless and
-                enjoyable user experience.
-              </li>
-            </ul>
-
+            <ol className="mt-5 list-disc list-outside ">
+              {job &&
+                job.responsibilities.map((resp, i) => (
+                  <li key={i} className="text-md mt-1">
+                    {resp}
+                  </li>
+                ))}
+            </ol>
             <h1 className="text-gray-800 text-3xl font-roboto font-semibold mt-8">
               Job Requirements
             </h1>
             <hr className="border border-gray-300 mt-5" />
-
-            <ul className="mt-5">
-              <li className="text-xl">
-                3+ years of professional experience in React Native mobile app development.
-              </li>
-              <li>Proficient in React Native, JavaScript, and related technologies.</li>
-              <li>
-                Experience with state management libraries (e.g., Redux) and asynchronous
-                programming.
-              </li>
-            </ul>
+            <ol className="mt-5 list-disc list-outside ">
+              {job &&
+                job.requirements.map((req, i) => (
+                  <li key={i} className="text-md mt-1">
+                    {req}
+                  </li>
+                ))}
+            </ol>
           </div>
         </div>
 
@@ -106,43 +128,43 @@ const SingleJobDetails = () => {
             <h3 className="text-white text-2xl font-roboto font-semibold">
               Interested in this job?
             </h3>
-            <button className="bg-[#2453CC] p-3 rounded-3xl text-md font-roboto text-white w-40 hover:bg-blue-900 transition duration-200 ">Apply now</button>
+            <button className="bg-[#2453CC] p-3 rounded-3xl text-md font-roboto text-white w-40 hover:bg-blue-900 transition duration-200 ">
+              Apply now
+            </button>
           </div>
 
-      
-            <div className="p-10 shadow-xl rounded-2xl mt-10 w-120 bg-white">
-              <div className="flex items-center gap-5">
-                <img src="c_logo1.svg" alt="" className="w-20" />
-                <div className="flex flex-col ">
-                  <h1 className="text-2xl font-semibold font-roboto">Swift works Inc</h1>
-                  <p className="text-gray-500">Amsterdam, Holland</p>
-                </div>
+          <div className="p-10 shadow-xl rounded-2xl mt-10 w-120 bg-white">
+            <div className="flex items-center gap-5">
+              <img src={job.company.companyLogo} alt="" className="w-20" />
+              <div className="flex flex-col ">
+                <h1 className="text-2xl font-semibold font-roboto">{job.company.companyName}</h1>
+                <p className="text-gray-500"> {job.company.location} </p>
               </div>
+            </div>
 
-              <p className="mt-5 text-lg text-gray-500 font-roboto">
-                Unlock cross-platform brilliance with our React Native front-end development.
-              </p>
+            <p className="mt-5 text-lg text-gray-500 font-roboto">{job.company.about}</p>
 
-              <div className="grid grid-cols-2 gap-3 mt-5 ">
-                <p className="text-lg">Company size</p>
-                <p className="text-lg"> 5 - 12</p>
-                <p className="text-lg">Founded in</p>
-                <p className="text-lg">2020</p>
-                <p className="text-lg">Phone</p>
-                <p className="text-lg">+44 (0) 161808123</p>
-                <p className="text-lg">Email</p>
-                <p className="text-lg ">http://example@gmail.com</p>
-              </div>
+            <div className="grid grid-cols-2 gap-3 mt-5 ">
+              <p className="text-lg">Company size</p>
+              <p className="text-lg"> {job.company.companySize} </p>
+              <p className="text-lg">Founded in</p>
+              <p className="text-lg">{job.company.foundedIn}</p>
+              <p className="text-lg">Phone</p>
+              <p className="text-lg">{job.company.phone}</p>
+              <p className="text-lg">Email</p>
+              <p className="text-lg ">{job.company.email}</p>
+            </div>
 
+            <Link to={`/company/${job.company._id}`}>
               <button className="p-3 text-[18px] font-roboto bg-black text-white w-full mt-8  rounded-3xl hover:bg-blue-800 transition duration-300">
                 View Company
               </button>
-            </div>
-          
+            </Link>
+          </div>
         </div>
       </div>
     </div>
   );
 };
 
-export default SingleJobDetails
+export default SingleJobDetails;

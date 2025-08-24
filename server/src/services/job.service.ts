@@ -15,17 +15,17 @@ export const createJobService = async (userId: string, companyId: string, body: 
 
   const job = new JobModel({
     title: body.title,
-    location: body.location,
     category: body.category,
     description: body.description,
     closeDate: body.closeDate,
     hiringLocation: body.hiringLocation,
-    experiance: body.experience,
+    jobType: body.jobType,
+    experience: body.experience,
     salary: body.salary,
     responsibilities: body.responsibilities,
     requirements: body.requirements,
     createdBy: userId,
-    companyId: companyId,
+    company: companyId,
   });
 
   await job.save();
@@ -34,7 +34,7 @@ export const createJobService = async (userId: string, companyId: string, body: 
 };
 
 export const getJpbByIdservice = async (jobId: string) => {
-  const job = await JobModel.findById(jobId);
+  const job = await JobModel.findById(jobId).populate("company")
   if (!job) {
     throw new BadRequestException("Job is not found");
   }

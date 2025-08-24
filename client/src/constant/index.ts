@@ -10,7 +10,14 @@ export const JobCategories = [
   "Content Writing",
   "Product Management",
   "Project Management",
-  "Other"
+  "Other",
 ] as const;
 
-export type JobCategoriesType = typeof JobCategories[number]
+export const JobTypeEnum = {
+  Full_Time: "Full_Time",
+  Part_Time: "Part_Time",
+  Fresher:"Fresher"
+} as const;
+
+export type JobCategoriesType = (typeof JobCategories)[number];
+export type JobTypeEnumType = (typeof JobTypeEnum)[keyof typeof JobTypeEnum];

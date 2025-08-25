@@ -1,21 +1,27 @@
-import { BriefcaseBusiness, CalendarPlus2, LocateFixed, PieChart, Search } from "lucide-react";
-import { CalendarX2 } from "lucide-react";
-import { format } from "date-fns";
 import { useEffect, useState } from "react";
-import { getJobByIdApiFn } from "../lib/api";
 import { Link, useParams } from "react-router-dom";
-import type { JobType } from "../types/api.type";
+import {
+  MapPin,
+  CalendarX2,
+  BriefcaseBusiness,
+  CalendarPlus2,
+  LocateFixed,
+  PieChart,
+  Search,
+} from "lucide-react";
+import { format } from "date-fns";
 import toast from "react-hot-toast";
-import InfoCard from "../components/InfoCard";
-import { MapPin } from "lucide-react";
 
-const SingleJobDetails = () => {
+import { getJobByIdApiFn } from "../../lib/api";
+import type { JobType } from "../../types/api.type";
+import InfoCard from "./components/InfoCard";
+import { List } from "./components/List";
+
+const JobDetails = () => {
   const [job, setJob] = useState<JobType>();
   const { jobId } = useParams();
 
   useEffect(() => {
-    console.log("first");
-
     try {
       const fetchPost = async () => {
         const data = await getJobByIdApiFn(jobId as string);
@@ -33,28 +39,34 @@ const SingleJobDetails = () => {
     return <div>Loading.....</div>;
   }
 
-  console.log(job);
+  const jobInfo = () => {
+    const items = [
+      { icon: <MapPin size={17} />, text: job.company.location },
+      { icon: <BriefcaseBusiness size={17} />, text: job.category },
+      { icon: <PieChart size={17} />, text: job.jobType.replace("_", "-") },
+    ];
+
+    return (
+      <div className="text-white flex gap-6 text-md">
+        {items.map((item, i) => (
+          <span key={i} className="text-white text-lg flex items-center gap-2">
+            {item.icon} {item.text}
+          </span>
+        ))}
+      </div>
+    );
+  };
 
   return (
-    <div className="sm:px-15">
+    <>
       {/* Header */}
-      <div className="bg-[#2453CC] flex rounded-2xl min-h-[180px] items-center p-5 pl-13 gap-7">
+      <div className="bg-[#2453CC] flex flex-col items-start sm:flex-row rounded-2xl min-h-[180px] sm:items-center p-5  sm:pl-13 gap-7 ">
         <div className="bg-white rounded-full p-3">
-          <img src="/c_logo1.svg" alt="" className="w-18" />
+          <img src={job.company.companyLogo} alt="" className="w-18" />
         </div>
         <div className="flex flex-col gap-2">
           <h1 className="text-white text-4xl font-roboto font-semibold ">{job.title}</h1>
-          <div className="text-white flex gap-6 text-md ">
-            <span className="text-white text-lg flex items-center gap-2">
-              <MapPin size={17} /> {job.hiringLocation}
-            </span>
-            <span className="text-white text-lg flex items-center gap-2">
-              <BriefcaseBusiness size={17} /> {job.category}
-            </span>
-            <span className="text-white text-lg flex items-center gap-2">
-              <PieChart size={17} /> {job.jobType.replace("_", "-")}
-            </span>
-          </div>
+          {jobInfo()}
         </div>
       </div>
 
@@ -64,7 +76,7 @@ const SingleJobDetails = () => {
           <hr className="border border-gray-300 mt-5" />
           <p className="text-lg mt-6">{job.description}</p>
 
-          <div className="grid grid-cols-3 gap-4 mt-10">
+          <div className="grid sm:grid-cols-3 grid-cols-1 gap-4 mt-10">
             <InfoCard
               icon={<CalendarPlus2 color="#2A5AD8" />}
               title="Date posted"
@@ -100,30 +112,16 @@ const SingleJobDetails = () => {
           <div className="mt-10">
             <h1 className="text-gray-800 text-3xl font-roboto font-semibold ">Responsibilities</h1>
             <hr className="border border-gray-300 mt-5" />
-            <ol className="mt-5 list-disc list-outside ">
-              {job &&
-                job.responsibilities.map((resp, i) => (
-                  <li key={i} className="text-md mt-1">
-                    {resp}
-                  </li>
-                ))}
-            </ol>
+            <List items={job.responsibilities} />
             <h1 className="text-gray-800 text-3xl font-roboto font-semibold mt-8">
               Job Requirements
             </h1>
             <hr className="border border-gray-300 mt-5" />
-            <ol className="mt-5 list-disc list-outside ">
-              {job &&
-                job.requirements.map((req, i) => (
-                  <li key={i} className="text-md mt-1">
-                    {req}
-                  </li>
-                ))}
-            </ol>
+            <List items={job.requirements} />
           </div>
         </div>
 
-        <div>
+        <div className="mt-10 sm:mt-1">
           <div className="bg-black min-w-md rounded-2xl min-h-50 flex flex-col justify-center p-10 gap-8">
             <h3 className="text-white text-2xl font-roboto font-semibold">
               Interested in this job?
@@ -133,7 +131,7 @@ const SingleJobDetails = () => {
             </button>
           </div>
 
-          <div className="p-10 shadow-xl rounded-2xl mt-10 w-120 bg-white">
+          <div className="p-10 shadow-xl rounded-2xl mt-10 w-120 bg-white ">
             <div className="flex items-center gap-5">
               <img src={job.company.companyLogo} alt="" className="w-20" />
               <div className="flex flex-col ">
@@ -163,8 +161,8 @@ const SingleJobDetails = () => {
           </div>
         </div>
       </div>
-    </div>
+    </>
   );
 };
 
-export default SingleJobDetails;
+export default JobDetails;

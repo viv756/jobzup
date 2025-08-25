@@ -10,7 +10,7 @@ import Header from "../components/Header";
 import ProtectedRoute from "./Protected.route";
 import AuthRoute from "./Auth.route";
 import RoleBasedRote from "./RoleBased.route";
-import { RECRUITER_ONLY_ROUTES } from "./common/routePaths";
+import AppLayout from "../layout/AppLayout";
 
 const AppRoutes = () => {
   return (
@@ -30,9 +30,11 @@ const AppRoutes = () => {
         </Route>
 
         <Route path="/" element={<ProtectedRoute />}>
-          {protectedRoutePaths.map((route) => (
-            <Route key={route.path} path={route.path} element={route.element} />
-          ))}
+          <Route element={<AppLayout />}>
+            {protectedRoutePaths.map((route) => (
+              <Route key={route.path} path={route.path} element={route.element} />
+            ))}
+          </Route>
         </Route>
 
         <Route path="/" element={<RoleBasedRote allowedRoles={["RECRUITER"]} />}>

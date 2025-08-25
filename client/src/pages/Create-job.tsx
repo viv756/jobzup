@@ -1,5 +1,5 @@
 import React, { useState } from "react";
-import { useParams } from "react-router-dom";
+import { useNavigate, useParams } from "react-router-dom";
 import DatePicker from "react-datepicker";
 import toast from "react-hot-toast";
 
@@ -22,6 +22,7 @@ const CreateJob = () => {
   const [closingDate, setClosingDate] = useState<Date | null>(new Date());
 
   const { companyId } = useParams();
+  const navigate = useNavigate();
 
   const onSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
@@ -54,6 +55,7 @@ const CreateJob = () => {
       const data = await createJobApiFn(payload, companyId as string);
       if (data) {
         toast.success(data.message);
+        navigate(`/job/${data.job._id}`);
       }
     } catch (error: any) {
       toast.error(error.message);

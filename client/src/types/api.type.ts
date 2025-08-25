@@ -33,6 +33,7 @@ export type CompanyType = {
 };
 
 export type JobType = {
+  _id:string
   title: string;
   category: string;
   description: string[];

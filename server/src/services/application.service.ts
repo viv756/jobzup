@@ -11,7 +11,7 @@ export const applyToAJobService = async (
 ) => {
   const job = await JobModel.findById(companyId);
 
-  if (!job || !job.companyId.equals(companyId)) {
+  if (!job || !job.company.equals(companyId)) {
     throw new BadRequestException("Job is not available");
   }
 

@@ -8,7 +8,7 @@ type props = {
 
 const InfoCard = ({ icon, title, content }: props) => {
   return (
-    <div className="bg-[#F5F7FF] max-w-[250px] flex flex-col items-center justify-center p-6 gap-3 rounded-2xl ">
+    <div className="bg-[#F5F7FF] sm:max-w-[250px] flex flex-col items-center justify-center p-6 gap-3 rounded-2xl ">
       {icon}
       <div className="flex flex-col items-center justify-center">
         <p className="text-gray1 text-lg font-roboto ">{title}</p>

@@ -9,10 +9,15 @@ export const applyToAJobService = async (
   jobId: string,
   recruiterId: string
 ) => {
-  const job = await JobModel.findById(companyId);
+  const job = await JobModel.findById(jobId);
 
   if (!job || !job.company.equals(companyId)) {
     throw new BadRequestException("Job is not available");
+  }
+
+  const userApplied = await ApplictionModel.exists({ user: userId, job: jobId });
+  if (userApplied) {
+    throw new BadRequestException("You are already applied to this job");
   }
 
   const company = await CompanyModel.findById(companyId);

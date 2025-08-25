@@ -9,7 +9,7 @@ import { HTTPSTATUS } from "../config/http.config";
 export const applyToAJobControlller = asyncHandler(async (req: Request, res: Response) => {
   const userId = req.user?._id as string;
 
-  const companyId = companyIdSchema.parse(req.params.comapanyId);
+  const companyId = companyIdSchema.parse(req.params.companyId);
   const jobId = jobIdSchema.parse(req.params.jobId);
   const recruiterId = recruiterIdSchema.parse(req.params.recruiterId);
 
@@ -17,7 +17,6 @@ export const applyToAJobControlller = asyncHandler(async (req: Request, res: Res
 
   return res.status(HTTPSTATUS.CREATED).json({
     message: "Job applied successfully",
-    application,
   });
 });
 

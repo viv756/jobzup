@@ -181,6 +181,11 @@ export type GetAllJobsResponse = {
   job: JobType[];
 };
 
+export type ApplyToAJobResponseType = {
+  message: string,
+  
+}
+
 export type CreateProfilePayloadType = {
   bio: string;
   location: string;

@@ -5,7 +5,6 @@ import type {
   CreateJobResponseType,
   CreateProfilePayloadType,
   CreateProfileResponseType,
-  
   CurrentUserResponseType,
   GetAllJobsResponse,
   GetCurrentCompanyResponseType,
@@ -81,7 +80,7 @@ export const getAllJobsApiFn = async () => {
   });
 };
 
-export const createProfileApiFn = async (userId: string, data:CreateProfilePayloadType) => {
+export const createProfileApiFn = async (userId: string, data: CreateProfilePayloadType) => {
   return apiFetch<CreateProfileResponseType>(`/profile/create/new/${userId}`, {
     method: "POST",
     body: JSON.stringify(data),
@@ -89,16 +88,26 @@ export const createProfileApiFn = async (userId: string, data:CreateProfilePaylo
   });
 };
 
+export const applyToAJobApiFn = async (jobId: string, companyId: string, recriterId: string) => {
+  return apiFetch<{ message: string }>(
+    `/application/job/${jobId}/company/${companyId}/recruiter/${recriterId}`,
+    {
+      method: "POST",
+      auth: true,
+    }
+  );
+};
+
 export const getUserProfileApiFn = async (userId: string) => {
   return apiFetch<GetCurrentUserProfileResponseType>(`/profile/getProfile/user/${userId}`, {
-    auth:true
-  })
-}
+    auth: true,
+  });
+};
 
-export const updateUserProfile = async (userId: string, data:UpdateUserProfilePayloadType) => {
+export const updateUserProfile = async (userId: string, data: UpdateUserProfilePayloadType) => {
   return apiFetch<UpdateUserProfileResponseType>(`/profile/update/user/${userId}`, {
     method: "POST",
     body: JSON.stringify(data),
-    auth:true
-  })
-}
+    auth: true,
+  });
+};

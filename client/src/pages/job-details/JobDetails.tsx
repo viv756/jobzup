@@ -16,6 +16,7 @@ import { getJobByIdApiFn } from "../../lib/api";
 import type { JobType } from "../../types/api.type";
 import InfoCard from "./components/InfoCard";
 import { List } from "./components/List";
+import ApplyToAJob from "./components/ApplyToAJob";
 
 const JobDetails = () => {
   const [job, setJob] = useState<JobType>();
@@ -122,14 +123,11 @@ const JobDetails = () => {
         </div>
 
         <div className="mt-10 sm:mt-1">
-          <div className="bg-black min-w-md rounded-2xl min-h-50 flex flex-col justify-center p-10 gap-8">
-            <h3 className="text-white text-2xl font-roboto font-semibold">
-              Interested in this job?
-            </h3>
-            <button className="bg-[#2453CC] p-3 rounded-3xl text-md font-roboto text-white w-40 hover:bg-blue-900 transition duration-200 ">
-              Apply now
-            </button>
-          </div>
+          <ApplyToAJob
+            jobId={jobId as string}
+            companyId={job.company._id}
+            recruiterId={job.createdBy}
+          />
 
           <div className="p-10 shadow-xl rounded-2xl mt-10 w-120 bg-white ">
             <div className="flex items-center gap-5">

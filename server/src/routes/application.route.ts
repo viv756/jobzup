@@ -7,7 +7,7 @@ import {
 const applicationRoutes = Router();
 
 applicationRoutes.post(
-  "/job/:jobId/company/:companyid/recruiter/:recruiterId",
+  "/job/:jobId/company/:companyId/recruiter/:recruiterId",
   applyToAJobControlller
 );
 applicationRoutes.get("/user/appliedJobs", getuserAppliedJobsController);

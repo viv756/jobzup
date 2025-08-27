@@ -1,10 +1,11 @@
-import CreateCompany from "../../pages/Create-company";
-import CreateJob from "../../pages/Create-job";
+import CreateCompany from "../../pages/recruiter/Create-company";
+import CreateJob from "../../pages/recruiter/Create-job";
 import LandingPage from "../../pages/landing-page";
-import SignIn from "../../pages/sign-in";
-import SignUp from "../../pages/sign-up";
-import { AUTH_ROUTES, PROTECTED_ROUTES, PUBLIC_ROUTES, RECRUITER_ONLY_ROUTES } from "./routePaths";
+import SignIn from "../../pages/auth/sign-in";
+import SignUp from "../../pages/auth/sign-up";
 import JobDetails from "../../pages/job-details/JobDetails";
+
+import { AUTH_ROUTES, PROTECTED_ROUTES, PUBLIC_ROUTES, RECRUITER_ONLY_ROUTES } from "./routePaths";
 
 export const publicRoutePaths = [{ path: PUBLIC_ROUTES.HOME, element: <LandingPage /> }];
 

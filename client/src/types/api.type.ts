@@ -131,14 +131,19 @@ export type CurrentUserResponseType = {
 
 export type CreateCompanyPayLoadType = {
   companyName: string;
+  email:string
   companySize: string;
+  foundedIn :Date | null
   avgSalary: string;
   location: string;
   about: string;
+  phone: string
+  background: string[]
+  benefits: string[]
   facebook: string | null;
   instagram: string | null;
   twitter: string | null;
-  companyLogo: string;
+  companyLogo: string | null;
   websiteLink: string | null;
 };
 

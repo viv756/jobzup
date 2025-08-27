@@ -1,5 +1,5 @@
 import mongoose, { Document, Schema } from "mongoose";
-import { string } from "zod";
+import { string, trim } from "zod";
 
 interface CompanyDocument extends Document {
   companyName: string;
@@ -10,6 +10,8 @@ interface CompanyDocument extends Document {
   facebook: string | null;
   instagram: string | null;
   twiter: string | null;
+  background: string[];
+  benefits: string[];
   foundedIn: string;
   phone: string;
   email: string;
@@ -70,6 +72,14 @@ const companySchema = new Schema<CompanyDocument>(
     companyLogo: {
       type: String,
       required: true,
+    },
+    background: {
+      type: [String],
+      trim: true,
+    },
+    benefits: {
+      type: [String],
+      trim: true,
     },
     createdBy: {
       type: Schema.Types.ObjectId,

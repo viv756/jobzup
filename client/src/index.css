@@ -14,13 +14,17 @@
   --color-gray2: #626364;
   --color-gray3: #f5f7ff;
   --color-gray4: #fefefe;
-
 }
 
 @theme {
-  --font-roboto: "Roboto", sans-serif; 
+  --font-roboto: "Roboto", sans-serif;
 }
 
 @plugin "daisyui" {
   themes: light --default;
 }
+
+.PhoneInput .PhoneInputInput:focus {
+  outline: none;
+}
+

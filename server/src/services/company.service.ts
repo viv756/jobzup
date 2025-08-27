@@ -1,14 +1,21 @@
+import mongoose from "mongoose";
 import CompanyModel from "../models/company.model";
+import UserModel from "../models/user.model";
 import { BadRequestException, NotFoundExeption } from "../utils/appError";
 
 export const createCompanyService = async (
   userId: string,
   body: {
     companyName: string;
+    email: string;
     companySize: string;
+    foundedIn: string;
     avgSalary: string;
     location: string;
     about: string;
+    phone: string;
+    background: string[];
+    benefits: string[];
     facebook?: string;
     instagram?: string;
     twitter?: string;
@@ -23,10 +30,15 @@ export const createCompanyService = async (
 
   const company = new CompanyModel({
     companyName: body.companyName,
+    email: body.email,
+    foundedIn: body.foundedIn,
     companySize: body.companySize,
     avgSalary: body.avgSalary,
     location: body.location,
     about: body.about,
+    phone: body.phone,
+    background: body.background,
+    benefits: body.benefits,
     facebook: body.facebook,
     instagram: body.instagram,
     twiter: body.twitter,
@@ -36,6 +48,11 @@ export const createCompanyService = async (
   });
 
   await company.save();
+  const user = await UserModel.findById(userId);
+
+  if (user) {
+    user.company = company._id as mongoose.Types.ObjectId;
+  }
 
   return { company };
 };

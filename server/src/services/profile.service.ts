@@ -16,7 +16,7 @@ export const createProfileService = async (body: CreateProfileType, userId: stri
     location: body.location,
     language: body.language,
     skills: body.skills,
-    workExperiance: body.workExperience,
+    workExperience: body.workExperience,
     education: body.education,
     awards: body.awards,
     qualification: body.qualification,

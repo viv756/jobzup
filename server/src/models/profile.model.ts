@@ -29,7 +29,7 @@ export interface ProfileDocument extends Document {
   location: string | null;
   language: string[] | null;
   skills: string[] | null;
-  workExperiance: WorkExperiance[] | null;
+  workExperience: WorkExperiance[] | null;
   education: Education[] | null;
   awards: Awards[] | null;
   qualification: string | null;
@@ -67,7 +67,7 @@ const profileSchema = new Schema<ProfileDocument>(
       type: [String],
       default: null,
     },
-    workExperiance: [
+    workExperience: [
       {
         company: String,
         position: String,

@@ -1,7 +1,18 @@
+import type React from "react";
+import { Link, useNavigate } from "react-router-dom";
 import { LuCirclePower } from "react-icons/lu";
 import { GiHamburgerMenu } from "react-icons/gi";
-import { Link } from "react-router-dom";
+
 import { useAppSelector } from "../hooks/useSelector";
+import Modal from "./Modal";
+import toast from "react-hot-toast";
+import { logoutApiFn } from "../lib/api";
+import { useDispatch } from "react-redux";
+import type { AppDispatch } from "../redux/store";
+import { logout } from "../redux/user/user.slice";
+import { useRef } from "react";
+import type { ConfirmModalHandle } from "./ConfirmModal";
+import ConfirmModal from "./ConfirmModal";
 
 const NavLinks = [
   { name: "Home", path: "/" },
@@ -12,11 +23,28 @@ const NavLinks = [
 
 const Header = () => {
   const { currentUser } = useAppSelector((store) => store.user);
+  const navigate = useNavigate();
+  const dispatch = useDispatch<AppDispatch>();
+
+  const modalRef = useRef<ConfirmModalHandle>(null);
+
+  const handleLogout = async () => {
+    try {
+      const data = await logoutApiFn();
+      if (data) {
+        dispatch(logout());
+        toast.success(data.message);
+        navigate("/");
+      }
+    } catch (error: any) {
+      toast.error(error.message);
+    }
+  };
 
   return (
     <div className="sm:px-15 p-2">
       <div className=" mx-auto flex justify-between h-[100px] ">
-        <Link to={"/"} className="flex items-center" >
+        <Link to={"/"} className="flex items-center">
           <img src="/jobzup_logo.svg" className="sm:w-[170px] w-[150px] " alt="" />
         </Link>
         <ul className="hidden sm:flex gap-6 items-center">
@@ -29,9 +57,11 @@ const Header = () => {
 
         <div className="sm:flex gap-5 items-center hidden">
           {currentUser ? (
-            <Link to={"/logout"} className="btn rounded-3xl text-lg p-6 w-36">
+            <button
+              onClick={() => modalRef.current?.open()}
+              className="btn rounded-3xl text-lg p-6 w-36">
               <LuCirclePower /> Logout
-            </Link>
+            </button>
           ) : (
             <Link to={"/sign-in"} className="btn rounded-3xl text-lg p-6 w-36">
               <LuCirclePower /> Login
@@ -48,6 +78,11 @@ const Header = () => {
           </button>
         </div>
       </div>
+      <ConfirmModal
+        ref={modalRef}
+        message="Are you sure you want to log out?"
+        onConfirm={handleLogout}
+      />
     </div>
   );
 };

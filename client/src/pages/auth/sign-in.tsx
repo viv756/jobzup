@@ -53,8 +53,20 @@ const SignIn = () => {
       if (data) {
         dispatch(signInSuccess(data.user));
         toast.success(data.message);
-        navigate("/");
       }
+
+      if (data.user.role === "CANDIDATE" && data.user.profile === null) {
+        navigate(`/profile/create/${data.user._id}`);
+        return;
+      }
+
+      if (data.user.role === "RECRUITER" && data.user.company === null) {
+        navigate(`/create/company`);
+        return;
+      }
+
+      navigate("/");
+      return;
     } catch (err: any) {
       toast.error(err.message);
     }
@@ -104,8 +116,7 @@ const SignIn = () => {
 
         <p className="text-white text-center text-xl">
           Don't have an account?
-          <Link to={"/sign-up"} className="underline">
-            {" "}
+          <Link to={"/sign-up"} className="underline"> 
             Sign Up
           </Link>
         </p>

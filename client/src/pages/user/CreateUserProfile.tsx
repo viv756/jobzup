@@ -39,7 +39,6 @@ const CreateUserProfile = () => {
   const { userId } = useParams();
   const navigate = useNavigate();
   const dispatch = useDispatch<AppDispatch>();
-
   const filePicker = useRef<HTMLInputElement>(null);
 
   useEffect(() => {

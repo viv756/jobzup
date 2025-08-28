@@ -1,17 +1,18 @@
 import { useEffect, useRef, useState } from "react";
+import { useNavigate, useParams } from "react-router-dom";
 import DatePicker from "react-datepicker";
+import { useDispatch } from "react-redux";
+import { PlusCircle, X } from "lucide-react";
+
 import type {
   Awards,
   CreateProfilePayloadType,
   Education,
   WorkExperience,
 } from "../../types/api.type";
-import { PlusCircle, X } from "lucide-react";
 import { type GenderEnumType } from "../../constant";
 import { createProfileApiFn } from "../../lib/api";
-import { useNavigate, useParams } from "react-router-dom";
 import toast from "react-hot-toast";
-import { useDispatch } from "react-redux";
 import type { AppDispatch } from "../../redux/store";
 import { fetchCurrentUser } from "../../redux/user/user.slice";
 import { filterAwards, filterEducation, filterWorkExperience } from "../../lib/helper";
@@ -47,7 +48,7 @@ const CreateUserProfile = () => {
         profileUpload();
       }
     }
-  },[profileImage]);
+  }, [profileImage]);
 
   const handleProfileImage = (e: React.ChangeEvent<HTMLInputElement>) => {
     const file = e.target.files?.[0];
@@ -165,7 +166,7 @@ const CreateUserProfile = () => {
     }
 
     const skillsArray = skills.split(",");
-    const laguageArray = language.split(",")
+    const laguageArray = language.split(",");
     const filteredWorkExperience = filterWorkExperience(workExperience);
     const filteredAwards = filterAwards(awards);
     const filteredEducation = filterEducation(education);
@@ -174,7 +175,7 @@ const CreateUserProfile = () => {
       profileUrl: profileUrl,
       bio,
       location,
-      language : laguageArray,
+      language: laguageArray,
       skills: skillsArray,
       age,
       awards: filteredAwards,
@@ -183,8 +184,6 @@ const CreateUserProfile = () => {
       education: filteredEducation,
       workExperience: filteredWorkExperience,
     };
-
-    console.log(payLoad);
 
     try {
       const data = await createProfileApiFn(userId as string, payLoad);

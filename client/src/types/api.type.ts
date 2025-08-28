@@ -1,4 +1,4 @@
-import type { JobTypeEnumType } from "../constant";
+import type { GenderEnumType, JobTypeEnumType } from "../constant";
 
 export type UserType = {
   _id: string;
@@ -56,9 +56,9 @@ type ProfileType = {
   userId: string;
   bio: string;
   location: string;
-  language: string;
+  language: string[];
   skills: string[];
-  workExperiance: WorkExperiance[];
+  workExperiance: WorkExperience[];
   education: Education[];
   awards: Awards[];
   qualification: string | null;
@@ -68,7 +68,7 @@ type ProfileType = {
   updatedAt: Date;
 };
 
-type WorkExperiance = {
+export type WorkExperience = {
   company: string;
   position: string;
   startDate: Date | null;
@@ -76,27 +76,20 @@ type WorkExperiance = {
   description: string;
 };
 
-type Education = {
+export type Education = {
   collegeName: string;
   department: string;
   startDate: Date | null;
   endDate: Date | null;
-  description: string | null;
+  description: string 
 };
 
-type Awards = {
+export type Awards = {
   name: string;
   date: Date | null;
-  description: string | null;
+  description: string 
 };
 
-export const GenderEnum = {
-  male: "male",
-  female: "female",
-  other: "other",
-} as const;
-
-export type GenderEnumType = keyof typeof GenderEnum;
 
 // **************Authentication Types**********************//
 
@@ -192,16 +185,17 @@ export type ApplyToAJobResponseType = {
 }
 
 export type CreateProfilePayloadType = {
+  profileUrl:string | null
   bio: string;
   location: string;
-  language: string;
+  language: string[];
   skills: string[];
-  workExperiance: WorkExperiance[];
-  education: Education[];
-  awards: Awards[];
-  qualification: string | null;
-  gender: GenderEnumType;
-  age: string | null;
+  workExperience?: WorkExperience[];
+  education?: Education[];
+  awards?: Awards[];
+  qualification?: string | null;
+  gender?: GenderEnumType;
+  age?: string | null;
 };
 
 export type CreateProfileResponseType = {
@@ -219,7 +213,7 @@ export type UpdateUserProfilePayloadType = {
   location: string;
   language: string;
   skills: string[];
-  workExperiance: WorkExperiance[];
+  workExperiance: WorkExperience[];
   education: Education[];
   awards: Awards[];
   qualification: string | null;

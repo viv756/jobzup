@@ -1,6 +1,6 @@
 import z from "zod";
 
-export const workExperianceSchema = z
+export const workExperienceSchema = z
   .array(
     z.object({
       company: z.string().trim(),
@@ -94,12 +94,13 @@ export const createProfileSchema = z.object({
   location: z.string().trim().optional(),
   language: z.array(z.string().trim()).optional(),
   skills: z.array(z.string().trim()).optional(),
-  workExperiance: workExperianceSchema,
+  workExperience: workExperienceSchema,
   education: educationSchema,
   awards: awardSchema,
   qualification: z.string().trim().nullable().default(null),
   gender: z.enum(["male", "female", "other"]).nullable().default(null),
   age: z.string().trim().nullable().default(null),
+  profileUrl:z.string().optional()
 });
 
 export const updateProfileSchema = z.object({
@@ -107,7 +108,7 @@ export const updateProfileSchema = z.object({
   location: z.string().trim().optional(),
   language: z.array(z.string().trim()).optional(),
   skills: z.array(z.string().trim()).optional(),
-  workExperiance: workExperianceSchema,
+  workExperiance: workExperienceSchema,
   education: educationSchema,
   awards: awardSchema,
   qualification: z.string().trim().nullable().default(null),

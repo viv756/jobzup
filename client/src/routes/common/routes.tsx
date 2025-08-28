@@ -4,6 +4,7 @@ import LandingPage from "../../pages/landing-page";
 import SignIn from "../../pages/auth/sign-in";
 import SignUp from "../../pages/auth/sign-up";
 import JobDetails from "../../pages/job-details/JobDetails";
+import CreateUserProfile from "../../pages/user/CreateUserProfile";
 
 import { AUTH_ROUTES, PROTECTED_ROUTES, PUBLIC_ROUTES, RECRUITER_ONLY_ROUTES } from "./routePaths";
 
@@ -18,6 +19,10 @@ export const protectedRoutePaths = [
   {
     path: PROTECTED_ROUTES.JOBS_DETAILS,
     element: <JobDetails />,
+  },
+  {
+    path: PROTECTED_ROUTES.CREATE_PROFILE,
+    element: <CreateUserProfile />,
   },
 ];
 

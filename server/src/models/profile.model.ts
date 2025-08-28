@@ -35,6 +35,7 @@ export interface ProfileDocument extends Document {
   qualification: string | null;
   gender: GenderEnumType | null;
   age: string | null;
+  profileUrl : string | null
 }
 
 const profileSchema = new Schema<ProfileDocument>(
@@ -43,6 +44,10 @@ const profileSchema = new Schema<ProfileDocument>(
       type: Schema.Types.ObjectId,
       ref: "User",
       required: true,
+    },
+    profileUrl: {
+      type: String,
+      default:null
     },
     bio: {
       type: String,

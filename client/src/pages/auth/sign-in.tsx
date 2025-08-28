@@ -2,9 +2,9 @@ import { useState } from "react";
 import { Link, useNavigate } from "react-router-dom";
 import toast from "react-hot-toast";
 
-import { loginApiFn } from "../lib/api";
-import { useAppDispatch } from "../hooks/useReducer";
-import { signInSuccess } from "../redux/user/user.slice";
+import { useAppDispatch } from "../../hooks/useReducer";
+import { loginApiFn } from "../../lib/api";
+import { signInSuccess } from "../../redux/user/user.slice";
 
 interface Errors {
   email?: string;

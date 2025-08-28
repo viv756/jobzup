@@ -3,9 +3,9 @@ import { useNavigate, useParams } from "react-router-dom";
 import DatePicker from "react-datepicker";
 import toast from "react-hot-toast";
 
-import { JobCategories, type JobCategoriesType, type JobTypeEnumType } from "../constant";
-import { createJobApiFn } from "../lib/api";
-import type { CreateJobPayloadType } from "../types/api.type";
+import { JobCategories, type JobCategoriesType, type JobTypeEnumType } from "../../constant";
+import { createJobApiFn } from "../../lib/api";
+import type { CreateJobPayloadType } from "../../types/api.type";
 import "react-datepicker/dist/react-datepicker.css";
 
 const CreateJob = () => {

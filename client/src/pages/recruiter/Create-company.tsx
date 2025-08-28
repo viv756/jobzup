@@ -1,4 +1,5 @@
 import React, { useEffect, useRef, useState } from "react";
+import { useNavigate } from "react-router-dom";
 import DatePicker from "react-datepicker";
 import PhoneInput, { formatPhoneNumberIntl, isValidPhoneNumber } from "react-phone-number-input";
 import type { Value } from "react-phone-number-input";
@@ -7,6 +8,9 @@ import toast from "react-hot-toast";
 import { createCompanyApiFn } from "../../lib/api";
 import type { CreateCompanyPayLoadType } from "../../types/api.type";
 import "react-phone-number-input/style.css";
+import { useDispatch } from "react-redux";
+import type { AppDispatch } from "../../redux/store";
+import { fetchCurrentUser } from "../../redux/user/user.slice";
 
 const CreateCompany = () => {
   const [companyName, setCompanyName] = useState<string>("");
@@ -27,6 +31,9 @@ const CreateCompany = () => {
   const [logoUrl, setLogourl] = useState<string | null>(null);
   const [phoneInputError, setPhoneInputError] = useState<string | undefined>();
   const [imageUploadingStart, setImageUploadingStart] = useState<boolean>(false);
+
+  const navigate = useNavigate();
+  const dispatch = useDispatch<AppDispatch>();
 
   const filePicker = useRef<HTMLInputElement>(null);
 
@@ -65,6 +72,7 @@ const CreateCompany = () => {
       const data = await res.json();
       if (data.error) {
         toast.error(data.error.message);
+        setImageUploadingStart(false)
         return;
       }
 
@@ -132,9 +140,9 @@ const CreateCompany = () => {
     try {
       const data = await createCompanyApiFn(payload);
       if (data) {
-        console.log(data);
-
         toast.success(data.message);
+        dispatch(fetchCurrentUser());
+        navigate("/");
       }
     } catch (error: any) {
       toast.error(error.message);

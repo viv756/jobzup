@@ -16,12 +16,13 @@ export const createProfileService = async (body: CreateProfileType, userId: stri
     location: body.location,
     language: body.language,
     skills: body.skills,
-    workExperiance: body.workExperiance,
+    workExperiance: body.workExperience,
     education: body.education,
     awards: body.awards,
     qualification: body.qualification,
     gender: body.gender,
     age: body.age,
+    profileUrl:body.profileUrl
   });
 
   await userProfile.save();

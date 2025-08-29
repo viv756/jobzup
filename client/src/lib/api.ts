@@ -35,6 +35,13 @@ export const loginApiFn = async (data: LoginPayLoadType) => {
   });
 };
 
+export const logoutApiFn = async () => {
+  return apiFetch<{message:string}>("/user/logout", {
+    method: "POST",
+    auth: true,
+  });
+};
+
 export const getCurrentUserApiFn = async () => {
   return apiFetch<CurrentUserResponseType>("/user/current", {
     auth: true,

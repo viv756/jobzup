@@ -1,16 +1,14 @@
-import type React from "react";
+import { useRef } from "react";
 import { Link, useNavigate } from "react-router-dom";
 import { LuCirclePower } from "react-icons/lu";
 import { GiHamburgerMenu } from "react-icons/gi";
 
 import { useAppSelector } from "../hooks/useSelector";
-import Modal from "./Modal";
 import toast from "react-hot-toast";
 import { logoutApiFn } from "../lib/api";
 import { useDispatch } from "react-redux";
 import type { AppDispatch } from "../redux/store";
 import { logout } from "../redux/user/user.slice";
-import { useRef } from "react";
 import type { ConfirmModalHandle } from "./ConfirmModal";
 import ConfirmModal from "./ConfirmModal";
 
@@ -42,7 +40,7 @@ const Header = () => {
   };
 
   return (
-    <div className="sm:px-15 p-2">
+    <div className="sticky top-0 bg-white">
       <div className=" mx-auto flex justify-between h-[100px] ">
         <Link to={"/"} className="flex items-center">
           <img src="/jobzup_logo.svg" className="sm:w-[170px] w-[150px] " alt="" />

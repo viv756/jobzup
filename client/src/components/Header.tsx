@@ -2,6 +2,7 @@ import { useRef } from "react";
 import { Link, useNavigate } from "react-router-dom";
 import { LuCirclePower } from "react-icons/lu";
 import { GiHamburgerMenu } from "react-icons/gi";
+import { LogOut } from "lucide-react";
 
 import { useAppSelector } from "../hooks/useSelector";
 import toast from "react-hot-toast";
@@ -55,20 +56,25 @@ const Header = () => {
 
         <div className="sm:flex gap-5 items-center hidden">
           {currentUser ? (
-            <button
-              onClick={() => modalRef.current?.open()}
-              className="btn rounded-3xl text-lg p-6 w-36">
-              <LuCirclePower /> Logout
-            </button>
+            <>
+              <Link to={`/dashboard/:${currentUser._id}`} className="flex items-center gap-x-3">
+                <img src={currentUser.profilePicture} className="w-16 h-16 rounded-full" />
+              </Link>
+              <button
+                onClick={() => modalRef.current?.open()}
+                className="btn rounded-3xl text-lg p-6 bg-primary text-white">
+                <LogOut />
+              </button>
+            </>
           ) : (
             <Link to={"/sign-in"} className="btn rounded-3xl text-lg p-6 w-36">
               <LuCirclePower /> Login
             </Link>
           )}
 
-          <button className="btn rounded-3xl text-lg bg-black text-white p-6 w-36 hover:bg-primary">
+          {/* <button className="btn rounded-3xl text-lg bg-black text-white p-6 w-36 hover:bg-primary">
             Post a job
-          </button>
+          </button> */}
         </div>
         <div className=" flex items-center sm:hidden">
           <button className="rounded-xl p-2 bg-primary text-white ">

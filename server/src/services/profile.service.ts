@@ -22,14 +22,17 @@ export const createProfileService = async (body: CreateProfileType, userId: stri
     qualification: body.qualification,
     gender: body.gender,
     age: body.age,
-    profileUrl:body.profileUrl
+    profileUrl: body.profileUrl,
   });
 
   await userProfile.save();
-  
+
   // add the profile _id to user
   user.profile = userProfile._id as Types.ObjectId;
-  await user.save()
+  if (body.profileUrl) {
+    user.profilePicture = body.profileUrl as string;
+  }
+  await user.save();
 
   return { userProfile };
 };

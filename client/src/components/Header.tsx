@@ -57,7 +57,7 @@ const Header = () => {
         <div className="sm:flex gap-5 items-center hidden">
           {currentUser ? (
             <>
-              <Link to={`/dashboard/:${currentUser._id}`} className="flex items-center gap-x-3">
+              <Link to={`/dashboard`} className="flex items-center gap-x-3">
                 <img src={currentUser.profilePicture} className="w-16 h-16 rounded-full" />
               </Link>
               <button

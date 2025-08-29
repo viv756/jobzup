@@ -7,6 +7,7 @@ import JobDetails from "../../pages/job-details/JobDetails";
 import CreateUserProfile from "../../pages/user/CreateUserProfile";
 
 import { AUTH_ROUTES, PROTECTED_ROUTES, PUBLIC_ROUTES, RECRUITER_ONLY_ROUTES } from "./routePaths";
+import DashBoard from "../../pages/dashboard/DashBoard";
 
 export const publicRoutePaths = [{ path: PUBLIC_ROUTES.HOME, element: <LandingPage /> }];
 
@@ -23,6 +24,10 @@ export const protectedRoutePaths = [
   {
     path: PROTECTED_ROUTES.CREATE_PROFILE,
     element: <CreateUserProfile />,
+  },
+  {
+    path: PROTECTED_ROUTES.DAHSBOARD,
+    element: <DashBoard />,
   },
 ];
 

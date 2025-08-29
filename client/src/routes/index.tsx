@@ -6,7 +6,6 @@ import {
   publicRoutePaths,
   recruiterOnlyRoutePaths,
 } from "./common/routes";
-import Header from "../components/Header";
 import ProtectedRoute from "./Protected.route";
 import AuthRoute from "./Auth.route";
 import RoleBasedRote from "./RoleBased.route";
@@ -15,7 +14,7 @@ import AppLayout from "../layout/AppLayout";
 const AppRoutes = () => {
   return (
     <BrowserRouter>
-      <Header />
+     
       <Routes>
         <Route path="/">
           {publicRoutePaths.map((route) => (

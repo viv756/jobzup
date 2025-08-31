@@ -5,8 +5,7 @@ import { CiLocationOn } from "react-icons/ci";
 import type { JobType } from "../../../types/api.type";
 
 const JobCard = ({ job }: { job: JobType }) => {
-  console.log(job);
-
+  
   return (
     <div className=" max-w-[450px] overflow-hidden rounded-xl bg-gray3 hover:bg-white shadow p-6 border border-secondary2">
       <div className="flex items-center gap-3">

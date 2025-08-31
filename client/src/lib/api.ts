@@ -36,7 +36,7 @@ export const loginApiFn = async (data: LoginPayLoadType) => {
 };
 
 export const logoutApiFn = async () => {
-  return apiFetch<{message:string}>("/user/logout", {
+  return apiFetch<{ message: string }>("/user/logout", {
     method: "POST",
     auth: true,
   });
@@ -81,8 +81,8 @@ export const getJobByIdApiFn = async (jobId: string) => {
   });
 };
 
-export const getAllJobsApiFn = async () => {
-  return apiFetch<GetAllJobsResponse>(`/job/all`, {
+export const getAllJobsApiFn = async (searchQuery?: string) => {
+  return apiFetch<GetAllJobsResponse>(`/job/all?${searchQuery}`, {
     auth: true,
   });
 };

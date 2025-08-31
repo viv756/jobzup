@@ -34,7 +34,7 @@ export const createJobService = async (userId: string, companyId: string, body: 
 };
 
 export const getJpbByIdservice = async (jobId: string) => {
-  const job = await JobModel.findById(jobId).populate("company")
+  const job = await JobModel.findById(jobId).populate("company");
   if (!job) {
     throw new BadRequestException("Job is not found");
   }
@@ -66,7 +66,7 @@ export const getAllJobsService = async (
   const skip = (pageNumber - 1) * pageSize;
 
   const [jobs, totalCount] = await Promise.all([
-    JobModel.find(query).skip(skip).limit(pageSize).sort({ createdAt: -1 }),
+    JobModel.find(query).skip(skip).limit(pageSize).sort({ createdAt: -1 }).populate("company"),
     JobModel.countDocuments(query),
   ]);
 

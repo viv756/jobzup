@@ -15,7 +15,7 @@ export const PROTECTED_ROUTES = {
   JOBS_DETAILS: "/job/:jobId",
   CREATE_PROFILE: "/profile/create/:userId",
   COMPANY_DETAILS: "/company/:companyId",
-  DAHSBOARD:"/dashboard"
+  DAHSBOARD: "/dashboard"
 };
 
 export const RECRUITER_ONLY_ROUTES = {

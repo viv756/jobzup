@@ -1,15 +1,12 @@
 export const JobCategories = [
-  "Software & IT",
-  "Design & Creative",
-  "Marketing & Sales",
-  "Finance & Accounting",
-  "Human Resources",
+  "Development",
+  "Marketing",
+  "Finance",
   "Engineering",
   "Customer Support",
-  "Data & Analytics",
+  "Accounting",
   "Content Writing",
-  "Product Management",
-  "Project Management",
+  "Date science",
   "Other",
 ] as const;
 

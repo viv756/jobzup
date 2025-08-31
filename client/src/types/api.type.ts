@@ -176,7 +176,7 @@ export type GetJobByIdResponse = {
 
 export type GetAllJobsResponse = {
   message: string;
-  job: JobType[];
+  jobs: JobType[];
 };
 
 export type ApplyToAJobResponseType = {

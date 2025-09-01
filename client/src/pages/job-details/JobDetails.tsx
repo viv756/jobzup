@@ -40,6 +40,8 @@ const JobDetails = () => {
     return <div>Loading.....</div>;
   }
 
+  console.log(job);
+  
   const jobInfo = () => {
     const items = [
       { icon: <MapPin size={17} />, text: job.company.location },

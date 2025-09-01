@@ -8,7 +8,7 @@ const SidebarFilter = () => {
   const currentCat = params.get("category");
 
   return (
-    <div className="bg-[#F5F7FF] min-h-screen min-w-[350px] rounded-xl p-8">
+    <div className="bg-[#F5F7FF] max-h-screen min-w-[350px] rounded-xl p-8">
       <h1 className="text-3xl font-semibold mt-5">Categories</h1>
 
       <ul className="mt-6 flex flex-col gap-2">

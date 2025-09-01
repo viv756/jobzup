@@ -8,10 +8,8 @@ const SearchJobs = () => {
 
   useEffect(() => {
     const urlParams = new URLSearchParams(location.search);
-
     const handler = setTimeout(() => {
       if (searchKey) {
-        
         if (urlParams.has("category")) {
           urlParams.delete("category");
         }

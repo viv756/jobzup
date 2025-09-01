@@ -22,9 +22,9 @@ export type CompanyType = {
   facebook: string | null;
   instagram: string | null;
   twitter: string | null;
-  foundedIn: string
-  phone: string
-  email:string
+  foundedIn: string;
+  phone: string;
+  email: string;
   companyLogo: string;
   websiteLink: string | null;
   createdBy: string;
@@ -33,15 +33,15 @@ export type CompanyType = {
 };
 
 export type JobType = {
-  _id:string
+  _id: string;
   title: string;
   category: string;
   description: string[];
   closeDate: Date | null;
   datePosted: Date | null;
   hiringLocation: string;
-  jobType: JobTypeEnumType
-  company: CompanyType
+  jobType: JobTypeEnumType;
+  company: CompanyType;
   experience: string;
   salary: string;
   responsibilities: string[];
@@ -81,15 +81,14 @@ export type Education = {
   department: string;
   startDate: Date | null;
   endDate: Date | null;
-  description: string 
+  description: string;
 };
 
 export type Awards = {
   name: string;
   date: Date | null;
-  description: string 
+  description: string;
 };
-
 
 // **************Authentication Types**********************//
 
@@ -124,15 +123,15 @@ export type CurrentUserResponseType = {
 
 export type CreateCompanyPayLoadType = {
   companyName: string;
-  email:string
+  email: string;
   companySize: string;
-  foundedIn :Date | null
+  foundedIn: Date | null;
   avgSalary: string;
   location: string;
   about: string;
-  phone: string
-  background: string[]
-  benefits: string[]
+  phone: string;
+  background: string[];
+  benefits: string[];
   facebook: string | null;
   instagram: string | null;
   twitter: string | null;
@@ -155,7 +154,7 @@ export type CreateJobPayloadType = {
   location: string;
   category: string;
   description: string;
-  jobType: JobTypeEnumType | string
+  jobType: JobTypeEnumType | string;
   closeDate: Date | null;
   hiringLocation: string;
   experience: string;
@@ -177,15 +176,21 @@ export type GetJobByIdResponse = {
 export type GetAllJobsResponse = {
   message: string;
   jobs: JobType[];
+  pagination: {
+    pageSize: number;
+    pageNumber: number;
+    totalCount: number;
+    totalPages: number;
+    skip: number;
+  };
 };
 
 export type ApplyToAJobResponseType = {
-  message: string,
-  
-}
+  message: string;
+};
 
 export type CreateProfilePayloadType = {
-  profileUrl:string | null
+  profileUrl: string | null;
   bio: string;
   location: string;
   language: string[];

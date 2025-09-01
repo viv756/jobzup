@@ -37,7 +37,7 @@ export const getAllJobsController = asyncHandler(async (req: Request, res: Respo
 
   const pagination = {
     pageSize: parseInt(req.query.pageSize as string) || 10,
-    pageNumber: parseInt(req.query.pageNumber as string) || 1,
+    pageNumber: parseInt(req.query.page as string) || 1,
   };
 
   const result = await getAllJobsService(filters, pagination);

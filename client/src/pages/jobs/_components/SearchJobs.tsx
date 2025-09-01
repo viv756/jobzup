@@ -13,6 +13,9 @@ const SearchJobs = () => {
         if (urlParams.has("category")) {
           urlParams.delete("category");
         }
+        if (urlParams.has("page")) {
+          urlParams.delete("page")
+        }
 
         urlParams.set("keyword", searchKey);
         const searchTerm = urlParams.toString();

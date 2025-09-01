@@ -4,8 +4,25 @@ import { JobCategories } from "../../../constant";
 
 const SidebarFilter = () => {
   const location = useLocation();
-  const params = new URLSearchParams(location.search);
-  const currentCat = params.get("category");
+  const urlParams = new URLSearchParams(location.search);
+  const currentCat = urlParams.get("category");
+
+  function buildJobLink(params: Record<string, string | number | boolean>) {
+    const query = new URLSearchParams(
+      Object.entries(params).map(([k, v]) => [k, String(v)])
+    ).toString();
+
+    const urlParams = new URLSearchParams(query);
+
+    if (urlParams.has("keyword")) {
+      urlParams.delete("keyword");
+    }
+    if (urlParams.has("page")) {
+      urlParams.delete("page");
+    }
+
+    return `/jobs/all?${query}`;
+  }
 
   return (
     <div className="bg-[#F5F7FF] max-h-screen min-w-[350px] rounded-xl p-8">
@@ -15,7 +32,7 @@ const SidebarFilter = () => {
         {JobCategories.map((cat) => (
           <NavLink
             key={cat}
-            to={`/jobs/all?category=${cat}`}
+            to={buildJobLink({ category: cat, page: 1 })}
             className={() =>
               `rounded-xl p-2 text-xl pl-7 ${
                 currentCat === cat

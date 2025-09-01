@@ -66,7 +66,7 @@ export const getAllJobsService = async (
   const skip = (pageNumber - 1) * pageSize;
 
   const [jobs, totalCount] = await Promise.all([
-    JobModel.find(query).skip(skip).limit(pageSize).sort({ createdAt: -1 }).populate("company"),
+    JobModel.find(query).skip(skip).limit(pageSize).sort({ createdAt: -1 }).populate("company","companyName companyLogo"),
     JobModel.countDocuments(query),
   ]);
 

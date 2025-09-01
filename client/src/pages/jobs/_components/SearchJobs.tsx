@@ -8,9 +8,25 @@ const SearchJobs = () => {
 
   useEffect(() => {
     const urlParams = new URLSearchParams(location.search);
-    urlParams.set("keyword", searchKey);
-    const searchTerm = urlParams.toString();
-    navigate(`/jobs/all?${searchTerm}`);
+
+    const handler = setTimeout(() => {
+      if (searchKey) {
+        
+        if (urlParams.has("category")) {
+          urlParams.delete("category");
+        }
+
+        urlParams.set("keyword", searchKey);
+        const searchTerm = urlParams.toString();
+        navigate(`/jobs/all?${searchTerm}`);
+      } else {
+        navigate(`/jobs/all`);
+      }
+    }, 500);
+
+    return () => {
+      clearTimeout(handler); // clear previous timer if user types again
+    };
   }, [searchKey]);
 
   return (

@@ -27,7 +27,7 @@ const ApplyToAJob = ({ jobId, companyId, recruiterId }: Props) => {
 
   return (
     <div className="bg-black min-w-md rounded-2xl min-h-50 flex flex-col justify-center p-10 gap-8">
-      <h3 className="text-white text-2xl font-dm font-semibold">Interested in this job?</h3>
+      <h3 className="text-white text-2xl font-satoshi font-semibold">Interested in this job?</h3>
       <button
         onClick={applyToAJob}
         disabled={applicationSubmitting}

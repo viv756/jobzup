@@ -13,7 +13,7 @@ export const List: React.FC<ListProps> = ({ items, ordered = false, className = 
     <ListTag
       className={`mt-5 ${ordered ? "list-decimal" : "list-disc"} list-outside pl-5 ${className}`}>
       {items.map((item, i) => (
-        <li key={i} className="text-md mt-1">
+        <li key={i} className="text-md mt-1 font-dm">
           {item}
         </li>
       ))}

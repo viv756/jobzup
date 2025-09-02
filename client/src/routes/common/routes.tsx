@@ -1,14 +1,14 @@
-import CreateCompany from "../../pages/recruiter/Create-company";
-import CreateJob from "../../pages/recruiter/Create-job";
+import CreateCompany from "../../pages/profile/recruiter/Create-company";
+import CreateJob from "../../pages/profile/recruiter/Create-job";
 import LandingPage from "../../pages/landing-page";
 import SignIn from "../../pages/auth/sign-in";
 import SignUp from "../../pages/auth/sign-up";
-import JobDetails from "../../pages/job-details/JobDetails";
-import CreateUserProfile from "../../pages/user/CreateUserProfile";
+import JobDetails from "../../pages/job-details";
+import CreateUserProfile from "../../pages/profile/user/CreateUserProfile";
+import DashBoard from "../../pages/profile/dashboard";
+import AllJobs from "../../pages/jobs";
 
 import { AUTH_ROUTES, PROTECTED_ROUTES, PUBLIC_ROUTES, RECRUITER_ONLY_ROUTES } from "./routePaths";
-import DashBoard from "../../pages/dashboard/DashBoard";
-import AllJobs from "../../pages/jobs";
 
 export const publicRoutePaths = [{ path: PUBLIC_ROUTES.HOME, element: <LandingPage /> }];
 

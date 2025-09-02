@@ -12,7 +12,7 @@ import {
   Building2,
 } from "lucide-react";
 import { BriefcaseBusiness } from "lucide-react";
-import { useAppSelector } from "../../../hooks/useSelector";
+import { useAppSelector } from "../../../../hooks/useSelector";
 
 type SidebarLink = {
   label: string;
@@ -57,7 +57,7 @@ const SideBar = () => {
               <NavLink
                 to={path}
                 className={({ isActive }) =>
-                  `rounded-md text-lg px-6 py-1 items-center transition duration-300 flex gap-2
+                  `rounded-md text-lg px-6 py-1 items-center transition duration-300 flex gap-2 font-dm
                   ${isActive ? "bg-white text-[#0A65FC]" : "hover:bg-white hover:text-[#0A65FC]"}`
                 }>
                 <Icon /> {label}

@@ -68,14 +68,14 @@ const JobDetails = () => {
           <img src={job.company.companyLogo} alt="" className="w-18" />
         </div>
         <div className="flex flex-col gap-2">
-          <h1 className="text-white text-4xl font-dm font-semibold ">{job.title}</h1>
+          <h1 className="text-white text-4xl font-satoshi font-semibold ">{job.title}</h1>
           {jobInfo()}
         </div>
       </div>
 
       <div className="mt-20 sm:flex gap-30">
         <div>
-          <h2 className="text-3xl font-semibold font-dm text-gray-800">Job description</h2>
+          <h2 className="text-3xl font-semibold font-satoshi text-gray-800">Job description</h2>
           <hr className="border border-gray-300 mt-5" />
           <p className="text-lg mt-6">{job.description}</p>
 
@@ -113,10 +113,10 @@ const JobDetails = () => {
           </div>
 
           <div className="mt-10">
-            <h1 className="text-gray-800 text-3xl font-dm font-semibold ">Responsibilities</h1>
+            <h1 className="text-gray-800 text-3xl font-satoshi font-semibold ">Responsibilities</h1>
             <hr className="border border-gray-300 mt-5" />
             <List items={job.responsibilities} />
-            <h1 className="text-gray-800 text-3xl font-dm font-semibold mt-8">
+            <h1 className="text-gray-800 text-3xl font-satoshi font-semibold mt-8">
               Job Requirements
             </h1>
             <hr className="border border-gray-300 mt-5" />
@@ -135,7 +135,7 @@ const JobDetails = () => {
             <div className="flex items-center gap-5">
               <img src={job.company.companyLogo} alt="" className="w-20" />
               <div className="flex flex-col ">
-                <h1 className="text-2xl font-semibold font-dm">{job.company.companyName}</h1>
+                <h1 className="text-2xl font-semibold font-satoshi">{job.company.companyName}</h1>
                 <p className="text-gray-500"> {job.company.location} </p>
               </div>
             </div>
@@ -143,15 +143,15 @@ const JobDetails = () => {
             <p className="mt-5 text-lg text-gray-500 font-dm">{job.company.about}</p>
 
             <div className="grid grid-cols-2 gap-3 mt-5 ">
-              <p className="text-lg">Company size</p>
-              <p className="text-lg"> {job.company.companySize} </p>
-              <p className="text-lg">Founded in</p>
-              <p className="text-lg">{job.company.foundedIn}</p>
-              <p className="text-lg">Phone</p>
-              <p className="text-lg">{job.company.phone}</p>
-              <p className="text-lg">Email</p>
-              <p className="text-lg ">{job.company.email}</p>
-            </div>
+              <p className="text-lg font-dm">Company size</p>
+              <p className="text-lg font-dm"> {job.company.companySize} </p>
+              <p className="text-lg font-dm">Founded in</p>
+              <p className="text-lg font-dm">{job.company.foundedIn}</p>
+              <p className="text-lg font-dm">Phone</p>
+              <p className="text-lg font-dm">{job.company.phone}</p>
+              <p className="text-lg font-dm">Email</p>
+              <p className="text-lg font-dm ">{job.company.email}</p>
+            </div> font-dm
 
             <Link to={`/company/${job.company._id}`}>
               <button className="p-3 text-[18px] font-dm bg-black text-white w-full mt-8  rounded-3xl hover:bg-blue-800 transition duration-300">

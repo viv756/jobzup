@@ -5,12 +5,12 @@ import PhoneInput, { formatPhoneNumberIntl, isValidPhoneNumber } from "react-pho
 import type { Value } from "react-phone-number-input";
 import toast from "react-hot-toast";
 
-import { createCompanyApiFn } from "../../lib/api";
-import type { CreateCompanyPayLoadType } from "../../types/api.type";
+import { createCompanyApiFn } from "../../../lib/api";
+import type { CreateCompanyPayLoadType } from "../../../types/api.type";
 import "react-phone-number-input/style.css";
 import { useDispatch } from "react-redux";
-import type { AppDispatch } from "../../redux/store";
-import { fetchCurrentUser } from "../../redux/user/user.slice";
+import type { AppDispatch } from "../../../redux/store";
+import { fetchCurrentUser } from "../../../redux/user/user.slice";
 
 const CreateCompany = () => {
   const [companyName, setCompanyName] = useState<string>("");

@@ -9,13 +9,13 @@ import type {
   CreateProfilePayloadType,
   Education,
   WorkExperience,
-} from "../../types/api.type";
-import { type GenderEnumType } from "../../constant";
-import { createProfileApiFn } from "../../lib/api";
+} from "../../../types/api.type";
+import { type GenderEnumType } from "../../../constant";
+import { createProfileApiFn } from "../../../lib/api";
 import toast from "react-hot-toast";
-import type { AppDispatch } from "../../redux/store";
-import { fetchCurrentUser } from "../../redux/user/user.slice";
-import { filterAwards, filterEducation, filterWorkExperience } from "../../lib/helper";
+import type { AppDispatch } from "../../../redux/store";
+import { fetchCurrentUser } from "../../../redux/user/user.slice";
+import { filterAwards, filterEducation, filterWorkExperience } from "../../../lib/helper";
 
 const CreateUserProfile = () => {
   const [profileImage, setProfileImage] = useState<File | null>(null);

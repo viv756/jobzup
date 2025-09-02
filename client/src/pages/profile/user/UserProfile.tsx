@@ -1,6 +1,3 @@
-import React from "react";
-
-import { CiLocationOn } from "react-icons/ci";
 import { Globe } from "lucide-react";
 import { MapPin } from "lucide-react";
 

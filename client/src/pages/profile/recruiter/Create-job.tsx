@@ -3,9 +3,9 @@ import { useNavigate, useParams } from "react-router-dom";
 import DatePicker from "react-datepicker";
 import toast from "react-hot-toast";
 
-import { JobCategories, type JobCategoriesType, type JobTypeEnumType } from "../../constant";
-import { createJobApiFn } from "../../lib/api";
-import type { CreateJobPayloadType } from "../../types/api.type";
+import { JobCategories, type JobCategoriesType, type JobTypeEnumType } from "../../../constant";
+import { createJobApiFn } from "../../../lib/api";
+import type { CreateJobPayloadType } from "../../../types/api.type";
 import "react-datepicker/dist/react-datepicker.css";
 
 const CreateJob = () => {
@@ -63,7 +63,7 @@ const CreateJob = () => {
   };
 
   return (
-    <div className="bg-gray3 max-w-[800px] p-10">
+    <div className="bg-primary max-w-[800px] p-10">
       <h1 className="text-2xl font-gray3 font-semibold font-dm">Job Details</h1>
       <form onSubmit={onSubmit} className="flex  flex-col gap-3 mt-3">
         <div className="flex flex-col gap-2">

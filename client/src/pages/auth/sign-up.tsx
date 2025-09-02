@@ -85,12 +85,12 @@ const SignUp = () => {
   return (
     <div className="min-h-[600px] bg-[#3367EC] max-w-[650px] p-15 rounded-2xl mx-auto">
       <div className="flex items-center flex-col gap-4">
-        <h1 className="text-6xl text-white font-semibold font-roboto">Sign Up</h1>
-        <p className="text-2xl text-white font-roboto">Create an account and start using Jobzup.</p>
+        <h1 className="text-6xl text-white font-semibold font-dm">Sign Up</h1>
+        <p className="text-2xl text-white font-dm">Create an account and start using Jobzup.</p>
       </div>
       <form onSubmit={onSubmit} className="flex flex-col p-6 gap-5">
         <div className="flex flex-col">
-          <label htmlFor="" className="font-roboto text-white">
+          <label htmlFor="" className="font-dm text-white">
             Name
           </label>
           <input
@@ -103,7 +103,7 @@ const SignUp = () => {
           <p className="pl-2 mt-1 text-red-600">{errors && errors.name}</p>
         </div>
         <div className="flex flex-col">
-          <label htmlFor="" className="font-roboto text-white">
+          <label htmlFor="" className="font-dm text-white">
             Email
           </label>
           <input
@@ -116,7 +116,7 @@ const SignUp = () => {
           <p className="pl-2 mt-1 text-red-600">{errors && errors.email}</p>
         </div>
         <div className="flex flex-col">
-          <label htmlFor="" className="font-roboto text-white">
+          <label htmlFor="" className="font-dm text-white">
             Password
           </label>
           <input
@@ -130,7 +130,7 @@ const SignUp = () => {
           <p className="px-2 mt-1 text-red-600">{errors && errors.checkPassword}</p>
         </div>
         <div className="flex flex-col">
-          <label htmlFor="" className="font-roboto text-white">
+          <label htmlFor="" className="font-dm text-white">
             Compare password
           </label>
           <input
@@ -173,7 +173,7 @@ const SignUp = () => {
           </div>
         </div>
         <div>
-          <button className="w-full text-white bg-gradient-to-r from-blue-500 via-blue-600 to-blue-700 hover:bg-gradient-to-br focus:ring-4 focus:outline-none focus:ring-blue-300 dark:focus:ring-blue-800 font-medium rounded-lg font-roboto px-5 py-2.5 text-center me-2 mb-2 text-xl ">
+          <button className="w-full text-white bg-gradient-to-r from-blue-500 via-blue-600 to-blue-700 hover:bg-gradient-to-br focus:ring-4 focus:outline-none focus:ring-blue-300 dark:focus:ring-blue-800 font-medium rounded-lg font-dm px-5 py-2.5 text-center me-2 mb-2 text-xl ">
             Create an account
           </button>
         </div>

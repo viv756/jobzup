@@ -48,7 +48,7 @@ const Header = () => {
         </Link>
         <ul className="hidden sm:flex gap-6 items-center">
           {NavLinks.map((nav) => (
-            <li key={nav.path} className="text-xl font-roboto">
+            <li key={nav.path} className="text-xl font-dm">
               <Link to={nav.path}>{nav.name}</Link>
             </li>
           ))}

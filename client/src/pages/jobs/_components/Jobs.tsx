@@ -47,7 +47,7 @@ const Jobs = () => {
         setPageNumber(data.pagination.pageNumber);
         setTotalPages(data.pagination.totalPages);
 
-        dispatch(setCachedResults({ searchKey, results: data.jobs }));
+        dispatch(setCachedResults({ searchKey, results: data.jobs, }));
       };
 
       fetchJobs();
@@ -78,7 +78,7 @@ const Jobs = () => {
     <>
       {jobs?.length === 0 && (
         <div className="mx-auto my-auto">
-          <p className="font-semibold font-roboto text-4xl">No Jobs Found</p>
+          <p className="font-semibold font-dm text-4xl">No Jobs Found</p>
         </div>
       )}
       <div className="grid grid-cols-2 gap-10">

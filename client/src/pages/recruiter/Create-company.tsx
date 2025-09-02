@@ -151,7 +151,7 @@ const CreateCompany = () => {
 
   return (
     <div className="w-[800px] mx-auto bg-[#F5F7FF] p-7 rounded-2xl">
-      <p className=" text-3xl text-black font-semibold font-roboto mt-10 text-center">
+      <p className=" text-3xl text-black font-semibold font-dm mt-10 text-center">
         Company Details
       </p>
       <form action="" className="w-full flex flex-col gap-3 mt-5" onSubmit={onSubmit}>
@@ -368,7 +368,7 @@ const CreateCompany = () => {
 
         <button
           disabled={imageUploadingStart}
-          className="w-full text-white bg-gradient-to-r from-blue-500 via-blue-600 to-blue-700 hover:bg-gradient-to-br focus:ring-4 focus:outline-none focus:ring-blue-300 dark:focus:ring-blue-800 font-medium rounded-lg font-roboto px-5 py-2.5 text-center me-2 mb-2 text-xl mt-5">
+          className="w-full text-white bg-gradient-to-r from-blue-500 via-blue-600 to-blue-700 hover:bg-gradient-to-br focus:ring-4 focus:outline-none focus:ring-blue-300 dark:focus:ring-blue-800 font-medium rounded-lg font-dm px-5 py-2.5 text-center me-2 mb-2 text-xl mt-5">
           Submit
         </button>
       </form>

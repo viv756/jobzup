@@ -32,13 +32,13 @@ const UserProfile = () => {
               Send Message
             </button>
 
-            <h3 className="text-lg font-semibold font-roboto text-gray-950 mt-5">Skills</h3>
+            <h3 className="text-lg font-semibold font-dm text-gray-950 mt-5">Skills</h3>
             <div className="flex flex-wrap gap-4 mt-3">
               <p className="p-1 px-3 bg-gray-200 rounded-3xl">Content Editor</p>
               <p className="p-1 px-3 bg-gray-200 rounded-3xl">Developer</p>
             </div>
 
-            <h3 className="text-lg font-semibold font-roboto text-gray-950 mt-6">Insights</h3>
+            <h3 className="text-lg font-semibold font-dm text-gray-950 mt-6">Insights</h3>
             <div className="grid grid-cols-2 mt-3  gap-3">
               <p className="text-gray-950">All time Earnings</p>
               <p className="text-black place-self-end font-semibold">$6,612</p>
@@ -50,7 +50,7 @@ const UserProfile = () => {
           </div>
         </div>
         <div className="flex-1">
-          <h1 className="text-2xl text-center font-roboto ">About Me</h1>
+          <h1 className="text-2xl text-center font-dm ">About Me</h1>
           <hr className="border border-gray-400 mt-3" />
 
           <div className="grid grid-cols-4 gap-1 mt-5">
@@ -72,7 +72,7 @@ const UserProfile = () => {
             </div>
           </div>
 
-          <p className="mt-7 text-gray-700 font-roboto">
+          <p className="mt-7 text-gray-700 font-dm">
             Detail oriented work is a must in my book and you will get a high-quality product from
             me. Please invite me to discuss how my skills fit your posting, how I can address your
             expected and unexpected needs, and to negotiate my rate. You will be pleased with a fast
@@ -82,7 +82,7 @@ const UserProfile = () => {
           
           </p>
 
-          <h1 className="text-xl mt-6 font-semibold font-roboto">Work Experience</h1>
+          <h1 className="text-xl mt-6 font-semibold font-dm">Work Experience</h1>
         </div>
       </div>
     </div>

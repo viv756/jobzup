@@ -64,7 +64,7 @@ const CreateJob = () => {
 
   return (
     <div className="bg-gray3 max-w-[800px] p-10">
-      <h1 className="text-2xl font-gray3 font-semibold font-roboto">Job Details</h1>
+      <h1 className="text-2xl font-gray3 font-semibold font-dm">Job Details</h1>
       <form onSubmit={onSubmit} className="flex  flex-col gap-3 mt-3">
         <div className="flex flex-col gap-2">
           <label htmlFor="" className="text-[18px] text-gray-400">
@@ -205,7 +205,7 @@ const CreateJob = () => {
           value={description}
           onChange={(e) => setDescription(e.target.value)}
           className="w-full bg-white outline-none border border-gray-500 rounded-2xl h-60 p-4"></textarea>
-        <button className="w-full text-white bg-gradient-to-r from-blue-500 via-blue-600 to-blue-700 hover:bg-gradient-to-br focus:ring-4 focus:outline-none focus:ring-blue-300 dark:focus:ring-blue-800 font-medium rounded-lg font-roboto px-5 py-2.5 text-center me-2 mb-2 text-xl mt-5">
+        <button className="w-full text-white bg-gradient-to-r from-blue-500 via-blue-600 to-blue-700 hover:bg-gradient-to-br focus:ring-4 focus:outline-none focus:ring-blue-300 dark:focus:ring-blue-800 font-medium rounded-lg font-dm px-5 py-2.5 text-center me-2 mb-2 text-xl mt-5">
           Submit
         </button>
       </form>

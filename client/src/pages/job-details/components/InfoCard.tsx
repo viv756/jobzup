@@ -11,8 +11,8 @@ const InfoCard = ({ icon, title, content }: props) => {
     <div className="bg-[#F5F7FF] sm:max-w-[250px] flex flex-col items-center justify-center p-6 gap-3 rounded-2xl ">
       {icon}
       <div className="flex flex-col items-center justify-center">
-        <p className="text-gray1 text-lg font-roboto ">{title}</p>
-        <p className="text-gray-600 font-semibold text-xl font-roboto">{content}</p>
+        <p className="text-gray1 text-lg font-dm ">{title}</p>
+        <p className="text-gray-600 font-semibold text-xl font-dm">{content}</p>
       </div>
     </div>
   );

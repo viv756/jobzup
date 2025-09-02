@@ -63,7 +63,8 @@ const CreateJob = () => {
   };
 
   return (
-    <div className="bg-primary max-w-[800px] p-10">
+    <div className="pt-20">
+      <div className="bg-amber-700 w-[800px] p-10 mx-auto rounded-2xl ">
       <h1 className="text-2xl font-gray3 font-semibold font-dm">Job Details</h1>
       <form onSubmit={onSubmit} className="flex  flex-col gap-3 mt-3">
         <div className="flex flex-col gap-2">
@@ -209,6 +210,7 @@ const CreateJob = () => {
           Submit
         </button>
       </form>
+    </div>
     </div>
   );
 };

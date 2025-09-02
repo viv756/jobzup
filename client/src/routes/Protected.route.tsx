@@ -1,13 +1,21 @@
 import { useAppSelector } from "../hooks/useSelector";
-import { Outlet,Navigate } from "react-router-dom";
+import { Outlet, Navigate } from "react-router-dom";
 
-const ProtectedRoute = () => {;
-  
+type ProtectedRouteProps = {
+  allowedRoles?: Array<"RECRUITER" | "CANDIDATE">;
+};
+
+const ProtectedRoute = ({ allowedRoles }: ProtectedRouteProps) => {
   const { currentUser, loading } = useAppSelector((state) => state.user);
 
   if (loading) return <div>Loading...</div>;
+  if (!currentUser) return <Navigate to={"/sign-in"} replace />;
 
-  return currentUser ? <Outlet /> : <Navigate to="/sign-in" />;
+  if (allowedRoles && !allowedRoles.includes(currentUser.role)) {
+    return <Navigate to={"/sign-in"} replace />;
+  }
+
+  return <Outlet />;
 };
 
-export default ProtectedRoute
+export default ProtectedRoute;

@@ -8,7 +8,6 @@ import {
 } from "./common/routes";
 import ProtectedRoute from "./Protected.route";
 import AuthRoute from "./Auth.route";
-import RoleBasedRote from "./RoleBased.route";
 import BaseLayout from "../layout/BaseLayout";
 import AppLayout from "../layout/AppLayout";
 
@@ -35,13 +34,13 @@ const AppRoutes = () => {
             {protectedRoutePaths.map((route) => (
               <Route key={route.path} path={route.path} element={route.element} />
             ))}
-          </Route>
-        </Route>
 
-        <Route path="/" element={<RoleBasedRote allowedRoles={["RECRUITER"]} />}>
-          {recruiterOnlyRoutePaths.map((route) => (
-            <Route key={route.path} path={route.path} element={route.element} />
-          ))}
+            <Route path="/" element={<ProtectedRoute allowedRoles={["RECRUITER"]} />}>
+              {recruiterOnlyRoutePaths.map((route) => (
+                <Route key={route.path} path={route.path} element={route.element} />
+              ))}
+            </Route>
+          </Route>
         </Route>
       </Routes>
     </BrowserRouter>

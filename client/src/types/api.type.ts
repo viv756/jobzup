@@ -9,7 +9,7 @@ export type UserType = {
   createdAt: Date;
   updatedAt: Date;
   company: string | null;
-  role: "RECRUITER" | "CANDIDATE";
+  role: "RECRUITER" | "JOB_SEEKER";
 };
 
 export type CompanyType = {
@@ -97,7 +97,7 @@ export type RegisterPayloadType = {
   name: string;
   password: string;
   confirmPassword: string;
-  role: "recruiter" | "candidate";
+  role: "recruiter" | "job_seeker";
 };
 
 export type RegisterResponseType = {

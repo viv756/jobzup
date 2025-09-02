@@ -1,6 +1,6 @@
 export const RoleEnum = {
   RECRUITER: "RECRUITER",
-  CANDIDATE: "CANDIDATE",
+  JOB_SEEKER: "JOB_SEEKER",
   ADMIN: "ADMIN",
 } as const;
 

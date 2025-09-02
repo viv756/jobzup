@@ -2,7 +2,7 @@ import { useAppSelector } from "../hooks/useSelector";
 import { Outlet, Navigate } from "react-router-dom";
 
 type ProtectedRouteProps = {
-  allowedRoles?: Array<"RECRUITER" | "CANDIDATE">;
+  allowedRoles?: Array<"RECRUITER" | "JOB_SEEKER">;
 };
 
 const ProtectedRoute = ({ allowedRoles }: ProtectedRouteProps) => {

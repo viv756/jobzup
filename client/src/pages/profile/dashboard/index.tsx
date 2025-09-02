@@ -6,7 +6,7 @@ const DashBoard = () => {
       <div className="h-30 flex items-center">
         <h1 className="text-3xl font-semibold">Welcome back!jen jav</h1>
       </div>
-      <div className="flex gap-10">
+      <div className="flex gap-14 ">
         <DashCard />
         <DashCard />
         <DashCard />

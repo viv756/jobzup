@@ -17,7 +17,7 @@ const SignUp = () => {
   const [email, setEmail] = useState<string>("");
   const [password, setPassword] = useState<string>("");
   const [confirmPassword, setConfirmPassword] = useState<string>("");
-  const [role, setRole] = useState<"candidate" | "recruiter">("candidate");
+  const [role, setRole] = useState<"job_seeker" | "recruiter">("job_seeker");
 
   const [errors, setErrors] = useState<Errors>({});
 
@@ -147,13 +147,13 @@ const SignUp = () => {
         <div className="flex justify-center gap-10 ">
           <div className="flex gap-3 items-center">
             <label htmlFor="" className="text-white text-xl">
-              Candidate
+              JOB_SEEKER
             </label>
             <input
-              onChange={(e) => setRole(e.target.value as "candidate" | "recruiter")}
-              checked={role === "candidate"}
+              onChange={(e) => setRole(e.target.value as "job_seeker" | "recruiter")}
+              checked={role === "job_seeker"}
               type="radio"
-              value="candidate"
+              value="job_seeker"
               name="role"
               className="radio radio-info"
             />
@@ -163,7 +163,7 @@ const SignUp = () => {
               Recruiter
             </label>
             <input
-              onChange={(e) => setRole(e.target.value as "candidate" | "recruiter")}
+              onChange={(e) => setRole(e.target.value as "job_seeker" | "recruiter")}
               value="recruiter"
               checked={role === "recruiter"}
               type="radio"

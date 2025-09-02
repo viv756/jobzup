@@ -55,7 +55,7 @@ const SignIn = () => {
         toast.success(data.message);
       }
 
-      if (data.user.role === "CANDIDATE" && data.user.profile === null) {
+      if (data.user.role === "JOB_SEEKER" && data.user.profile === null) {
         navigate(`/profile/create/${data.user._id}`);
         return;
       }

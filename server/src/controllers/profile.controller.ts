@@ -12,7 +12,7 @@ import { HTTPSTATUS } from "../config/http.config";
 import { userIdSchema } from "../validation/user.validation";
 
 export const createProfileController = asyncHandler(async (req: Request, res: Response) => {
-  if (!(req.user?.role === "CANDIDATE")) {
+  if (!(req.user?.role === "JOB_SEEKER")) {
     throw new UnauthorizedException(
       "You do not have the necessary permissions to perform this action"
     );
@@ -30,7 +30,7 @@ export const createProfileController = asyncHandler(async (req: Request, res: Re
 });
 
 export const getUserProfileController = asyncHandler(async (req: Request, res: Response) => {
-  // if (!(req.user?.role === "CANDIDATE")) {
+  // if (!(req.user?.role === "JOB_SEEKER")) {
   //   throw new UnauthorizedException(
   //     "You do not have the necessary permissions to perform this action"
   //   );
@@ -47,7 +47,7 @@ export const getUserProfileController = asyncHandler(async (req: Request, res: R
 });
 
 export const updateProfileController = asyncHandler(async (req: Request, res: Response) => {
-  // if (!(req.user?.role === "CANDIDATE")) {
+  // if (!(req.user?.role === "JOB_SEEKER")) {
   //   throw new UnauthorizedException(
   //     "You do not have the necessary permissions to perform this action"
   //   );

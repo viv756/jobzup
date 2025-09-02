@@ -1,12 +1,15 @@
 import { Outlet } from "react-router-dom";
-import Header from "../components/Header";
+
+import SideBar from "../components/SideBar";
 
 const AppLayout = () => {
   return (
-    <div className="px-2 sm:px-15">
-      <Header />
-      <Outlet />
-    </div>
+    <>
+      <SideBar />
+      <div className="h-[1200px] bg-[#F2F4F7] pl-[300px]">
+        <Outlet />
+      </div>
+    </>
   );
 };
 

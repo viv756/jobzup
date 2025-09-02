@@ -12,7 +12,7 @@ import {
   Building2,
 } from "lucide-react";
 import { BriefcaseBusiness } from "lucide-react";
-import { useAppSelector } from "../../../../hooks/useSelector";
+import { useAppSelector } from "../hooks/useSelector";
 
 type SidebarLink = {
   label: string;
@@ -25,21 +25,21 @@ const SideBar = () => {
   const { currentUser } = useAppSelector((store) => store.user);
 
   const sidebarLinks: SidebarLink[] = [
-    { label: "Dashboard", path: "/dashboard", icon: Contrast },
-    { label: "My Jobs", path: "/myjobs", icon: BriefcaseBusiness, roles: ["RECRUITER"] },
-    { label: "My Jobs", path: "/applied-jobs", icon: BriefcaseBusiness },
-    { label: "Applications", path: "/applications", icon: File, roles: ["RECRUITER"] },
+    { label: "Dashboard", path: "/profile/dashboard", icon: Contrast },
+    { label: "My Jobs", path: "/profile/myjobs", icon: BriefcaseBusiness, roles: ["RECRUITER"] },
+    { label: "My Jobs", path: "/profile/applied-jobs", icon: BriefcaseBusiness },
+    { label: "Applications", path: "/profile/applications", icon: File, roles: ["RECRUITER"] },
     {
       label: "Create New Job",
-      path: `/create/job/${currentUser?.company}`,
+      path: `/profile/create/job/${currentUser?.company}`,
       icon: FilePlus,
       roles: ["RECRUITER"],
     },
-    { label: "Company", path: "/comapany", icon: Building2, roles: ["RECRUITER"] },
-    { label: "Profile", path: "/profile", icon: User },
-    { label: "Messages", path: "/messages", icon: MessageSquareMore },
-    { label: "Meetings", path: "/meetings", icon: Headset },
-    { label: "Settings", path: "/settings", icon: Settings },
+    { label: "Company", path: "/profile/company", icon: Building2, roles: ["RECRUITER"] },
+    { label: "Profile", path: "/profile/update", icon: User },
+    { label: "Messages", path: "/profile/messages", icon: MessageSquareMore },
+    { label: "Meetings", path: "/profile/meetings", icon: Headset },
+    { label: "Settings", path: "/profile/settings", icon: Settings },
     { label: "Logout", path: "/logout", icon: LogOut },
   ];
 
@@ -49,8 +49,11 @@ const SideBar = () => {
   });
 
   return (
-    <div className="bg-[#0851CA] min-h-screen min-w-[280px] rounded-md fixed">
-      <div className="p-8 pt-15">
+    <div className="bg-[#0851CA] min-h-screen min-w-[280px] fixed">
+      <div className="p-8 pt-10 flex flex-col gap-8">
+        <div className="">
+          <img src={"/jobzup_logo.svg"} className="" alt="" />
+        </div>
         <ul className="flex flex-col justify-center text-center gap-2 text-white">
           {visibleLinks.map(({ label, path, icon: Icon }) => (
             <li key={path}>

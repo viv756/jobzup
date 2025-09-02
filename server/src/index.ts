@@ -42,7 +42,7 @@ app.use(`${BASE_PATH}/auth`, authRoutes);
 app.use(`${BASE_PATH}/user`, isAuthenticated, userRoutes);
 app.use(`${BASE_PATH}/company`, isAuthenticated, companyRoutes);
 app.use(`${BASE_PATH}/profile`, isAuthenticated, profileRoutes);
-app.use(`${BASE_PATH}/job`, isAuthenticated, jobRoutes);
+app.use(`${BASE_PATH}/job`, jobRoutes);
 app.use(`${BASE_PATH}/application`, isAuthenticated, applicationRoutes);
 
 app.use(errorHandler);

@@ -2,6 +2,8 @@ export const PUBLIC_ROUTES = {
   HOME: "/",
   ABOUT: "/about",
   CONTACT: "/contact",
+  JOBS: "/jobs/all",
+  JOBS_DETAILS: "/job/:jobId",
 };
 
 export const AUTH_ROUTES = {
@@ -10,15 +12,13 @@ export const AUTH_ROUTES = {
 };
 
 export const PROTECTED_ROUTES = {
-  PROFILE: "/profile/:userId",
-  JOBS: "/jobs/all",
-  JOBS_DETAILS: "/job/:jobId",
+  PROFILE: "/profile/update",
   CREATE_PROFILE: "/profile/create/:userId",
   COMPANY_DETAILS: "/company/:companyId",
-  DAHSBOARD: "/dashboard"
+  DAHSBOARD: "/profile/dashboard",
 };
 
 export const RECRUITER_ONLY_ROUTES = {
-  CREATE_JOB: "/create/job/:companyId",
-  CREATE_COMPANY: "/create/company",
+  CREATE_JOB: "/profile/create/job/:companyId",
+  CREATE_COMPANY: "/profile/create/company",
 };

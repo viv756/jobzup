@@ -64,11 +64,11 @@ const CreateJob = () => {
 
   return (
     <div className="pt-20">
-      <div className="bg-amber-700 w-[800px] p-10 mx-auto rounded-2xl ">
-      <h1 className="text-2xl font-gray3 font-semibold font-dm">Job Details</h1>
-      <form onSubmit={onSubmit} className="flex  flex-col gap-3 mt-3">
+      <div className="bg-[#1844B5] w-[800px] p-10 mx-auto rounded-2xl ">
+      <h1 className="text-4xl text-white font-semibold font-satoshi ">Job Details</h1>
+      <form onSubmit={onSubmit} className="flex  flex-col gap-3 mt-7">
         <div className="flex flex-col gap-2">
-          <label htmlFor="" className="text-[18px] text-gray-400">
+          <label htmlFor="" className="text-[18px] text-white font-dm">
             Job Title
           </label>
           <input

@@ -1,4 +1,4 @@
-import { NavLink } from "react-router-dom";
+import { Link, NavLink } from "react-router-dom";
 import {
   Contrast,
   LogOut,
@@ -49,11 +49,12 @@ const SideBar = () => {
   });
 
   return (
-    <div className="bg-[#0851CA] min-h-screen min-w-[280px] fixed">
+    <div className="bg-[#1A1C28] min-h-screen min-w-[280px] fixed">
       <div className="p-8 pt-10 flex flex-col gap-8">
-        <div className="">
-          <img src={"/jobzup_logo.svg"} className="" alt="" />
-        </div>
+        <Link to={"/"}>
+           <img src={"/jobzup_logo_dark.svg"} className="" alt="" />
+
+        </Link>
         <ul className="flex flex-col justify-center text-center gap-2 text-white">
           {visibleLinks.map(({ label, path, icon: Icon }) => (
             <li key={path}>
@@ -61,7 +62,7 @@ const SideBar = () => {
                 to={path}
                 className={({ isActive }) =>
                   `rounded-md text-lg px-6 py-1 items-center transition duration-300 flex gap-2 font-dm
-                  ${isActive ? "bg-white text-[#0A65FC]" : "hover:bg-white hover:text-[#0A65FC]"}`
+                  ${isActive ? "bg-[#626364] text-white" : "hover:bg-[#626364] hover:text-white"}`
                 }>
                 <Icon /> {label}
               </NavLink>

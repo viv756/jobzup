@@ -1,6 +1,7 @@
 import { Router } from "express";
 import {
   applyToAJobControlller,
+  getRecentApplicantsController,
   getuserAppliedJobsController,
 } from "../controllers/application.controller";
 
@@ -11,5 +12,6 @@ applicationRoutes.post(
   applyToAJobControlller
 );
 applicationRoutes.get("/user/appliedJobs", getuserAppliedJobsController);
+applicationRoutes.get("/recruiter/recent/applicants",getRecentApplicantsController)
 
 export default applicationRoutes;

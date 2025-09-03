@@ -9,6 +9,7 @@ import DashBoard from "../../pages/profile/dashboard";
 import AllJobs from "../../pages/jobs";
 
 import { AUTH_ROUTES, PROTECTED_ROUTES, PUBLIC_ROUTES, RECRUITER_ONLY_ROUTES } from "./routePaths";
+import MyJobs from "../../pages/profile/recruiter/my-jobs/MyJobs";
 
 export const publicRoutePaths = [
   { path: PUBLIC_ROUTES.HOME, element: <LandingPage /> },
@@ -44,4 +45,5 @@ export const recruiterOnlyRoutePaths = [
     path: RECRUITER_ONLY_ROUTES.CREATE_JOB,
     element: <CreateJob />,
   },
+  { path: RECRUITER_ONLY_ROUTES.MY_JOBS, element: <MyJobs /> },
 ];

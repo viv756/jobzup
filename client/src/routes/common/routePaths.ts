@@ -20,5 +20,6 @@ export const PROTECTED_ROUTES = {
 
 export const RECRUITER_ONLY_ROUTES = {
   CREATE_JOB: "/profile/create/job/:companyId",
+  MY_JOBS :'/profile/my-jobs',
   CREATE_COMPANY: "/profile/create/company",
 };

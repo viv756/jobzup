@@ -230,3 +230,14 @@ export type UpdateUserProfileResponseType = {
   message: string;
   userProfile: ProfileType;
 };
+
+export type Applicant = {
+  _id: string;
+  user: UserType;
+  job:JobType
+};
+
+export type RecentApplicantsResponse = {
+  message: string;
+  recentApplicants: Applicant[];
+};

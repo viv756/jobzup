@@ -11,14 +11,15 @@ import { useAppDispatch } from "../../../hooks/useReducer";
 
 const Jobs = () => {
   const [jobs, setJobs] = useState<JobType[]>();
-  const location = useLocation();
-  const urlParams = new URLSearchParams(location.search);
   const [pageNumber, setPageNumber] = useState(1);
   const [totalPages, setTotalPages] = useState(0);
 
+  const location = useLocation();
+  const urlParams = new URLSearchParams(location.search);
+  const navigate = useNavigate();
+
   const { cachedResults } = useAppSelector((state) => state.search);
   const dispatch = useAppDispatch();
-  const navigate = useNavigate();
 
   const onPageChange = (page: number) => {
     urlParams.set("page", String(page));
@@ -29,7 +30,7 @@ const Jobs = () => {
     try {
       const keyword = urlParams.get("keyword") || "all";
       const page = Number(urlParams.get("page")) || 1;
-      const category = urlParams.get("category") || "all"
+      const category = urlParams.get("category") || "all";
 
       const searchKey = `${keyword}-${page}-${category}`;
 
@@ -47,7 +48,7 @@ const Jobs = () => {
         setPageNumber(data.pagination.pageNumber);
         setTotalPages(data.pagination.totalPages);
 
-        dispatch(setCachedResults({ searchKey, results: data.jobs, }));
+        dispatch(setCachedResults({ searchKey, results: data.jobs }));
       };
 
       fetchJobs();

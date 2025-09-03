@@ -45,3 +45,17 @@ export const getuserAppliedJobsService = async (userId: string) => {
 
   return { appliedJobs };
 };
+
+export const getRecentApplicantsService = async (userId: string) => {
+  const recentApplicants = await ApplictionModel.find({ recruiter: userId })
+    .select("user job")
+    .limit(5)
+    .populate("user", "_id name profilePicture -password")
+    .populate("job", "_id title ");
+
+  if (!recentApplicants) {
+    throw new BadRequestException("You don't have any recent applicants");
+  }
+
+  return { recentApplicants };
+};

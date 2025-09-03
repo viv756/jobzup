@@ -2,7 +2,7 @@ import { ShieldUser } from "lucide-react";
 
 const DashCard = () => {
   return (
-    <div className="w-65 bg-white h-30 rounded-md p-4 pt-6">
+    <div className="w-70 bg-white h-30 rounded-md p-4 pt-6">
       <div className="flex justify-between items-center">
         <p className="text-sm text-gray-800 font-dm">POSTED SERVICES</p>
         <div className="bg-green-700 p-1 rounded-md">

@@ -28,14 +28,14 @@ const SideBar = () => {
 
   const sidebarLinks: SidebarLink[] = [
     { label: "Dashboard", path: "/profile/dashboard", icon: Contrast, roles: ["RECRUITER"] },
-    { label: "My Jobs", path: "/profile/myjobs", icon: BriefcaseBusiness, roles: ["RECRUITER"] },
+    { label: "My Jobs", path: "/profile/my-jobs", icon: BriefcaseBusiness, roles: ["RECRUITER"] },
     {
       label: "My Jobs",
       path: "/profile/applied-jobs",
       icon: BriefcaseBusiness,
       roles: ["JOB_SEEKER"],
     },
-    { label: "Applications", path: "/profile/applications", icon: File, roles: ["RECRUITER"] },
+    { label: "Applications", path: "/profile/applicants", icon: File, roles: ["RECRUITER"] },
     {
       label: "Create New Job",
       path: `/profile/create/job/${currentUser?.company}`,
@@ -52,7 +52,7 @@ const SideBar = () => {
 
   const visibleLinks = sidebarLinks.filter((link) => {
     if (!link.roles) return true; // no restriction
-    return link.roles.includes(currentUser?.role as string); // show only if role matches
+    return link.roles.includes(currentUser?.role as UserRole); // show only if role matches
   });
 
   return (

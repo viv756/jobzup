@@ -12,6 +12,7 @@ import type {
   GetJobByIdResponse,
   LoginPayLoadType,
   LoginResponseType,
+  RecentApplicantsResponse,
   RegisterPayloadType,
   RegisterResponseType,
   UpdateUserProfilePayloadType,
@@ -103,6 +104,12 @@ export const applyToAJobApiFn = async (jobId: string, companyId: string, recrite
       auth: true,
     }
   );
+};
+
+export const recentApplicantsApiFn = async () => {
+  return apiFetch<RecentApplicantsResponse>(`/application/recruiter/recent/applicants`, {
+    auth: true,
+  });
 };
 
 export const getUserProfileApiFn = async (userId: string) => {

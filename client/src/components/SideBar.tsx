@@ -14,20 +14,27 @@ import {
 import { BriefcaseBusiness } from "lucide-react";
 import { useAppSelector } from "../hooks/useSelector";
 
+type UserRole = "JOB_SEEKER" | "RECRUITER";
+
 type SidebarLink = {
   label: string;
   path: string;
   icon: LucideIcon;
-  roles?: string[]; // optional field for role-based access
+  roles?: UserRole[]; // optional field for role-based access
 };
 
 const SideBar = () => {
   const { currentUser } = useAppSelector((store) => store.user);
 
   const sidebarLinks: SidebarLink[] = [
-    { label: "Dashboard", path: "/profile/dashboard", icon: Contrast,roles:["RECRUITER"] },
+    { label: "Dashboard", path: "/profile/dashboard", icon: Contrast, roles: ["RECRUITER"] },
     { label: "My Jobs", path: "/profile/myjobs", icon: BriefcaseBusiness, roles: ["RECRUITER"] },
-    { label: "My Jobs", path: "/profile/applied-jobs", icon: BriefcaseBusiness,roles:["JOB_SEEKER"] },
+    {
+      label: "My Jobs",
+      path: "/profile/applied-jobs",
+      icon: BriefcaseBusiness,
+      roles: ["JOB_SEEKER"],
+    },
     { label: "Applications", path: "/profile/applications", icon: File, roles: ["RECRUITER"] },
     {
       label: "Create New Job",
@@ -36,7 +43,7 @@ const SideBar = () => {
       roles: ["RECRUITER"],
     },
     { label: "Company", path: "/profile/company", icon: Building2, roles: ["RECRUITER"] },
-    { label: "Profile", path: "/profile/update", icon: User },
+    { label: "Profile", path: "/profile/update", icon: User, roles: ["JOB_SEEKER"] },
     { label: "Messages", path: "/profile/messages", icon: MessageSquareMore },
     { label: "Meetings", path: "/profile/meetings", icon: Headset },
     { label: "Settings", path: "/profile/settings", icon: Settings },

@@ -234,10 +234,23 @@ export type UpdateUserProfileResponseType = {
 export type Applicant = {
   _id: string;
   user: UserType;
-  job:JobType
+  job: JobType;
 };
 
 export type RecentApplicantsResponse = {
   message: string;
   recentApplicants: Applicant[];
+};
+
+export type RecruiterJob = {
+  _id: string;
+  title: string;
+  category: string;
+  datePosted: Date;
+  applicantsCount: number;
+};
+
+export type GetAllJobsOfRecruiterResponse = {
+  message: string;
+  result: RecruiterJob[];
 };

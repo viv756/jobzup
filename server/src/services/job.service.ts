@@ -66,7 +66,11 @@ export const getAllJobsService = async (
   const skip = (pageNumber - 1) * pageSize;
 
   const [jobs, totalCount] = await Promise.all([
-    JobModel.find(query).skip(skip).limit(pageSize).sort({ createdAt: -1 }).populate("company","companyName companyLogo"),
+    JobModel.find(query)
+      .skip(skip)
+      .limit(pageSize)
+      .sort({ createdAt: -1 })
+      .populate("company", "companyName companyLogo"),
     JobModel.countDocuments(query),
   ]);
 
@@ -82,4 +86,35 @@ export const getAllJobsService = async (
       skip,
     },
   };
+};
+
+export const getAllJobsOfRecruiterService = async (userId: string) => {
+  const result = await JobModel.aggregate([
+    { $match: { createdBy: userId } },
+    {
+      $lookup: {
+        from: "application",
+        localField: "_id",
+        foreignField: "job",
+        as: "applicants",
+      },
+    },
+    {
+      $addFields: {
+        applicantsCount: { $size: "$applicants" },
+      },
+    },
+
+    {
+      $project: {
+        _id: 1,
+        title: 1,
+        category: 1,
+        datePosted: 1,
+        applicantsCount: 1,
+      },
+    },
+  ]);
+
+  return { result };
 };

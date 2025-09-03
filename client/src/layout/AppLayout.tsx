@@ -6,7 +6,7 @@ const AppLayout = () => {
   return (
     <>
       <SideBar />
-      <div className="bg-[#F2F4F7] pl-[300px]">
+      <div className="bg-[#F2F4F7] pl-[310px] pr-[30px]">
         <Outlet />
       </div>
     </>

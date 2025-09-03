@@ -11,7 +11,7 @@ const DashBoard = () => {
       <div className="h-30 flex items-center">
         <h1 className="text-3xl font-semibold">Welcome back!{currentUser?.name}</h1>
       </div>
-      <div className="flex gap-6 ">
+      <div className="flex  ">
         <DashCard />
         <DashCard />
         <DashCard />

@@ -6,6 +6,7 @@ import type {
   CreateProfilePayloadType,
   CreateProfileResponseType,
   CurrentUserResponseType,
+  GetAllJobsOfRecruiterResponse,
   GetAllJobsResponse,
   GetCurrentCompanyResponseType,
   GetCurrentUserProfileResponseType,
@@ -122,6 +123,12 @@ export const updateUserProfile = async (userId: string, data: UpdateUserProfileP
   return apiFetch<UpdateUserProfileResponseType>(`/profile/update/user/${userId}`, {
     method: "POST",
     body: JSON.stringify(data),
+    auth: true,
+  });
+};
+
+export const getAllJobsOfRecruiterApiFn = async () => {
+  return apiFetch<GetAllJobsOfRecruiterResponse>(`/job/recruiter/jobs`, {
     auth: true,
   });
 };

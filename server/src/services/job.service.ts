@@ -1,3 +1,4 @@
+import { Types } from "mongoose";
 import CompanyModel from "../models/company.model";
 import JobModel from "../models/job.model";
 import { BadRequestException, NotFoundExeption } from "../utils/appError";
@@ -88,12 +89,34 @@ export const getAllJobsService = async (
   };
 };
 
-export const getAllJobsOfRecruiterService = async (userId: string) => {
+export const getAllJobsOfRecruiterService = async (
+  userId: string,
+  filters: {
+    keyword?: string;
+  },
+  pagination: {
+    pageSize: number;
+    pageNumber: number;
+  }
+) => {
+  const query: Record<string, any> = {
+    createdBy: new Types.ObjectId(userId),
+  };
+
+  if (filters.keyword) {
+    query.title = { $regex: filters.keyword, $options: "i" };
+  }
+
+  const { pageNumber, pageSize } = pagination;
+  const skip = (pageNumber - 1) * pageSize;
+
   const result = await JobModel.aggregate([
-    { $match: { createdBy: userId } },
+    {
+      $match: query,
+    },
     {
       $lookup: {
-        from: "application",
+        from: "applications",
         localField: "_id",
         foreignField: "job",
         as: "applicants",
@@ -111,10 +134,33 @@ export const getAllJobsOfRecruiterService = async (userId: string) => {
         title: 1,
         category: 1,
         datePosted: 1,
+        closeDate: 1,
         applicantsCount: 1,
+      },
+    },
+    {
+      $facet: {
+        total: [{ $count: "count" }],
+        jobs: [{ $skip: skip }, { $limit: pageSize }],
+      },
+    },
+
+    {
+      $unwind: "$total",
+    },
+
+    {
+      $project: {
+        jobs: 1,
+        totalCount: "$total.count",
       },
     },
   ]);
 
-  return { result };
+  return {
+    jobs: result[0]?.jobs || [],
+    totalCount: result[0]?.totalCount || 0,
+    pageNumber,
+    totalPages: Math.max(1, Math.ceil((result[0]?.totalCount || 0) / pageSize)),
+  };
 };

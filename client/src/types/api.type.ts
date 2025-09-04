@@ -247,10 +247,14 @@ export type RecruiterJob = {
   title: string;
   category: string;
   datePosted: Date;
+  closeDate: Date;
   applicantsCount: number;
 };
 
 export type GetAllJobsOfRecruiterResponse = {
   message: string;
-  result: RecruiterJob[];
+  jobs: RecruiterJob[];
+  pageNumber: number;
+  totalCount: number;
+  totalPages: number;
 };

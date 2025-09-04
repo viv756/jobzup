@@ -127,8 +127,8 @@ export const updateUserProfile = async (userId: string, data: UpdateUserProfileP
   });
 };
 
-export const getAllJobsOfRecruiterApiFn = async () => {
-  return apiFetch<GetAllJobsOfRecruiterResponse>(`/job/recruiter/jobs`, {
+export const getAllJobsOfRecruiterApiFn = async (searchQuery?: string) => {
+  return apiFetch<GetAllJobsOfRecruiterResponse>(`/job/recruiter/jobs?${searchQuery}`, {
     auth: true,
   });
 };

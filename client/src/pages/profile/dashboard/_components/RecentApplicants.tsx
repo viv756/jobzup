@@ -49,7 +49,7 @@ const RecentApplicants = () => {
         <h1 className="font-satoshi font-medium text-2xl ">Recent Applicants</h1>
         <div className="flex flex-col gap-4 mt-7">
           {recentApplicants.map((applicant) => (
-            <div className="flex  items-center gap-4 ">
+            <div className="flex  items-center gap-4 " key={applicant._id}>
               <img src={applicant.user.profilePicture} alt="" className="w-15 h-15 rounded-full" />
               <div className="flex flex-col">
                 <Link to={`/profile/${applicant.user._id}`}>

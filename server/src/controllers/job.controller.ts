@@ -56,10 +56,19 @@ export const getAllJobsController = asyncHandler(async (req: Request, res: Respo
 export const getAllJobsOfRecruiterController = asyncHandler(async (req: Request, res: Response) => {
   const userId = req.user?._id as string;
 
-  const { result } = await getAllJobsOfRecruiterService(userId);
+  const filters = {
+    keyword: req.query.keyword as string | undefined,
+  };
+
+  const pagination = {
+    pageSize: parseInt(req.query.pageSize as string) || 10,
+    pageNumber: parseInt(req.query.page as string) || 1,
+  };
+
+  const { ...result } = await getAllJobsOfRecruiterService(userId, filters, pagination);
 
   res.status(HTTPSTATUS.OK).json({
     message: "Fetched successfully",
-  result
+    ...result,
   });
 });

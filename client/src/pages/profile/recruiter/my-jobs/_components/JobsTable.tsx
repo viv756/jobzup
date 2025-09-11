@@ -5,6 +5,15 @@ import toast from "react-hot-toast";
 
 import { getAllJobsOfRecruiterApiFn } from "../../../../../lib/api";
 import type { RecruiterJob } from "../../../../../types/api.type";
+import {
+  Table,
+  TableBody,
+  TableCell,
+  TableHead,
+  TableHeaderCell,
+  TableHeaderRow,
+  TableRow,
+} from "../../../../../components/Table";
 
 const JobsTable = () => {
   const [jobs, setJobs] = useState<RecruiterJob[]>();
@@ -78,47 +87,35 @@ const JobsTable = () => {
             </button>
           </div>
         </div>
-        <table className="w-full text-sm text-left rtl:text-right text-gray-500 ">
-          <thead className="text-xs text-gray-700 uppercase bg-gray-50 ">
-            <tr>
-              <th scope="col" className="p-4">
-                <div className="flex items-center">
+        <Table>
+          <TableHead>
+            <TableHeaderRow>
+              <TableHeaderCell className="">
+                <div className="flex items-center px-4">
                   <input
                     id="checkbox-all-search"
                     type="checkbox"
-                    className="w-4 h-4 text-blue-600 accent-blue-700 bg-blue-700 border-gray-300 rounded-sm focus:ring-blue-500 focus:ring-2 "
+                    className="w-4 h-4  text-blue-600 accent-blue-700 bg-blue-700 border-gray-300 rounded-sm focus:ring-blue-500 focus:ring-2 "
                   />
                   <label htmlFor="checkbox-all-search" className="sr-only">
                     checkbox
                   </label>
                 </div>
-              </th>
-              <th scope="col" className="px-6 py-3 font-dm">
-                job name
-              </th>
-              <th scope="col" className="px-6 py-3 font-dm">
-                posted-date
-              </th>
-              <th scope="col" className="px-6 py-3 font-dm">
-                Category
-              </th>
-              <th scope="col" className="px-6 py-3 font-dm">
-                close-date
-              </th>
-              <th scope="col" className="px-6 py-3 font-dm">
-                applicants
-              </th>
-              <th scope="col" className="px-6 py-3 font-dm">
-                Action
-              </th>
-            </tr>
-          </thead>
-          <tbody>
+              </TableHeaderCell>
+              <TableHeaderCell className="px-6 ">job name</TableHeaderCell>
+              <TableHeaderCell className="px-6 ">posted-date</TableHeaderCell>
+              <TableHeaderCell className="px-6 ">Category</TableHeaderCell>
+              <TableHeaderCell className="px-6 ">close-date</TableHeaderCell>
+              <TableHeaderCell className="px-6">applicants</TableHeaderCell>
+              <TableHeaderCell className="px-6 ">Action</TableHeaderCell>
+            </TableHeaderRow>
+          </TableHead>
+          <TableBody>
             {jobs &&
               jobs.map((job) => (
-                <tr className="bg-white border-b  border-gray-200 hover:bg-gray-50 " key={job._id}>
-                  <td className="w-4 p-4">
-                    <div className="flex items-center">
+                <TableRow key={job._id}>
+                  <TableCell className="">
+                    <div className="flex items-center px-4">
                       <input
                         id="checkbox-table-search-1"
                         type="checkbox"
@@ -128,7 +125,7 @@ const JobsTable = () => {
                         checkbox
                       </label>
                     </div>
-                  </td>
+                  </TableCell>
                   <th
                     scope="row"
                     className="px-6 py-4 font-medium text-gray-900 whitespace-nowrap ">
@@ -137,11 +134,11 @@ const JobsTable = () => {
                       {job.title}
                     </Link>
                   </th>
-                  <td className="px-6 py-4 font-dm">{format(job.datePosted, "MMMM dd,yyyy")}</td>
-                  <td className="px-6 py-4 font-dm">{job.category}</td>
-                  <td className="px-6 py-4 font-dm">{format(job.closeDate, "MMMM dd,yyyy")}</td>
-                  <td className="px-13 py-4 font-dm">{job.applicantsCount}</td>
-                  <td className=" py-4 font-dm ">
+                  <TableCell className="px-6 py-4 font-dm">{format(job.datePosted, "MMMM dd,yyyy")}</TableCell>
+                  <TableCell className="px-6 py-4 font-dm">{job.category}</TableCell>
+                  <TableCell className="px-6 py-4 font-dm">{format(job.closeDate, "MMMM dd,yyyy")}</TableCell>
+                  <TableCell className="px-13 py-4 font-dm">{job.applicantsCount}</TableCell>
+                  <TableCell className=" py-4 font-dm ">
                     <Link to={""}>
                       <span className="rounded-full border border-blue-700 hover:bg-blue-700 hover:text-white px-2.5 py-0.2 text-sm whitespace-nowrap text-blue-700">
                         Edit
@@ -152,11 +149,11 @@ const JobsTable = () => {
                         Delete
                       </span>
                     </Link>
-                  </td>
-                </tr>
+                  </TableCell>
+                </TableRow>
               ))}
-          </tbody>
-        </table>
+          </TableBody>
+        </Table>
       </div>
       <div className="join flex justify-end ">
         <button

@@ -61,10 +61,22 @@ export const getRecentApplicantsService = async (userId: string) => {
   return { recentApplicants };
 };
 
-export const getAllApplicationsService = async (userId: string) => {
+export const getAllApplicationsService = async (
+  userId: string,
+  pagination: {
+    pageSize: number;
+    pageNumber: number;
+  }
+) => {
+  const { pageNumber, pageSize } = pagination;
+  const skip = (pageNumber - 1) * pageSize;
+
+  const totalCount = await ApplictionModel.countDocuments({ recruiter: userId });
+
   const applications = await ApplictionModel.find({ recruiter: userId })
     .select("user job createdAt status")
-    .limit(10)
+    .skip(skip)
+    .limit(pageSize)
     .populate("user", "_id name profilePicture -password")
     .populate("job", "_id title ");
 
@@ -72,7 +84,12 @@ export const getAllApplicationsService = async (userId: string) => {
     throw new BadRequestException("You don't have any applicants");
   }
 
-  return { applications };
+  return {
+    applications,
+    totalCount,
+    totalPages: Math.max(1, Math.ceil(totalCount / pageSize)),
+    pageNumber,
+  };
 };
 
 export const udateAppicationStatusService = async (

@@ -135,8 +135,8 @@ export const getAllJobsOfRecruiterApiFn = async (searchQuery?: string) => {
   });
 };
 
-export const getAllApplicantsApiFn = async () => {
-  return apiFetch<GetAllApplicantsType>("/application/recruiter/applicants/all", {
+export const getAllApplicantsApiFn = async (searchQuery:string) => {
+  return apiFetch<GetAllApplicantsType>(`/application/recruiter/applicants/all?${searchQuery}`, {
     auth: true,
   });
 };

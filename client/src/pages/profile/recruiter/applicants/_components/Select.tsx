@@ -22,6 +22,7 @@ const Select = ({
       const data = await updateApplicationStatusApiFn(applicationId, newStatus);
       if (data) {
         setStatus(data.application.status);
+        toast.success("Application status changed")
       }
       setLoading(false);
     } catch (error: any) {

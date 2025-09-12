@@ -51,11 +51,16 @@ export const getRecentApplicantsController = asyncHandler(async (req: Request, r
 export const getAllApplicantionsController = asyncHandler(async (req: Request, res: Response) => {
   const userId = req.user?._id as string;
 
-  const { applications } = await getAllApplicationsService(userId);
+  const pagination = {
+    pageSize: parseInt(req.query.pageSize as string) || 10,
+    pageNumber: parseInt(req.query.page as string) || 1,
+  };
+
+  const data = await getAllApplicationsService(userId, pagination);
 
   return res.status(HTTPSTATUS.OK).json({
     message: "Applications fetched successfully",
-    applications,
+    ...data,
   });
 });
 

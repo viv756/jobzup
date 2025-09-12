@@ -1,3 +1,4 @@
+import { ApplicationStatusEnumType } from "../enums/application.enum";
 import ApplictionModel from "../models/application.model";
 import CompanyModel from "../models/company.model";
 import JobModel from "../models/job.model";
@@ -58,4 +59,39 @@ export const getRecentApplicantsService = async (userId: string) => {
   }
 
   return { recentApplicants };
+};
+
+export const getAllApplicationsService = async (userId: string) => {
+  const applications = await ApplictionModel.find({ recruiter: userId })
+    .select("user job createdAt status")
+    .limit(10)
+    .populate("user", "_id name profilePicture -password")
+    .populate("job", "_id title ");
+
+  if (!applications) {
+    throw new BadRequestException("You don't have any applicants");
+  }
+
+  return { applications };
+};
+
+export const udateAppicationStatusService = async (
+  userId: string,
+  applicationId: string,
+  body: {
+    status: string;
+  }
+) => {
+  const { status } = body;
+
+  const application = await ApplictionModel.findById(applicationId);
+
+  if (!application) {
+    throw new BadRequestException("Application does't exist");
+  }
+
+  application.status = status as ApplicationStatusEnumType;
+  await application.save();
+
+  return { application };
 };

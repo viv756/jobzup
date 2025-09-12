@@ -235,6 +235,9 @@ export type Applicant = {
   _id: string;
   user: UserType;
   job: JobType;
+  status:string
+  createdAt: Date;
+  updatedAt: Date;
 };
 
 export type RecentApplicantsResponse = {
@@ -258,3 +261,13 @@ export type GetAllJobsOfRecruiterResponse = {
   totalCount: number;
   totalPages: number;
 };
+
+export type GetAllApplicantsType = {
+  message: string;
+  applications: Applicant[];
+};
+
+export type UpdateApplicationStatusType = {
+  message: string,
+  application: Applicant
+}

@@ -37,7 +37,7 @@ export const TableHeaderCell = ({
   children,
   className,
 }: {
-  children: React.ReactNode;
+  children?: React.ReactNode;
   className?: string;
 }) => (
   <th scope="col" className={clsx(" py-3 font-dm", className)}>

@@ -11,6 +11,7 @@ import MyJobs from "../../pages/profile/recruiter/my-jobs";
 
 import { AUTH_ROUTES, PROTECTED_ROUTES, PUBLIC_ROUTES, RECRUITER_ONLY_ROUTES } from "./routePaths";
 import Applicants from "../../pages/profile/recruiter/applicants";
+import UserProfile from "../../pages/profile/recruiter/user-profile";
 
 export const publicRoutePaths = [
   { path: PUBLIC_ROUTES.HOME, element: <LandingPage /> },
@@ -37,6 +38,10 @@ export const protectedRoutePaths = [
   {
     path: PROTECTED_ROUTES.DAHSBOARD,
     element: <DashBoard />,
+  },
+  {
+    path: PROTECTED_ROUTES.PROFILE_VIEW,
+    element: <UserProfile />,
   },
 ];
 

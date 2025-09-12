@@ -2,8 +2,14 @@ import { Request, Response } from "express";
 
 import asyncHandler from "../middlewares/asyncHandler.middlewares";
 import { companyIdSchema, jobIdSchema } from "../validation/job.validation";
-import { recruiterIdSchema } from "../validation/application.validation";
-import { applyToAJobService, getRecentApplicantsService, getuserAppliedJobsService } from "../services/application.service";
+import { applicationStatusSchema, recruiterIdSchema } from "../validation/application.validation";
+import {
+  applyToAJobService,
+  getAllApplicationsService,
+  getRecentApplicantsService,
+  getuserAppliedJobsService,
+  udateAppicationStatusService,
+} from "../services/application.service";
 import { HTTPSTATUS } from "../config/http.config";
 
 export const applyToAJobControlller = asyncHandler(async (req: Request, res: Response) => {
@@ -34,10 +40,37 @@ export const getuserAppliedJobsController = asyncHandler(async (req: Request, re
 export const getRecentApplicantsController = asyncHandler(async (req: Request, res: Response) => {
   const userId = req.user?._id as string;
 
-  const { recentApplicants } = await getRecentApplicantsService(userId)
+  const { recentApplicants } = await getRecentApplicantsService(userId);
 
   return res.status(HTTPSTATUS.OK).json({
     message: "Recent applicants fetched successfully",
-    recentApplicants
-  })
-})
+    recentApplicants,
+  });
+});
+
+export const getAllApplicantionsController = asyncHandler(async (req: Request, res: Response) => {
+  const userId = req.user?._id as string;
+
+  const { applications } = await getAllApplicationsService(userId);
+
+  return res.status(HTTPSTATUS.OK).json({
+    message: "Applications fetched successfully",
+    applications,
+  });
+});
+
+export const updateAppicationStatusController = asyncHandler(
+  async (req: Request, res: Response) => {
+    const userId = req.user?._id as string;
+    const applicationId = req.params.applicationId;
+
+    const body = applicationStatusSchema.parse(req.body);
+
+    const application = await udateAppicationStatusService(userId, applicationId, body);
+
+    return res.status(HTTPSTATUS.OK).json({
+      message: "Application status changed",
+      application,
+    });
+  }
+);

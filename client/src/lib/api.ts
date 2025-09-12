@@ -6,6 +6,7 @@ import type {
   CreateProfilePayloadType,
   CreateProfileResponseType,
   CurrentUserResponseType,
+  GetAllApplicantsType,
   GetAllJobsOfRecruiterResponse,
   GetAllJobsResponse,
   GetCurrentCompanyResponseType,
@@ -16,6 +17,7 @@ import type {
   RecentApplicantsResponse,
   RegisterPayloadType,
   RegisterResponseType,
+  UpdateApplicationStatusType,
   UpdateUserProfilePayloadType,
   UpdateUserProfileResponseType,
 } from "../types/api.type";
@@ -129,6 +131,20 @@ export const updateUserProfile = async (userId: string, data: UpdateUserProfileP
 
 export const getAllJobsOfRecruiterApiFn = async (searchQuery?: string) => {
   return apiFetch<GetAllJobsOfRecruiterResponse>(`/job/recruiter/jobs?${searchQuery}`, {
+    auth: true,
+  });
+};
+
+export const getAllApplicantsApiFn = async () => {
+  return apiFetch<GetAllApplicantsType>("/application/recruiter/applicants/all", {
+    auth: true,
+  });
+};
+
+export const updateApplicationStatusApiFn = async (applicationId:string,status:string) => {
+  return apiFetch<UpdateApplicationStatusType>(`/application/status/update/${applicationId}`, {
+    method: "PUT",
+    body: JSON.stringify({status}),
     auth: true,
   });
 };

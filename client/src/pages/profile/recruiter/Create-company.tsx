@@ -2,15 +2,15 @@ import React, { useEffect, useRef, useState } from "react";
 import { useNavigate } from "react-router-dom";
 import DatePicker from "react-datepicker";
 import PhoneInput, { formatPhoneNumberIntl, isValidPhoneNumber } from "react-phone-number-input";
-import type { Value } from "react-phone-number-input";
+import { useDispatch } from "react-redux";
 import toast from "react-hot-toast";
+import type { Value } from "react-phone-number-input";
 
 import { createCompanyApiFn } from "../../../lib/api";
 import type { CreateCompanyPayLoadType } from "../../../types/api.type";
-import "react-phone-number-input/style.css";
-import { useDispatch } from "react-redux";
 import type { AppDispatch } from "../../../redux/store";
 import { fetchCurrentUser } from "../../../redux/user/user.slice";
+import "react-phone-number-input/style.css";
 
 const CreateCompany = () => {
   const [companyName, setCompanyName] = useState<string>("");

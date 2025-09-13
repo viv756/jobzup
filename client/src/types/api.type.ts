@@ -51,7 +51,7 @@ export type JobType = {
   updatedAt: Date;
 };
 
-type ProfileType = {
+export type ProfileType = {
   _id: string;
   userId: string;
   bio: string;
@@ -62,6 +62,7 @@ type ProfileType = {
   education: Education[];
   awards: Awards[];
   qualification: string | null;
+  experianceTime:string
   gender: GenderEnumType;
   age: string | null;
   createdAt: Date;
@@ -71,22 +72,22 @@ type ProfileType = {
 export type WorkExperience = {
   company: string;
   position: string;
-  startDate: Date | null;
-  endDate: Date | null;
+  startDate: Date
+  endDate: Date 
   description: string;
 };
 
 export type Education = {
   collegeName: string;
   department: string;
-  startDate: Date | null;
-  endDate: Date | null;
+  startDate: Date 
+  endDate: Date 
   description: string;
 };
 
 export type Awards = {
   name: string;
-  date: Date | null;
+  date: Date 
   description: string;
 };
 
@@ -274,3 +275,13 @@ export type UpdateApplicationStatusType = {
   message: string;
   application: Applicant;
 };
+
+
+
+
+export type GetUserByIdResponseType = {
+  message: string,
+  user: UserType & {
+    profile : ProfileType | null
+  }
+}

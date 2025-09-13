@@ -12,6 +12,7 @@ import type {
   GetCurrentCompanyResponseType,
   GetCurrentUserProfileResponseType,
   GetJobByIdResponse,
+  GetUserByIdResponseType,
   LoginPayLoadType,
   LoginResponseType,
   RecentApplicantsResponse,
@@ -135,16 +136,22 @@ export const getAllJobsOfRecruiterApiFn = async (searchQuery?: string) => {
   });
 };
 
-export const getAllApplicantsApiFn = async (searchQuery:string) => {
+export const getAllApplicantsApiFn = async (searchQuery: string) => {
   return apiFetch<GetAllApplicantsType>(`/application/recruiter/applicants/all?${searchQuery}`, {
     auth: true,
   });
 };
 
-export const updateApplicationStatusApiFn = async (applicationId:string,status:string) => {
+export const updateApplicationStatusApiFn = async (applicationId: string, status: string) => {
   return apiFetch<UpdateApplicationStatusType>(`/application/status/update/${applicationId}`, {
     method: "PUT",
-    body: JSON.stringify({status}),
+    body: JSON.stringify({ status }),
+    auth: true,
+  });
+};
+
+export const getUserByIdApiFn = async (userId: string) => {
+  return apiFetch<GetUserByIdResponseType>(`/user/${userId}`, {
     auth: true,
   });
 };

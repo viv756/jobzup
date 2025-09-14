@@ -4,6 +4,7 @@ export type UserType = {
   _id: string;
   name: string;
   email: string;
+  phone:string
   profile: string | null;
   profilePicture: string;
   createdAt: Date;
@@ -72,22 +73,22 @@ export type ProfileType = {
 export type WorkExperience = {
   company: string;
   position: string;
-  startDate: Date
-  endDate: Date 
+  startDate: Date | null
+  endDate: Date | null
   description: string;
 };
 
 export type Education = {
   collegeName: string;
   department: string;
-  startDate: Date 
-  endDate: Date 
+  startDate: Date | null
+  endDate: Date | null
   description: string;
 };
 
 export type Awards = {
   name: string;
-  date: Date 
+  date: Date | null
   description: string;
 };
 

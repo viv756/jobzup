@@ -97,10 +97,11 @@ export const createProfileSchema = z.object({
   workExperience: workExperienceSchema,
   education: educationSchema,
   awards: awardSchema,
+  phone: z.string().trim().optional(),
   qualification: z.string().trim().nullable().default(null),
   gender: z.enum(["male", "female", "other"]).nullable().default(null),
   age: z.string().trim().nullable().default(null),
-  profileUrl:z.string().optional()
+  profileUrl: z.string().optional(),
 });
 
 export const updateProfileSchema = z.object({
@@ -110,6 +111,7 @@ export const updateProfileSchema = z.object({
   skills: z.array(z.string().trim()).optional(),
   workExperiance: workExperienceSchema,
   education: educationSchema,
+  phone: z.string().trim().optional(),
   awards: awardSchema,
   qualification: z.string().trim().nullable().default(null),
   gender: z.enum(["Male", "Female", "Other"]).nullable().default(null),

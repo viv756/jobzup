@@ -3,6 +3,7 @@ import { useNavigate, useParams } from "react-router-dom";
 import DatePicker from "react-datepicker";
 import { useDispatch } from "react-redux";
 import { PlusCircle, X } from "lucide-react";
+import toast from "react-hot-toast";
 
 import type {
   Awards,
@@ -12,7 +13,6 @@ import type {
 } from "../../../types/api.type";
 import { type GenderEnumType } from "../../../constant";
 import { createProfileApiFn } from "../../../lib/api";
-import toast from "react-hot-toast";
 import type { AppDispatch } from "../../../redux/store";
 import { fetchCurrentUser } from "../../../redux/user/user.slice";
 import { filterAwards, filterEducation, filterWorkExperience } from "../../../lib/helper";

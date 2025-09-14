@@ -29,13 +29,14 @@ export interface ProfileDocument extends Document {
   location: string | null;
   language: string[] | null;
   skills: string[] | null;
+  phone: string | null
   workExperience: WorkExperiance[] | null;
   education: Education[] | null;
   awards: Awards[] | null;
   qualification: string | null;
   gender: GenderEnumType | null;
   age: string | null;
-  profileUrl : string | null
+  profileUrl: string | null;
 }
 
 const profileSchema = new Schema<ProfileDocument>(
@@ -47,7 +48,7 @@ const profileSchema = new Schema<ProfileDocument>(
     },
     profileUrl: {
       type: String,
-      default:null
+      default: null,
     },
     bio: {
       type: String,
@@ -58,6 +59,10 @@ const profileSchema = new Schema<ProfileDocument>(
       type: String,
       default: null,
       trim: true,
+    },
+    phone: {
+      type: String,
+      default: null,
     },
     language: {
       type: [String],

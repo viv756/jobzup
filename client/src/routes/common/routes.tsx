@@ -19,6 +19,7 @@ import {
   RECRUITER_ONLY_ROUTES,
 } from "./routePaths";
 import CompanyPage from "../../pages/profile/recruiter/company";
+import Settings from "../../pages/profile/settings";
 
 export const publicRoutePaths = [
   { path: PUBLIC_ROUTES.HOME, element: <LandingPage /> },
@@ -42,6 +43,10 @@ export const protectedRoutePaths = [
     path: PROTECTED_ROUTES.DAHSBOARD,
     element: <DashBoard />,
   },
+  {
+    path: PROTECTED_ROUTES.SETTINGS,
+    element: <Settings />,
+  },
 ];
 
 export const recruiterOnlyRoutePaths = [
@@ -64,4 +69,5 @@ export const baseRoutePaths = [
     path: BASEROUTES.CREATE_PROFILE,
     element: <CreateUserProfile />,
   },
+  
 ];

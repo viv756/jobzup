@@ -1,7 +1,7 @@
 import React, { useEffect, useRef, useState } from "react";
 import { useNavigate } from "react-router-dom";
 import DatePicker from "react-datepicker";
-import PhoneInput, { formatPhoneNumberIntl, isValidPhoneNumber } from "react-phone-number-input";
+import PhoneInput, { isValidPhoneNumber } from "react-phone-number-input";
 import { useDispatch } from "react-redux";
 import toast from "react-hot-toast";
 import type { Value } from "react-phone-number-input";
@@ -108,8 +108,6 @@ const CreateCompany = () => {
     }
     setPhoneInputError("");
 
-    const formattedPhoneNumber = phone ? formatPhoneNumberIntl(phone) : "";
-
     const benefitsArray = benefits
       .split("\n")
       .map((r) => r.trim())
@@ -127,7 +125,7 @@ const CreateCompany = () => {
       avgSalary: avgSalary,
       location: location,
       about: about,
-      phone: formattedPhoneNumber,
+      phone: phone as string,
       background: backgroundArray,
       benefits: benefitsArray,
       facebook: facebook,

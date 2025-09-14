@@ -11,6 +11,7 @@ export interface UserDocument extends Document {
   updatedAt: Date;
   profile: mongoose.Types.ObjectId | null;
   company: mongoose.Types.ObjectId | null;
+  phone: string | null;
   role: RoleEnumType;
   comparePassword(value: string): Promise<boolean>;
   omitPassword(): Omit<UserDocument, "password">;
@@ -48,6 +49,10 @@ const userSchema = new Schema<UserDocument>(
     role: {
       type: String,
       enum: Object.values(RoleEnum),
+    },
+    phone: {
+      type: String,
+      default: null,
     },
     profilePicture: {
       type: String,

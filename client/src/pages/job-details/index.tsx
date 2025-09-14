@@ -17,6 +17,7 @@ import type { JobType } from "../../types/api.type";
 import InfoCard from "./components/InfoCard";
 import { List } from "./components/List";
 import ApplyToAJob from "./components/ApplyToAJob";
+import { formatPhoneNumberIntl } from "react-phone-number-input";
 
 const JobDetails = () => {
   const [job, setJob] = useState<JobType>();
@@ -41,7 +42,7 @@ const JobDetails = () => {
   }
 
   console.log(job);
-  
+
   const jobInfo = () => {
     const items = [
       { icon: <MapPin size={17} />, text: job.company.location },
@@ -139,20 +140,18 @@ const JobDetails = () => {
                 <p className="text-gray-500"> {job.company.location} </p>
               </div>
             </div>
-
             <p className="mt-5 text-lg text-gray-500 font-dm">{job.company.about}</p>
-
             <div className="grid grid-cols-2 gap-3 mt-5 ">
               <p className="text-lg font-dm">Company size</p>
               <p className="text-lg font-dm"> {job.company.companySize} </p>
               <p className="text-lg font-dm">Founded in</p>
               <p className="text-lg font-dm">{job.company.foundedIn}</p>
               <p className="text-lg font-dm">Phone</p>
-              <p className="text-lg font-dm">{job.company.phone}</p>
+              <p className="text-lg font-dm">{formatPhoneNumberIntl(job.company.phone)}</p>
               <p className="text-lg font-dm">Email</p>
               <p className="text-lg font-dm ">{job.company.email}</p>
-            </div> font-dm
-
+            </div>{" "}
+            font-dm
             <Link to={`/company/${job.company._id}`}>
               <button className="p-3 text-[18px] font-dm bg-black text-white w-full mt-8  rounded-3xl hover:bg-blue-800 transition duration-300">
                 View Company

@@ -16,6 +16,7 @@ export const createProfileService = async (body: CreateProfileType, userId: stri
     location: body.location,
     language: body.language,
     skills: body.skills,
+    phone: body.phone,
     workExperience: body.workExperience,
     education: body.education,
     awards: body.awards,
@@ -32,6 +33,11 @@ export const createProfileService = async (body: CreateProfileType, userId: stri
   if (body.profileUrl) {
     user.profilePicture = body.profileUrl as string;
   }
+  // add phone number to user
+  if (body.phone) {
+    user.phone = body.phone;
+  }
+
   await user.save();
 
   return { userProfile };

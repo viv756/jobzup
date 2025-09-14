@@ -2,7 +2,12 @@ import { Request, Response } from "express";
 
 import asyncHandler from "../middlewares/asyncHandler.middlewares";
 import { HTTPSTATUS } from "../config/http.config";
-import { getCurrentUserService, getUserByIdService } from "../services/user.service";
+import {
+  getCurrentUserService,
+  getUserByIdService,
+  userSettingsService,
+} from "../services/user.service";
+import { userSettingsSchema } from "../validation/user.validation";
 
 export const getCurrentUserController = asyncHandler(async (req: Request, res: Response) => {
   if (!req.user || !req.user._id) {
@@ -22,11 +27,24 @@ export const getUserByIdController = asyncHandler(async (req: Request, res: Resp
   const currentUserId = req.user?._id as string;
   const userId = req.params.userId;
 
-  const { user } = await getUserByIdService(userId);
+  const user = await getUserByIdService(userId);
 
   return res.status(HTTPSTATUS.OK).json({
     message: "User fetch successfully",
     user,
+  });
+});
+
+export const userSettingsController = asyncHandler(async (req: Request, res: Response) => {
+  const userId = req.user?._id as string;
+
+  const body = userSettingsSchema.parse(req.body);
+
+  const updatedUser = await userSettingsService(userId, body);
+
+  return res.status(HTTPSTATUS.OK).json({
+    message: "User updated successfully",
+    updatedUser,
   });
 });
 

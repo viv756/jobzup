@@ -21,6 +21,7 @@ import type {
   UpdateApplicationStatusType,
   UpdateUserProfilePayloadType,
   UpdateUserProfileResponseType,
+  UserType,
 } from "../types/api.type";
 import { apiFetch } from "./fetch";
 
@@ -152,6 +153,19 @@ export const updateApplicationStatusApiFn = async (applicationId: string, status
 
 export const getUserByIdApiFn = async (userId: string) => {
   return apiFetch<GetUserByIdResponseType>(`/user/${userId}`, {
+    auth: true,
+  });
+};
+
+export const userSettingApiFn = async (data: {
+  name: string;
+  email: string;
+  phone: string;
+  profilePicture: string;
+}) => {
+  return apiFetch<{ message: string; updatedUser: UserType }>("/user/settings", {
+    method: "PUT",
+    body: JSON.stringify(data),
     auth: true,
   });
 };

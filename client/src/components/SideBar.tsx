@@ -1,4 +1,4 @@
-import { Link, NavLink } from "react-router-dom";
+import { Link, NavLink, useNavigate } from "react-router-dom";
 import {
   Contrast,
   LogOut,
@@ -13,6 +13,14 @@ import {
 } from "lucide-react";
 import { BriefcaseBusiness } from "lucide-react";
 import { useAppSelector } from "../hooks/useSelector";
+import { useAppDispatch } from "../hooks/useReducer";
+import { useRef } from "react";
+import type { ConfirmModalHandle } from "./ConfirmModal";
+import { logoutApiFn } from "../lib/api";
+import { logout } from "../redux/user/user.slice";
+import toast from "react-hot-toast";
+import type { AppDispatch } from "../redux/store";
+import ConfirmModal from "./ConfirmModal";
 
 type UserRole = "JOB_SEEKER" | "RECRUITER";
 
@@ -47,13 +55,31 @@ const SideBar = () => {
     { label: "Messages", path: "/profile/messages", icon: MessageSquareMore },
     { label: "Meetings", path: "/profile/meetings", icon: Headset },
     { label: "Settings", path: "/profile/settings", icon: Settings },
-    { label: "Logout", path: "/logout", icon: LogOut },
+    // { label: "Logout", path: "/logout", icon: LogOut },
   ];
 
   const visibleLinks = sidebarLinks.filter((link) => {
     if (!link.roles) return true; // no restriction
     return link.roles.includes(currentUser?.role as UserRole); // show only if role matches
   });
+
+  const navigate = useNavigate();
+  const dispatch = useAppDispatch();
+
+  const modalRef = useRef<ConfirmModalHandle>(null);
+
+  const handleLogout = async () => {
+    try {
+      const data = await logoutApiFn();
+      if (data) {
+        dispatch(logout());
+        toast.success(data.message);
+        navigate("/");
+      }
+    } catch (error: any) {
+      toast.error(error.message);
+    }
+  };
 
   return (
     <div className="bg-[#1844B5] min-h-screen min-w-[280px] fixed">
@@ -74,8 +100,22 @@ const SideBar = () => {
               </NavLink>
             </li>
           ))}
+
+          <li>
+            <button
+              onClick={() => modalRef.current?.open()}
+              className="rounded-md text-lg px-6 py-1 items-center transition duration-300 flex gap-2 font-dm hover:bg-white hover:text-[#0A65FC] w-full">
+              <LogOut />
+              Logout
+            </button>
+          </li>
         </ul>
       </div>
+      <ConfirmModal
+        ref={modalRef}
+        message="Are you sure you want to log out?"
+        onConfirm={handleLogout}
+      />
     </div>
   );
 };

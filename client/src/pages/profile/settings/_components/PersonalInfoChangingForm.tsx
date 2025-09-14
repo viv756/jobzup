@@ -18,6 +18,7 @@ const PersonalInfoChangingForm = () => {
   const [profileUrl, setProfileUrl] = useState<string>(currentUser?.profilePicture as string);
   const [profileUploadStart, setProfileUploadStart] = useState<boolean>(false);
   const [phoneInputError, setPhoneInputError] = useState<string | undefined>();
+  const [loading, setLoading] = useState<boolean>(false);
 
   const filePicker = useRef<HTMLInputElement>(null);
 
@@ -40,6 +41,8 @@ const PersonalInfoChangingForm = () => {
   const profileUpload = async () => {
     if (!profileImage) return;
     setProfileUploadStart(true);
+
+    const toastId = toast.loading("Image is uploading....");
 
     try {
       const unsignedPreset = import.meta.env.VITE_UNSIGNED_PRESET;
@@ -71,9 +74,11 @@ const PersonalInfoChangingForm = () => {
       }
 
       setProfileUrl(data.secure_url);
+      toast.dismiss(toastId);
       toast.success("Image uploaded successfully");
       setProfileUploadStart(false);
     } catch (error: any) {
+      toast.dismiss(toastId);
       toast.error(error.message);
       setProfileUploadStart(false);
     }
@@ -81,7 +86,6 @@ const PersonalInfoChangingForm = () => {
 
   const onSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
-
     const error = phone
       ? isValidPhoneNumber(phone)
         ? undefined
@@ -93,6 +97,7 @@ const PersonalInfoChangingForm = () => {
       return;
     }
     setPhoneInputError("");
+    setLoading(true);
 
     const payLoad = {
       name,
@@ -108,7 +113,9 @@ const PersonalInfoChangingForm = () => {
         toast.success(data.message);
         dispatch(updateCurrentUser(data.updatedUser));
       }
+      setLoading(false);
     } catch (error: any) {
+      setLoading(false);
       toast.error(error.message);
     }
   };
@@ -177,8 +184,10 @@ const PersonalInfoChangingForm = () => {
             </div>
           </div>
         </div>
-        <button className="rounded-lg border border-blue-[#1844B5] bg-[#0851CA] px-3 py-2 text-center text-md font-medium text-white shadow-sm transition-all font-dm hover:bg-blue-800 focus:bg-blue-800 mt-6">
-          Save changes
+        <button
+          disabled={loading || profileUploadStart}
+          className="rounded-lg border border-blue-[#1844B5] bg-[#0851CA] px-3 py-2 text-center text-md font-medium text-white shadow-sm transition-all font-dm hover:bg-blue-800  focus:bg-blue-800 mt-6 w-32 disabled:bg-blue-900">
+          {loading ? <span className="loading loading-spinner loading-sm"></span> : "Save changes"}
         </button>
       </form>
     </>

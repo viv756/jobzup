@@ -163,7 +163,19 @@ export const userSettingApiFn = async (data: {
   phone: string;
   profilePicture: string;
 }) => {
-  return apiFetch<{ message: string; updatedUser: UserType }>("/user/settings", {
+  return apiFetch<{ message: string; updatedUser: UserType }>("/user/settings/info", {
+    method: "PUT",
+    body: JSON.stringify(data),
+    auth: true,
+  });
+};
+
+export const userSettingsPasswordChangeApiFn = async (data: {
+  currentPassword: string;
+  newPassword: string;
+  confirmPassword: string;
+}) => {
+  return apiFetch<{ message: string }>("/user/settings/password", {
     method: "PUT",
     body: JSON.stringify(data),
     auth: true,

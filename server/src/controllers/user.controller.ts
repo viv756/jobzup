@@ -5,9 +5,10 @@ import { HTTPSTATUS } from "../config/http.config";
 import {
   getCurrentUserService,
   getUserByIdService,
+  passwordChangingSettingsService,
   userSettingsService,
 } from "../services/user.service";
-import { userSettingsSchema } from "../validation/user.validation";
+import { passwordChangingSchema, userSettingsSchema } from "../validation/user.validation";
 
 export const getCurrentUserController = asyncHandler(async (req: Request, res: Response) => {
   if (!req.user || !req.user._id) {
@@ -47,6 +48,19 @@ export const userSettingsController = asyncHandler(async (req: Request, res: Res
     updatedUser,
   });
 });
+
+export const passwordChangingSettingsController = asyncHandler(
+  async (req: Request, res: Response) => {
+    const userId = req.user?._id as string;
+    const body = passwordChangingSchema.parse(req.body);
+
+    const { user } = await passwordChangingSettingsService(userId, body);
+
+    return res.status(HTTPSTATUS.OK).json({
+      message: "Password updated successfully",
+    });
+  }
+);
 
 export const logoutController = asyncHandler(async (req: Request, res: Response) => {
   return res.clearCookie("access_token").status(HTTPSTATUS.OK).json({

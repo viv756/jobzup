@@ -1,6 +1,6 @@
 import Profilemodel from "../models/profile.model";
 import UserModel from "../models/user.model";
-import { BadRequestException } from "../utils/appError";
+import { BadRequestException, UnauthorizedException } from "../utils/appError";
 
 export const getCurrentUserService = async (userId: string) => {
   const user = await UserModel.findById(userId);
@@ -50,4 +50,34 @@ export const userSettingsService = async (
   }
 
   return updatedUser.omitPassword();
+};
+
+export const passwordChangingSettingsService = async (
+  userId: string,
+  body: {
+    currentPassword: string;
+    newPassword: string;
+    confirmPassword: string;
+  }
+) => {
+  const { currentPassword, newPassword, confirmPassword } = body;
+
+  const user = await UserModel.findById(userId);
+  if (!user) {
+    throw new BadRequestException("User not found");
+  }
+
+  const isMatch = await user.comparePassword(currentPassword);
+  if (!isMatch) {
+    throw new UnauthorizedException("Invalid password");
+  }
+
+  if (newPassword !== confirmPassword) {
+    throw new BadRequestException("Password not matching");
+  }
+
+  user.password = newPassword;
+  await user.save();
+
+  return {user}
 };

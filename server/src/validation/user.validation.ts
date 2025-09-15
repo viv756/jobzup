@@ -8,3 +8,9 @@ export const userSettingsSchema = z.object({
   profilePicture: z.string().trim(),
   phone: z.string().trim(),
 });
+
+export const passwordChangingSchema = z.object({
+  currentPassword: z.string().trim().min(4),
+  newPassword: z.string().trim().min(4),
+  confirmPassword: z.string().trim().min(4),
+});

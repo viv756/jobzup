@@ -57,9 +57,21 @@ const Header = () => {
         <div className="sm:flex gap-5 items-center hidden">
           {currentUser ? (
             <>
-              <Link to={`/profile/dashboard`} className="flex items-center gap-x-3">
-                <img src={currentUser.profilePicture} className="w-16 h-16 rounded-full" />
-              </Link>
+              {currentUser.role === "RECRUITER" ? (
+                <Link to={`/profile/dashboard`} className="flex items-center gap-x-3">
+                  <img
+                    src={currentUser.profilePicture}
+                    className="w-16 h-16 rounded-full object-cover"
+                  />
+                </Link>
+              ) : (
+                <Link to={`/profile/user`} className="flex items-center gap-x-3">
+                  <img
+                    src={currentUser.profilePicture}
+                    className="w-16 h-16 rounded-full object-cover"
+                  />
+                </Link>
+              )}
               <button
                 onClick={() => modalRef.current?.open()}
                 className="btn rounded-3xl text-lg p-6 bg-primary text-white">

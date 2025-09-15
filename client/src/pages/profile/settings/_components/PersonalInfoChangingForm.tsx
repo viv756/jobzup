@@ -137,7 +137,7 @@ const PersonalInfoChangingForm = () => {
               <img
                 src={profileUrl}
                 alt=""
-                className="w-40 h-40 rounded-sm"
+                className="w-40 h-40 rounded-sm object-cover"
                 onClick={() => filePicker.current?.click()}
               />
               <p className="text-sm font-dm text-wrap">

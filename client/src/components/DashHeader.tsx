@@ -6,7 +6,7 @@ const DashHeader = () => {
 
   const capitalizeFirstLetter = () => {
     if (currentUser?.role) {
-      const role = currentUser.role.toLowerCase();
+      const role = currentUser.role.toLowerCase().replace(/_/g, " ");
       return role.charAt(0).toUpperCase() + role.slice(1);
     }
   };

@@ -20,6 +20,8 @@ import {
 } from "./routePaths";
 import CompanyPage from "../../pages/profile/recruiter/company";
 import Settings from "../../pages/profile/settings";
+import Profile from "../../pages/profile/user/user-Profile";
+import AppliedJobs from "../../pages/profile/user/applied-jobs";
 
 export const publicRoutePaths = [
   { path: PUBLIC_ROUTES.HOME, element: <LandingPage /> },
@@ -40,9 +42,14 @@ export const authenticationRoutePaths = [
 
 export const protectedRoutePaths = [
   {
-    path: PROTECTED_ROUTES.DAHSBOARD,
-    element: <DashBoard />,
+    path: PROTECTED_ROUTES.PROFILE,
+    element: <Profile />,
   },
+  {
+    path: PROTECTED_ROUTES.MY_JOBS,
+    element: <AppliedJobs />,
+  },
+
   {
     path: PROTECTED_ROUTES.SETTINGS,
     element: <Settings />,
@@ -50,6 +57,10 @@ export const protectedRoutePaths = [
 ];
 
 export const recruiterOnlyRoutePaths = [
+  {
+    path: RECRUITER_ONLY_ROUTES.DAHSBOARD,
+    element: <DashBoard />,
+  },
   {
     path: RECRUITER_ONLY_ROUTES.CREATE_JOB,
     element: <CreateJob />,
@@ -69,5 +80,4 @@ export const baseRoutePaths = [
     path: BASEROUTES.CREATE_PROFILE,
     element: <CreateUserProfile />,
   },
-  
 ];

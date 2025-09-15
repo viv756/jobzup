@@ -12,13 +12,14 @@ export const AUTH_ROUTES = {
 };
 
 export const PROTECTED_ROUTES = {
-  PROFILE: "/profile/update",
+  PROFILE: "/profile/user",
+  MY_JOBS: "/profile/applied-jobs",
   COMPANY_DETAILS: "/company/:companyId",
-  DAHSBOARD: "/profile/dashboard",
-  SETTINGS:"/profile/settings"
+  SETTINGS: "/profile/settings",
 };
 
 export const RECRUITER_ONLY_ROUTES = {
+  DAHSBOARD: "/profile/dashboard",
   CREATE_JOB: "/profile/create/job/:companyId",
   MY_JOBS: "/profile/my-jobs",
   APPLICANTS: "/profile/applicants",

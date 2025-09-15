@@ -151,7 +151,6 @@ const JobDetails = () => {
               <p className="text-lg font-dm">Email</p>
               <p className="text-lg font-dm ">{job.company.email}</p>
             </div>{" "}
-            font-dm
             <Link to={`/company/${job.company._id}`}>
               <button className="p-3 text-[18px] font-dm bg-black text-white w-full mt-8  rounded-3xl hover:bg-blue-800 transition duration-300">
                 View Company

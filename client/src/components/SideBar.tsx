@@ -19,7 +19,6 @@ import type { ConfirmModalHandle } from "./ConfirmModal";
 import { logoutApiFn } from "../lib/api";
 import { logout } from "../redux/user/user.slice";
 import toast from "react-hot-toast";
-import type { AppDispatch } from "../redux/store";
 import ConfirmModal from "./ConfirmModal";
 
 type UserRole = "JOB_SEEKER" | "RECRUITER";
@@ -36,6 +35,7 @@ const SideBar = () => {
 
   const sidebarLinks: SidebarLink[] = [
     { label: "Dashboard", path: "/profile/dashboard", icon: Contrast, roles: ["RECRUITER"] },
+    { label: "profile", path: "/profile/user", icon: Contrast, roles: ["JOB_SEEKER"] },
     { label: "My Jobs", path: "/profile/my-jobs", icon: BriefcaseBusiness, roles: ["RECRUITER"] },
     {
       label: "My Jobs",
@@ -51,7 +51,7 @@ const SideBar = () => {
       roles: ["RECRUITER"],
     },
     { label: "Company", path: "/profile/company", icon: Building2, roles: ["RECRUITER"] },
-    { label: "Profile", path: "/profile/update", icon: User, roles: ["JOB_SEEKER"] },
+    // { label: "Profile", path: "/profile/update", icon: User, roles: ["JOB_SEEKER"] },
     { label: "Messages", path: "/profile/messages", icon: MessageSquareMore },
     { label: "Meetings", path: "/profile/meetings", icon: Headset },
     { label: "Settings", path: "/profile/settings", icon: Settings },

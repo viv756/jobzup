@@ -37,41 +37,37 @@ const UpdateCompanyDetailsForm = () => {
   useEffect(() => {
     const fetchCompany = async () => {
       setLoading(true);
-
       try {
         const data = await getCurrentCompanyApiFn();
-        if (data) {
-          setComapny(data.company);
+        if (data?.company) {
+          const company = data.company;
+
+          setComapny(company);
+          setCompanyName(company.companyName || "");
+          setEmail(company.email || "");
+          setCompanysize(company.companySize || "");
+          setFoundedIn(company.foundedIn ? new Date(company.foundedIn) : null);
+          setAvgSalary(company.avgSalary || "");
+          setLocation(company.location || "");
+          setAbout(company.about || "");
+          setPhone(company.phone as Value);
+          setBackground(company.background?.join("\n") || "");
+          setBenefits(company.benefits?.join("\n") || "");
+          setFacebook(company.facebook || "");
+          setInstagram(company.instagram || "");
+          setTwitter(company.twitter || "");
+          setWebsiteLink(company.websiteLink || "");
+          setLogourl(company.companyLogo || "");
         }
-        setLoading(false);
       } catch (error: any) {
         toast.error(error.message);
+      } finally {
         setLoading(false);
       }
     };
 
     fetchCompany();
   }, []);
-
-  useEffect(() => {
-    if (company) {
-      setCompanyName(company.companyName || "");
-      setEmail(company.email || "");
-      setCompanysize(company.companySize || "");
-      setFoundedIn(company.foundedIn ? new Date(company.foundedIn) : null);
-      setAvgSalary(company.avgSalary || "");
-      setLocation(company.location || "");
-      setAbout(company.about || "");
-      setPhone(company.phone as Value);
-      setBackground(company.background?.join("\n") || "");
-      setBenefits(company.benefits?.join("\n") || "");
-      setFacebook(company.facebook || "");
-      setInstagram(company.instagram || "");
-      setTwitter(company.twitter || "");
-      setWebsiteLink(company.websiteLink || "");
-      setLogourl(company.companyLogo || "");
-    }
-  }, [company]);
 
   useEffect(() => {
     if (logoFile) {

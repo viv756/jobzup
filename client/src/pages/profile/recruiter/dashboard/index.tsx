@@ -1,4 +1,4 @@
-import { useAppSelector } from "../../../hooks/useSelector";
+import { useAppSelector } from "../../../../hooks/useSelector";
 
 import DashCard from "./_components/Dash_Card";
 import RecentApplicants from "./_components/RecentApplicants";

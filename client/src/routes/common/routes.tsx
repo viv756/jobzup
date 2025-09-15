@@ -5,7 +5,7 @@ import SignIn from "../../pages/auth/sign-in";
 import SignUp from "../../pages/auth/sign-up";
 import JobDetails from "../../pages/job-details";
 import CreateUserProfile from "../../pages/profile/user/CreateUserProfile";
-import DashBoard from "../../pages/profile/dashboard";
+import DashBoard from "../../pages/profile/recruiter/dashboard";
 import AllJobs from "../../pages/jobs";
 import MyJobs from "../../pages/profile/recruiter/my-jobs";
 import Applicants from "../../pages/profile/recruiter/applicants";

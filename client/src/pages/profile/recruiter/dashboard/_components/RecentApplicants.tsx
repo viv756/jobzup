@@ -2,8 +2,8 @@ import { useEffect, useState } from "react";
 import { Link } from "react-router-dom";
 import toast from "react-hot-toast";
 
-import { recentApplicantsApiFn } from "../../../../lib/api";
-import type { Applicant } from "../../../../types/api.type";
+import { recentApplicantsApiFn } from "../../../../../lib/api";
+import type { Applicant } from "../../../../../types/api.type";
 
 const RecentApplicants = () => {
   const [recentApplicants, setRecentApplicants] = useState<Applicant[]>();

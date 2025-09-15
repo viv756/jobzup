@@ -6,6 +6,7 @@ import {
   getAllJobsOfRecruiterService,
   getAllJobsService,
   getJpbByIdservice,
+  jobDeleteService,
 } from "../services/job.service";
 import { HTTPSTATUS } from "../config/http.config";
 
@@ -14,7 +15,7 @@ export const createJobController = asyncHandler(async (req: Request, res: Respon
 
   const body = createJobSchema.parse(req.body);
 
-  const { job } = await createJobService(userId,body);
+  const { job } = await createJobService(userId, body);
 
   return res.status(HTTPSTATUS.CREATED).json({
     message: "Job is created",
@@ -69,5 +70,16 @@ export const getAllJobsOfRecruiterController = asyncHandler(async (req: Request,
   res.status(HTTPSTATUS.OK).json({
     message: "Fetched successfully",
     ...result,
+  });
+});
+
+export const jobDeleteController = asyncHandler(async (req: Request, res: Response) => {
+  const userId = req.user?._id as string;
+  const jobId = jobIdSchema.parse(req.params.jobId);
+
+  await jobDeleteService(jobId, userId);
+
+  res.status(HTTPSTATUS.OK).json({
+    message: "Job deleted successfully",
   });
 });

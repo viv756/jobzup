@@ -7,7 +7,7 @@ type ModalProps = {
   children: React.ReactNode;
 };
 
-const Modal: React.FC<ModalProps> = ({ isOpen, onClose, title, children }) => {
+const Modal: React.FC<ModalProps> = ({ isOpen, onClose, children }) => {
   return (
     <dialog className="modal " open={isOpen}>
       <div className="modal-box max-w-4xl">
@@ -16,8 +16,6 @@ const Modal: React.FC<ModalProps> = ({ isOpen, onClose, title, children }) => {
             ✕
           </button>
         </form>
-
-        {title && <h3 className="font-bold text-lg">{title}</h3>}
         <div className="py-4 ">{children}</div>
       </div>
 

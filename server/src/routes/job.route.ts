@@ -4,6 +4,7 @@ import {
   getAllJobsController,
   getAllJobsOfRecruiterController,
   getJobByIdController,
+  jobDeleteController,
 } from "../controllers/job.controller";
 import { isAuthenticated } from "../middlewares/isAuthenticated.middleware";
 
@@ -12,6 +13,7 @@ const jobRoutes = Router();
 jobRoutes.post("/create/new", isAuthenticated, createJobController);
 jobRoutes.get("/all", getAllJobsController);
 jobRoutes.get("/:jobId", getJobByIdController);
-jobRoutes.get('/recruiter/jobs',isAuthenticated,getAllJobsOfRecruiterController)
+jobRoutes.delete("/delete/:jobId", isAuthenticated, jobDeleteController);
+jobRoutes.get("/recruiter/jobs", isAuthenticated, getAllJobsOfRecruiterController);
 
 export default jobRoutes;

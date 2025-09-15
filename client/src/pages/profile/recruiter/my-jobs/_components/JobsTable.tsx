@@ -3,7 +3,7 @@ import { Link, useLocation, useNavigate } from "react-router-dom";
 import { format } from "date-fns";
 import toast from "react-hot-toast";
 
-import { getAllJobsOfRecruiterApiFn } from "../../../../../lib/api";
+import { deleteJobApiFn, getAllJobsOfRecruiterApiFn } from "../../../../../lib/api";
 import type { RecruiterJob } from "../../../../../types/api.type";
 import {
   Table,
@@ -24,8 +24,10 @@ const JobsTable = () => {
   const [pageNumber, setPageNumber] = useState<number>(1);
   const [totalPages, setTotalPages] = useState<number>(0);
   const [searchKey, setSearchKey] = useState<string>("");
-  const [deleteModal, setDeleteModal] = useState<boolean>(false);
-  const [isModalOpen, setIsModalOpen] = useState(false);
+  const [isJobCreateModalOpen, setIsJobCreateModalOpen] = useState(false);
+
+  const confirmModalRef = useRef<ConfirmModalHandle>(null);
+  const [jobToDelete, setJobToDelete] = useState<string | null>(null);
 
   const navigate = useNavigate();
   const location = useLocation();
@@ -69,8 +71,10 @@ const JobsTable = () => {
     navigate(`/profile/my-jobs?${urlParams.toString()}`);
   };
 
-  const handleDeleteJob = (jobId: string) => {};
-
+  const handleDeleteJob = (jobId: string) => {
+    setJobToDelete(jobId);
+    confirmModalRef.current?.open(); // open modal programmatically
+  };
   return (
     <div className="">
       <div className="relative overflow-x-auto sm:rounded-lg">
@@ -91,7 +95,7 @@ const JobsTable = () => {
           </div>
           <div>
             <button
-              onClick={() => setIsModalOpen(true)}
+              onClick={() => setIsJobCreateModalOpen(true)}
               className="rounded-lg border border-blue-[#1844B5] bg-[#0851CA] px-5 py-2.5 text-center text-lg font-medium text-white shadow-sm transition-all font-dm hover:bg-blue-800 focus:bg-blue-800">
               Create new job +
             </button>
@@ -188,11 +192,25 @@ const JobsTable = () => {
         </button>
       </div>
 
-      <Modal isOpen={isModalOpen} onClose={() => setIsModalOpen(false)}>
-        <p className="text-gray-700">
-          <CreateJob />
-        </p>
+      <Modal isOpen={isJobCreateModalOpen} onClose={() => setIsJobCreateModalOpen(false)}>
+        <CreateJob />
       </Modal>
+      <ConfirmModal
+        ref={confirmModalRef}
+        message="Are you sure you want to delete this job?"
+        onConfirm={async () => {
+          if (!jobToDelete) return;
+          try {
+            await deleteJobApiFn(jobToDelete);
+            toast.success("Job deleted successfully");
+            setJobs((prev) => prev?.filter((job) => job._id !== jobToDelete)); // update UI
+          } catch (error: any) {
+            toast.error(error.message || "Failed to delete job");
+          } finally {
+            setJobToDelete(null);
+          }
+        }}
+      />
     </div>
   );
 };

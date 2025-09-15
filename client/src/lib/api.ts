@@ -98,6 +98,13 @@ export const getJobByIdApiFn = async (jobId: string) => {
   });
 };
 
+export const deleteJobApiFn = async (jobId: string) => {
+  return apiFetch<{ message: string }>(`/job/delete/${jobId}`, {
+    method: "DELETE",
+    auth: true,
+  });
+};
+
 export const getAllJobsApiFn = async (searchQuery?: string) => {
   return apiFetch<GetAllJobsResponse>(`/job/all?${searchQuery}`, {
     auth: true,

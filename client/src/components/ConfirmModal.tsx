@@ -21,9 +21,9 @@ const ConfirmModal = forwardRef<ConfirmModalHandle, ConfirmModalProps>(
       <dialog ref={modalRef} className="modal modal-bottom sm:modal-middle">
         <div className="modal-box">
           <p className="mb-4 text-center text-xl">{message}</p>
-          <div className="flex justify-center gap-4 mt-6">
+          <div className="flex justify-center gap-4 mt-10">
             <button
-              className="btn btn-neutral px-8 hover:bg-primary hover:border-none"
+              className="btn bg-primary text-white px-8 hover:bg-primary hover:border-none"
               onClick={() => {
                 onConfirm();
                 modalRef.current?.close();

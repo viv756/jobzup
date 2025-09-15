@@ -1,7 +1,7 @@
 import { Types } from "mongoose";
 import CompanyModel from "../models/company.model";
 import JobModel from "../models/job.model";
-import { BadRequestException, NotFoundExeption } from "../utils/appError";
+import { BadRequestException, NotFoundExeption, UnauthorizedException } from "../utils/appError";
 import { CreateJobType } from "../validation/job.validation";
 import UserModel from "../models/user.model";
 
@@ -173,4 +173,19 @@ export const getAllJobsOfRecruiterService = async (
     pageNumber,
     totalPages: Math.max(1, Math.ceil((result[0]?.totalCount || 0) / pageSize)),
   };
+};
+
+export const jobDeleteService = async (jobId: string, userId: string) => {
+  const job = await JobModel.findById(jobId).populate("company");
+  if (!job) {
+    throw new BadRequestException("Job is not found");
+  }
+
+  if (String(job.createdBy) !== String(userId)) {
+    throw new UnauthorizedException("You are not allowed to delete this job");
+  }
+
+  await job.deleteOne();
+
+  return { message: "Job deleted successfully" };
 };

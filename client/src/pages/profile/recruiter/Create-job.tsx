@@ -21,7 +21,6 @@ const CreateJob = () => {
   const [requirements, setRequerements] = useState<string>("");
   const [closingDate, setClosingDate] = useState<Date | null>(new Date());
 
-  const { companyId } = useParams();
   const navigate = useNavigate();
 
   const onSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
@@ -52,7 +51,7 @@ const CreateJob = () => {
     };
 
     try {
-      const data = await createJobApiFn(payload, companyId as string);
+      const data = await createJobApiFn(payload);
       if (data) {
         toast.success(data.message);
         navigate(`/job/${data.job._id}`);

@@ -20,7 +20,7 @@ export const PROTECTED_ROUTES = {
 
 export const RECRUITER_ONLY_ROUTES = {
   DAHSBOARD: "/profile/dashboard",
-  CREATE_JOB: "/profile/create/job/:companyId",
+  CREATE_JOB: "/profile/create/job",
   MY_JOBS: "/profile/my-jobs",
   APPLICANTS: "/profile/applicants",
   PROFILE_VIEW: "/profile/:userId",

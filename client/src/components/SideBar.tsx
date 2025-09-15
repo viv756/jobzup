@@ -46,7 +46,7 @@ const SideBar = () => {
     { label: "Applications", path: "/profile/applicants", icon: File, roles: ["RECRUITER"] },
     {
       label: "Create New Job",
-      path: `/profile/create/job/${currentUser?.company}`,
+      path: `/profile/create/job`,
       icon: FilePlus,
       roles: ["RECRUITER"],
     },

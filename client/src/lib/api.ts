@@ -84,8 +84,8 @@ export const deleteCompanyApiFn = async (companyId: string) => {
   });
 };
 
-export const createJobApiFn = async (data: CreateJobPayloadType, companyId: string) => {
-  return apiFetch<CreateJobResponseType>(`/job/company/${companyId}/create/new`, {
+export const createJobApiFn = async (data: CreateJobPayloadType) => {
+  return apiFetch<CreateJobResponseType>(`/job/create/new`, {
     method: "POST",
     body: JSON.stringify(data),
     auth: true,

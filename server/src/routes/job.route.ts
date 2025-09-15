@@ -9,7 +9,7 @@ import { isAuthenticated } from "../middlewares/isAuthenticated.middleware";
 
 const jobRoutes = Router();
 
-jobRoutes.post("/company/:companyId/create/new", isAuthenticated, createJobController);
+jobRoutes.post("/create/new", isAuthenticated, createJobController);
 jobRoutes.get("/all", getAllJobsController);
 jobRoutes.get("/:jobId", getJobByIdController);
 jobRoutes.get('/recruiter/jobs',isAuthenticated,getAllJobsOfRecruiterController)

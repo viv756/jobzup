@@ -11,11 +11,10 @@ import { HTTPSTATUS } from "../config/http.config";
 
 export const createJobController = asyncHandler(async (req: Request, res: Response) => {
   const userId = req.user?._id as string;
-  const companyId = companyIdSchema.parse(req.params.companyId);
 
   const body = createJobSchema.parse(req.body);
 
-  const { job } = await createJobService(userId, companyId, body);
+  const { job } = await createJobService(userId,body);
 
   return res.status(HTTPSTATUS.CREATED).json({
     message: "Job is created",

@@ -3,9 +3,19 @@ import CompanyModel from "../models/company.model";
 import JobModel from "../models/job.model";
 import { BadRequestException, NotFoundExeption } from "../utils/appError";
 import { CreateJobType } from "../validation/job.validation";
+import UserModel from "../models/user.model";
 
-export const createJobService = async (userId: string, companyId: string, body: CreateJobType) => {
-  const company = await CompanyModel.findById(companyId);
+export const createJobService = async (userId: string, body: CreateJobType) => {
+  const user = await UserModel.findById(userId);
+  if (!user) {
+    throw new NotFoundExeption("User not found");
+  }
+
+  if (!user.company) {
+    throw new NotFoundExeption("You need to register your company");
+  }
+
+  const company = await CompanyModel.findById(user.company);
   if (!company) {
     throw new NotFoundExeption("Company not found");
   }
@@ -26,7 +36,7 @@ export const createJobService = async (userId: string, companyId: string, body: 
     responsibilities: body.responsibilities,
     requirements: body.requirements,
     createdBy: userId,
-    company: companyId,
+    company: company._id,
   });
 
   await job.save();

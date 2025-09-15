@@ -82,9 +82,11 @@ const JobsTable = () => {
             </div>
           </div>
           <div>
-            <button className="rounded-lg border border-blue-[#1844B5] bg-[#0851CA] px-5 py-2.5 text-center text-lg font-medium text-white shadow-sm transition-all font-dm hover:bg-blue-800 focus:bg-blue-800">
+            <Link
+              to={"/profile/create/job"}
+              className="rounded-lg border border-blue-[#1844B5] bg-[#0851CA] px-5 py-2.5 text-center text-lg font-medium text-white shadow-sm transition-all font-dm hover:bg-blue-800 focus:bg-blue-800">
               Create new job +
-            </button>
+            </Link>
           </div>
         </div>
         <Table>
@@ -134,9 +136,13 @@ const JobsTable = () => {
                       {job.title}
                     </Link>
                   </th>
-                  <TableCell className="px-6 py-4 font-dm">{format(job.datePosted, "MMMM dd,yyyy")}</TableCell>
+                  <TableCell className="px-6 py-4 font-dm">
+                    {format(job.datePosted, "MMMM dd,yyyy")}
+                  </TableCell>
                   <TableCell className="px-6 py-4 font-dm">{job.category}</TableCell>
-                  <TableCell className="px-6 py-4 font-dm">{format(job.closeDate, "MMMM dd,yyyy")}</TableCell>
+                  <TableCell className="px-6 py-4 font-dm">
+                    {format(job.closeDate, "MMMM dd,yyyy")}
+                  </TableCell>
                   <TableCell className="px-13 py-4 font-dm">{job.applicantsCount}</TableCell>
                   <TableCell className=" py-4 font-dm ">
                     <Link to={""}>

@@ -9,7 +9,7 @@ interface CompanyDocument extends Document {
   about: string;
   facebook: string | null;
   instagram: string | null;
-  twiter: string | null;
+  twitter: string | null;
   background: string[];
   benefits: string[];
   foundedIn: string;
@@ -61,7 +61,7 @@ const companySchema = new Schema<CompanyDocument>(
       type: String,
       default: null,
     },
-    twiter: {
+    twitter: {
       type: String,
       default: null,
     },

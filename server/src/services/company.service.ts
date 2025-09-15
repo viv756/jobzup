@@ -42,7 +42,7 @@ export const createCompanyService = async (
     benefits: body.benefits,
     facebook: body.facebook,
     instagram: body.instagram,
-    twiter: body.twitter,
+    twitter: body.twitter,
     createdBy: userId,
     companyLogo: body.companyLogo,
     websiteLink: body.websiteLink,

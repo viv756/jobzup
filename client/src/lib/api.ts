@@ -19,6 +19,8 @@ import type {
   RegisterPayloadType,
   RegisterResponseType,
   UpdateApplicationStatusType,
+  UpdateCompanyPayLoadType,
+  UpdateCompanyResponseType,
   UpdateUserProfilePayloadType,
   UpdateUserProfileResponseType,
   UserType,
@@ -61,6 +63,15 @@ export const createCompanyApiFn = async (data: CreateCompanyPayLoadType) => {
     auth: true,
   });
 };
+
+export const updateCompanyApiFn = async (data: UpdateCompanyPayLoadType) => {
+  return apiFetch<UpdateCompanyResponseType>("/company/update", {
+    method: "PUT",
+    body: JSON.stringify(data),
+    auth: true,
+  });
+};
+
 export const getCurrentCompanyApiFn = async () => {
   return apiFetch<GetCurrentCompanyResponseType>("/company/currentCompany", {
     auth: true,

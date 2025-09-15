@@ -4,7 +4,7 @@ export type UserType = {
   _id: string;
   name: string;
   email: string;
-  phone:string
+  phone: string;
   profile: string | null;
   profilePicture: string;
   createdAt: Date;
@@ -27,6 +27,8 @@ export type CompanyType = {
   phone: string;
   email: string;
   companyLogo: string;
+  benefits: string[];
+  background: string[];
   websiteLink: string | null;
   createdBy: string;
   createdAt: Date;
@@ -63,7 +65,7 @@ export type ProfileType = {
   education: Education[];
   awards: Awards[];
   qualification: string | null;
-  experianceTime:string
+  experianceTime: string;
   gender: GenderEnumType;
   age: string | null;
   createdAt: Date;
@@ -73,22 +75,22 @@ export type ProfileType = {
 export type WorkExperience = {
   company: string;
   position: string;
-  startDate: Date | null
-  endDate: Date | null
+  startDate: Date | null;
+  endDate: Date | null;
   description: string;
 };
 
 export type Education = {
   collegeName: string;
   department: string;
-  startDate: Date | null
-  endDate: Date | null
+  startDate: Date | null;
+  endDate: Date | null;
   description: string;
 };
 
 export type Awards = {
   name: string;
-  date: Date | null
+  date: Date | null;
   description: string;
 };
 
@@ -141,7 +143,30 @@ export type CreateCompanyPayLoadType = {
   websiteLink: string | null;
 };
 
+export type UpdateCompanyPayLoadType = {
+  companyName: string;
+  email: string;
+  companySize: string;
+  foundedIn: Date | null;
+  avgSalary: string;
+  location: string;
+  about: string;
+  phone: string;
+  background: string[];
+  benefits: string[];
+  facebook: string | null;
+  instagram: string | null;
+  twitter: string | null;
+  companyLogo: string | null;
+  websiteLink: string | null;
+};
+
 export type CreateCompanyResponseType = {
+  message: string;
+  company: CompanyType;
+};
+
+export type UpdateCompanyResponseType = {
   message: string;
   company: CompanyType;
 };
@@ -277,12 +302,9 @@ export type UpdateApplicationStatusType = {
   application: Applicant;
 };
 
-
-
-
 export type GetUserByIdResponseType = {
-  message: string,
+  message: string;
   user: UserType & {
-    profile : ProfileType | null
-  }
-}
+    profile: ProfileType | null;
+  };
+};

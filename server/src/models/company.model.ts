@@ -72,6 +72,8 @@ const companySchema = new Schema<CompanyDocument>(
     companyLogo: {
       type: String,
       required: true,
+      default:
+        "https://res.cloudinary.com/devincarloz/image/upload/v1757924762/ni5bwve4pkesxxpjaids.png",
     },
     background: {
       type: [String],

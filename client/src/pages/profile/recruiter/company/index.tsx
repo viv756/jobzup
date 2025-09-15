@@ -1,7 +1,11 @@
-import React from "react";
+import UpdateCompanyDetailsForm from "./_components/UpdateComapnyDetailsForm";
 
 const CompanyPage = () => {
-  return <div>CompanyPage</div>;
+  return (
+    <>
+      <UpdateCompanyDetailsForm />
+    </>
+  );
 };
 
 export default CompanyPage;

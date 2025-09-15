@@ -1,25 +1,25 @@
+import { useRef } from "react";
 import { Link, NavLink, useNavigate } from "react-router-dom";
+import toast from "react-hot-toast";
 import {
   Contrast,
   LogOut,
-  User,
   MessageSquareMore,
   Settings,
   type LucideIcon,
   File,
   FilePlus,
+  BriefcaseBusiness,
   Headset,
   Building2,
 } from "lucide-react";
-import { BriefcaseBusiness } from "lucide-react";
+
 import { useAppSelector } from "../hooks/useSelector";
 import { useAppDispatch } from "../hooks/useReducer";
-import { useRef } from "react";
-import type { ConfirmModalHandle } from "./ConfirmModal";
 import { logoutApiFn } from "../lib/api";
 import { logout } from "../redux/user/user.slice";
-import toast from "react-hot-toast";
 import ConfirmModal from "./ConfirmModal";
+import type { ConfirmModalHandle } from "./ConfirmModal";
 
 type UserRole = "JOB_SEEKER" | "RECRUITER";
 
@@ -51,11 +51,9 @@ const SideBar = () => {
       roles: ["RECRUITER"],
     },
     { label: "Company", path: "/profile/company", icon: Building2, roles: ["RECRUITER"] },
-    // { label: "Profile", path: "/profile/update", icon: User, roles: ["JOB_SEEKER"] },
     { label: "Messages", path: "/profile/messages", icon: MessageSquareMore },
     { label: "Meetings", path: "/profile/meetings", icon: Headset },
     { label: "Settings", path: "/profile/settings", icon: Settings },
-    // { label: "Logout", path: "/logout", icon: LogOut },
   ];
 
   const visibleLinks = sidebarLinks.filter((link) => {

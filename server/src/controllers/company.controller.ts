@@ -3,11 +3,12 @@ import { Request, Response } from "express";
 import asyncHandler from "../middlewares/asyncHandler.middlewares";
 import { HTTPSTATUS } from "../config/http.config";
 import { UnauthorizedException } from "../utils/appError";
-import { createCompanySchema } from "../validation/company.validation";
+import { createCompanySchema, updateCompanySchema } from "../validation/company.validation";
 import {
   createCompanyService,
   deleteComapnyService,
   getRecruiterCurrentCompanyService,
+  updateCompanyService,
 } from "../services/company.service";
 
 export const createCompanyController = asyncHandler(async (req: Request, res: Response) => {
@@ -46,6 +47,23 @@ export const getRecruiterCurrentCompanyController = asyncHandler(
     });
   }
 );
+
+export const updateCompanyController = asyncHandler(async (req: Request, res: Response) => {
+  if (!(req.user?.role === "RECRUITER")) {
+    throw new UnauthorizedException(
+      "You do not have the necessary permissions to perform this action"
+    );
+  }
+  const userId = req.user?._id as string;
+  const body = updateCompanySchema.parse(req.body);
+
+  const { updatedCompany } = await updateCompanyService(userId, body);
+
+  return res.status(HTTPSTATUS.OK).json({
+    message: "Company updated successfully",
+    updatedCompany,
+  });
+});
 
 export const deleteCompanyController = asyncHandler(async (req: Request, res: Response) => {
   if (!(req.user?.role === "RECRUITER")) {

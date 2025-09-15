@@ -2,6 +2,7 @@ import mongoose from "mongoose";
 import CompanyModel from "../models/company.model";
 import UserModel from "../models/user.model";
 import { BadRequestException, NotFoundExeption } from "../utils/appError";
+import { UpdateComapnyType } from "../validation/company.validation";
 
 export const createCompanyService = async (
   userId: string,
@@ -65,6 +66,25 @@ export const getRecruiterCurrentCompanyService = async (userId: string) => {
   }
 
   return { company };
+};
+
+export const updateCompanyService = async (userId: string, body: UpdateComapnyType) => {
+  const company = await CompanyModel.findOne({ createdBy: userId });
+  if (!company) {
+    throw new NotFoundExeption("Company not found");
+  }
+
+  const updatedCompany = await CompanyModel.findByIdAndUpdate(
+    company._id,
+    { ...body },
+    { new: true }
+  );
+
+  if (!updatedCompany) {
+    throw new BadRequestException("Failed to update company")
+  }
+
+  return { updatedCompany };
 };
 
 export const deleteComapnyService = async (userId: string, companyId: string) => {

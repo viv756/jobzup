@@ -1,4 +1,4 @@
-import { useEffect, useState } from "react";
+import { useEffect, useRef, useState } from "react";
 import { Link, useLocation, useNavigate } from "react-router-dom";
 import { format } from "date-fns";
 import toast from "react-hot-toast";
@@ -14,12 +14,18 @@ import {
   TableHeaderRow,
   TableRow,
 } from "../../../../../components/Table";
+import Modal from "../../../../../components/Modal";
+import type { ConfirmModalHandle } from "../../../../../components/ConfirmModal";
+import ConfirmModal from "../../../../../components/ConfirmModal";
+import CreateJob from "./Create-job";
 
 const JobsTable = () => {
   const [jobs, setJobs] = useState<RecruiterJob[]>();
   const [pageNumber, setPageNumber] = useState<number>(1);
   const [totalPages, setTotalPages] = useState<number>(0);
   const [searchKey, setSearchKey] = useState<string>("");
+  const [deleteModal, setDeleteModal] = useState<boolean>(false);
+  const [isModalOpen, setIsModalOpen] = useState(false);
 
   const navigate = useNavigate();
   const location = useLocation();
@@ -63,6 +69,8 @@ const JobsTable = () => {
     navigate(`/profile/my-jobs?${urlParams.toString()}`);
   };
 
+  const handleDeleteJob = (jobId: string) => {};
+
   return (
     <div className="">
       <div className="relative overflow-x-auto sm:rounded-lg">
@@ -82,11 +90,11 @@ const JobsTable = () => {
             </div>
           </div>
           <div>
-            <Link
-              to={"/profile/create/job"}
+            <button
+              onClick={() => setIsModalOpen(true)}
               className="rounded-lg border border-blue-[#1844B5] bg-[#0851CA] px-5 py-2.5 text-center text-lg font-medium text-white shadow-sm transition-all font-dm hover:bg-blue-800 focus:bg-blue-800">
               Create new job +
-            </Link>
+            </button>
           </div>
         </div>
         <Table>
@@ -150,11 +158,14 @@ const JobsTable = () => {
                         Edit
                       </span>
                     </Link>{" "}
-                    <Link to={""}>
+                    <button
+                      onClick={() => {
+                        handleDeleteJob(job._id);
+                      }}>
                       <span className="rounded-full border hover:bg-red-500 hover:text-white border-red-500 px-2.5 py-0.2 text-sm whitespace-nowrap text-red-500">
                         Delete
                       </span>
-                    </Link>
+                    </button>
                   </TableCell>
                 </TableRow>
               ))}
@@ -176,6 +187,12 @@ const JobsTable = () => {
           »
         </button>
       </div>
+
+      <Modal isOpen={isModalOpen} onClose={() => setIsModalOpen(false)}>
+        <p className="text-gray-700">
+          <CreateJob />
+        </p>
+      </Modal>
     </div>
   );
 };

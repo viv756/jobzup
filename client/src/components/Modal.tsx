@@ -10,7 +10,7 @@ type ModalProps = {
 const Modal: React.FC<ModalProps> = ({ isOpen, onClose, title, children }) => {
   return (
     <dialog className="modal " open={isOpen}>
-      <div className="modal-box">
+      <div className="modal-box max-w-4xl">
         <form method="dialog" className="absolute right-2 top-2">
           <button type="button" className="btn btn-sm btn-circle btn-ghost" onClick={onClose}>
             ✕

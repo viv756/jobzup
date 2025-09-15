@@ -1,11 +1,11 @@
 import React, { useState } from "react";
-import { useNavigate, useParams } from "react-router-dom";
+import { useNavigate } from "react-router-dom";
 import DatePicker from "react-datepicker";
 import toast from "react-hot-toast";
 
-import { JobCategories, type JobCategoriesType, type JobTypeEnumType } from "../../../constant";
-import { createJobApiFn } from "../../../lib/api";
-import type { CreateJobPayloadType } from "../../../types/api.type";
+import { JobCategories, type JobCategoriesType, type JobTypeEnumType } from "../../../../../constant";
+import { createJobApiFn } from "../../../../../lib/api";
+import type { CreateJobPayloadType } from "../../../../../types/api.type";
 import "react-datepicker/dist/react-datepicker.css";
 
 const CreateJob = () => {
@@ -62,8 +62,8 @@ const CreateJob = () => {
   };
 
   return (
-    <div className="pt-20">
-      <div className="bg-white  shadow-2xl  w-[800px] p-10 mx-auto rounded-2xl ">
+    <div className="">
+      <div className="bg-white   p-10 mx-auto rounded-2xl ">
         <h1 className="text-4xl  font-semibold font-satoshi ">Job Details</h1>
         <form onSubmit={onSubmit} className="flex  flex-col gap-3 mt-7">
           <div className="flex flex-col gap-2">

@@ -1,5 +1,4 @@
 import CreateCompany from "../../pages/profile/recruiter/Create-company";
-import CreateJob from "../../pages/profile/recruiter/Create-job";
 import LandingPage from "../../pages/home";
 import SignIn from "../../pages/auth/sign-in";
 import SignUp from "../../pages/auth/sign-up";
@@ -10,6 +9,10 @@ import AllJobs from "../../pages/jobs";
 import MyJobs from "../../pages/profile/recruiter/my-jobs";
 import Applicants from "../../pages/profile/recruiter/applicants";
 import UserProfile from "../../pages/profile/recruiter/user-profile";
+import CompanyPage from "../../pages/profile/recruiter/company";
+import Settings from "../../pages/profile/settings";
+import Profile from "../../pages/profile/user/user-Profile";
+import AppliedJobs from "../../pages/profile/user/applied-jobs";
 
 import {
   AUTH_ROUTES,
@@ -18,10 +21,6 @@ import {
   PUBLIC_ROUTES,
   RECRUITER_ONLY_ROUTES,
 } from "./routePaths";
-import CompanyPage from "../../pages/profile/recruiter/company";
-import Settings from "../../pages/profile/settings";
-import Profile from "../../pages/profile/user/user-Profile";
-import AppliedJobs from "../../pages/profile/user/applied-jobs";
 
 export const publicRoutePaths = [
   { path: PUBLIC_ROUTES.HOME, element: <LandingPage /> },
@@ -60,10 +59,6 @@ export const recruiterOnlyRoutePaths = [
   {
     path: RECRUITER_ONLY_ROUTES.DAHSBOARD,
     element: <DashBoard />,
-  },
-  {
-    path: RECRUITER_ONLY_ROUTES.CREATE_JOB,
-    element: <CreateJob />,
   },
   { path: RECRUITER_ONLY_ROUTES.MY_JOBS, element: <MyJobs /> },
   {

@@ -40,5 +40,5 @@ const applicationSchema = new Schema<ApplicationDocument>(
   { timestamps: true }
 );
 
-const ApplictionModel = mongoose.model<ApplicationDocument>("Application", applicationSchema);
-export default ApplictionModel;
+const ApplicationModel = mongoose.model<ApplicationDocument>("Application", applicationSchema);
+export default ApplicationModel;

@@ -11,6 +11,7 @@ export interface JobDocument extends Document {
   jobType: JobTypeEnumType;
   experience: string;
   salary: string;
+  qualification: string;
   responsibilities: string[];
   requirements: string[];
   createdBy: mongoose.Types.ObjectId;
@@ -55,6 +56,10 @@ const jobSchema = new Schema<JobDocument>({
     required: true,
   },
   salary: {
+    type: String,
+    required: true,
+  },
+  qualification: {
     type: String,
     required: true,
   },

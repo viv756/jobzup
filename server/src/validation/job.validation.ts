@@ -22,6 +22,21 @@ export const createJobSchema = z.object({
   description: z.string().trim().min(1).max(255),
   jobType: z.enum(Object.values(JobTypeEnum)),
   closeDate: closeDateSchema,
+  qualification: z.string().trim(),
+  hiringLocation: z.string().trim().min(1).max(255),
+  experience: z.string().trim().optional(),
+  salary: z.string().trim().min(1).max(255),
+  responsibilities: z.array(z.string().trim()).optional(),
+  requirements: z.array(z.string().trim()).optional(),
+});
+
+export const updateJobSchema = z.object({
+  title: z.string().trim().min(1).max(255),
+  category: z.string().trim().min(1).max(255),
+  description: z.string().trim().min(1).max(255),
+  jobType: z.enum(Object.values(JobTypeEnum)),
+  closeDate: closeDateSchema,
+  qualification: z.string().trim(),
   hiringLocation: z.string().trim().min(1).max(255),
   experience: z.string().trim().optional(),
   salary: z.string().trim().min(1).max(255),
@@ -30,3 +45,4 @@ export const createJobSchema = z.object({
 });
 
 export type CreateJobType = z.infer<typeof createJobSchema>;
+export type UpdateJbType = z.infer<typeof updateJobSchema>;

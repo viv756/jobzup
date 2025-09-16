@@ -1,8 +1,8 @@
-import { Types } from "mongoose";
+import mongoose, { Types } from "mongoose";
 import CompanyModel from "../models/company.model";
 import JobModel from "../models/job.model";
 import { BadRequestException, NotFoundExeption, UnauthorizedException } from "../utils/appError";
-import { CreateJobType } from "../validation/job.validation";
+import { CreateJobType, UpdateJbType } from "../validation/job.validation";
 import UserModel from "../models/user.model";
 import ApplicationModel from "../models/application.model";
 
@@ -177,22 +177,58 @@ export const getAllJobsOfRecruiterService = async (
   };
 };
 
-export const jobDeleteService = async (jobId: string, userId: string) => {
-  const job = await JobModel.findById(jobId).populate("company");
+export const updateJobService = async (jobId: string, userId: string, body: UpdateJbType) => {
+
+  const job = await JobModel.findById(jobId)
   if (!job) {
     throw new BadRequestException("Job is not found");
   }
 
-  // Ensure only job creator can delete
   if (String(job.createdBy) !== String(userId)) {
-    throw new UnauthorizedException("You are not allowed to delete this job");
+    throw new UnauthorizedException("You are not allowed to edit this job");
   }
 
-  // Delete applicants associated with this job
-  await ApplicationModel.deleteMany({ job: job._id });
+  const updatedJob = await JobModel.findByIdAndUpdate(
+    job._id,
+    {
+      ...body,
+    },
+    { new: true }
+  );
 
-  // Delete the job itself
-  await job.deleteOne();
 
-  return { message: "Job deleted successfully" };
+  return { updatedJob };
+};
+
+export const deleteJobService = async (jobId: string, userId: string) => {
+  const session = await mongoose.startSession();
+  session.startTransaction();
+
+  try {
+    const job = await JobModel.findById(jobId).session(session);
+
+    if (!job) {
+      throw new BadRequestException("Job is not found");
+    }
+
+    if (String(job.createdBy) !== String(userId)) {
+      throw new UnauthorizedException("You are not allowed to delete this job");
+    }
+
+    // Delete applications linked to this job
+    await ApplicationModel.deleteMany({ job: job._id }).session(session);
+
+    // Delete job itself
+    await job.deleteOne({ session });
+
+    await session.commitTransaction();
+    session.endSession();
+
+    return { message: "Job deleted successfully" };
+
+  } catch (error) {
+    await session.abortTransaction();
+    session.endSession();
+    throw error;
+  }
 };

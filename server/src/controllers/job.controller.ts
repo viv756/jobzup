@@ -1,12 +1,18 @@
 import { Request, Response } from "express";
 import asyncHandler from "../middlewares/asyncHandler.middlewares";
-import { companyIdSchema, createJobSchema, jobIdSchema } from "../validation/job.validation";
+import {
+  companyIdSchema,
+  createJobSchema,
+  jobIdSchema,
+  updateJobSchema,
+} from "../validation/job.validation";
 import {
   createJobService,
   getAllJobsOfRecruiterService,
   getAllJobsService,
   getJpbByIdservice,
-  jobDeleteService,
+  deleteJobService,
+  updateJobService,
 } from "../services/job.service";
 import { HTTPSTATUS } from "../config/http.config";
 
@@ -73,11 +79,25 @@ export const getAllJobsOfRecruiterController = asyncHandler(async (req: Request,
   });
 });
 
+export const updateJobController = asyncHandler(async (req: Request, res: Response) => {
+  const userId = req.user?._id as string;
+  const jobId = jobIdSchema.parse(req.params.jobId);
+
+  const body = updateJobSchema.parse(req.body);
+
+  const { updatedJob } = await updateJobService(userId, jobId, body);
+
+  res.status(HTTPSTATUS.OK).json({
+    message: "Job updated successfully",
+    updatedJob,
+  });
+});
+
 export const jobDeleteController = asyncHandler(async (req: Request, res: Response) => {
   const userId = req.user?._id as string;
   const jobId = jobIdSchema.parse(req.params.jobId);
 
-  await jobDeleteService(jobId, userId);
+  await deleteJobService(jobId, userId);
 
   res.status(HTTPSTATUS.OK).json({
     message: "Job deleted successfully",

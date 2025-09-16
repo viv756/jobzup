@@ -15,9 +15,10 @@ import {
   TableRow,
 } from "../../../../../components/Table";
 import Modal from "../../../../../components/Modal";
-import type { ConfirmModalHandle } from "../../../../../components/ConfirmModal";
 import ConfirmModal from "../../../../../components/ConfirmModal";
 import CreateJob from "./Create-job";
+import type { ConfirmModalHandle } from "../../../../../components/ConfirmModal";
+import EditJob from "./EditJob";
 
 const JobsTable = () => {
   const [jobs, setJobs] = useState<RecruiterJob[]>();
@@ -25,6 +26,8 @@ const JobsTable = () => {
   const [totalPages, setTotalPages] = useState<number>(0);
   const [searchKey, setSearchKey] = useState<string>("");
   const [isJobCreateModalOpen, setIsJobCreateModalOpen] = useState(false);
+  const [isJobEditModalOpen, setIsJobEditModalOpen] = useState(false);
+  const [jobToEdit, setJobToEdit] = useState("");
 
   const confirmModalRef = useRef<ConfirmModalHandle>(null);
   const [jobToDelete, setJobToDelete] = useState<string | null>(null);
@@ -74,6 +77,11 @@ const JobsTable = () => {
   const handleDeleteJob = (jobId: string) => {
     setJobToDelete(jobId);
     confirmModalRef.current?.open(); // open modal programmatically
+  };
+
+  const handleEditJob = (jobId: string) => {
+    setJobToEdit(jobId);
+    setIsJobEditModalOpen(true);
   };
   return (
     <div className="">
@@ -157,11 +165,14 @@ const JobsTable = () => {
                   </TableCell>
                   <TableCell className="px-13 py-4 font-dm">{job.applicantsCount}</TableCell>
                   <TableCell className=" py-4 font-dm ">
-                    <Link to={""}>
+                    <button
+                      onClick={() => {
+                        handleEditJob(job._id);
+                      }}>
                       <span className="rounded-full border border-blue-700 hover:bg-blue-700 hover:text-white px-2.5 py-0.2 text-sm whitespace-nowrap text-blue-700">
                         Edit
                       </span>
-                    </Link>{" "}
+                    </button>{" "}
                     <button
                       onClick={() => {
                         handleDeleteJob(job._id);
@@ -195,6 +206,11 @@ const JobsTable = () => {
       <Modal isOpen={isJobCreateModalOpen} onClose={() => setIsJobCreateModalOpen(false)}>
         <CreateJob />
       </Modal>
+
+      <Modal isOpen={isJobEditModalOpen} onClose={() => setIsJobEditModalOpen(false)}>
+        <EditJob jobId={jobToEdit} />
+      </Modal>
+
       <ConfirmModal
         ref={confirmModalRef}
         message="Are you sure you want to delete this job?"

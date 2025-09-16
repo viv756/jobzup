@@ -39,7 +39,7 @@ export type JobType = {
   _id: string;
   title: string;
   category: string;
-  description: string[];
+  description: string;
   closeDate: Date | null;
   datePosted: Date | null;
   hiringLocation: string;
@@ -47,6 +47,7 @@ export type JobType = {
   company: CompanyType;
   experience: string;
   salary: string;
+  qualification: string;
   responsibilities: string[];
   requirements: string[];
   createdBy: string;
@@ -181,6 +182,7 @@ export type CreateJobPayloadType = {
   location: string;
   category: string;
   description: string;
+  qualification: string;
   jobType: JobTypeEnumType | string;
   closeDate: Date | null;
   hiringLocation: string;
@@ -190,6 +192,25 @@ export type CreateJobPayloadType = {
   requirements: string[];
 };
 
+export type UpdateJobPayLoadType = {
+  title: string;
+  location: string;
+  category: string;
+  description: string;
+  qualification: string;
+  jobType: JobTypeEnumType | string;
+  closeDate: Date | null;
+  hiringLocation: string;
+  experience: string;
+  salary: string;
+  responsibilities: string[];
+  requirements: string[];
+};
+
+export type UpdateJobResponseType = {
+  message: string;
+  job: JobType;
+};
 export type CreateJobResponseType = {
   message: string;
   job: JobType;

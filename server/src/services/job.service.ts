@@ -177,9 +177,8 @@ export const getAllJobsOfRecruiterService = async (
   };
 };
 
-export const updateJobService = async (jobId: string, userId: string, body: UpdateJbType) => {
-
-  const job = await JobModel.findById(jobId)
+export const updateJobService = async (userId: string, jobId: string, body: UpdateJbType) => {
+  const job = await JobModel.findById(jobId);
   if (!job) {
     throw new BadRequestException("Job is not found");
   }
@@ -195,7 +194,6 @@ export const updateJobService = async (jobId: string, userId: string, body: Upda
     },
     { new: true }
   );
-
 
   return { updatedJob };
 };
@@ -225,7 +223,6 @@ export const deleteJobService = async (jobId: string, userId: string) => {
     session.endSession();
 
     return { message: "Job deleted successfully" };
-
   } catch (error) {
     await session.abortTransaction();
     session.endSession();

@@ -21,6 +21,8 @@ import type {
   UpdateApplicationStatusType,
   UpdateCompanyPayLoadType,
   UpdateCompanyResponseType,
+  UpdateJobPayLoadType,
+  UpdateJobResponseType,
   UpdateUserProfilePayloadType,
   UpdateUserProfileResponseType,
   UserType,
@@ -91,6 +93,14 @@ export const createJobApiFn = async (data: CreateJobPayloadType) => {
     auth: true,
   });
 };
+
+export const updateJobApiFn = async (jobId:string,data: UpdateJobPayLoadType) => {
+   return apiFetch<UpdateJobResponseType>(`/job/update/${jobId}`, {
+    method: "PUT",
+    body: JSON.stringify(data),
+    auth: true,
+  });
+}
 
 export const getJobByIdApiFn = async (jobId: string) => {
   return apiFetch<GetJobByIdResponse>(`/job/${jobId}`, {

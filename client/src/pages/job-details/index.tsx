@@ -66,7 +66,11 @@ const JobDetails = () => {
       {/* Header */}
       <div className="bg-[#2453CC] flex flex-col items-start sm:flex-row rounded-2xl min-h-[180px] sm:items-center p-5  sm:pl-13 gap-7 ">
         <div className="bg-white rounded-full p-3">
-          <img src={job.company.companyLogo} alt="" className="w-18" />
+          <img
+            src={job.company.companyLogo}
+            alt=""
+            className="w-18 h-18 rounded-full object-cover"
+          />
         </div>
         <div className="flex flex-col gap-2">
           <h1 className="text-white text-4xl font-satoshi font-semibold ">{job.title}</h1>

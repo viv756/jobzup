@@ -1,5 +1,5 @@
 import { ApplicationStatusEnumType } from "../enums/application.enum";
-import ApplictionModel from "../models/application.model";
+import ApplicationModel from "../models/application.model";
 import CompanyModel from "../models/company.model";
 import JobModel from "../models/job.model";
 import { BadRequestException } from "../utils/appError";
@@ -16,7 +16,7 @@ export const applyToAJobService = async (
     throw new BadRequestException("Job is not available");
   }
 
-  const userApplied = await ApplictionModel.exists({ user: userId, job: jobId });
+  const userApplied = await ApplicationModel.exists({ user: userId, job: jobId });
   if (userApplied) {
     throw new BadRequestException("You are already applied to this job");
   }
@@ -26,7 +26,7 @@ export const applyToAJobService = async (
     throw new BadRequestException("Company is not Valid");
   }
 
-  const application = new ApplictionModel({
+  const application = new ApplicationModel({
     user: userId,
     company: companyId,
     job: jobId,
@@ -39,7 +39,7 @@ export const applyToAJobService = async (
 };
 
 export const getuserAppliedJobsService = async (userId: string) => {
-  const appliedJobs = await ApplictionModel.find({ user: userId }).select("job").populate("job");
+  const appliedJobs = await ApplicationModel.find({ user: userId }).select("job").populate("job");
   if (!appliedJobs) {
     throw new BadRequestException("You are not applied to any jobs");
   }
@@ -48,7 +48,7 @@ export const getuserAppliedJobsService = async (userId: string) => {
 };
 
 export const getRecentApplicantsService = async (userId: string) => {
-  const recentApplicants = await ApplictionModel.find({ recruiter: userId })
+  const recentApplicants = await ApplicationModel.find({ recruiter: userId })
     .select("user job")
     .limit(5)
     .populate("user", "_id name profilePicture -password")
@@ -71,9 +71,9 @@ export const getAllApplicationsService = async (
   const { pageNumber, pageSize } = pagination;
   const skip = (pageNumber - 1) * pageSize;
 
-  const totalCount = await ApplictionModel.countDocuments({ recruiter: userId });
+  const totalCount = await ApplicationModel.countDocuments({ recruiter: userId });
 
-  const applications = await ApplictionModel.find({ recruiter: userId })
+  const applications = await ApplicationModel.find({ recruiter: userId })
     .select("user job createdAt status")
     .skip(skip)
     .limit(pageSize)
@@ -101,7 +101,7 @@ export const udateAppicationStatusService = async (
 ) => {
   const { status } = body;
 
-  const application = await ApplictionModel.findById(applicationId);
+  const application = await ApplicationModel.findById(applicationId);
 
   if (!application) {
     throw new BadRequestException("Application does't exist");

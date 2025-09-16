@@ -4,6 +4,7 @@ import JobModel from "../models/job.model";
 import { BadRequestException, NotFoundExeption, UnauthorizedException } from "../utils/appError";
 import { CreateJobType } from "../validation/job.validation";
 import UserModel from "../models/user.model";
+import ApplicationModel from "../models/application.model";
 
 export const createJobService = async (userId: string, body: CreateJobType) => {
   const user = await UserModel.findById(userId);
@@ -32,6 +33,7 @@ export const createJobService = async (userId: string, body: CreateJobType) => {
     hiringLocation: body.hiringLocation,
     jobType: body.jobType,
     experience: body.experience,
+    qualification: body.qualification,
     salary: body.salary,
     responsibilities: body.responsibilities,
     requirements: body.requirements,
@@ -181,10 +183,15 @@ export const jobDeleteService = async (jobId: string, userId: string) => {
     throw new BadRequestException("Job is not found");
   }
 
+  // Ensure only job creator can delete
   if (String(job.createdBy) !== String(userId)) {
     throw new UnauthorizedException("You are not allowed to delete this job");
   }
 
+  // Delete applicants associated with this job
+  await ApplicationModel.deleteMany({ job: job._id });
+
+  // Delete the job itself
   await job.deleteOne();
 
   return { message: "Job deleted successfully" };

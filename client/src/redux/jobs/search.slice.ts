@@ -1,7 +1,13 @@
 import { createSlice } from "@reduxjs/toolkit";
 
+interface CachedResult {
+  jobs: any[]; // or JobType[]
+  totalPages: number;
+  pageNumber: number;
+}
+
 interface SearchState {
-  cachedResults: Record<string, any>;
+  cachedResults: Record<string, CachedResult>;
 }
 
 const initialState: SearchState = {
@@ -13,8 +19,8 @@ const searchSlice = createSlice({
   initialState,
   reducers: {
     setCachedResults: (state, action) => {
-      const { searchKey, results } = action.payload;
-      state.cachedResults[searchKey] = results;
+      const { searchKey, jobs, totalPages, pageNumber } = action.payload;
+      state.cachedResults[searchKey] = { jobs, totalPages, pageNumber };
     },
   },
 });

@@ -138,7 +138,11 @@ const JobDetails = () => {
 
           <div className="p-10 shadow-xl rounded-2xl mt-10 w-120 bg-white ">
             <div className="flex items-center gap-5">
-              <img src={job.company.companyLogo} alt="" className="w-20" />
+              <img
+                src={job.company.companyLogo}
+                alt=""
+                className="w-20 h-20 rounded-full object-cover"
+              />
               <div className="flex flex-col ">
                 <h1 className="text-2xl font-semibold font-satoshi">{job.company.companyName}</h1>
                 <p className="text-gray-500"> {job.company.location} </p>
@@ -149,7 +153,7 @@ const JobDetails = () => {
               <p className="text-lg font-dm">Company size</p>
               <p className="text-lg font-dm"> {job.company.companySize} </p>
               <p className="text-lg font-dm">Founded in</p>
-              <p className="text-lg font-dm">{job.company.foundedIn}</p>
+              <p className="text-lg font-dm">{format(new Date(job.company.foundedIn), "yyyy")}</p>
               <p className="text-lg font-dm">Phone</p>
               <p className="text-lg font-dm">{formatPhoneNumberIntl(job.company.phone)}</p>
               <p className="text-lg font-dm">Email</p>

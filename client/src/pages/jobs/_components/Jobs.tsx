@@ -35,8 +35,9 @@ const Jobs = () => {
       const searchKey = `${keyword}-${page}-${category}`;
 
       if (cachedResults[searchKey]) {
-        setJobs(cachedResults[searchKey]);
-        setPageNumber(page);
+        setJobs(cachedResults[searchKey].jobs);
+        setPageNumber(cachedResults[searchKey].pageNumber);
+        setTotalPages(cachedResults[searchKey].totalPages);
         return;
       }
 
@@ -48,7 +49,15 @@ const Jobs = () => {
         setPageNumber(data.pagination.pageNumber);
         setTotalPages(data.pagination.totalPages);
 
-        dispatch(setCachedResults({ searchKey, results: data.jobs }));
+        // dispatch(setCachedResults({ searchKey, results: data.jobs }));
+        dispatch(
+          setCachedResults({
+            searchKey,
+            jobs: data.jobs,
+            pageNumber: data.pagination.pageNumber,
+            totalPages: data.pagination.totalPages,
+          })
+        );
       };
 
       fetchJobs();

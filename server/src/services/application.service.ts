@@ -61,6 +61,7 @@ export const getRecentApplicantsService = async (userId: string) => {
   return { recentApplicants };
 };
 
+
 export const getAllApplicationsService = async (
   userId: string,
   pagination: {
@@ -111,4 +112,46 @@ export const udateAppicationStatusService = async (
   await application.save();
 
   return { application };
+};
+
+export const dashboardInfoService = async (userId: string) => {
+  const [totalPostedJobs, totalApplicationReceived, recentApplicants, jobApplicationStats] =
+    await Promise.all([
+      JobModel.countDocuments({ createdBy: userId }), // recruiter’s jobs
+      ApplicationModel.countDocuments({ recruiter: userId }), // applications recruiter received
+      ApplicationModel.find({ recruiter: userId }) // recent applicants
+        .select("user job")
+        .limit(5)
+        .populate("user", "_id name profilePicture -password")
+        .populate("job", "_id title "),
+      ApplicationModel.aggregate([            // graph stats
+        { $match: { recruiter: userId } },
+        { $group: { _id: "$job", applicantsCount: { $sum: 1 } } },
+        {
+          $lookup: {
+            from: "jobs",
+            localField: "_id",
+            foreignField: "_id",
+            as: "job",
+          },
+        },
+        { $unwind: "$job" },
+        {
+          $project: {
+            _id: 0,
+            jobTitle: "$job.title",
+            applicantsCount: 1,
+          },
+        },
+      ]),
+    ]);
+
+  return {
+    stats: {
+      totalPostedJobs,
+      totalApplicationReceived,
+    },
+    recentApplicants,
+    jobApplicationStats,
+  };
 };

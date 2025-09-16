@@ -5,6 +5,7 @@ import { companyIdSchema, jobIdSchema } from "../validation/job.validation";
 import { applicationStatusSchema, recruiterIdSchema } from "../validation/application.validation";
 import {
   applyToAJobService,
+  dashboardInfoService,
   getAllApplicationsService,
   getRecentApplicantsService,
   getuserAppliedJobsService,
@@ -45,6 +46,19 @@ export const getRecentApplicantsController = asyncHandler(async (req: Request, r
   return res.status(HTTPSTATUS.OK).json({
     message: "Recent applicants fetched successfully",
     recentApplicants,
+  });
+});
+
+export const dashboardInfoController = asyncHandler(async (req: Request, res: Response) => {
+  const userId = req.user?._id as string;
+
+  const { stats, jobApplicationStats, recentApplicants } = await dashboardInfoService(userId);
+
+  return res.status(HTTPSTATUS.OK).json({
+    message: "Dashboard data fetched successfully",
+    stats,
+    recentApplicants,
+    jobApplicationStats,
   });
 });
 

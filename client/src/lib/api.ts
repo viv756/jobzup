@@ -6,6 +6,7 @@ import type {
   CreateProfilePayloadType,
   CreateProfileResponseType,
   CurrentUserResponseType,
+  DashBoardInfo,
   GetAllApplicantsType,
   GetAllJobsOfRecruiterResponse,
   GetAllJobsResponse,
@@ -139,8 +140,8 @@ export const applyToAJobApiFn = async (jobId: string, companyId: string, recrite
   );
 };
 
-export const recentApplicantsApiFn = async () => {
-  return apiFetch<RecentApplicantsResponse>(`/application/recruiter/recent/applicants`, {
+export const dashBoardApiFn = async () => {
+  return apiFetch<DashBoardInfo>(`/application/recruiter/dashboard/info`, {
     auth: true,
   });
 };

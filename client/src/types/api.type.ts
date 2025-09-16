@@ -293,6 +293,20 @@ export type RecentApplicantsResponse = {
   recentApplicants: Applicant[];
 };
 
+export type DashBoardInfo = {
+  message: string;
+  stats: {
+    totalPostedJobs: string;
+    totalApplicationReceived: string;
+  };
+  recentApplicants: Applicant[];
+  jobApplicationStats: {
+    _id: string;
+    jobTitle: string;
+    applicantsCount: string;
+  };
+};
+
 export type RecruiterJob = {
   _id: string;
   title: string;

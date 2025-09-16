@@ -8,7 +8,7 @@ type RecentApplicantsProps = {
 
 const RecentApplicants = ({ recentApplicants }: RecentApplicantsProps) => {
   return recentApplicants.length > 0 ? (
-    <div className="bg-white w-130 p-8 rounded-md">
+    <div className="bg-white w-130 p-8 rounded-t-md">
       <h1 className="font-satoshi font-medium text-2xl ">Recent Applicants</h1>
       <div className="flex flex-col gap-4 mt-7">
         {recentApplicants.map((applicant) => (

@@ -5,7 +5,8 @@ import toast from "react-hot-toast";
 import DashStats, { DashStatsSkelton } from "./_components/DashStats";
 import RecentApplicants, { RecentApplicantsSkelton } from "./_components/RecentApplicants";
 import { dashBoardApiFn } from "../../../../lib/api";
-import type { Applicant } from "../../../../types/api.type";
+import type { Applicant, JobStats } from "../../../../types/api.type";
+import DashChart from "./_components/DashChart";
 
 type DashBoardStatsType = {
   totalApplicationReceived: string;
@@ -21,6 +22,7 @@ const DashBoard = () => {
     totalApplicationReceived: "0",
     totalPostedJobs: "0",
   });
+  const [dashChartData, setDashChartData] = useState<JobStats[]>([]);
 
   useEffect(() => {
     setLoading(true);
@@ -31,6 +33,9 @@ const DashBoard = () => {
           console.log(data);
           setRecentApplicants(data.recentApplicants);
           setDashBoardStats(data.stats);
+          setDashChartData(data.jobApplicationStats);
+          console.log(dashChartData);
+
           setLoading(false);
         }
       };
@@ -42,22 +47,29 @@ const DashBoard = () => {
   }, []);
 
   return (
-    <>
+    <div className="min-h-screen">
       <div className="h-30 flex items-center">
         <h1 className="text-3xl font-semibold">Welcome back!{currentUser?.name}</h1>
       </div>
       {loadng ? <DashStatsSkelton /> : <DashStats dashBoardStats={dashBoradStats} />}
 
-      {loadng ? (
-        <div className="mt-4">
-          <RecentApplicantsSkelton />
+      <div className="flex justify-between mt-4 gap-4">
+        <div className="w-full min-h-[500px]"> 
+          <DashChart data={dashChartData} />
         </div>
-      ) : (
-        <div className="mt-4">
-          <RecentApplicants recentApplicants={recentApplicants} />
+        <div>
+          {loadng ? (
+            <div className="">
+              <RecentApplicantsSkelton />
+            </div>
+          ) : (
+            <div className="">
+              <RecentApplicants recentApplicants={recentApplicants} />
+            </div>
+          )}
         </div>
-      )}
-    </>
+      </div>
+    </div>
   );
 };
 

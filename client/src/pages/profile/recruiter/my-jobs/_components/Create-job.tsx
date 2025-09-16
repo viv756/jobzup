@@ -22,13 +22,16 @@ const CreateJob = () => {
   const [jobCategory, setJobCategory] = useState<JobCategoriesType | string>("");
   const [description, setDescription] = useState<string>("");
   const [responsibilities, setResponsibilities] = useState<string>("");
-  const [requirements, setRequerements] = useState<string>("");
+  const [requirements, setRequirements] = useState<string>("");
   const [closingDate, setClosingDate] = useState<Date | null>(new Date());
+
+  const [createStart, setCreateStart] = useState(false);
 
   const navigate = useNavigate();
 
   const onSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
+    setCreateStart(true);
 
     const responsibilitiesArray = responsibilities
       .split("\n")
@@ -59,9 +62,11 @@ const CreateJob = () => {
       const data = await createJobApiFn(payload);
       if (data) {
         toast.success(data.message);
+        setCreateStart(false);
         navigate(`/job/${data.job._id}`);
       }
     } catch (error: any) {
+      setCreateStart(false);
       toast.error(error.message);
     }
   };
@@ -69,8 +74,8 @@ const CreateJob = () => {
   return (
     <div className="">
       <div className="bg-white   p-10 mx-auto rounded-2xl ">
-        <h1 className="text-4xl  font-semibold font-satoshi ">Job Details</h1>
-        <form onSubmit={onSubmit} className="flex  flex-col gap-3 mt-7">
+        <h1 className="text-4xl  font-semibold font-satoshi ">Update Job Details</h1>
+        <form onSubmit={onSubmit} className="flex flex-col gap-3 mt-7">
           <div className="flex flex-col gap-2">
             <label htmlFor="" className="text-[18px]  font-dm">
               Job Title
@@ -86,7 +91,7 @@ const CreateJob = () => {
           </div>
 
           <div className="flex flex-col gap-2">
-            <label htmlFor="" className="text-[18px] text-gray-400">
+            <label htmlFor="" className="text-[18px]  font-dm">
               Location
             </label>
             <input
@@ -95,23 +100,23 @@ const CreateJob = () => {
               type="text"
               name=""
               id=""
-              className="p-3 rounded-2xl outline-none border border-gray-500 bg-white"
+              className="p-3 rounded-2xl outline-none border border-[#1844B5] bg-white"
             />
           </div>
           {/* <div className="flex flex-col gap-3">
-          <label htmlFor="">Remote Position (optional)</label>
-          <input type="checkbox" className="checkbox checkbox-primary" />
-        </div> */}
+             <label htmlFor="">Remote Position (optional)</label>
+             <input type="checkbox" className="checkbox checkbox-primary" />
+           </div> */}
 
           <div className="flex gap-4 w-full">
             <div className="flex flex-col w-full gap-2">
-              <label htmlFor="" className="text-[18px] text-gray-400">
+              <label htmlFor="" className="text-[18px] font-dm">
                 Job Type
               </label>
               <select
                 value={jobType as JobTypeEnumType}
                 onChange={(e) => setJobType(e.target.value as JobTypeEnumType)}
-                className="p-3 rounded-2xl outline-none border border-gray-500 bg-white">
+                className="p-3 rounded-2xl outline-none border border-[#1844B5] bg-white">
                 <option value="">Select job type</option>
                 <option value="Full_Time">Full-time</option>
                 <option value="Part_Time">Part-Time</option>
@@ -120,21 +125,21 @@ const CreateJob = () => {
             </div>
 
             <div className="flex flex-col w-full gap-2">
-              <label htmlFor="" className="text-[18px] text-gray-400">
+              <label htmlFor="" className="text-[18px] font-dm">
                 Job salary
               </label>
               <input
                 value={salary}
                 onChange={(e) => setSalary(e.target.value)}
-                type="number"
-                className="p-3 rounded-2xl outline-none border border-gray-500 bg-white"
+                type="text"
+                className="p-3 rounded-2xl outline-none border border-[#1844B5] bg-white"
               />
             </div>
           </div>
 
           <div className="flex gap-4 w-full">
             <div className="flex flex-col w-full gap-2">
-              <label htmlFor="" className="text-[18px] text-gray-400">
+              <label htmlFor="" className="text-[18px] font-dm">
                 Job Experiance
               </label>
               <input
@@ -143,12 +148,12 @@ const CreateJob = () => {
                 type="text"
                 name=""
                 id=""
-                className="p-3 rounded-2xl outline-none border border-gray-500 bg-white"
+                className="p-3 rounded-2xl outline-none border border-[#1844B5] bg-white"
               />
             </div>
 
             <div className="flex flex-col w-full gap-2">
-              <label htmlFor="" className="text-[18px] text-gray-400">
+              <label htmlFor="" className="text-[18px] font-dm">
                 Job Qualification
               </label>
               <input
@@ -157,16 +162,16 @@ const CreateJob = () => {
                 type="text"
                 name=""
                 id=""
-                className="p-3 rounded-2xl outline-none border border-gray-500 bg-white"
+                className="p-3 rounded-2xl outline-none border border-[#1844B5] bg-white"
               />
             </div>
           </div>
 
-          <label htmlFor="" className="text-[18px] text-gray-400">
+          <label htmlFor="" className="text-[18px] font-dm">
             Job Category
           </label>
           <select
-            className="p-3 rounded-2xl outline-none border border-gray-500 bg-white"
+            className="p-3 rounded-2xl outline-none border border-[#1844B5] bg-white"
             value={jobCategory ?? ""}
             onChange={(e) => setJobCategory(e.target.value as JobCategoriesType)}>
             <option value="">Select Category</option>
@@ -176,42 +181,46 @@ const CreateJob = () => {
               </option>
             ))}
           </select>
-          <label htmlFor="" className="text-[18px] text-gray-400">
+          <label htmlFor="" className="text-[18px] font-dm">
             Closing date
           </label>
           <DatePicker
             selected={closingDate}
             onChange={(date) => setClosingDate(date)}
-            className="w-full p-3 rounded-2xl border border-gray-500 outline-none"
+            className="w-full p-3 rounded-2xl border border-[#1844B5] outline-none"
             dateFormat="yyyy-MM-dd"
             placeholderText="Select a date"
           />
 
-          <label htmlFor="" className="text-[18px] text-gray-400">
+          <label htmlFor="" className="text-[18px] font-dm">
             Responsibilities
           </label>
           <textarea
             value={responsibilities}
             onChange={(e) => setResponsibilities(e.target.value)}
             placeholder={`Write responsibilities, one per line...`}
-            className="w-full bg-white outline-none border border-gray-500 rounded-2xl h-60 p-4"></textarea>
-          <label htmlFor="" className="text-[18px] text-gray-400">
+            className="w-full bg-white outline-none border border-[#1844B5] rounded-2xl h-60 p-4"></textarea>
+          <label htmlFor="" className="text-[18px] font-dm">
             Requirements
           </label>
           <textarea
             value={requirements}
-            onChange={(e) => setRequerements(e.target.value)}
+            onChange={(e) => setRequirements(e.target.value)}
             placeholder={`Write responsibilities, one per line...`}
-            className="w-full bg-white outline-none border border-gray-500 rounded-2xl h-60 p-4"></textarea>
-          <label htmlFor="" className="text-[18px] text-gray-400">
+            className="w-full bg-white outline-none border border-[#1844B5] rounded-2xl h-60 p-4"></textarea>
+          <label htmlFor="" className="text-[18px] font-dm">
             Description
           </label>
           <textarea
             value={description}
             onChange={(e) => setDescription(e.target.value)}
-            className="w-full bg-white outline-none border border-gray-500 rounded-2xl h-60 p-4"></textarea>
-          <button className="w-full text-white bg-[#1A1C28] hover:bg-[#626364] focus:ring-4 focus:outline-none focus:ring-blue-300 dark:focus:ring-blue-800 font-medium rounded-lg font-dm px-5 py-2.5 text-center me-2 mb-2 text-xl mt-5">
-            Submit
+            className="w-full bg-white outline-none border border-[#1844B5] rounded-2xl h-60 p-4"></textarea>
+          <button className="w-full rounded-lg border border-blue-[#1844B5] bg-[#0851CA] px-3 py-2 mt-7 text-center text-md font-medium text-white shadow-sm transition-all font-dm hover:bg-blue-800  focus:bg-blue-800  disabled:bg-blue-900">
+            {createStart ? (
+              <span className="loading loading-spinner loading-sm"></span>
+            ) : (
+              "Save changes"
+            )}
           </button>
         </form>
       </div>

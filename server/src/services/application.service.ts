@@ -2,7 +2,7 @@ import { ApplicationStatusEnumType } from "../enums/application.enum";
 import ApplicationModel from "../models/application.model";
 import CompanyModel from "../models/company.model";
 import JobModel from "../models/job.model";
-import { BadRequestException } from "../utils/appError";
+import { BadRequestException, NotFoundExeption } from "../utils/appError";
 
 export const applyToAJobService = async (
   userId: string,
@@ -39,7 +39,11 @@ export const applyToAJobService = async (
 };
 
 export const getuserAppliedJobsService = async (userId: string) => {
-  const appliedJobs = await ApplicationModel.find({ user: userId }).select("job").populate("job");
+  const appliedJobs = await ApplicationModel.find({ user: userId }).populate(
+    "job",
+    "title closeDate"
+  );
+  
   if (!appliedJobs) {
     throw new BadRequestException("You are not applied to any jobs");
   }
@@ -60,7 +64,6 @@ export const getRecentApplicantsService = async (userId: string) => {
 
   return { recentApplicants };
 };
-
 
 export const getAllApplicationsService = async (
   userId: string,
@@ -124,7 +127,8 @@ export const dashboardInfoService = async (userId: string) => {
         .limit(5)
         .populate("user", "_id name profilePicture -password")
         .populate("job", "_id title "),
-      ApplicationModel.aggregate([            // graph stats
+      ApplicationModel.aggregate([
+        // graph stats
         { $match: { recruiter: userId } },
         { $group: { _id: "$job", applicantsCount: { $sum: 1 } } },
         {

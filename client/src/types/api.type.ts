@@ -240,6 +240,7 @@ export type ApplyToAJobResponseType = {
 export type CreateProfilePayloadType = {
   profileUrl: string | null;
   bio: string;
+  phone:string
   location: string;
   language: string[];
   skills: string[];

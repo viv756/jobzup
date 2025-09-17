@@ -16,7 +16,6 @@ import type {
   GetUserByIdResponseType,
   LoginPayLoadType,
   LoginResponseType,
-  RecentApplicantsResponse,
   RegisterPayloadType,
   RegisterResponseType,
   UpdateApplicationStatusType,
@@ -122,8 +121,8 @@ export const getAllJobsApiFn = async (searchQuery?: string) => {
   });
 };
 
-export const createProfileApiFn = async (userId: string, data: CreateProfilePayloadType) => {
-  return apiFetch<CreateProfileResponseType>(`/profile/create/new/${userId}`, {
+export const createProfileApiFn = async ( data: CreateProfilePayloadType) => {
+  return apiFetch<CreateProfileResponseType>(`/profile/create/new`, {
     method: "POST",
     body: JSON.stringify(data),
     auth: true,

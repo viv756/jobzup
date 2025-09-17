@@ -18,7 +18,7 @@ export const createProfileController = asyncHandler(async (req: Request, res: Re
     );
   }
 
-  const userId = userIdSchema.parse(req.params.userId);
+  const userId = req.user?._id as string;
   const body = createProfileSchema.parse(req.body);
 
   const { userProfile } = await createProfileService(body, userId);

@@ -12,6 +12,6 @@ const profileRoutes = Router();
 profileRoutes.post("/create/new", createProfileController);
 profileRoutes.get("/getProfile/user/:userId", getUserProfileController);
 profileRoutes.get("/getCurrent/user", currentUserProfileController);
-profileRoutes.put("/update/user/:userId", updateProfileController);
+profileRoutes.put("/update/user", updateProfileController);
 
 export default profileRoutes;

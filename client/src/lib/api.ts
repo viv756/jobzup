@@ -94,13 +94,13 @@ export const createJobApiFn = async (data: CreateJobPayloadType) => {
   });
 };
 
-export const updateJobApiFn = async (jobId:string,data: UpdateJobPayLoadType) => {
-   return apiFetch<UpdateJobResponseType>(`/job/update/${jobId}`, {
+export const updateJobApiFn = async (jobId: string, data: UpdateJobPayLoadType) => {
+  return apiFetch<UpdateJobResponseType>(`/job/update/${jobId}`, {
     method: "PUT",
     body: JSON.stringify(data),
     auth: true,
   });
-}
+};
 
 export const getJobByIdApiFn = async (jobId: string) => {
   return apiFetch<GetJobByIdResponse>(`/job/${jobId}`, {
@@ -121,10 +121,16 @@ export const getAllJobsApiFn = async (searchQuery?: string) => {
   });
 };
 
-export const createProfileApiFn = async ( data: CreateProfilePayloadType) => {
+export const createProfileApiFn = async (data: CreateProfilePayloadType) => {
   return apiFetch<CreateProfileResponseType>(`/profile/create/new`, {
     method: "POST",
     body: JSON.stringify(data),
+    auth: true,
+  });
+};
+
+export const getCurrentUserProfileApiFn = () => {
+  return apiFetch<GetCurrentUserProfileResponseType>("/profile/getCurrent/user", {
     auth: true,
   });
 };
@@ -151,9 +157,9 @@ export const getUserProfileApiFn = async (userId: string) => {
   });
 };
 
-export const updateUserProfile = async (userId: string, data: UpdateUserProfilePayloadType) => {
-  return apiFetch<UpdateUserProfileResponseType>(`/profile/update/user/${userId}`, {
-    method: "POST",
+export const updateUserProfile = async ( data: UpdateUserProfilePayloadType) => {
+  return apiFetch<UpdateUserProfileResponseType>(`/profile/update/user`, {
+    method: "PUT",
     body: JSON.stringify(data),
     auth: true,
   });

@@ -8,7 +8,7 @@ import {
   getUserProfileService,
   updateProfileService,
 } from "../services/profile.service";
-import { BadRequestException, UnauthorizedException } from "../utils/appError";
+import { UnauthorizedException } from "../utils/appError";
 import { HTTPSTATUS } from "../config/http.config";
 import { userIdSchema } from "../validation/user.validation";
 
@@ -39,7 +39,6 @@ export const currentUserProfileController = asyncHandler(async (req: Request, re
     message: "Profile created successfully",
     userProfile,
   });
-  
 });
 
 export const getUserProfileController = asyncHandler(async (req: Request, res: Response) => {
@@ -66,12 +65,8 @@ export const updateProfileController = asyncHandler(async (req: Request, res: Re
   //   );
   // }
 
-  const loggedInuserId = req.user?.id;
-  const userId = userIdSchema.parse(req.params.userId);
+  const userId = req.user?._id as string;
 
-  if (loggedInuserId !== userId) {
-    throw new BadRequestException("You are not allowed to update this user");
-  }
   const body = updateProfileSchema.parse(req.body);
 
   const { updatedProfile } = await updateProfileService(userId, body);

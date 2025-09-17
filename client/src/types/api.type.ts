@@ -60,15 +60,16 @@ export type ProfileType = {
   userId: string;
   bio: string;
   location: string;
+  profileUrl: string;
   language: string[];
   skills: string[];
-  workExperiance: WorkExperience[];
+  workExperience: WorkExperience[];
   education: Education[];
   awards: Awards[];
-  qualification: string | null;
+  qualification?: string;
   experianceTime: string;
   gender: GenderEnumType;
-  age: string | null;
+  age?: string;
   createdAt: Date;
   updatedAt: Date;
 };
@@ -240,7 +241,7 @@ export type ApplyToAJobResponseType = {
 export type CreateProfilePayloadType = {
   profileUrl: string | null;
   bio: string;
-  phone:string
+  phone: string;
   location: string;
   language: string[];
   skills: string[];
@@ -265,14 +266,14 @@ export type GetCurrentUserProfileResponseType = {
 export type UpdateUserProfilePayloadType = {
   bio: string;
   location: string;
-  language: string;
+  language: string[];
   skills: string[];
-  workExperiance: WorkExperience[];
+  workExperience: WorkExperience[];
   education: Education[];
   awards: Awards[];
-  qualification: string | null;
-  gender: GenderEnumType;
-  age: string | null;
+  qualification: string | undefined;
+  gender: GenderEnumType | undefined;
+  age: string | undefined;
 };
 
 export type UpdateUserProfileResponseType = {

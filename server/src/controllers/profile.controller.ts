@@ -4,6 +4,7 @@ import asyncHandler from "../middlewares/asyncHandler.middlewares";
 import { createProfileSchema, updateProfileSchema } from "../validation/profile.validation";
 import {
   createProfileService,
+  getCurrentuserProfileService,
   getUserProfileService,
   updateProfileService,
 } from "../services/profile.service";
@@ -27,6 +28,18 @@ export const createProfileController = asyncHandler(async (req: Request, res: Re
     message: "Profile created successfully",
     userProfile,
   });
+});
+
+export const currentUserProfileController = asyncHandler(async (req: Request, res: Response) => {
+  const userId = req.user?._id as string;
+
+  const { userProfile } = await getCurrentuserProfileService(userId);
+
+  return res.status(HTTPSTATUS.CREATED).json({
+    message: "Profile created successfully",
+    userProfile,
+  });
+  
 });
 
 export const getUserProfileController = asyncHandler(async (req: Request, res: Response) => {

@@ -52,6 +52,15 @@ export const getUserProfileService = async (userId: string) => {
   return { userProfile };
 };
 
+export const getCurrentuserProfileService = async (userId: string) => {
+  const userProfile = await Profilemodel.findOne({ userId });
+  if (!userProfile) {
+    throw new NotFoundExeption("Profile not found");
+  }
+
+  return { userProfile };
+};
+
 export const updateProfileService = async (userId: string, body: UpdateProfileType) => {
   const profile = await Profilemodel.findOne({ userId });
   if (!profile) {

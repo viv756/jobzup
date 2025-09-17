@@ -25,10 +25,8 @@ const Profile = () => {
   const [skills, setSkills] = useState<string>("");
   const [gender, setGender] = useState<GenderEnumType | undefined>();
   const [workExperience, setWorkExperience] = useState<WorkExperience[]>([]);
-  const [education, setEducation] = useState<Education[]>([
-    { collegeName: "", department: "", startDate: null, endDate: null, description: "" },
-  ]);
-  const [awards, setawards] = useState<Awards[]>([{ name: "", date: null, description: "" }]);
+  const [education, setEducation] = useState<Education[]>([]);
+  const [awards, setawards] = useState<Awards[]>([]);
 
   useEffect(() => {
     const fetchUserProfile = async () => {
@@ -42,7 +40,7 @@ const Profile = () => {
           setSkills(Array.isArray(profile.skills) ? profile.skills.join(", ") : "");
           setQualification(profile.qualification);
           setAge(profile.age);
-          setGender(profile.gender)
+          setGender(profile.gender);
 
           setWorkExperience(
             (
@@ -79,12 +77,12 @@ const Profile = () => {
             }))
           );
         }
-      } catch (error) {}
+      } catch (error: any) {
+        toast.error(error.message);
+      }
     };
     fetchUserProfile();
   }, []);
-
-  console.log(workExperience);
 
   const handleWorkExperienceChange = <K extends keyof WorkExperience>(
     index: number,

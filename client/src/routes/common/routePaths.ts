@@ -28,6 +28,6 @@ export const RECRUITER_ONLY_ROUTES = {
 };
 
 export const BASEROUTES = {
-  CREATE_PROFILE: "/profile/create/:userId",
-  CREATE_COMPANY: "/profile/create/company",
+  CREATE_PROFILE: "/create/profile/:userId",
+  CREATE_COMPANY: "/create/company",
 };

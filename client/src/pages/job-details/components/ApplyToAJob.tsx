@@ -1,6 +1,7 @@
 import { useState } from "react";
-import { applyToAJobApiFn } from "../../../lib/api";
 import toast from "react-hot-toast";
+
+import { applyToAJobApiFn } from "../../../lib/api";
 
 interface Props {
   jobId: string;
@@ -31,8 +32,12 @@ const ApplyToAJob = ({ jobId, companyId, recruiterId }: Props) => {
       <button
         onClick={applyToAJob}
         disabled={applicationSubmitting}
-        className="bg-[#2453CC] p-3 rounded-3xl text-md font-dm text-white w-40 hover:bg-blue-900 transition duration-200 ">
-        Apply now
+        className="bg-[#2453CC] p-3 rounded-3xl text-md font-dm text-white w-40 hover:bg-blue-900 transition duration-200 disabled:bg-blue-900">
+        {applicationSubmitting ? (
+          <span className="loading loading-spinner loading-sm"></span>
+        ) : (
+          "Apply now"
+        )}
       </button>
     </div>
   );

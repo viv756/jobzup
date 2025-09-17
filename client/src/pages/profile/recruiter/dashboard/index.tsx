@@ -34,8 +34,6 @@ const DashBoard = () => {
           setRecentApplicants(data.recentApplicants);
           setDashBoardStats(data.stats);
           setDashChartData(data.jobApplicationStats);
-          console.log(dashChartData);
-
           setLoading(false);
         }
       };

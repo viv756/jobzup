@@ -54,8 +54,6 @@ export const DashStatsSkelton = () => {
 };
 
 const DashStats = ({ dashBoardStats }: DashStatsProps) => {
-  console.log(dashBoardStats);
-
   return (
     <div className="flex gap-6">
       <DashCard

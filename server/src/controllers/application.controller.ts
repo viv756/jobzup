@@ -5,6 +5,7 @@ import { companyIdSchema, jobIdSchema } from "../validation/job.validation";
 import { applicationStatusSchema, recruiterIdSchema } from "../validation/application.validation";
 import {
   applyToAJobService,
+  cancelApplicationService,
   dashboardInfoService,
   getAllApplicationsService,
   getRecentApplicantsService,
@@ -77,6 +78,18 @@ export const getAllApplicantionsController = asyncHandler(async (req: Request, r
     ...data,
   });
 });
+
+export const cancelApplicationController = asyncHandler(async (req: Request, res: Response) => {
+  const userId = req.user?._id as string;
+  const applicationId = req.params.applicationId;
+
+  const { application } = await cancelApplicationService(userId, applicationId);
+
+  return res.status(HTTPSTATUS.OK).json({
+    message: "Application canceled successfully",
+  });
+});
+
 
 export const updateAppicationStatusController = asyncHandler(
   async (req: Request, res: Response) => {

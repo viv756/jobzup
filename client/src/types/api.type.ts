@@ -40,8 +40,8 @@ export type JobType = {
   title: string;
   category: string;
   description: string;
-  closeDate: Date | null;
-  datePosted: Date | null;
+  closeDate: Date 
+  datePosted: Date 
   hiringLocation: string;
   jobType: JobTypeEnumType;
   company: CompanyType;
@@ -345,4 +345,19 @@ export type GetUserByIdResponseType = {
   user: UserType & {
     profile: ProfileType | null;
   };
+};
+
+export type AppliedJobs = {
+  _id: string;
+  user: string;
+  job: JobType;
+  status:string
+  company: string;
+  createdAt: Date;
+  updatedAt: Date;
+};
+
+export type GetUserAppliedJobsResponseType = {
+  message: string;
+  appliedJobs: AppliedJobs[];
 };

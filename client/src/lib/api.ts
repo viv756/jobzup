@@ -13,6 +13,7 @@ import type {
   GetCurrentCompanyResponseType,
   GetCurrentUserProfileResponseType,
   GetJobByIdResponse,
+  GetUserAppliedJobsResponseType,
   GetUserByIdResponseType,
   LoginPayLoadType,
   LoginResponseType,
@@ -94,6 +95,19 @@ export const createJobApiFn = async (data: CreateJobPayloadType) => {
   });
 };
 
+export const getUserAppliedJobsApiFn = async () => {
+  return apiFetch<GetUserAppliedJobsResponseType>(`/application/user/appliedJobs`, {
+    auth: true,
+  });
+};
+
+export const cancelApplicationApiFn = async (applicationId: string) => {
+  return apiFetch(`/application/job/cancel/${applicationId}`, {
+    method: "DELETE",
+    auth: true,
+  });
+};
+
 export const updateJobApiFn = async (jobId: string, data: UpdateJobPayLoadType) => {
   return apiFetch<UpdateJobResponseType>(`/job/update/${jobId}`, {
     method: "PUT",
@@ -157,7 +171,7 @@ export const getUserProfileApiFn = async (userId: string) => {
   });
 };
 
-export const updateUserProfile = async ( data: UpdateUserProfilePayloadType) => {
+export const updateUserProfile = async (data: UpdateUserProfilePayloadType) => {
   return apiFetch<UpdateUserProfileResponseType>(`/profile/update/user`, {
     method: "PUT",
     body: JSON.stringify(data),

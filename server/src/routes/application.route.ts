@@ -1,9 +1,9 @@
 import { Router } from "express";
 import {
   applyToAJobControlller,
+  cancelApplicationController,
   dashboardInfoController,
   getAllApplicantionsController,
-  getRecentApplicantsController,
   getuserAppliedJobsController,
   updateAppicationStatusController,
 } from "../controllers/application.controller";
@@ -17,6 +17,7 @@ applicationRoutes.post(
 applicationRoutes.get("/user/appliedJobs", getuserAppliedJobsController);
 applicationRoutes.get("/recruiter/dashboard/info", dashboardInfoController);
 applicationRoutes.get("/recruiter/applicants/all", getAllApplicantionsController);
+applicationRoutes.delete("/job/cancel/:applicationId", cancelApplicationController);
 applicationRoutes.put("/status/update/:applicationId", updateAppicationStatusController);
 
 export default applicationRoutes;

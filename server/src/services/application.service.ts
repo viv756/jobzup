@@ -43,7 +43,7 @@ export const getuserAppliedJobsService = async (userId: string) => {
     "job",
     "title closeDate"
   );
-  
+
   if (!appliedJobs) {
     throw new BadRequestException("You are not applied to any jobs");
   }
@@ -158,4 +158,20 @@ export const dashboardInfoService = async (userId: string) => {
     recentApplicants,
     jobApplicationStats,
   };
+};
+
+export const cancelApplicationService = async (userId: string, applicationId: string) => {
+  const application = await ApplicationModel.findById(applicationId);
+
+  if (!application) {
+    throw new NotFoundExeption("Application not found");
+  }
+
+  if (String(application.user) !== String(userId)) {
+    throw new BadRequestException("Failed to cancel the application");
+  }
+
+  await application.deleteOne();
+
+  return { application };
 };

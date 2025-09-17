@@ -38,17 +38,34 @@ export const applyToAJobService = async (
   return { application };
 };
 
-export const getuserAppliedJobsService = async (userId: string) => {
-  const appliedJobs = await ApplicationModel.find({ user: userId }).populate(
-    "job",
-    "title closeDate"
-  );
+export const getuserAppliedJobsService = async (
+  userId: string,
+  pagination: {
+    pageSize: number;
+    pageNumber: number;
+  }
+) => {
+  const { pageNumber, pageSize } = pagination;
+  const skip = (pageNumber - 1) * pageSize;
+
+  const [totalApplicationCount, appliedJobs] = await Promise.all([
+    await ApplicationModel.countDocuments({ user: userId }),
+    await ApplicationModel.find({ user: userId })
+      .skip(skip)
+      .limit(pageSize)
+      .populate("job", "title closeDate"),
+  ]);
 
   if (!appliedJobs) {
     throw new BadRequestException("You are not applied to any jobs");
   }
 
-  return { appliedJobs };
+  return {
+    appliedJobs,
+    totalApplicationCount,
+    totalPages: Math.max(1, Math.ceil(totalApplicationCount / pageSize)),
+    pageNumber,
+  };
 };
 
 export const getRecentApplicantsService = async (userId: string) => {

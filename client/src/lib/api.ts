@@ -95,8 +95,8 @@ export const createJobApiFn = async (data: CreateJobPayloadType) => {
   });
 };
 
-export const getUserAppliedJobsApiFn = async () => {
-  return apiFetch<GetUserAppliedJobsResponseType>(`/application/user/appliedJobs`, {
+export const getUserAppliedJobsApiFn = async (searchQuery?:string) => {
+  return apiFetch<GetUserAppliedJobsResponseType>(`/application/user/appliedJobs/${searchQuery}`, {
     auth: true,
   });
 };

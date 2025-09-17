@@ -31,11 +31,16 @@ export const applyToAJobControlller = asyncHandler(async (req: Request, res: Res
 export const getuserAppliedJobsController = asyncHandler(async (req: Request, res: Response) => {
   const userId = req.user?._id as string;
 
-  const { appliedJobs } = await getuserAppliedJobsService(userId);
+  const pagination = {
+    pageSize: parseInt(req.query.pageSize as string) || 10,
+    pageNumber: parseInt(req.query.page as string) || 1,
+  };
+
+  const data = await getuserAppliedJobsService(userId, pagination);
 
   return res.status(HTTPSTATUS.OK).json({
     message: "User applied jobs fetched successfully",
-    appliedJobs,
+    ...data,
   });
 });
 
@@ -89,7 +94,6 @@ export const cancelApplicationController = asyncHandler(async (req: Request, res
     message: "Application canceled successfully",
   });
 });
-
 
 export const updateAppicationStatusController = asyncHandler(
   async (req: Request, res: Response) => {

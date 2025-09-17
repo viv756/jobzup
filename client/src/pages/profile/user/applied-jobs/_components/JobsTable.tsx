@@ -3,10 +3,7 @@ import { Link, useLocation, useNavigate } from "react-router-dom";
 import { format } from "date-fns";
 import toast from "react-hot-toast";
 
-import {
-  cancelApplicationApiFn,
-  getUserAppliedJobsApiFn,
-} from "../../../../../lib/api";
+import { cancelApplicationApiFn, getUserAppliedJobsApiFn } from "../../../../../lib/api";
 import type { AppliedJobs } from "../../../../../types/api.type";
 import {
   Table,
@@ -38,9 +35,11 @@ const JobsTable = () => {
     try {
       const fetchJobs = async () => {
         const searchQuery = urlParams.toString();
-        const data = await getUserAppliedJobsApiFn();
+        const data = await getUserAppliedJobsApiFn(searchQuery);
         if (data) {
           setAppliedJobs(data.appliedJobs);
+          setPageNumber(data.pageNumber);
+          setTotalPages(data.totalPages);
         }
       };
       fetchJobs();

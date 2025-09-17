@@ -40,8 +40,8 @@ export type JobType = {
   title: string;
   category: string;
   description: string;
-  closeDate: Date 
-  datePosted: Date 
+  closeDate: Date;
+  datePosted: Date;
   hiringLocation: string;
   jobType: JobTypeEnumType;
   company: CompanyType;
@@ -351,7 +351,7 @@ export type AppliedJobs = {
   _id: string;
   user: string;
   job: JobType;
-  status:string
+  status: string;
   company: string;
   createdAt: Date;
   updatedAt: Date;
@@ -360,4 +360,7 @@ export type AppliedJobs = {
 export type GetUserAppliedJobsResponseType = {
   message: string;
   appliedJobs: AppliedJobs[];
+  pageNumber: number;
+  totalApplicationCount: number;
+  totalPages: number;
 };

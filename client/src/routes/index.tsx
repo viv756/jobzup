@@ -11,6 +11,7 @@ import ProtectedRoute from "./Protected.route";
 import AuthRoute from "./Auth.route";
 import BaseLayout from "../layout/BaseLayout";
 import AppLayout from "../layout/AppLayout";
+
 import NotFound from "../pages/not-found";
 
 const AppRoutes = () => {

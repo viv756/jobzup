@@ -16,6 +16,8 @@ export const PROTECTED_ROUTES = {
   MY_JOBS: "/profile/applied-jobs",
   COMPANY_DETAILS: "/company/:companyId",
   SETTINGS: "/profile/settings",
+  MESSAGES: "/profile/messages",
+  MEETINGS:"/profile/meetings"
 };
 
 export const RECRUITER_ONLY_ROUTES = {

@@ -13,6 +13,8 @@ import CompanyPage from "../../pages/profile/recruiter/company";
 import Settings from "../../pages/profile/settings";
 import Profile from "../../pages/profile/user/user-Profile";
 import AppliedJobs from "../../pages/profile/user/applied-jobs";
+import Messages from "../../pages/profile/messages/Index";
+import Meetings from "../../pages/profile/meetings/Index";
 
 import {
   AUTH_ROUTES,
@@ -47,6 +49,14 @@ export const protectedRoutePaths = [
   {
     path: PROTECTED_ROUTES.MY_JOBS,
     element: <AppliedJobs />,
+  },
+  {
+    path: PROTECTED_ROUTES.MESSAGES,
+    element: <Messages />,
+  },
+  {
+    path: PROTECTED_ROUTES.MEETINGS,
+    element: <Meetings />,
   },
 
   {

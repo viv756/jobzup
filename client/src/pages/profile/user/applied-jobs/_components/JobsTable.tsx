@@ -76,7 +76,7 @@ const JobsTable = () => {
                   </label>
                 </div>
               </TableHeaderCell>
-              <TableHeaderCell className="px-6 ">j name</TableHeaderCell>
+              <TableHeaderCell className="px-6 ">job name</TableHeaderCell>
               <TableHeaderCell className="px-6 ">applied-date</TableHeaderCell>
               <TableHeaderCell className="px-6 ">close-date</TableHeaderCell>
               <TableHeaderCell className="px-6">status</TableHeaderCell>
@@ -102,7 +102,7 @@ const JobsTable = () => {
                   <th
                     scope="row"
                     className="px-6 py-4 font-medium text-gray-900 whitespace-nowrap ">
-                    <Link to={`/j/${j._id}`} className="hover:text-blue-700">
+                    <Link to={`/job/${j.job._id}`} className="hover:text-blue-700">
                       {" "}
                       {j.job.title}
                     </Link>
@@ -113,7 +113,7 @@ const JobsTable = () => {
                   <TableCell className="px-6 py-4 font-dm">
                     {format(j.job.closeDate, "MMMM dd,yyyy")}
                   </TableCell>
-                  <TableCell className="px-13 py-4 font-dm">{j.status}</TableCell>
+                  <TableCell className="px-6 py-4 font-dm">{j.status}</TableCell>
                   <TableCell className=" py-4 font-dm ">
                     <button
                       onClick={() => {

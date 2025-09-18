@@ -8,7 +8,6 @@ import {
   cancelApplicationService,
   dashboardInfoService,
   getAllApplicationsService,
-  getRecentApplicantsService,
   getuserAppliedJobsService,
   udateAppicationStatusService,
 } from "../services/application.service";
@@ -44,16 +43,6 @@ export const getuserAppliedJobsController = asyncHandler(async (req: Request, re
   });
 });
 
-export const getRecentApplicantsController = asyncHandler(async (req: Request, res: Response) => {
-  const userId = req.user?._id as string;
-
-  const { recentApplicants } = await getRecentApplicantsService(userId);
-
-  return res.status(HTTPSTATUS.OK).json({
-    message: "Recent applicants fetched successfully",
-    recentApplicants,
-  });
-});
 
 export const dashboardInfoController = asyncHandler(async (req: Request, res: Response) => {
   const userId = req.user?._id as string;

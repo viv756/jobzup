@@ -53,7 +53,7 @@ export const getuserAppliedJobsService = async (
     await ApplicationModel.find({ user: userId })
       .skip(skip)
       .limit(pageSize)
-      .populate("job", "title closeDate"),
+      .populate("job", "_id title closeDate"),
   ]);
 
   if (!appliedJobs) {
@@ -68,19 +68,6 @@ export const getuserAppliedJobsService = async (
   };
 };
 
-export const getRecentApplicantsService = async (userId: string) => {
-  const recentApplicants = await ApplicationModel.find({ recruiter: userId })
-    .select("user job")
-    .limit(5)
-    .populate("user", "_id name profilePicture -password")
-    .populate("job", "_id title ");
-
-  if (!recentApplicants) {
-    throw new BadRequestException("You don't have any recent applicants");
-  }
-
-  return { recentApplicants };
-};
 
 export const getAllApplicationsService = async (
   userId: string,

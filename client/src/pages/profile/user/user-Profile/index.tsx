@@ -296,7 +296,7 @@ const Profile = () => {
                   required
                   onChange={(e) => handleWorkExperienceChange(index, "company", e.target.value)}
                   placeholder="company name"
-                  className="p-3 font-dm rounded-2xl outline-none border border-[#1844B5]  "
+                  className="p-3 font-dm rounded-md outline-none border border-[#1844B5]  "
                 />
               </div>
 
@@ -309,7 +309,7 @@ const Profile = () => {
                   required
                   onChange={(e) => handleWorkExperienceChange(index, "position", e.target.value)}
                   placeholder="Enter your position"
-                  className="p-3 rounded-2xl font-dm outline-none border border-[#1844B5] "
+                  className="p-3 rounded-md font-dm outline-none border border-[#1844B5] "
                 />
               </div>
             </div>
@@ -321,7 +321,7 @@ const Profile = () => {
                 <DatePicker
                   selected={exp.startDate}
                   onChange={(date) => handleWorkExperienceChange(index, "startDate", date)}
-                  className="w-full p-3 font-dm rounded-2xl border border-[#1844B5] outline-none"
+                  className="w-full p-3 font-dm rounded-md border border-[#1844B5] outline-none"
                   dateFormat="yyyy-MM-dd"
                   placeholderText="Select a date"
                 />
@@ -333,7 +333,7 @@ const Profile = () => {
                 <DatePicker
                   selected={exp.endDate}
                   onChange={(date) => handleWorkExperienceChange(index, "endDate", date)}
-                  className="w-full p-3 font-dm rounded-2xl border border-[#1844B5] outline-none"
+                  className="w-full p-3 font-dm rounded-md border border-[#1844B5] outline-none"
                   dateFormat="yyyy-MM-dd"
                   placeholderText="Select a date"
                 />
@@ -349,7 +349,7 @@ const Profile = () => {
                 required
                 onChange={(e) => handleWorkExperienceChange(index, "description", e.target.value)}
                 placeholder="write about your experiance"
-                className="p-3 font-dm rounded-2xl outline-none border border-[#1844B5] h-40"
+                className="p-3 font-dm rounded-md outline-none border border-[#1844B5] h-40"
               />
             </div>
             <div className="">
@@ -387,7 +387,7 @@ const Profile = () => {
                   required
                   onChange={(e) => handleEducationChange(index, "collegeName", e.target.value)}
                   placeholder="comapny name"
-                  className="p-3 rounded-2xl font-dm outline-none border border-[#1844B5] "
+                  className="p-3 rounded-md font-dm outline-none border border-[#1844B5] "
                 />
               </div>
               <div className="flex flex-col gap-2 w-full">
@@ -399,7 +399,7 @@ const Profile = () => {
                   required
                   onChange={(e) => handleEducationChange(index, "department", e.target.value)}
                   placeholder="Enter your position"
-                  className="p-3 rounded-2xl font-dm outline-none border border-[#1844B5]  "
+                  className="p-3 rounded-md font-dm outline-none border border-[#1844B5]  "
                 />
               </div>
             </div>
@@ -411,7 +411,7 @@ const Profile = () => {
                 <DatePicker
                   selected={edu.startDate}
                   onChange={(date) => handleEducationChange(index, "startDate", date)}
-                  className="w-full p-3 rounded-2xl font-dm border border-[#1844B5] outline-none"
+                  className="w-full p-3 rounded-md font-dm border border-[#1844B5] outline-none"
                   dateFormat="yyyy-MM-dd"
                   placeholderText="Select a date"
                 />
@@ -423,7 +423,7 @@ const Profile = () => {
                 <DatePicker
                   selected={edu.endDate}
                   onChange={(date) => handleEducationChange(index, "endDate", date)}
-                  className="w-full p-3 rounded-2xl font-dm border border-[#1844B5] outline-none"
+                  className="w-full p-3 rounded-md font-dm border border-[#1844B5] outline-none"
                   dateFormat="yyyy-MM-dd"
                   placeholderText="Select a date"
                 />
@@ -439,7 +439,7 @@ const Profile = () => {
                 required
                 onChange={(e) => handleEducationChange(index, "description", e.target.value)}
                 placeholder="description"
-                className="p-3 rounded-2xl font-dm outline-none border border-[#1844B5]  h-40"
+                className="p-3 rounded-md font-dm outline-none border border-[#1844B5]  h-40"
               />
               <div className="">
                 {index >= 1 && (
@@ -477,7 +477,7 @@ const Profile = () => {
                   required
                   onChange={(e) => handleAwardChange(index, "name", e.target.value)}
                   placeholder="company name"
-                  className="p-3 rounded-2xl font-dm outline-none border border-[#1844B5] "
+                  className="p-3 rounded-md font-dm outline-none border border-[#1844B5] "
                 />
               </div>
               <div className="flex flex-col w-full gap-2">
@@ -487,7 +487,7 @@ const Profile = () => {
                 <DatePicker
                   selected={awa.date}
                   onChange={(date) => handleAwardChange(index, "date", date)}
-                  className="w-full p-3 font-dm rounded-2xl border border-[#1844B5] outline-none"
+                  className="w-full p-3 font-dm rounded-md border border-[#1844B5] outline-none"
                   dateFormat="yyyy-MM-dd"
                   placeholderText="Select a date"
                 />
@@ -503,7 +503,7 @@ const Profile = () => {
                 required
                 onChange={(e) => handleAwardChange(index, "description", e.target.value)}
                 placeholder="write about your award"
-                className="p-3 rounded-2xl outline-none border font-dm border-[#1844B5] h-40"
+                className="p-3 rounded-md outline-none border font-dm border-[#1844B5] h-40"
               />
             </div>
             <div className="">

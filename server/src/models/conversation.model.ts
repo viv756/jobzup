@@ -1,7 +1,7 @@
 import mongoose, { Schema } from "mongoose";
 import { required } from "zod/mini";
 
-export interface CoversationDocument extends Document {
+export interface ConversationDocument extends Document {
   participants: {
     userId: mongoose.Types.ObjectId;
     role: "JOB_SEEKER" | "RECRUITER";
@@ -16,7 +16,7 @@ export interface CoversationDocument extends Document {
   updatedAt: Date;
 }
 
-const conversationSchema = new Schema<CoversationDocument>(
+const conversationSchema = new Schema<ConversationDocument>(
   {
     participants: [
       {
@@ -36,7 +36,7 @@ const conversationSchema = new Schema<CoversationDocument>(
   { timestamps: true }
 );
 
-export const ConversationModel = mongoose.model<CoversationDocument>(
+export const ConversationModel = mongoose.model<ConversationDocument>(
   "Conversation",
   conversationSchema
 );

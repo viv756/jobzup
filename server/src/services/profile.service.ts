@@ -1,16 +1,17 @@
 import { Types } from "mongoose";
-import Profilemodel from "../models/profile.model";
+
+import ProfileModel from "../models/profile.model";
 import UserModel from "../models/user.model";
-import { BadRequestException, NotFoundExeption } from "../utils/appError";
+import { BadRequestException, NotFoundException } from "../utils/appError";
 import { CreateProfileType, UpdateProfileType } from "../validation/profile.validation";
 
 export const createProfileService = async (body: CreateProfileType, userId: string) => {
   const user = await UserModel.findById(userId);
   if (!user) {
-    throw new NotFoundExeption("User is not found");
+    throw new NotFoundException("User is not found");
   }
 
-  const userProfile = new Profilemodel({
+  const userProfile = new ProfileModel({
     userId: userId,
     bio: body.bio,
     location: body.location,
@@ -44,30 +45,30 @@ export const createProfileService = async (body: CreateProfileType, userId: stri
 };
 
 export const getUserProfileService = async (userId: string) => {
-  const userProfile = await Profilemodel.findOne({ userId });
+  const userProfile = await ProfileModel.findOne({ userId });
   if (!userProfile) {
-    throw new NotFoundExeption("Profile not found");
+    throw new NotFoundException("Profile not found");
   }
 
   return { userProfile };
 };
 
 export const getCurrentuserProfileService = async (userId: string) => {
-  const userProfile = await Profilemodel.findOne({ userId });
+  const userProfile = await ProfileModel.findOne({ userId });
   if (!userProfile) {
-    throw new NotFoundExeption("Profile not found");
+    throw new NotFoundException("Profile not found");
   }
 
   return { userProfile };
 };
 
 export const updateProfileService = async (userId: string, body: UpdateProfileType) => {
-  const profile = await Profilemodel.findOne({ userId });
+  const profile = await ProfileModel.findOne({ userId });
   if (!profile) {
-    throw new NotFoundExeption("Profile not found");
+    throw new NotFoundException("Profile not found");
   }
 
-  const updatedProfile = await Profilemodel.findByIdAndUpdate(
+  const updatedProfile = await ProfileModel.findByIdAndUpdate(
     profile._id,
     { ...body },
     { new: true }

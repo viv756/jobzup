@@ -23,7 +23,7 @@ const CreateUserProfile = () => {
   const [profileImage, setProfileImage] = useState<File | null>(null);
   const [profileUrl, setProfileUrl] = useState<string | null>(null);
   const [profileUploadStart, setProfileUploadStart] = useState<boolean>(false);
-  const [formSbmiting, setFormSubmiting] = useState<boolean>(false);
+  const [formSubmitting, setFormSubmitting] = useState<boolean>(false);
   const [bio, setBio] = useState<string>("");
   const [location, setLocation] = useState<string>("");
   const [phone, setPhone] = useState<Value>();
@@ -39,7 +39,7 @@ const CreateUserProfile = () => {
   const [education, setEducation] = useState<Education[]>([
     { collegeName: "", department: "", startDate: null, endDate: null, description: "" },
   ]);
-  const [awards, setawards] = useState<Awards[]>([{ name: "", date: null, description: "" }]);
+  const [awards, setAwards] = useState<Awards[]>([{ name: "", date: null, description: "" }]);
 
   const navigate = useNavigate();
   const dispatch = useDispatch<AppDispatch>();
@@ -154,16 +154,16 @@ const CreateUserProfile = () => {
   const handleAwardChange = <K extends keyof Awards>(index: number, field: K, value: Awards[K]) => {
     const updated = [...awards];
     updated[index][field] = value;
-    setawards(updated);
+    setAwards(updated);
   };
 
   const addAwards = () => {
-    setawards([...awards, { name: "", date: null, description: "" }]);
+    setAwards([...awards, { name: "", date: null, description: "" }]);
   };
 
   const removeAwards = (index: number) => {
     const updated = awards.filter((_, i) => i !== index);
-    setawards(updated);
+    setAwards(updated);
   };
 
   const onSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
@@ -180,10 +180,10 @@ const CreateUserProfile = () => {
       return;
     }
     setPhoneInputError("");
-    setFormSubmiting(true);
+    setFormSubmitting(true);
 
     const skillsArray = skills.split(",");
-    const laguageArray = language.split(",");
+    const languageArray = language.split(",");
     const filteredWorkExperience = filterWorkExperience(workExperience);
     const filteredAwards = filterAwards(awards);
     const filteredEducation = filterEducation(education);
@@ -192,7 +192,7 @@ const CreateUserProfile = () => {
       profileUrl: profileUrl,
       bio,
       location,
-      language: laguageArray,
+      language: languageArray,
       skills: skillsArray,
       phone: phone as string,
       age,
@@ -207,13 +207,13 @@ const CreateUserProfile = () => {
       const data = await createProfileApiFn(payLoad);
       if (data) {
         toast.success(data.message);
-        setFormSubmiting(false);
+        setFormSubmitting(false);
         dispatch(fetchCurrentUser());
         navigate("/");
       }
-      setFormSubmiting(false);
+      setFormSubmitting(false);
     } catch (error: any) {
-      setFormSubmiting(false);
+      setFormSubmitting(false);
       toast.error(error.message);
     }
   };
@@ -351,7 +351,7 @@ const CreateUserProfile = () => {
             </select>
           </div>
         </div>
-        <p className="text-black mt-3 text-xl font-satoshi font-semibold">Work experiance</p>
+        <p className="text-black mt-3 text-xl font-satoshi font-semibold">Work experience</p>
         {workExperience.map((exp, index) => (
           <div className="" key={index}>
             <div className="flex w-full gap-4 ">
@@ -416,7 +416,7 @@ const CreateUserProfile = () => {
                 value={exp.description}
                 required
                 onChange={(e) => handleWorkExperienceChange(index, "description", e.target.value)}
-                placeholder="write about your experiance"
+                placeholder="write about your experience"
                 className="p-3 font-dm rounded-2xl outline-none border border-[#1844B5] bg-white h-40"
               />
             </div>
@@ -454,7 +454,7 @@ const CreateUserProfile = () => {
                   value={edu.collegeName}
                   required
                   onChange={(e) => handleEducationChange(index, "collegeName", e.target.value)}
-                  placeholder="comapny name"
+                  placeholder="company name"
                   className="p-3 rounded-2xl font-dm outline-none border border-[#1844B5] bg-white "
                 />
               </div>
@@ -595,9 +595,9 @@ const CreateUserProfile = () => {
           </button>
         </div>
         <button
-          disabled={profileUploadStart || formSbmiting}
+          disabled={profileUploadStart || formSubmitting}
           className="w-full rounded-lg border border-blue-[#1844B5] bg-[#0851CA] px-3 py-2 text-center text-md font-medium text-white shadow-sm transition-all font-dm hover:bg-blue-800  focus:bg-blue-800 mt-8 disabled:bg-blue-900">
-          {formSbmiting ? <span className="loading loading-spinner loading-sm"></span> : "Submit"}
+          {formSubmitting ? <span className="loading loading-spinner loading-sm"></span> : "Submit"}
         </button>
       </form>
     </div>

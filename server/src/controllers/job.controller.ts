@@ -10,7 +10,7 @@ import {
   createJobService,
   getAllJobsOfRecruiterService,
   getAllJobsService,
-  getJpbByIdservice,
+  getJobByIdService,
   deleteJobService,
   updateJobService,
 } from "../services/job.service";
@@ -32,7 +32,7 @@ export const createJobController = asyncHandler(async (req: Request, res: Respon
 export const getJobByIdController = asyncHandler(async (req: Request, res: Response) => {
   const jobId = jobIdSchema.parse(req.params.jobId);
 
-  const { job } = await getJpbByIdservice(jobId);
+  const { job } = await getJobByIdService(jobId);
 
   return res.status(HTTPSTATUS.OK).json({
     message: "Job fetched successfully",

@@ -1,6 +1,6 @@
 import JobsTable from "./_components/JobsTable";
 
-const AppledJobs = () => {
+const AppliedJobs = () => {
   return (
     <>
       <div className="h-20 flex items-center">
@@ -11,4 +11,4 @@ const AppledJobs = () => {
   );
 };
 
-export default AppledJobs;
+export default AppliedJobs;

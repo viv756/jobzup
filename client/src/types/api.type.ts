@@ -67,7 +67,7 @@ export type ProfileType = {
   education: Education[];
   awards: Awards[];
   qualification?: string;
-  experianceTime: string;
+  experienceTime: string;
   gender: GenderEnumType;
   age?: string;
   createdAt: Date;

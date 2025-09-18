@@ -1,8 +1,8 @@
 import mongoose from "mongoose";
 import CompanyModel from "../models/company.model";
 import UserModel from "../models/user.model";
-import { BadRequestException, NotFoundExeption } from "../utils/appError";
-import { UpdateComapnyType } from "../validation/company.validation";
+import { BadRequestException, NotFoundException } from "../utils/appError";
+import { UpdateCompanyType } from "../validation/company.validation";
 
 export const createCompanyService = async (
   userId: string,
@@ -62,16 +62,16 @@ export const getRecruiterCurrentCompanyService = async (userId: string) => {
   const company = await CompanyModel.findOne({ createdBy: userId });
 
   if (!company) {
-    throw new NotFoundExeption("Company not found");
+    throw new NotFoundException("Company not found");
   }
 
   return { company };
 };
 
-export const updateCompanyService = async (userId: string, body: UpdateComapnyType) => {
+export const updateCompanyService = async (userId: string, body: UpdateCompanyType) => {
   const company = await CompanyModel.findOne({ createdBy: userId });
   if (!company) {
-    throw new NotFoundExeption("Company not found");
+    throw new NotFoundException("Company not found");
   }
 
   const updatedCompany = await CompanyModel.findByIdAndUpdate(
@@ -87,10 +87,10 @@ export const updateCompanyService = async (userId: string, body: UpdateComapnyTy
   return { updatedCompany };
 };
 
-export const deleteComapnyService = async (userId: string, companyId: string) => {
+export const deleteCompanyService = async (userId: string, companyId: string) => {
   const company = await CompanyModel.findById(companyId);
   if (!company) {
-    throw new NotFoundExeption("Company not found");
+    throw new NotFoundException("Company not found");
   }
 
   // equals() is a method on ObjectId that can compare an ObjectId to either another objectId or string like userId

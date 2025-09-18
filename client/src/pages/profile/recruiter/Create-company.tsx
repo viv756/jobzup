@@ -15,7 +15,7 @@ import "react-phone-number-input/style.css";
 const CreateCompany = () => {
   const [companyName, setCompanyName] = useState<string>("");
   const [email, setEmail] = useState<string>("");
-  const [companySize, setCompanysize] = useState<string>("");
+  const [companySize, setCompanySize] = useState<string>("");
   const [foundedIn, setFoundedIn] = useState<Date | null>(null);
   const [avgSalary, setAvgSalary] = useState<string>("");
   const [location, setLocation] = useState<string>("");
@@ -28,7 +28,7 @@ const CreateCompany = () => {
   const [twitter, setTwitter] = useState<string>("");
   const [websiteLink, setWebsiteLink] = useState<string>("");
   const [logoFile, setLogoFile] = useState<File | null>(null);
-  const [logoUrl, setLogourl] = useState<string | null>(null);
+  const [logoUrl, setLogoUrl] = useState<string | null>(null);
   const [phoneInputError, setPhoneInputError] = useState<string | undefined>();
   const [imageUploadingStart, setImageUploadingStart] = useState<boolean>(false);
 
@@ -76,7 +76,7 @@ const CreateCompany = () => {
         return;
       }
 
-      setLogourl(data.secure_url);
+      setLogoUrl(data.secure_url);
       toast.success("Image uploaded successfully");
       setImageUploadingStart(false);
     } catch (error: any) {
@@ -89,7 +89,7 @@ const CreateCompany = () => {
     const file = e.target.files?.[0];
     if (file) {
       setLogoFile(file);
-      setLogourl(URL.createObjectURL(file));
+      setLogoUrl(URL.createObjectURL(file));
     }
   };
 
@@ -237,7 +237,7 @@ const CreateCompany = () => {
               Company Size
             </label>
             <input
-              onChange={(e) => setCompanysize(e.target.value)}
+              onChange={(e) => setCompanySize(e.target.value)}
               required
               placeholder="Enter the size of the company"
               value={companySize}

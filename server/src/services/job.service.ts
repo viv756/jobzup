@@ -1,24 +1,25 @@
 import mongoose, { Types } from "mongoose";
+
 import CompanyModel from "../models/company.model";
+import ApplicationModel from "../models/application.model";
 import JobModel from "../models/job.model";
-import { BadRequestException, NotFoundExeption, UnauthorizedException } from "../utils/appError";
+import { BadRequestException, NotFoundException, UnauthorizedException } from "../utils/appError";
 import { CreateJobType, UpdateJbType } from "../validation/job.validation";
 import UserModel from "../models/user.model";
-import ApplicationModel from "../models/application.model";
 
 export const createJobService = async (userId: string, body: CreateJobType) => {
   const user = await UserModel.findById(userId);
   if (!user) {
-    throw new NotFoundExeption("User not found");
+    throw new NotFoundException("User not found");
   }
 
   if (!user.company) {
-    throw new NotFoundExeption("You need to register your company");
+    throw new NotFoundException("You need to register your company");
   }
 
   const company = await CompanyModel.findById(user.company);
   if (!company) {
-    throw new NotFoundExeption("Company not found");
+    throw new NotFoundException("Company not found");
   }
 
   if (userId.toString() !== company.createdBy.toString()) {
@@ -46,7 +47,7 @@ export const createJobService = async (userId: string, body: CreateJobType) => {
   return { job };
 };
 
-export const getJpbByIdservice = async (jobId: string) => {
+export const getJobByIdService = async (jobId: string) => {
   const job = await JobModel.findById(jobId).populate("company");
   if (!job) {
     throw new BadRequestException("Job is not found");

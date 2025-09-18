@@ -16,7 +16,7 @@ import { filterAwards, filterEducation, filterWorkExperience } from "../../../..
 
 const Profile = () => {
   const { currentUser } = useAppSelector((store) => store.user);
-  const [formSbmiting, setFormSubmiting] = useState<boolean>(false);
+  const [formSubmitting, setFormSubmitting] = useState<boolean>(false);
   const [bio, setBio] = useState<string>("");
   const [location, setLocation] = useState<string>("");
   const [language, setLanguage] = useState<string>("");
@@ -26,7 +26,7 @@ const Profile = () => {
   const [gender, setGender] = useState<GenderEnumType | undefined>();
   const [workExperience, setWorkExperience] = useState<WorkExperience[]>([]);
   const [education, setEducation] = useState<Education[]>([]);
-  const [awards, setawards] = useState<Awards[]>([]);
+  const [awards, setAwards] = useState<Awards[]>([]);
 
   useEffect(() => {
     const fetchUserProfile = async () => {
@@ -54,7 +54,7 @@ const Profile = () => {
             }))
           );
 
-          setawards(
+          setAwards(
             (profile.awards ?? [{ name: "", date: null, description: "" }]).map((awa: any) => ({
               ...awa,
               date: awa.date ? new Date(awa.date) : null,
@@ -131,25 +131,25 @@ const Profile = () => {
   const handleAwardChange = <K extends keyof Awards>(index: number, field: K, value: Awards[K]) => {
     const updated = [...awards];
     updated[index][field] = value;
-    setawards(updated);
+    setAwards(updated);
   };
 
   const addAwards = () => {
-    setawards([...awards, { name: "", date: null, description: "" }]);
+    setAwards([...awards, { name: "", date: null, description: "" }]);
   };
 
   const removeAwards = (index: number) => {
     const updated = awards.filter((_, i) => i !== index);
-    setawards(updated);
+    setAwards(updated);
   };
 
   const onSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
 
-    setFormSubmiting(true);
+    setFormSubmitting(true);
 
     const skillsArray = skills.split(",");
-    const laguageArray = language.split(",");
+    const languageArray = language.split(",");
     const filteredWorkExperience = filterWorkExperience(workExperience);
     const filteredAwards = filterAwards(awards);
     const filteredEducation = filterEducation(education);
@@ -157,7 +157,7 @@ const Profile = () => {
     const payLoad: UpdateUserProfilePayloadType = {
       bio,
       location,
-      language: laguageArray,
+      language: languageArray,
       skills: skillsArray,
       age,
       awards: filteredAwards,
@@ -171,11 +171,11 @@ const Profile = () => {
       const data = await updateUserProfile(payLoad);
       if (data) {
         toast.success(data.message);
-        setFormSubmiting(false);
+        setFormSubmitting(false);
       }
-      setFormSubmiting(false);
+      setFormSubmitting(false);
     } catch (error: any) {
-      setFormSubmiting(false);
+      setFormSubmitting(false);
       toast.error(error.message);
     }
   };
@@ -348,7 +348,7 @@ const Profile = () => {
                 value={exp.description}
                 required
                 onChange={(e) => handleWorkExperienceChange(index, "description", e.target.value)}
-                placeholder="write about your experiance"
+                placeholder="write about your experience"
                 className="p-3 font-dm rounded-md outline-none border border-[#1844B5] h-40"
               />
             </div>
@@ -386,7 +386,7 @@ const Profile = () => {
                   value={edu.collegeName}
                   required
                   onChange={(e) => handleEducationChange(index, "collegeName", e.target.value)}
-                  placeholder="comapny name"
+                  placeholder="company name"
                   className="p-3 rounded-md font-dm outline-none border border-[#1844B5] "
                 />
               </div>
@@ -528,9 +528,9 @@ const Profile = () => {
         </div>
         <div className="flex justify-center h-30">
           <button
-            disabled={formSbmiting}
+            disabled={formSubmitting}
             className=" w-150 h-13 rounded-lg border border-blue-[#1844B5] bg-[#0851CA] px-3 py-2 text-center text-xl font-medium text-white shadow-sm transition-all font-dm hover:bg-blue-800  focus:bg-blue-800 mt-8 disabled:bg-blue-900">
-            {formSbmiting ? <span className="loading loading-spinner loading-sm"></span> : "Submit"}
+            {formSubmitting ? <span className="loading loading-spinner loading-sm"></span> : "Submit"}
           </button>
         </div>
       </form>

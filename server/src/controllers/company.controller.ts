@@ -6,7 +6,7 @@ import { UnauthorizedException } from "../utils/appError";
 import { createCompanySchema, updateCompanySchema } from "../validation/company.validation";
 import {
   createCompanyService,
-  deleteComapnyService,
+  deleteCompanyService,
   getRecruiterCurrentCompanyService,
   updateCompanyService,
 } from "../services/company.service";
@@ -75,7 +75,7 @@ export const deleteCompanyController = asyncHandler(async (req: Request, res: Re
   const userId = req.user?._id as string;
   const companyId = req.params.id;
 
-  await deleteComapnyService(userId, companyId);
+  await deleteCompanyService(userId, companyId);
 
   return res.status(HTTPSTATUS.OK).json({
     message: "Company deleted successfully",

@@ -1,7 +1,7 @@
 import mongoose, { Document, Schema } from "mongoose";
 import { GenderEnum, GenderEnumType } from "../enums/profile.enum";
 
-type WorkExperiance = {
+type WorkExperience = {
   company: string;
   position: string;
   startDate: Date | null;
@@ -30,7 +30,7 @@ export interface ProfileDocument extends Document {
   language: string[] | null;
   skills: string[] | null;
   phone: string | null
-  workExperience: WorkExperiance[] | null;
+  workExperience: WorkExperience[] | null;
   education: Education[] | null;
   awards: Awards[] | null;
   qualification: string | null;
@@ -138,5 +138,5 @@ const profileSchema = new Schema<ProfileDocument>(
   { timestamps: true }
 );
 
-const Profilemodel = mongoose.model<ProfileDocument>("Profile", profileSchema);
-export default Profilemodel;
+const ProfileModel = mongoose.model<ProfileDocument>("Profile", profileSchema);
+export default ProfileModel;

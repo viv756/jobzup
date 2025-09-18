@@ -52,7 +52,7 @@ const jobSchema = new Schema<JobDocument>({
   },
   jobType: {
     type: String,
-    enum: Object.values(JobTypeEnum), // ["fulltime", "parttime", "fresher"]
+    enum: Object.values(JobTypeEnum), // ["fulltime", "partTime", "fresher"]
     required: true,
   },
   salary: {

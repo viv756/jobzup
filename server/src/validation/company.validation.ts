@@ -36,5 +36,5 @@ export const updateCompanySchema = z.object({
   websiteLink: z.string().trim().optional(),
 });
 
-export type CreateComapnyType = z.infer<typeof createCompanySchema>;
-export type UpdateComapnyType = z.infer<typeof updateCompanySchema>;
+export type CreateCompanyType = z.infer<typeof createCompanySchema>;
+export type UpdateCompanyType = z.infer<typeof updateCompanySchema>;

@@ -9,13 +9,13 @@ import type { CompanyType, CreateCompanyPayLoadType } from "../../../../../types
 import "react-phone-number-input/style.css";
 
 const UpdateCompanyDetailsForm = () => {
-  const [company, setComapny] = useState<CompanyType>();
+  const [company, setCompany] = useState<CompanyType>();
   const [loading, setLoading] = useState<boolean>(false);
   const [updateStart, setUpdateStart] = useState<boolean>(false);
 
   const [companyName, setCompanyName] = useState<string>("");
   const [email, setEmail] = useState<string>("");
-  const [companySize, setCompanysize] = useState<string>("");
+  const [companySize, setCompanySize] = useState<string>("");
   const [foundedIn, setFoundedIn] = useState<Date | null>(null);
   const [avgSalary, setAvgSalary] = useState<string>("");
   const [location, setLocation] = useState<string>("");
@@ -28,7 +28,7 @@ const UpdateCompanyDetailsForm = () => {
   const [twitter, setTwitter] = useState<string>("");
   const [websiteLink, setWebsiteLink] = useState<string>("");
   const [logoFile, setLogoFile] = useState<File | null>(null);
-  const [logoUrl, setLogourl] = useState<string | undefined>(undefined);
+  const [logoUrl, setLogoUrl] = useState<string | undefined>(undefined);
   const [phoneInputError, setPhoneInputError] = useState<string | undefined>();
   const [imageUploadingStart, setImageUploadingStart] = useState<boolean>(false);
 
@@ -42,10 +42,10 @@ const UpdateCompanyDetailsForm = () => {
         if (data?.company) {
           const company = data.company;
 
-          setComapny(company);
+          setCompany(company);
           setCompanyName(company.companyName || "");
           setEmail(company.email || "");
-          setCompanysize(company.companySize || "");
+          setCompanySize(company.companySize || "");
           setFoundedIn(company.foundedIn ? new Date(company.foundedIn) : null);
           setAvgSalary(company.avgSalary || "");
           setLocation(company.location || "");
@@ -57,7 +57,7 @@ const UpdateCompanyDetailsForm = () => {
           setInstagram(company.instagram || "");
           setTwitter(company.twitter || "");
           setWebsiteLink(company.websiteLink || "");
-          setLogourl(company.companyLogo || "");
+          setLogoUrl(company.companyLogo || "");
         }
       } catch (error: any) {
         toast.error(error.message);
@@ -109,7 +109,7 @@ const UpdateCompanyDetailsForm = () => {
         return;
       }
 
-      setLogourl(data.secure_url);
+      setLogoUrl(data.secure_url);
       toast.dismiss(toastId);
       toast.success("Image uploaded successfully");
       setLogoFile(null);
@@ -126,7 +126,7 @@ const UpdateCompanyDetailsForm = () => {
     const file = e.target.files?.[0];
     if (file) {
       setLogoFile(file);
-      setLogourl(URL.createObjectURL(file));
+      setLogoUrl(URL.createObjectURL(file));
     }
   };
 
@@ -280,7 +280,7 @@ const UpdateCompanyDetailsForm = () => {
                     Company Size
                   </label>
                   <input
-                    onChange={(e) => setCompanysize(e.target.value)}
+                    onChange={(e) => setCompanySize(e.target.value)}
                     required
                     placeholder="Enter the size of the company"
                     value={companySize}
@@ -296,7 +296,7 @@ const UpdateCompanyDetailsForm = () => {
                     Avg.Salary
                   </label>
                   <input
-                    placeholder="Enter the avarage salary"
+                    placeholder="Enter the average salary"
                     required
                     type="number"
                     onChange={(e) => setAvgSalary(e.target.value)}
@@ -396,7 +396,7 @@ const UpdateCompanyDetailsForm = () => {
                 required
                 className="w-full bg-white outline-none border border-[#1844B5] rounded-2xl h-30 p-4"></textarea>
               <label htmlFor="" className="text-md font-dm">
-                Benifits
+                Benefits
               </label>
               <textarea
                 onChange={(e) => setBenefits(e.target.value)}

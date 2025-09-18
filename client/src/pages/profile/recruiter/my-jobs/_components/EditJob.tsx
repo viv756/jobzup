@@ -21,7 +21,7 @@ const EditJob = ({ jobId }: EditJobProps) => {
   const [hiringLocation, setHiringLocation] = useState<string>("");
   const [jobType, setJobType] = useState<JobTypeEnumType | string>("");
   const [salary, setSalary] = useState<string>("");
-  const [experiance, setExperiance] = useState<string>("");
+  const [experience, setExperience] = useState<string>("");
   const [jobQualification, setJobQualification] = useState<string>("");
   const [jobCategory, setJobCategory] = useState<JobCategoriesType | string>("");
   const [description, setDescription] = useState<string>("");
@@ -43,7 +43,7 @@ const EditJob = ({ jobId }: EditJobProps) => {
           setHiringLocation(job.hiringLocation);
           setJobType(job.jobType);
           setSalary(job.salary);
-          setExperiance(job.experience);
+          setExperience(job.experience);
           setJobCategory(job.category);
           setJobQualification(job.qualification);
           setDescription(job.description);
@@ -84,7 +84,7 @@ const EditJob = ({ jobId }: EditJobProps) => {
       closeDate: closingDate,
       qualification: jobQualification,
       hiringLocation: hiringLocation,
-      experience: experiance,
+      experience: experience,
       salary: salary,
       responsibilities: responsibilitiesArray,
       requirements: requirementsArray,
@@ -179,11 +179,11 @@ const EditJob = ({ jobId }: EditJobProps) => {
           <div className="flex gap-4 w-full">
             <div className="flex flex-col w-full gap-2">
               <label htmlFor="" className="text-[18px] font-dm">
-                Job Experiance
+                Job experience
               </label>
               <input
-                value={experiance}
-                onChange={(e) => setExperiance(e.target.value)}
+                value={experience}
+                onChange={(e) => setExperience(e.target.value)}
                 type="text"
                 name=""
                 id=""

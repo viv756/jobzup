@@ -8,12 +8,12 @@ import {
   cancelApplicationService,
   dashboardInfoService,
   getAllApplicationsService,
-  getuserAppliedJobsService,
-  udateAppicationStatusService,
+  getUserAppliedJobsService,
+  updateApplicationStatusService,
 } from "../services/application.service";
 import { HTTPSTATUS } from "../config/http.config";
 
-export const applyToAJobControlller = asyncHandler(async (req: Request, res: Response) => {
+export const applyToAJobController = asyncHandler(async (req: Request, res: Response) => {
   const userId = req.user?._id as string;
 
   const companyId = companyIdSchema.parse(req.params.companyId);
@@ -35,7 +35,7 @@ export const getuserAppliedJobsController = asyncHandler(async (req: Request, re
     pageNumber: parseInt(req.query.page as string) || 1,
   };
 
-  const data = await getuserAppliedJobsService(userId, pagination);
+  const data = await getUserAppliedJobsService(userId, pagination);
 
   return res.status(HTTPSTATUS.OK).json({
     message: "User applied jobs fetched successfully",
@@ -91,7 +91,7 @@ export const updateAppicationStatusController = asyncHandler(
 
     const body = applicationStatusSchema.parse(req.body);
 
-    const application = await udateAppicationStatusService(userId, applicationId, body);
+    const application = await updateApplicationStatusService(userId, applicationId, body);
 
     return res.status(HTTPSTATUS.OK).json({
       message: "Application status changed",

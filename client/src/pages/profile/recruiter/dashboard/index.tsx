@@ -16,9 +16,9 @@ type DashBoardStatsType = {
 const DashBoard = () => {
   const { currentUser } = useAppSelector((store) => store.user);
 
-  const [loadng, setLoading] = useState<boolean>(false);
+  const [loading, setLoading] = useState<boolean>(false);
   const [recentApplicants, setRecentApplicants] = useState<Applicant[]>([]);
-  const [dashBoradStats, setDashBoardStats] = useState<DashBoardStatsType>({
+  const [dashBoardStats, setDashBoardStats] = useState<DashBoardStatsType>({
     totalApplicationReceived: "0",
     totalPostedJobs: "0",
   });
@@ -49,14 +49,14 @@ const DashBoard = () => {
       <div className="h-30 flex items-center">
         <h1 className="text-3xl font-semibold">Welcome back!{currentUser?.name}</h1>
       </div>
-      {loadng ? <DashStatsSkelton /> : <DashStats dashBoardStats={dashBoradStats} />}
+      {loading ? <DashStatsSkelton /> : <DashStats dashBoardStats={dashBoardStats} />}
 
       <div className="flex justify-between mt-4 gap-4">
         <div className="w-full min-h-[500px]"> 
           <DashChart data={dashChartData} />
         </div>
         <div>
-          {loadng ? (
+          {loading ? (
             <div className="">
               <RecentApplicantsSkelton />
             </div>

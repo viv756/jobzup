@@ -2,7 +2,7 @@ import { ApplicationStatusEnumType } from "../enums/application.enum";
 import ApplicationModel from "../models/application.model";
 import CompanyModel from "../models/company.model";
 import JobModel from "../models/job.model";
-import { BadRequestException, NotFoundExeption } from "../utils/appError";
+import { BadRequestException, NotFoundException } from "../utils/appError";
 
 export const applyToAJobService = async (
   userId: string,
@@ -38,7 +38,7 @@ export const applyToAJobService = async (
   return { application };
 };
 
-export const getuserAppliedJobsService = async (
+export const getUserAppliedJobsService = async (
   userId: string,
   pagination: {
     pageSize: number;
@@ -100,7 +100,7 @@ export const getAllApplicationsService = async (
   };
 };
 
-export const udateAppicationStatusService = async (
+export const updateApplicationStatusService = async (
   userId: string,
   applicationId: string,
   body: {
@@ -168,7 +168,7 @@ export const cancelApplicationService = async (userId: string, applicationId: st
   const application = await ApplicationModel.findById(applicationId);
 
   if (!application) {
-    throw new NotFoundExeption("Application not found");
+    throw new NotFoundException("Application not found");
   }
 
   if (String(application.user) !== String(userId)) {

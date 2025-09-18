@@ -1,6 +1,6 @@
 import { Router } from "express";
 import {
-  applyToAJobControlller,
+  applyToAJobController,
   cancelApplicationController,
   dashboardInfoController,
   getAllApplicantionsController,
@@ -12,7 +12,7 @@ const applicationRoutes = Router();
 
 applicationRoutes.post(
   "/job/:jobId/company/:companyId/recruiter/:recruiterId",
-  applyToAJobControlller
+  applyToAJobController
 );
 applicationRoutes.get("/user/appliedJobs", getuserAppliedJobsController);
 applicationRoutes.get("/recruiter/dashboard/info", dashboardInfoController);

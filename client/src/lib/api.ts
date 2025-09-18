@@ -149,9 +149,9 @@ export const getCurrentUserProfileApiFn = () => {
   });
 };
 
-export const applyToAJobApiFn = async (jobId: string, companyId: string, recriterId: string) => {
+export const applyToAJobApiFn = async (jobId: string, companyId: string, recruiterId: string) => {
   return apiFetch<{ message: string }>(
-    `/application/job/${jobId}/company/${companyId}/recruiter/${recriterId}`,
+    `/application/job/${jobId}/company/${companyId}/recruiter/${recruiterId}`,
     {
       method: "POST",
       auth: true,

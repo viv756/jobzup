@@ -1,4 +1,5 @@
 import mongoose from "mongoose";
+
 import ConversationModel from "../models/conversation.model";
 
 export const getUsersForSidebarService = async (userId: string) => {

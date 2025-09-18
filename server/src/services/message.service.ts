@@ -1,4 +1,5 @@
 import mongoose from "mongoose";
+
 import ConversationModel from "../models/conversation.model";
 import MessageModel from "../models/message.model";
 import { BadRequestException } from "../utils/appError";
@@ -20,9 +21,9 @@ export const getMessagesService = async (
   return { messages };
 };
 
-export const sendMessageservice = async (
+export const sendMessageService = async (
   userId: string,
-  recieverId: string,
+  receiverId: string,
   conversationId: string | null,
   body: {
     text: string;
@@ -32,7 +33,7 @@ export const sendMessageservice = async (
 
   if (!conversationId) {
     conversation = await ConversationModel.findOne({
-      "participants.userId": { $all: [userId, recieverId] },
+      "participants.userId": { $all: [userId, receiverId] },
     });
   }
 
@@ -40,7 +41,7 @@ export const sendMessageservice = async (
     conversation = await ConversationModel.create({
       participants: [
         { userId: new mongoose.Types.ObjectId(userId) },
-        { userId: new mongoose.Types.ObjectId(recieverId) },
+        { userId: new mongoose.Types.ObjectId(receiverId) },
       ],
       lastMessage: {
         text: body.text,
@@ -58,7 +59,7 @@ export const sendMessageservice = async (
 
   const newMessage = new MessageModel({
     sender: userId,
-    receiver: recieverId,
+    receiver: receiverId,
     conversationId: conversationId,
     text: body.text,
   });

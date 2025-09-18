@@ -34,7 +34,7 @@ const UserProfile = () => {
   }, [userId]);
 
   if (loading) {
-    return <div>loding</div>;
+    return <div>loading</div>;
   }
 
   return (
@@ -94,7 +94,7 @@ const UserProfile = () => {
           <div className="grid grid-cols-4 gap-1 mt-5">
             <div>
               <p className="text-lg text-gray-950">Experience time</p>
-              <span>{user?.profile?.experianceTime} </span>
+              <span>{user?.profile?.experienceTime} </span>
             </div>
             <div>
               <p className="text-lg text-gray-950">Qualification</p>
@@ -112,12 +112,12 @@ const UserProfile = () => {
 
           <p className="mt-7 text-gray-700 font-dm">{user?.profile?.bio}</p>
 
-          {user?.profile?.workExperiance && user.profile.workExperiance.length > 0 && (
+          {user?.profile?.workExperience && user.profile.workExperience.length > 0 && (
             <>
               <h1 className="text-2xl mt-6 font-semibold font-dm">Work Experience</h1>
               <div className="m-6">
                 <ol className="relative border-s border-blue-700 border-dashed">
-                  {user.profile.workExperiance.map((work, index) => (
+                  {user.profile.workExperience.map((work, index) => (
                     <li className="mb-10 ms-4 " key={index}>
                       <div className="absolute w-3 h-3 bg-white rounded-full mt-1.5 -start-1.5 border border-blue-700"></div>
 
@@ -128,10 +128,12 @@ const UserProfile = () => {
                       <div className="flex gap-3 items-center ">
                         <p className="text-[#0A65FC]">{work.company}</p>
                         <div className="w-1 h-1 bg-gray-700 rounded-full"></div>
-                        <p className=" text-sm  leading-none text-[#444444] font-dm">
-                          {format(work.startDate, "MMMM dd,yyyy")} -{" "}
-                          {format(work.endDate, "MMMM dd,yyyy")}
-                        </p>
+                        {work.startDate && work.endDate && (
+                          <p className=" text-sm  leading-none text-[#444444] font-dm">
+                            {format(work.startDate, "MMMM dd,yyyy")} -{" "}
+                            {format(work.endDate, "MMMM dd,yyyy")}
+                          </p>
+                        )}
                       </div>
 
                       {/* Description */}
@@ -160,10 +162,12 @@ const UserProfile = () => {
                       <div className="flex gap-3 items-center ">
                         <p className="text-[#0A65FC]">{edu.department}</p>
                         <div className="w-1 h-1 bg-gray-700 rounded-full"></div>
-                        <p className=" text-sm font-dm leading-none text-[#444444]">
-                          {format(edu.startDate, "MMMM dd,yyyy")} -{" "}
-                          {format(edu.endDate, "MMMM dd,yyyy")}
-                        </p>
+                        {edu.startDate && edu.endDate && (
+                          <p className=" text-sm font-dm leading-none text-[#444444]">
+                            {format(edu.startDate, "MMMM dd,yyyy")} -{" "}
+                            {format(edu.endDate, "MMMM dd,yyyy")}
+                          </p>
+                        )}
                       </div>
 
                       <p className="mb-4 text-base font-dm text-[#444444] mt-4">
@@ -189,9 +193,11 @@ const UserProfile = () => {
                       <h3 className="text-lg font-dm text-black">{awa.name}</h3>
 
                       <div className="flex gap-3 items-center mt-1">
-                        <p className=" text-sm leading-none text-[#444444] font-dm">
-                          {format(awa.date, "MMMM dd,yyyy")}
-                        </p>
+                        {awa.date && (
+                          <p className=" text-sm leading-none text-[#444444] font-dm">
+                            {format(awa.date, "MMMM dd,yyyy")}
+                          </p>
+                        )}
                       </div>
 
                       <p className="mb-4 text-base font-dm text-[#444444] mt-4">

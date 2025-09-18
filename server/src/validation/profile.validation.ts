@@ -109,7 +109,7 @@ export const updateProfileSchema = z.object({
   location: z.string().trim().optional(),
   language: z.array(z.string().trim()).optional(),
   skills: z.array(z.string().trim()).optional(),
-  workExperiance: workExperienceSchema,
+  workExperince: workExperienceSchema,
   education: educationSchema,
   phone: z.string().trim().optional(),
   awards: awardSchema,

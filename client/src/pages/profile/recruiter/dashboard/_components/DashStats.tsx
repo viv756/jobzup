@@ -63,7 +63,7 @@ const DashStats = ({ dashBoardStats }: DashStatsProps) => {
         color="#FF585C"
       />
       <DashCard
-        title="APPLICATION RECIEVED"
+        title="APPLICATION RECEIVED"
         icon={ShieldUser}
         content={dashBoardStats.totalApplicationReceived}
         color="#7744A7"

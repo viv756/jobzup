@@ -1,4 +1,5 @@
-import Profilemodel from "../models/profile.model";
+import ProfileModel from "../models/profile.model";
+
 import UserModel from "../models/user.model";
 import { BadRequestException, UnauthorizedException } from "../utils/appError";
 
@@ -43,7 +44,7 @@ export const userSettingsService = async (
     throw new BadRequestException("User not found");
   }
 
-  const userProfile = await Profilemodel.findOne({ userId });
+  const userProfile = await ProfileModel.findOne({ userId });
   if (userProfile) {
     userProfile.profileUrl = updatedUser.profilePicture;
     userProfile.phone = updatedUser.phone;

@@ -1,5 +1,6 @@
-import { RoleEnumType } from "../enums/user.enum";
 import UserModel from "../models/user.model";
+
+import { RoleEnumType } from "../enums/user.enum";
 import { BadRequestException, UnauthorizedException } from "../utils/appError";
 
 export const registerService = async (body: {

@@ -16,6 +16,7 @@ import profileRoutes from "./routes/profile.routes";
 import jobRoutes from "./routes/job.route";
 import applicationRoutes from "./routes/application.route";
 import conversationRoutes from "./routes/conversation.route";
+import messageRoutes from "./routes/message.route";
 
 const app = express();
 const BASE_PATH = config.BASE_PATH;
@@ -46,6 +47,7 @@ app.use(`${BASE_PATH}/profile`, isAuthenticated, profileRoutes);
 app.use(`${BASE_PATH}/job`, jobRoutes);
 app.use(`${BASE_PATH}/application`, isAuthenticated, applicationRoutes);
 app.use(`${BASE_PATH}/conversation`, isAuthenticated, conversationRoutes);
+app.use(`${BASE_PATH}/message`, isAuthenticated, messageRoutes);
 
 app.use(errorHandler);
 

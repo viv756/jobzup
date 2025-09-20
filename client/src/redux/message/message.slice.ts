@@ -34,8 +34,6 @@ export const fetchMessageOfSelectedUser = createAsyncThunk<
 >("message/fetchMessageOfSelectedUser", async ({ conversationId, userToChatId }, thunkAPI) => {
   try {
     if (!conversationId) {
-      console.log("jiii");
-
       return thunkAPI.rejectWithValue("first-message");
     }
 
@@ -61,7 +59,7 @@ export const sendMessageToSelectedUser = createAsyncThunk<
     return thunkAPI.rejectWithValue("No user selected");
   }
 
-  const { conversationId, userId: receiverId } = selectedUser;
+  const { userId: receiverId } = selectedUser;
 
   if (!receiverId) {
     return thunkAPI.rejectWithValue("No user selected");

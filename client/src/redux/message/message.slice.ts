@@ -13,6 +13,7 @@ import type { RootState } from "../store";
 interface MessageState {
   messages: Message[];
   users: SidebarUserType[];
+  onlineUsers: string[] | null;
   selectedUser: SidebarUserType | null;
   conversationId: string | null;
   isUsersLoading: boolean;
@@ -23,6 +24,7 @@ const initialState: MessageState = {
   messages: [],
   users: [],
   selectedUser: null,
+  onlineUsers: null,
   conversationId: null,
   isMessagesLoading: false,
   isUsersLoading: false,
@@ -125,6 +127,13 @@ const messageSlice = createSlice({
         state.conversationId = null;
       }
     },
+    setOnlineUsers: (state, action) => {
+      state.onlineUsers = action.payload;
+    },
+
+    setSocketMessage: (state, action) => {
+      state.messages = [...state.messages, action.payload];
+    },
   },
   extraReducers: (builder) => {
     builder
@@ -200,5 +209,5 @@ const messageSlice = createSlice({
   },
 });
 
-export const { setSelectedUserFromSidebar, setSelectedUser } = messageSlice.actions;
+export const { setSelectedUserFromSidebar, setSelectedUser, setOnlineUsers,setSocketMessage } = messageSlice.actions;
 export default messageSlice.reducer;

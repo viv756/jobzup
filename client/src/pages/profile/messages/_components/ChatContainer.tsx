@@ -3,37 +3,56 @@ import { format } from "date-fns";
 
 import { useAppSelector } from "../../../../hooks/useSelector";
 import { useAppDispatch } from "../../../../hooks/useReducer";
-import { fetchMessageOfSelectedUser } from "../../../../redux/message/message.slice";
+import {
+  fetchMessageOfSelectedUser,
+  setSocketMessage,
+} from "../../../../redux/message/message.slice";
 
 import ChatHeader from "./ChatHeader";
 import MessageInput from "./MessageInput";
 import MessageSkeleton from "./skelton/MessageSkelton";
+import { useSocket } from "../../../../context/SocketProvider";
+import type { Message } from "../../../../types/api.type";
 
 const ChatContainer = () => {
   const { messages, selectedUser, conversationId, isMessagesLoading } = useAppSelector(
     (store) => store.message
   );
+  const { socket } = useSocket();
   const { currentUser } = useAppSelector((store) => store.user);
   const dispatch = useAppDispatch();
 
   const messageEndRef = useRef<HTMLDivElement>(null);
 
   useEffect(() => {
-    if (selectedUser) {
-      dispatch(
-        fetchMessageOfSelectedUser({
-          conversationId,
-          userToChatId: selectedUser.userId as string,
-        })
-      );
-    }
+    if (!selectedUser || !socket) return;
+
+    // fetch messages of selected user
+    dispatch(
+      fetchMessageOfSelectedUser({
+        conversationId,
+        userToChatId: selectedUser.userId as string,
+      })
+    );
+
+    // subscribe to new messages
+    const handleNewMessage = (newMessage: Message) => {
+      if (newMessage.sender !== selectedUser.userId) return;
+      dispatch(setSocketMessage(newMessage));
+    };
+
+    socket.on("newMessage", handleNewMessage);
+
+    return () => {
+      socket.off("newMessage", handleNewMessage); // proper cleanup
+    };
   }, [selectedUser, dispatch, conversationId]);
 
-    useEffect(() => {
+  useEffect(() => {
     if (messageEndRef.current && messages) {
-     messageEndRef.current.scrollIntoView({behavior:"smooth"})
-   }
-  },[messages])
+      messageEndRef.current.scrollIntoView({ behavior: "smooth" });
+    }
+  }, [messages]);
 
   if (isMessagesLoading) {
     return (
@@ -72,7 +91,9 @@ const ChatContainer = () => {
                 {format(new Date(message.createdAt), "MM yy EEE")}
               </time>
             </div>
-            <div className="chat-bubble flex flex-col font-dm">{message.text && <p>{message.text}</p>}</div>
+            <div className="chat-bubble flex flex-col font-dm">
+              {message.text && <p>{message.text}</p>}
+            </div>
           </div>
         ))}
       </div>

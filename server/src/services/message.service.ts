@@ -3,6 +3,7 @@ import mongoose from "mongoose";
 import ConversationModel from "../models/conversation.model";
 import MessageModel from "../models/message.model";
 import { BadRequestException } from "../utils/appError";
+import { getReceiverSocketId, io } from "../socket/socket";
 
 export const getMessagesService = async (
   userId: string,
@@ -26,7 +27,6 @@ export const sendMessageService = async (
   receiverId: string,
   body: { text: string }
 ) => {
-
   let conversation;
 
   if (!conversation) {
@@ -54,6 +54,12 @@ export const sendMessageService = async (
   });
 
   await newMessage.save();
+
+  // real time functionality goes here
+  const receiverSocketId = getReceiverSocketId(receiverId);
+  if (receiverSocketId) {
+    io.to(receiverSocketId).emit("newMessage", newMessage);
+  }
 
   return {
     newMessage,

@@ -15,6 +15,11 @@ const io = new Server(server, {
 
 const userSocketMap: Record<string, string> = {};
 
+// Helper to get receiver socket id
+export function getReceiverSocketId(receiverId: string) {
+  return userSocketMap[receiverId];
+}
+
 // Helper to get online users
 const getOnlineUsers = () => Object.keys(userSocketMap);
 

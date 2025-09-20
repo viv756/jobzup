@@ -1,10 +1,15 @@
 import React, { useRef, useState } from "react";
 import { Send, Image, X } from "lucide-react";
+import toast from "react-hot-toast";
+import { useAppDispatch } from "../../../../hooks/useReducer";
+import { sendMessageToSelectedUser } from "../../../../redux/message/message.slice";
 
 const MessageInput = () => {
   const [text, setText] = useState("");
   const [imagePreview, setImagePreview] = useState<string | null>(null);
   const fileInputRef = useRef<HTMLInputElement | null>(null);
+
+  const dispatch = useAppDispatch();
 
   // Handle image selection
   const handleImageChange = (e: React.ChangeEvent<HTMLInputElement>) => {
@@ -30,22 +35,15 @@ const MessageInput = () => {
   const handleSendMessage = (e: React.FormEvent) => {
     e.preventDefault();
 
-    if (!text.trim() && !imagePreview) return;
+    if (!text.trim()) return;
 
-    const newMessage = {
-      text: text.trim(),
-      image: imagePreview,
-      createdAt: new Date(),
-    };
-
-    console.log("Sending message:", newMessage);
-
-    // Reset input fields
-    setText("");
-    setImagePreview(null);
-    if (fileInputRef.current) {
-      fileInputRef.current.value = "";
+    try {
+      dispatch(sendMessageToSelectedUser({ text }));
+      setText("");
+    } catch (error: any) {
+      toast.error(error.message || "failed");
     }
+    // Reset input fields
   };
 
   return (

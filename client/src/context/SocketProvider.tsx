@@ -25,7 +25,6 @@ export const SocketProvider: React.FC<{ children: React.ReactNode }> = ({ childr
       query: { userId: currentUser._id },
       transports: ["websocket"],
     });
-
   }, [currentUser?._id]);
 
   const disconnectSocket = () => {
@@ -41,7 +40,7 @@ export const SocketProvider: React.FC<{ children: React.ReactNode }> = ({ childr
 
     // Listen for connection
     socket.on("connect", () => {
-      console.log("Socket connected with id:")
+      console.log("Socket connected with id:");
     });
 
     // ✅ Listen for online users

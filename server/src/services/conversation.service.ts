@@ -29,9 +29,9 @@ export const getUsersForSidebarService = async (userId: string) => {
         _id: 0,
         conversationId: "$_id",
         userId: "$user._id",
-        fullName: "$user.fullName",
-        profilePic: "$user.profilePic",
-        lastMessage: "$lastMessage",
+        name: "$user.name",
+        profilePicture: "$user.profilePicture",
+       
       },
     },
   ]);

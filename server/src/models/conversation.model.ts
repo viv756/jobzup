@@ -6,11 +6,7 @@ export interface ConversationDocument extends Document {
     userId: mongoose.Types.ObjectId;
     role: "JOB_SEEKER" | "RECRUITER";
   }[];
-  lastMessage: {
-    text: string;
-    sender: mongoose.Types.ObjectId;
-    createdAt: Date;
-  };
+
 
   createdAt: Date;
   updatedAt: Date;
@@ -27,11 +23,6 @@ const conversationSchema = new Schema<ConversationDocument>(
         },
       },
     ],
-    lastMessage: {
-      text: { type: String },
-      sender: { type: Schema.Types.ObjectId, ref: "User" },
-      createdAt: { type: Date },
-    },
   },
   { timestamps: true }
 );

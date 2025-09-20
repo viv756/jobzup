@@ -1,9 +1,9 @@
 import { Router } from "express";
-import { getMessagesController } from "../controllers/message.controller";
+import { getMessagesController, sendMessageController } from "../controllers/message.controller";
 
 const messageRoutes = Router();
 
 messageRoutes.get("/:conversationId/get/:userToChatId", getMessagesController);
-messageRoutes.post("/:conversationId/send/:receiverId", getMessagesController);
+messageRoutes.post("/send/:receiverId", sendMessageController);
 
 export default messageRoutes

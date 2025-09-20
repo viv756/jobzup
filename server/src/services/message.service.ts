@@ -24,59 +24,36 @@ export const getMessagesService = async (
 export const sendMessageService = async (
   userId: string,
   receiverId: string,
-  conversationId: string | null,
-  body: {
-    text: string;
-  }
+  body: { text: string }
 ) => {
+
   let conversation;
 
-  if (!conversationId) {
+  if (!conversation) {
+    // If conversationId invalid or null, try to find existing one by participants
     conversation = await ConversationModel.findOne({
       "participants.userId": { $all: [userId, receiverId] },
     });
   }
 
   if (!conversation) {
+    // Still not found? → Create new one
     conversation = await ConversationModel.create({
       participants: [
         { userId: new mongoose.Types.ObjectId(userId) },
         { userId: new mongoose.Types.ObjectId(receiverId) },
       ],
-      lastMessage: {
-        text: body.text,
-        sender: userId,
-        createdAt: new Date(),
-      },
     });
-  } else {
-    conversation = await ConversationModel.findById(conversationId);
-  }
-
-  if (!conversation) {
-    throw new BadRequestException("Conversation could not be created/found");
   }
 
   const newMessage = new MessageModel({
     sender: userId,
     receiver: receiverId,
-    conversationId: conversationId,
+    conversationId: conversation._id,
     text: body.text,
   });
 
   await newMessage.save();
-
-  if (!newMessage) {
-    throw new BadRequestException("Message sending failed");
-  }
-
-  conversation.lastMessage = {
-    text: body.text,
-    sender: new mongoose.Types.ObjectId(userId),
-    createdAt: new Date(),
-  };
-
-  await conversation.save();
 
   return {
     newMessage,

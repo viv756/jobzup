@@ -1,17 +1,14 @@
 import { useRef } from "react";
-import { Link, useNavigate } from "react-router-dom";
+import { Link } from "react-router-dom";
 import { LuCirclePower } from "react-icons/lu";
 import { GiHamburgerMenu } from "react-icons/gi";
 import { LogOut } from "lucide-react";
 
 import { useAppSelector } from "../hooks/useSelector";
-import toast from "react-hot-toast";
-import { logoutApiFn } from "../lib/api";
-import { useDispatch } from "react-redux";
-import type { AppDispatch } from "../redux/store";
-import { logout } from "../redux/user/user.slice";
+
 import type { ConfirmModalHandle } from "./ConfirmModal";
 import ConfirmModal from "./ConfirmModal";
+import { useLogout } from "../hooks/api/useLogout";
 
 const NavLinks = [
   { name: "Home", path: "/" },
@@ -22,23 +19,10 @@ const NavLinks = [
 
 const Header = () => {
   const { currentUser } = useAppSelector((store) => store.user);
-  const navigate = useNavigate();
-  const dispatch = useDispatch<AppDispatch>();
+   const handleLogout = useLogout();
+
 
   const modalRef = useRef<ConfirmModalHandle>(null);
-
-  const handleLogout = async () => {
-    try {
-      const data = await logoutApiFn();
-      if (data) {
-        dispatch(logout());
-        toast.success(data.message);
-        navigate("/");
-      }
-    } catch (error: any) {
-      toast.error(error.message);
-    }
-  };
 
   return (
     <div className="sticky top-0 bg-white">

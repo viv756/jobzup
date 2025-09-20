@@ -1,6 +1,5 @@
 import { useRef } from "react";
-import { Link, NavLink, useNavigate } from "react-router-dom";
-import toast from "react-hot-toast";
+import { Link, NavLink } from "react-router-dom";
 import {
   Contrast,
   LogOut,
@@ -14,11 +13,9 @@ import {
 } from "lucide-react";
 
 import { useAppSelector } from "../hooks/useSelector";
-import { useAppDispatch } from "../hooks/useReducer";
-import { logoutApiFn } from "../lib/api";
-import { logout } from "../redux/user/user.slice";
 import ConfirmModal from "./ConfirmModal";
 import type { ConfirmModalHandle } from "./ConfirmModal";
+import { useLogout } from "../hooks/api/useLogout";
 
 type UserRole = "JOB_SEEKER" | "RECRUITER";
 
@@ -31,6 +28,7 @@ type SidebarLink = {
 
 const SideBar = () => {
   const { currentUser } = useAppSelector((store) => store.user);
+  const handleLogout = useLogout();
 
   const sidebarLinks: SidebarLink[] = [
     { label: "Dashboard", path: "/profile/dashboard", icon: Contrast, roles: ["RECRUITER"] },
@@ -54,23 +52,7 @@ const SideBar = () => {
     return link.roles.includes(currentUser?.role as UserRole); // show only if role matches
   });
 
-  const navigate = useNavigate();
-  const dispatch = useAppDispatch();
-
   const modalRef = useRef<ConfirmModalHandle>(null);
-
-  const handleLogout = async () => {
-    try {
-      const data = await logoutApiFn();
-      if (data) {
-        dispatch(logout());
-        toast.success(data.message);
-        navigate("/");
-      }
-    } catch (error: any) {
-      toast.error(error.message);
-    }
-  };
 
   return (
     <div className="bg-[#1844B5] min-h-screen min-w-[280px] fixed">

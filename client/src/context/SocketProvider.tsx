@@ -21,10 +21,11 @@ export const SocketProvider: React.FC<{ children: React.ReactNode }> = ({ childr
   const socket = useMemo(() => {
     if (!currentUser) return null;
 
-    return io("http://localhost:8000", {
+    return io(import.meta.env.VITE_BASE_URL, {
       query: { userId: currentUser._id },
       transports: ["websocket"],
     });
+
   }, [currentUser?._id]);
 
   const disconnectSocket = () => {
@@ -40,7 +41,7 @@ export const SocketProvider: React.FC<{ children: React.ReactNode }> = ({ childr
 
     // Listen for connection
     socket.on("connect", () => {
-      console.log("Socket connected with id:", socket.id);
+      console.log("Socket connected with id:")
     });
 
     // ✅ Listen for online users
@@ -68,5 +69,5 @@ export const useSocket = () => {
     throw new Error("useSocket must be used within a SocketProvider");
   }
 
-  return context
+  return context;
 };

@@ -30,7 +30,6 @@ const DashBoard = () => {
       const fetchApplicants = async () => {
         const data = await dashBoardApiFn();
         if (data) {
-          console.log(data);
           setRecentApplicants(data.recentApplicants);
           setDashBoardStats(data.stats);
           setDashChartData(data.jobApplicationStats);

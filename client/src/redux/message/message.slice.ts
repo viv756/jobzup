@@ -28,6 +28,7 @@ const initialState: MessageState = {
   isUsersLoading: false,
 };
 
+// fetch message of selected user
 export const fetchMessageOfSelectedUser = createAsyncThunk<
   GetMessageOfUserSelectedResponse,
   { conversationId: string | null; userToChatId: string }
@@ -48,6 +49,7 @@ export const fetchMessageOfSelectedUser = createAsyncThunk<
   }
 });
 
+// send message to selected user
 export const sendMessageToSelectedUser = createAsyncThunk<
   SendMessageToSelectedUserResponseType,
   { text: string }
@@ -72,6 +74,7 @@ export const sendMessageToSelectedUser = createAsyncThunk<
   });
 });
 
+// fetch users for sidebar
 export const fetchUsersForSidebar = createAsyncThunk<SidebarUsersResponseType, void>(
   "message/fetchUsersForSidebar",
   async (_, thunkAPI) => {

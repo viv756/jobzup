@@ -29,6 +29,12 @@ const ChatContainer = () => {
     }
   }, [selectedUser, dispatch, conversationId]);
 
+    useEffect(() => {
+    if (messageEndRef.current && messages) {
+     messageEndRef.current.scrollIntoView({behavior:"smooth"})
+   }
+  },[messages])
+
   if (isMessagesLoading) {
     return (
       <div className="flex-1 flex flex-col overflow-auto">

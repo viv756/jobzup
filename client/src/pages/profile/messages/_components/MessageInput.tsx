@@ -38,7 +38,7 @@ const MessageInput = () => {
           />
         </div>
 
-        <button type="submit" className="btn btn-sm btn-circle" disabled={!text.trim()}>
+        <button type="submit" className="btn btn-lg btn-circle font-dm" disabled={!text.trim()}>
           <Send size={22} />
         </button>
       </form>

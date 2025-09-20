@@ -1,5 +1,5 @@
 import { useEffect, useState } from "react";
-import { useParams } from "react-router-dom";
+import { useNavigate, useParams } from "react-router-dom";
 import { format } from "date-fns";
 import { Globe } from "lucide-react";
 import { MapPin } from "lucide-react";
@@ -7,12 +7,15 @@ import toast from "react-hot-toast";
 
 import { getUserByIdApiFn } from "../../../../lib/api";
 import type { ProfileType, UserType } from "../../../../types/api.type";
+import { useAppDispatch } from "../../../../hooks/useReducer";
+import { setSelectedUser } from "../../../../redux/message/message.slice";
 
 const UserProfile = () => {
   const [user, setUser] = useState<(UserType & { profile: ProfileType | null }) | undefined>();
-
   const [loading, setLoading] = useState<boolean>(false);
   const { userId } = useParams();
+  const navigate = useNavigate();
+  const dispatch = useAppDispatch();
 
   useEffect(() => {
     setLoading(true);
@@ -32,6 +35,11 @@ const UserProfile = () => {
 
     fetchUser();
   }, [userId]);
+
+  const handleSelectedUser = () => {
+    dispatch(setSelectedUser({ user }));
+    navigate("/profile/messages");
+  };
 
   if (loading) {
     return <div>loading</div>;
@@ -64,7 +72,9 @@ const UserProfile = () => {
               <Globe color="#050100" size={20} /> {user?.profile?.language.join(",")}
             </p>
 
-            <button className="bg-blue-700 text-white p-3 rounded-xl w-full mt-4 font-dm">
+            <button
+              onClick={handleSelectedUser}
+              className="bg-blue-700 text-white p-3 rounded-xl w-full mt-4 font-dm">
               Send Message
             </button>
 

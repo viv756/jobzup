@@ -11,13 +11,6 @@ export const getMessagesController = asyncHandler(async (req: Request, res: Resp
   const userToChatId = req.params.userToChatId;
   const conversationId = req.params.conversationId;
 
-  if (!conversationId) {
-    res.status(HTTPSTATUS.OK).json({
-      message: "Messages fetched successfully",
-      messages: [],
-    });
-  }
-
   const { messages } = await getMessagesService(userId, userToChatId, conversationId);
 
   res.status(HTTPSTATUS.OK).json({

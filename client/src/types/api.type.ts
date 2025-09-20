@@ -364,3 +364,37 @@ export type GetUserAppliedJobsResponseType = {
   totalApplicationCount: number;
   totalPages: number;
 };
+
+export type Message = {
+  _id: string;
+  conversationId: string;
+  sender: string;
+  receiver: string;
+  text: string;
+  createdAt: string;
+  updatedAt: string;
+};
+
+export type GetMessageOfUserSelectedResponse = {
+  message: string;
+  messages: Message[];
+};
+
+export type SidebarUserType = {
+  conversationId: string | null;
+  userId: string 
+  name: string 
+  profilePicture: string 
+
+};
+
+export type SidebarUsersResponseType = {
+  message: string;
+  sidebarUsers: SidebarUserType[];
+};
+
+export type SendMessageToSelectedUserResponseType = {
+  message: string;
+  newMessage: Message;
+  conversationId: string;
+};

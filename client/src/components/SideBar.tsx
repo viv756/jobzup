@@ -5,11 +5,12 @@ import {
   LogOut,
   MessageSquareMore,
   Settings,
-  type LucideIcon,
+  User,
   File,
   BriefcaseBusiness,
   Headset,
   Building2,
+  type LucideIcon,
 } from "lucide-react";
 
 import { useAppSelector } from "../hooks/useSelector";
@@ -32,7 +33,7 @@ const SideBar = () => {
 
   const sidebarLinks: SidebarLink[] = [
     { label: "Dashboard", path: "/profile/dashboard", icon: Contrast, roles: ["RECRUITER"] },
-    { label: "profile", path: "/profile/user", icon: Contrast, roles: ["JOB_SEEKER"] },
+    { label: "profile", path: "/profile/user", icon: User, roles: ["JOB_SEEKER"] },
     { label: "My Jobs", path: "/profile/my-jobs", icon: BriefcaseBusiness, roles: ["RECRUITER"] },
     {
       label: "My Jobs",

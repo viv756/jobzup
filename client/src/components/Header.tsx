@@ -2,13 +2,13 @@ import { useRef } from "react";
 import { Link } from "react-router-dom";
 import { LuCirclePower } from "react-icons/lu";
 import { GiHamburgerMenu } from "react-icons/gi";
-import { LogOut } from "lucide-react";
+import { LogOut, Contrast, User } from "lucide-react";
 
 import { useAppSelector } from "../hooks/useSelector";
+import { useLogout } from "../hooks/api/useLogout";
 
 import type { ConfirmModalHandle } from "./ConfirmModal";
 import ConfirmModal from "./ConfirmModal";
-import { useLogout } from "../hooks/api/useLogout";
 
 const NavLinks = [
   { name: "Home", path: "/" },
@@ -19,8 +19,7 @@ const NavLinks = [
 
 const Header = () => {
   const { currentUser } = useAppSelector((store) => store.user);
-   const handleLogout = useLogout();
-
+  const handleLogout = useLogout();
 
   const modalRef = useRef<ConfirmModalHandle>(null);
 
@@ -42,25 +41,58 @@ const Header = () => {
           {currentUser ? (
             <>
               {currentUser.role === "RECRUITER" ? (
-                <Link to={`/profile/dashboard`} className="flex items-center gap-x-3">
-                  <img
-                    src={currentUser.profilePicture}
-                    className="w-16 h-16 rounded-full object-cover"
-                  />
-                </Link>
+                <div className="dropdown dropdown-end">
+                  <div tabIndex={0} role="button" className=" m-1">
+                    <img
+                      src={currentUser.profilePicture}
+                      className="w-16 h-16 rounded-full object-cover"
+                    />
+                  </div>
+                  <ul
+                    tabIndex={0}
+                    className="dropdown-content menu bg-base-100 rounded-box z-1 w-52 p-2 shadow-sm">
+                    <li className="font-dm text-[15px]">
+                      <Link to={`/profile/dashboard`}>
+                        <Contrast size={15} />
+                        Dashboard
+                      </Link>
+                    </li>
+                    <li>
+                      <button
+                        onClick={() => modalRef.current?.open()}
+                        className="font-dm  text-[15px]">
+                        <LogOut size={15} /> Logout
+                      </button>
+                    </li>
+                  </ul>
+                </div>
               ) : (
-                <Link to={`/profile/user`} className="flex items-center gap-x-3">
-                  <img
-                    src={currentUser.profilePicture}
-                    className="w-16 h-16 rounded-full object-cover"
-                  />
-                </Link>
+                <div className="dropdown dropdown-end">
+                  <div tabIndex={0} role="button" className=" m-1">
+                    <img
+                      src={currentUser.profilePicture}
+                      className="w-16 h-16 rounded-full object-cover"
+                    />
+                  </div>
+                  <ul
+                    tabIndex={0}
+                    className="dropdown-content menu bg-base-100 rounded-box z-1 w-52 p-2 shadow-sm">
+                    <li className="font-dm  text-[15px]">
+                      <Link to={`/profile/user`}>
+                        <User />
+                        Profile
+                      </Link>
+                    </li>
+                    <li>
+                      <button
+                        onClick={() => modalRef.current?.open()}
+                        className="font-dm  text-[15px]">
+                        <LogOut size={15} /> Logout
+                      </button>
+                    </li>
+                  </ul>
+                </div>
               )}
-              <button
-                onClick={() => modalRef.current?.open()}
-                className="btn rounded-3xl text-lg p-6 bg-primary text-white">
-                <LogOut />
-              </button>
             </>
           ) : (
             <Link to={"/sign-in"} className="btn rounded-3xl text-lg p-6 w-36">

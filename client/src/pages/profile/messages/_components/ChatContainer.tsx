@@ -37,6 +37,7 @@ const ChatContainer = () => {
 
     // subscribe to new messages
     const handleNewMessage = (newMessage: Message) => {
+      // check senderId and selected userId is same or not
       if (newMessage.sender !== selectedUser.userId) return;
       dispatch(setSocketMessage(newMessage));
     };
@@ -88,7 +89,7 @@ const ChatContainer = () => {
             </div>
             <div className="chat-header mb-1">
               <time className="text-xs opacity-50 ml-1 font-dm">
-                {format(new Date(message.createdAt), "MM yy EEE")}
+                {format(new Date(message.createdAt), "EEE hh:mm a")}
               </time>
             </div>
             <div className="chat-bubble flex flex-col font-dm">

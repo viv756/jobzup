@@ -5,7 +5,7 @@ import { setSelectedUserFromSidebar } from "../../../../redux/message/message.sl
 import { useAppDispatch } from "../../../../hooks/useReducer";
 
 const ChatHeader = () => {
-  const { selectedUser } = useAppSelector((store) => store.message);
+  const { selectedUser ,onlineUsers} = useAppSelector((store) => store.message);
   const dispatch = useAppDispatch();
 
   return (
@@ -22,9 +22,9 @@ const ChatHeader = () => {
           {/* User info */}
           <div>
             <h3 className="font-medium font-dm">{selectedUser?.name}</h3>
-            {/* <p className="text-sm text-base-content/70">
-              {onlineUsers.includes(selectedUser?.userId as string) ? "Online" : "Offline"}
-            </p> */}
+            <p className="text-sm text-base-content/70">
+              {onlineUsers?.includes(selectedUser?.userId as string) ? "Online" : "Offline"}
+            </p>
           </div>
         </div>
 

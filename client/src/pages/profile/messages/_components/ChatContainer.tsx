@@ -1,4 +1,5 @@
 import { useEffect, useRef } from "react";
+import { format } from "date-fns";
 
 import { useAppSelector } from "../../../../hooks/useSelector";
 import { useAppDispatch } from "../../../../hooks/useReducer";
@@ -62,7 +63,7 @@ const ChatContainer = () => {
             </div>
             <div className="chat-header mb-1">
               <time className="text-xs opacity-50 ml-1">
-                {/* {formatMessageTime(message.createdAt)} */}
+                {format(new Date(message.createdAt), "MM yy EEE")}
               </time>
             </div>
             <div className="chat-bubble flex flex-col">{message.text && <p>{message.text}</p>}</div>

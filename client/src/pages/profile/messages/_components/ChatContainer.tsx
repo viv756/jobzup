@@ -62,11 +62,11 @@ const ChatContainer = () => {
               </div>
             </div>
             <div className="chat-header mb-1">
-              <time className="text-xs opacity-50 ml-1">
+              <time className="text-xs opacity-50 ml-1 font-dm">
                 {format(new Date(message.createdAt), "MM yy EEE")}
               </time>
             </div>
-            <div className="chat-bubble flex flex-col">{message.text && <p>{message.text}</p>}</div>
+            <div className="chat-bubble flex flex-col font-dm">{message.text && <p>{message.text}</p>}</div>
           </div>
         ))}
       </div>

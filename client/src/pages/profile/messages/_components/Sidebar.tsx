@@ -24,7 +24,7 @@ const Sidebar = () => {
       <div className="border-b border-base-300 w-full p-5">
         <div className="flex items-center gap-2">
           <Users className="size-6" />
-          <span className="font-medium hidden lg:block">Contacts</span>
+          <span className="font-medium hidden lg:block font-dm">Contacts</span>
         </div>
 
         {/* TODO: Online filter toggle */}
@@ -36,9 +36,9 @@ const Sidebar = () => {
               // onChange={(e) => setShowOnlineUsersOnly(e.target.checked)}
               className="checkbox checkbox-sm"
             />
-            <span className="text-sm">Show online only</span>
+            <span className="text-sm font-dm">Show online only</span>
           </label>
-          <span className="text-xs text-zinc-500">online</span>
+          <span className="text-xs text-zinc-500 font-dm">online</span>
         </div>
       </div>
 
@@ -68,7 +68,7 @@ const Sidebar = () => {
 
             {/* User info - only visible on larger screens */}
             <div className="hidden lg:block text-left min-w-0">
-              <div className="font-medium truncate">{user.name}</div>
+              <div className="font-medium truncate font-dm">{user.name}</div>
               {/* <div className="text-sm text-zinc-400">
                 {onlineUsers.includes(user.userId) ? "Online" : "Offline"}
               </div> */}
@@ -77,7 +77,7 @@ const Sidebar = () => {
         ))}
 
         {users.length === 0 && (
-          <div className="text-center text-zinc-500 py-4">No online users</div>
+          <div className="text-center text-zinc-500 py-4 font-dm">No online users</div>
         )}
       </div>
     </aside>

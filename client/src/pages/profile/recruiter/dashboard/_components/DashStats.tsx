@@ -23,7 +23,7 @@ type DashStatsProps = {
 
 export const DashCard = ({ title, icon: Icon, content, color }: DashCardPropsTpe) => {
   return (
-    <div className="w-70 bg-white h-30 rounded-md p-4 pt-6 ">
+    <div className="sm:w-70 bg-white h-30 rounded-md p-4 pt-6 ">
       <div className="flex justify-between items-center">
         <p className="text-sm text-gray-800 font-dm">{title}</p>
         <div style={{ backgroundColor: color }} className="p-1 rounded-md">
@@ -37,9 +37,9 @@ export const DashCard = ({ title, icon: Icon, content, color }: DashCardPropsTpe
 
 export const DashStatsSkelton = () => {
   return (
-    <div className="flex gap-6">
+    <div className="flex sm:flex-row flex-col gap-6">
       {Array.from({ length: 4 }).map((_, i) => (
-        <div className="w-70 bg-white h-30 rounded-md p-4 pt-6" key={i}>
+        <div className="sm:w-70 bg-white h-30 rounded-md p-4 pt-6" key={i}>
           <div className="flex flex-col gap-5">
             <div className="flex justify-between items-center">
               <div className="skeleton h-4 w-40"></div>
@@ -55,7 +55,7 @@ export const DashStatsSkelton = () => {
 
 const DashStats = ({ dashBoardStats }: DashStatsProps) => {
   return (
-    <div className="flex gap-6">
+    <div className="flex flex-col sm:flex-row gap-6">
       <DashCard
         title="POSTED JOBS"
         icon={SquareCheckBig}

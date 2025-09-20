@@ -56,7 +56,7 @@ const SideBar = () => {
   const modalRef = useRef<ConfirmModalHandle>(null);
 
   return (
-    <div className="bg-[#1844B5] min-h-screen min-w-[280px] fixed">
+    <div className=" bg-[#1844B5] min-h-screen min-w-[280px] fixed">
       <div className="p-8 pt-10 flex flex-col gap-8">
         <Link to={"/"}>
           <img src={"/jobzup_logo_dark.svg"} className="" alt="" />

@@ -50,7 +50,7 @@ const DashBoard = () => {
       </div>
       {loading ? <DashStatsSkelton /> : <DashStats dashBoardStats={dashBoardStats} />}
 
-      <div className="flex justify-between mt-4 gap-4">
+      <div className="flex sm:flex-row flex-col justify-between mt-4 gap-4">
         <div className="w-full min-h-[500px]"> 
           <DashChart data={dashChartData} />
         </div>

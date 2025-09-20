@@ -3,7 +3,7 @@ import type { JobStats } from "../../../../../types/api.type";
 
 const DashChart = ({ data }: { data: JobStats[] }) => {
   return (
-    <div className="w-full h-full bg-white rounded-t-md  p-4 ">
+    <div className="w-full h-120 sm:h-full bg-white rounded-t-md  p-4 ">
       <h2 className="text-lg font-semibold mb-4">Applicants per Job</h2>
       <ResponsiveContainer width="100%" height="100%">
         <BarChart data={data}>

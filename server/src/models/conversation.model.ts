@@ -1,13 +1,10 @@
 import mongoose, { Schema } from "mongoose";
-import { required } from "zod/mini";
 
 export interface ConversationDocument extends Document {
   participants: {
     userId: mongoose.Types.ObjectId;
     role: "JOB_SEEKER" | "RECRUITER";
   }[];
-
-
   createdAt: Date;
   updatedAt: Date;
 }

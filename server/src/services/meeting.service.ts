@@ -29,11 +29,12 @@ export const createMeetingService = async (
   return { meeting };
 };
 
-
 export const getMeetingsOfUserService = async (userId: string) => {
   const meetings = await MeetingModel.find({
     $or: [{ recruiterId: userId }, { candidateId: userId }],
-  });
+  })
+    .populate("jobId", "title")
+    .populate("recruiterId", "name");
 
   return { meetings };
 };

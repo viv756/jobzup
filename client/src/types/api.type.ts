@@ -76,9 +76,9 @@ export type ProfileType = {
 
 export type Meeting = {
   title: string;
-  jobId: string;
-  recruiterId: string;
-  candidateId: string;
+  jobId: JobType
+  recruiterId: UserType
+  candidateId: UserType
   scheduledAt: Date;
   durationInMinutes: number;
   joinToken?: string;

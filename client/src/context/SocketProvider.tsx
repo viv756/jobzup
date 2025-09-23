@@ -29,6 +29,7 @@ export const SocketProvider: React.FC<{ children: React.ReactNode }> = ({ childr
 
   const disconnectSocket = () => {
     if (socket) {
+      socket.off("disconnect");
       socket.disconnect();
       console.log("Socket disconnected manually");
     }
@@ -50,7 +51,7 @@ export const SocketProvider: React.FC<{ children: React.ReactNode }> = ({ childr
 
     return () => {
       socket.off("getOnlineUsers"); // cleanup
-      socket.off("disconnect");
+      // socket.off("disconnect");
       socket.off("connect");
     };
   }, [socket, dispatch]);

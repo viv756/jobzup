@@ -74,6 +74,19 @@ export type ProfileType = {
   updatedAt: Date;
 };
 
+export type Meeting = {
+  title: string;
+  jobId: string;
+  recruiterId: string;
+  candidateId: string;
+  scheduledAt: Date;
+  durationInMinutes: number;
+  joinToken?: string;
+  status: string;
+  createdAt: Date;
+  updatedAt: Date;
+};
+
 export type WorkExperience = {
   company: string;
   position: string;
@@ -382,10 +395,9 @@ export type GetMessageOfUserSelectedResponse = {
 
 export type SidebarUserType = {
   conversationId: string | null;
-  userId: string 
-  name: string 
-  profilePicture: string 
-
+  userId: string;
+  name: string;
+  profilePicture: string;
 };
 
 export type SidebarUsersResponseType = {
@@ -397,4 +409,14 @@ export type SendMessageToSelectedUserResponseType = {
   message: string;
   newMessage: Message;
   conversationId: string;
+};
+
+export type CreateMeetingResponse = {
+  message: string;
+  meeting: Meeting;
+};
+
+export type GetUserMeetingsResponse = {
+  message: string;
+  meetings: Meeting[];
 };

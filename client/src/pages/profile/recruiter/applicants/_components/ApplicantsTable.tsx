@@ -14,11 +14,16 @@ import {
 import { getAllApplicantsApiFn } from "../../../../../lib/api";
 import Select from ".././_components/Select";
 import type { Applicant } from "../../../../../types/api.type";
+import Modal from "./Modal";
+import CreateMeeting from "./CreateMeeting";
 
 const ApplicantsTable = () => {
   const [applications, setApplications] = useState<Applicant[]>();
   const [pageNumber, setPageNumber] = useState<number>(1);
   const [totalPages, setTotalPages] = useState<number>(0);
+  const [applicantId, setApplicantId] = useState<string>("");
+  const [jobId, setJobId] = useState<string>();
+  const [createMeetingOpenModal, setCreateMeetingOpenModal] = useState<boolean>(false);
 
   const navigate = useNavigate();
   const location = useLocation();
@@ -46,6 +51,12 @@ const ApplicantsTable = () => {
   const onPageChange = (newPage: number) => {
     urlParams.set("page", String(newPage));
     navigate(`/profile/applicants?${urlParams.toString()}`);
+  };
+
+  const handleCreateMeeting = (jobId: string, applicantId: string) => {
+    setApplicantId(applicantId);
+    setJobId(jobId);
+    setCreateMeetingOpenModal(true);
   };
 
   return (
@@ -113,7 +124,13 @@ const ApplicantsTable = () => {
                   <TableCell className="px-6 py-4 font-dm">
                     <div className="flex gap-3">
                       {/* <button className="btn font-medium ">send</button> */}
-                      <button className="btn btn-primary font-medium">create meeting</button>
+                      <button
+                        className="btn btn-primary font-medium"
+                        onClick={() =>
+                          handleCreateMeeting(application.job._id, application.user._id)
+                        }>
+                        create meeting
+                      </button>
                     </div>
                   </TableCell>
                 </TableRow>
@@ -136,6 +153,9 @@ const ApplicantsTable = () => {
           »
         </button>
       </div>
+      <Modal isOpen={createMeetingOpenModal} onClose={() => setCreateMeetingOpenModal(false)}>
+        <CreateMeeting applicantId={applicantId} jobId={jobId as string} onClose={() => setCreateMeetingOpenModal(false)}/>
+      </Modal>
     </div>
   );
 };

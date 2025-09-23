@@ -3,6 +3,7 @@ import type {
   CreateCompanyResponseType,
   CreateJobPayloadType,
   CreateJobResponseType,
+  CreateMeetingResponse,
   CreateProfilePayloadType,
   CreateProfileResponseType,
   CurrentUserResponseType,
@@ -15,6 +16,7 @@ import type {
   GetJobByIdResponse,
   GetUserAppliedJobsResponseType,
   GetUserByIdResponseType,
+  GetUserMeetingsResponse,
   LoginPayLoadType,
   LoginResponseType,
   RegisterPayloadType,
@@ -226,6 +228,27 @@ export const userSettingsPasswordChangeApiFn = async (data: {
   return apiFetch<{ message: string }>("/user/settings/password", {
     method: "PUT",
     body: JSON.stringify(data),
+    auth: true,
+  });
+};
+
+export const createMeetingApiFn = async (
+  recruiterId: string,
+  candidateId: string,
+  data: { title: string; scheduledAt: Date | null | undefined; durationInMinutes: number,jobId:string }
+) => {
+  return apiFetch<CreateMeetingResponse>(
+    `/meeting/create/recruiter/${recruiterId}/candidate/${candidateId}`,
+    {
+      method: "POST",
+      body: JSON.stringify(data),
+      auth: true,
+    }
+  );
+};
+
+export const getMeetingsApiFn = async () => {
+  return apiFetch<GetUserMeetingsResponse>("/meeting/get", {
     auth: true,
   });
 };

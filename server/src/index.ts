@@ -18,6 +18,7 @@ import jobRoutes from "./routes/job.route";
 import applicationRoutes from "./routes/application.route";
 import conversationRoutes from "./routes/conversation.route";
 import messageRoutes from "./routes/message.route";
+import meetingRoutes from "./routes/meeting.route";
 
 const BASE_PATH = config.BASE_PATH;
 
@@ -48,6 +49,7 @@ app.use(`${BASE_PATH}/job`, jobRoutes);
 app.use(`${BASE_PATH}/application`, isAuthenticated, applicationRoutes);
 app.use(`${BASE_PATH}/conversation`, isAuthenticated, conversationRoutes);
 app.use(`${BASE_PATH}/message`, isAuthenticated, messageRoutes);
+app.use(`${BASE_PATH}/meeting`, isAuthenticated, meetingRoutes);
 
 app.use(errorHandler);
 

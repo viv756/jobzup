@@ -24,7 +24,7 @@ const Header = () => {
   const modalRef = useRef<ConfirmModalHandle>(null);
 
   return (
-    <div className="sticky top-0 bg-white">
+    <div className=" top-0 bg-white">
       <div className=" mx-auto flex justify-between h-[100px] ">
         <Link to={"/"} className="flex items-center">
           <img src="/jobzup_logo.svg" className="sm:w-[170px] w-[150px] " alt="" />

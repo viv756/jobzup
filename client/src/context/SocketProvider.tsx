@@ -1,4 +1,4 @@
-import React, { createContext, useContext, useEffect, useMemo } from "react";
+import React, { createContext, useContext, useEffect, useMemo, useState } from "react";
 import { io, Socket } from "socket.io-client";
 
 import { useAppSelector } from "../hooks/useSelector";
@@ -8,6 +8,8 @@ import { setOnlineUsers } from "../redux/message/message.slice";
 interface SocketContextType {
   socket: Socket | null;
   disconnectSocket: () => void;
+  startMeeting: boolean;
+  setStartMeeting: React.Dispatch<React.SetStateAction<boolean>>;
 }
 
 // create context
@@ -15,6 +17,7 @@ const SocketContext = createContext<SocketContextType | undefined>(undefined);
 
 export const SocketProvider: React.FC<{ children: React.ReactNode }> = ({ children }) => {
   const { currentUser } = useAppSelector((store) => store.user);
+  const [startMeeting, setStartMeeting] = useState<boolean>(false);
   const dispatch = useAppDispatch();
 
   // Initialize socket
@@ -57,7 +60,9 @@ export const SocketProvider: React.FC<{ children: React.ReactNode }> = ({ childr
   }, [socket, dispatch]);
 
   return (
-    <SocketContext.Provider value={{ socket, disconnectSocket }}>{children}</SocketContext.Provider>
+    <SocketContext.Provider value={{ socket, disconnectSocket, startMeeting, setStartMeeting }}>
+      {children}
+    </SocketContext.Provider>
   );
 };
 

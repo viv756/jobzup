@@ -22,6 +22,20 @@
   --font-satoshi: "Satoshi", sans-serif;
 }
 
+@theme {
+  --animate-zoom-in-out: zoom-in-out 2s ease-in-out infinite;
+
+  @keyframes zoom-in-out {
+    0%,
+    100% {
+      transform: scale(1);
+    }
+    50% {
+      transform: scale(1.2);
+    }
+  }
+}
+
 @plugin "daisyui" {
   themes: light --default;
 }

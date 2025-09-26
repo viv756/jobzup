@@ -23,6 +23,7 @@ import {
   PUBLIC_ROUTES,
   RECRUITER_ONLY_ROUTES,
 } from "./routePaths";
+import MeetingRoom from "../../pages/profile/meetings/_components/MeetingRoom";
 
 export const publicRoutePaths = [
   { path: PUBLIC_ROUTES.HOME, element: <LandingPage /> },
@@ -33,6 +34,10 @@ export const publicRoutePaths = [
   {
     path: PUBLIC_ROUTES.JOBS,
     element: <AllJobs />,
+  },
+  {
+    path: PUBLIC_ROUTES.MEETING_ROOM,
+    element: <MeetingRoom />,
   },
 ];
 

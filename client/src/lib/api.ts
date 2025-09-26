@@ -235,7 +235,12 @@ export const userSettingsPasswordChangeApiFn = async (data: {
 export const createMeetingApiFn = async (
   recruiterId: string,
   candidateId: string,
-  data: { title: string; scheduledAt: Date | null | undefined; durationInMinutes: number,jobId:string }
+  data: {
+    title: string;
+    scheduledAt: Date | null | undefined;
+    durationInMinutes: number;
+    jobId: string;
+  }
 ) => {
   return apiFetch<CreateMeetingResponse>(
     `/meeting/create/recruiter/${recruiterId}/candidate/${candidateId}`,

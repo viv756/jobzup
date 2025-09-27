@@ -1,5 +1,5 @@
 # --------- Builder Stage ---------
-FROM node:18-alpine AS builder
+FROM node:20-bullseye-slim AS builder
 
 # Set working directory
 WORKDIR /app
@@ -15,7 +15,7 @@ COPY . .
 RUN npm run build
 
 # --------- Production Stage ---------
-FROM node:18-alpine
+FROM node:20-bullseye-slim 
 
 # Set working directory
 WORKDIR /app

@@ -4,7 +4,7 @@ export const PUBLIC_ROUTES = {
   CONTACT: "/contact",
   JOBS: "/jobs/all",
   JOBS_DETAILS: "/job/:jobId",
-  MEETING_ROOM:"/meetings/room/:roomId"
+  MEETING_ROOM: "/meetings/room/:roomId",
 };
 
 export const AUTH_ROUTES = {
@@ -18,7 +18,7 @@ export const PROTECTED_ROUTES = {
   COMPANY_DETAILS: "/company/:companyId",
   SETTINGS: "/profile/settings",
   MESSAGES: "/profile/messages",
-  MEETINGS: "/profile/meetings"
+  MEETINGS: "/profile/meetings",
 };
 
 export const RECRUITER_ONLY_ROUTES = {

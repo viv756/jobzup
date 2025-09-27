@@ -1,5 +1,3 @@
-import crypto from "crypto";
-
 import MeetingModel from "../models/meeting.model";
 import { BadRequestException } from "../utils/appError";
 import { generateToken } from "../utils/crypto";

@@ -1,23 +1,16 @@
-import { defineConfig } from "vite";
-import react from "@vitejs/plugin-react";
-import tailwindcss from "@tailwindcss/vite";
-import { NodeGlobalsPolyfillPlugin } from "@esbuild-plugins/node-globals-polyfill";
+import { defineConfig } from 'vite'
+import react from '@vitejs/plugin-react'
+import tailwindcss from '@tailwindcss/vite'
 
 // https://vite.dev/config/
 export default defineConfig({
-  plugins: [react(), tailwindcss()],
-  define: {
-    global: "globalThis", // already good
-  },
-  resolve: {
-    alias: {
-      events: "events", // polyfill the events module for browser
-      util: "util",
+    server: {
+    host: "0.0.0.0",
+    port: 5173,
+    strictPort: true,
+    watch: {
+      usePolling: true, // optional fix for file watching inside containers
     },
   },
-  optimizeDeps: {
-    esbuildOptions: {
-      plugins: [NodeGlobalsPolyfillPlugin({ buffer: true })],
-    },
-  },
-});
+  plugins: [react(), tailwindcss(),],
+})

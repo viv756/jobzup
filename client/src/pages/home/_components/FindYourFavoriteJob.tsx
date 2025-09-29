@@ -26,7 +26,7 @@ const FindYourFavoriteJob = () => {
 
   if (!jobs) {
     return (
-      <div className="grid grid-cols-3 gap-10 mt-30">
+      <div className="grid sm:grid-cols-3 grid-cols-1 gap-10 mt-30">
         {Array.from({ length: 6 }).map((_, i) => (
           <div className="flex w-[450px] flex-col gap-6" key={i}>
             <div className="flex flex-col gap-4">
@@ -44,15 +44,15 @@ const FindYourFavoriteJob = () => {
 
   return (
     <>
-      <div className="flex justify-between items-center mt-20">
-        <h3 className="font-bold font-satoshi text-[55px] ">Find your favorite job</h3>
+      <div className="flex sm:justify-between flex-wrap items-center mt-20 space-y-7">
+        <h3 className="font-bold font-satoshi sm:text-[55px] text-4xl ">Find your favorite job</h3>
         <Link
           to={"/jobs/all"}
           className="p-2 h-10 bg-[#1844B5] text-white text-md px-7 rounded-3xl font-dm">
           View all jobs
         </Link>
       </div>
-      <div className="grid grid-cols-3 gap-10 mt-10">
+      <div className="grid sm:grid-cols-3 grid-cols-1 gap-10 mt-10">
         {jobs?.map((job) => (
           <JobCard job={job} key={job._id} />
         ))}

@@ -56,7 +56,6 @@ const SignIn = () => {
       }
 
       if (data.user.role === "JOB_SEEKER" && data.user.profile === null) {
-        console.log("l");
         navigate(`/create/profile`);
       } else if (data.user.role === "RECRUITER" && data.user.company === null) {
         navigate(`/create/company`);

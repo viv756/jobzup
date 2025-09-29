@@ -5,16 +5,16 @@ const LandingPage = () => {
   return (
     <div className=" ">
       <div className="relative">
-        <div className="z-10 w-[900px] flex flex-col justify-center items-center mx-auto mt-20 gap-2">
-          <div className="border border-[#6291E1] flex items-center font-dm  text-lg rounded-3xl h-10 p-2 w-90 pl-9 bg-[#F5F7FF]">
+        <div className="z-10 sm:w-[900px] flex flex-col justify-center items-center mx-auto mt-20 gap-2">
+          <div className="border border-[#6291E1] flex items-center font-dm  text-lg rounded-3xl h-10 p-2 sm:w-90 pl-9 bg-[#F5F7FF]">
             <p className="text-center border-r-1 border-[#6291E1] pr-3">The best job seeker</p>
             <span className="text-center text-[#2453CC] pl-3">Explore now</span>
           </div>
           <div className="w-full text-center">
-            <h1 className="text-[70px] font-satoshi font-bold leading-20">
+            <h1 className="sm:text-[70px] text-6xl font-satoshi font-bold leading-20">
               Find jobs that match your
               <br />
-              <span className="text-[70px] font-satoshi font-bold  text-center text-[#3163E6] ">
+              <span className="sm:text-[70px] text-6xl  font-satoshi font-bold  text-center text-[#3163E6] ">
                 ‍preferences
               </span>
             </h1>

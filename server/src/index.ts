@@ -2,6 +2,7 @@ import "dotenv/config";
 import express, { NextFunction, Request, Response } from "express";
 import cookieParser from "cookie-parser";
 import cors from "cors";
+import helmet from "helmet";
 
 import { app, server } from "./socket/socket";
 import { config } from "./config/app.config";
@@ -24,11 +25,28 @@ const BASE_PATH = config.BASE_PATH;
 
 app.use(express.json());
 app.use(cookieParser());
+app.use(helmet());
 
 app.use(
   cors({
     origin: config.FRONTEND_ORIGIN,
     credentials: true,
+  })
+);
+
+app.use(
+  helmet({
+    contentSecurityPolicy: false,
+    hsts: {
+      maxAge: 63072000,
+      includeSubDomains: true,
+      preload: true,
+    },
+    frameguard: { action: "deny" },
+    noSniff: true,
+    hidePoweredBy: true,
+    xssFilter: false,
+    referrerPolicy: { policy: "no-referrer" },
   })
 );
 

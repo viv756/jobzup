@@ -3,6 +3,7 @@ import express, { NextFunction, Request, Response } from "express";
 import cookieParser from "cookie-parser";
 import cors from "cors";
 import helmet from "helmet";
+import ExpressMongoSanitize from "express-mongo-sanitize";
 
 import { app, server } from "./socket/socket";
 import { config } from "./config/app.config";
@@ -26,6 +27,17 @@ const BASE_PATH = config.BASE_PATH;
 app.use(express.json());
 app.use(cookieParser());
 app.use(helmet());
+
+app.use(
+  ExpressMongoSanitize({
+    replaceWith: "_",
+    onSanitize: ({ req, key }) => {
+      console.warn(`This request[${key}] is sanitized`, req);
+    },
+  })
+);
+
+
 
 app.use(
   cors({

@@ -21,23 +21,16 @@ import applicationRoutes from "./routes/application.route";
 import conversationRoutes from "./routes/conversation.route";
 import messageRoutes from "./routes/message.route";
 import meetingRoutes from "./routes/meeting.route";
+import { noSqlInjectionSanitizer, xssSanitizer } from "./middlewares/security.middlewares";
 
 const BASE_PATH = config.BASE_PATH;
 
 app.use(express.json());
 app.use(cookieParser());
+
 app.use(helmet());
-
-app.use(
-  ExpressMongoSanitize({
-    replaceWith: "_",
-    onSanitize: ({ req, key }) => {
-      console.warn(`This request[${key}] is sanitized`, req);
-    },
-  })
-);
-
-
+app.use(noSqlInjectionSanitizer);
+app.use(xssSanitizer());
 
 app.use(
   cors({

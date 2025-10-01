@@ -21,24 +21,19 @@ import applicationRoutes from "./routes/application.route";
 import conversationRoutes from "./routes/conversation.route";
 import messageRoutes from "./routes/message.route";
 import meetingRoutes from "./routes/meeting.route";
-import { noSqlInjectionSanitizer, xssSanitizer } from "./middlewares/security.middlewares";
+import {
+  apiLimiter,
+  // apiLimiter,
+  noSqlInjectionSanitizer,
+  xssSanitizer,
+} from "./middlewares/security.middlewares";
 
 const BASE_PATH = config.BASE_PATH;
 
 app.use(express.json());
 app.use(cookieParser());
 
-app.use(helmet());
-app.use(noSqlInjectionSanitizer);
-app.use(xssSanitizer());
-
-app.use(
-  cors({
-    origin: config.FRONTEND_ORIGIN,
-    credentials: true,
-  })
-);
-
+// Security headers
 app.use(
   helmet({
     contentSecurityPolicy: false,
@@ -55,8 +50,20 @@ app.use(
   })
 );
 
+// Sanitize body
+app.use(noSqlInjectionSanitizer());
+app.use(xssSanitizer());
+
+app.use(
+  cors({
+    origin: config.FRONTEND_ORIGIN,
+    credentials: true,
+  })
+);
+
 app.get(
   "/",
+  apiLimiter,
   asyncHandler(async (req: Request, res: Response, next: NextFunction) => {
     res.status(HTTPSTATUS.OK).json({
       message: "Hello",

@@ -80,5 +80,15 @@ export const passwordChangingSettingsService = async (
   user.password = newPassword;
   await user.save();
 
-  return {user}
+  return { user };
+};
+
+export const getUserRoleService = async (userId: string) => {
+  const user = await UserModel.findById(userId);
+  if (!user) {
+    throw new UnauthorizedException("You need to create an account");
+  }
+
+  const role = user.role;
+  return { role };
 };

@@ -12,6 +12,9 @@ import {
   updateApplicationStatusService,
 } from "../services/application.service";
 import { HTTPSTATUS } from "../config/http.config";
+import { getUserRoleService } from "../services/user.service";
+import { roleGuard } from "../utils/roleGuard";
+import { Permissions } from "../enums/role.enum";
 
 export const applyToAJobController = asyncHandler(async (req: Request, res: Response) => {
   const userId = req.user?._id as string;
@@ -19,6 +22,9 @@ export const applyToAJobController = asyncHandler(async (req: Request, res: Resp
   const companyId = companyIdSchema.parse(req.params.companyId);
   const jobId = jobIdSchema.parse(req.params.jobId);
   const recruiterId = recruiterIdSchema.parse(req.params.recruiterId);
+
+  const { role } = await getUserRoleService(userId);
+  roleGuard(role, [Permissions.APPLY_JOB]);
 
   const { application } = await applyToAJobService(userId, companyId, jobId, recruiterId);
 
@@ -42,7 +48,6 @@ export const getuserAppliedJobsController = asyncHandler(async (req: Request, re
     ...data,
   });
 });
-
 
 export const dashboardInfoController = asyncHandler(async (req: Request, res: Response) => {
   const userId = req.user?._id as string;

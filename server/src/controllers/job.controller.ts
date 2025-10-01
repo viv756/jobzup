@@ -15,11 +15,17 @@ import {
   updateJobService,
 } from "../services/job.service";
 import { HTTPSTATUS } from "../config/http.config";
+import { getUserRoleService } from "../services/user.service";
+import { roleGuard } from "../utils/roleGuard";
+import { Permissions } from "../enums/role.enum";
 
 export const createJobController = asyncHandler(async (req: Request, res: Response) => {
   const userId = req.user?._id as string;
 
   const body = createJobSchema.parse(req.body);
+
+  const { role } = await getUserRoleService(userId);
+  roleGuard(role, [Permissions.POST_JOB]);
 
   const { job } = await createJobService(userId, body);
 
@@ -96,6 +102,9 @@ export const updateJobController = asyncHandler(async (req: Request, res: Respon
 export const jobDeleteController = asyncHandler(async (req: Request, res: Response) => {
   const userId = req.user?._id as string;
   const jobId = jobIdSchema.parse(req.params.jobId);
+
+  const { role } = await getUserRoleService(userId);
+  roleGuard(role, [Permissions.DELETE_JOB]);
 
   await deleteJobService(jobId, userId);
 

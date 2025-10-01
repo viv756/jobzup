@@ -3,7 +3,6 @@ import express, { NextFunction, Request, Response } from "express";
 import cookieParser from "cookie-parser";
 import cors from "cors";
 import helmet from "helmet";
-import ExpressMongoSanitize from "express-mongo-sanitize";
 
 import { app, server } from "./socket/socket";
 import { config } from "./config/app.config";
@@ -27,6 +26,7 @@ import {
   noSqlInjectionSanitizer,
   xssSanitizer,
 } from "./middlewares/security.middlewares";
+import { rateLimiter } from "./middlewares/rateLimit.middleware";
 
 const BASE_PATH = config.BASE_PATH;
 
@@ -61,9 +61,10 @@ app.use(
   })
 );
 
+app.use(rateLimiter({ requested: 1 }));
+
 app.get(
   "/",
-  apiLimiter,
   asyncHandler(async (req: Request, res: Response, next: NextFunction) => {
     res.status(HTTPSTATUS.OK).json({
       message: "Hello",

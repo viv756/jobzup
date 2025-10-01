@@ -11,6 +11,10 @@ const appConfig = () => ({
   // this value is of the same type as the expiresIn   property from the SignOptions type provided by jsonwebtoken.
   JWT_EXPIRES_IN: getEnv("JWT_EXPIRES_IN", "1d") as SignOptions["expiresIn"],
   COOKIE_EXPIRE: getEnv("COOKIE_EXPIRE"),
+
+  ARCJET_ENV: getEnv("ARCJET_ENV"),
+  ARCJET_KEY: getEnv("ARCJET_KEY"),
+
   FRONTEND_ORIGIN: getEnv("FRONTEND_ORIGIN", "localhost"),
 });
 

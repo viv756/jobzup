@@ -20,12 +20,7 @@ import applicationRoutes from "./routes/application.route";
 import conversationRoutes from "./routes/conversation.route";
 import messageRoutes from "./routes/message.route";
 import meetingRoutes from "./routes/meeting.route";
-import {
-  apiLimiter,
-  // apiLimiter,
-  noSqlInjectionSanitizer,
-  xssSanitizer,
-} from "./middlewares/security.middlewares";
+import { noSqlInjectionSanitizer, xssSanitizer } from "./middlewares/security.middlewares";
 import { rateLimiter } from "./middlewares/rateLimit.middleware";
 import { emailValidator } from "./middlewares/emailValidation.middleware";
 import { shieldBotProtection } from "./middlewares/shieldBot.middleware";

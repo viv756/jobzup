@@ -69,34 +69,33 @@ const SignIn = () => {
 
   return (
     <>
-      <div className="min-h-[600px] bg-[#3367EC] max-w-[700px] p-15 rounded-2xl mx-auto">
-        <div className="flex items-center flex-col gap-4">
-          <h1 className="text-6xl text-white font-semibold font-dm">Log In</h1>
-          <p className="text-2xl text-white font-dm">
-            Fill in your email address and password to sign in.
+      <div className="min-h-[500px] shadow-xl max-w-[700px] p-15 rounded-2xl mx-auto mt-20">
+        <div className="space-y-1">
+          <h1 className="text-4xl font-semibold font-dm ">Sign in</h1>
+          <p className="text-xl  font-dm">
+            or don’t have an account?{" "}
+            <Link to={"/sign-up"} className="text-blue-600">
+              Sign Up
+            </Link>
           </p>
         </div>
         <form onSubmit={onSubmit} className="flex flex-col p-6 gap-5">
-          <div className="flex flex-col">
-            <label htmlFor="" className="font-dm text-white">
-              Email
-            </label>
+          <div className="flex flex-col gap-2">
+            <p className="font-dm text-md font-medium ">Account or Email</p>
             <input
               type="email"
               onChange={(e) => setEmail(e.target.value)}
-              className="bg-white p-3 rounded-xl"
+              className="bg-white p-3 outline-none border rounded-sm focus:border-blue-600 border-gray-400"
               placeholder="Enter your email"
             />
             <p className="pl-2 mt-1 text-red-600">{errors && errors.email}</p>
           </div>
           <div className="flex flex-col">
-            <label htmlFor="" className="font-dm text-white">
-              Password
-            </label>
+            <p className="font-dm text-md font-medium ">Password</p>
             <input
               type="password"
               onChange={(e) => setPassword(e.target.value)}
-              className="bg-white p-3 rounded-xl"
+              className="bg-white p-3 outline-none border rounded-sm focus:border-blue-600 border-gray-400"
               placeholder="Enter your password"
             />
             <p className="pl-2 mt-1 text-red-600">{errors && errors.password}</p>

@@ -83,61 +83,59 @@ const SignUp = () => {
   };
 
   return (
-    <div className="min-h-[600px] bg-[#3367EC] max-w-[650px] p-15 rounded-2xl mx-auto">
-      <div className="flex items-center flex-col gap-4">
-        <h1 className="text-6xl text-white font-semibold font-dm">Sign Up</h1>
-        <p className="text-2xl text-white font-dm">Create an account and start using Jobzup.</p>
+    <div className="min-h-[600px] shadow-xl  max-w-[650px] p-15 rounded-2xl mx-auto">
+      <div className=" space-y-2">
+        <h1 className="text-4xl font-semibold font-dm">Sign Up</h1>
+        <p className="text-xl  font-dm">
+          or already have an account?{" "}
+          <Link to={"/sign-in"} className="text-blue-600">
+            {" "}
+            Sign in
+          </Link>
+        </p>
       </div>
       <form onSubmit={onSubmit} className="flex flex-col p-6 gap-5">
-        <div className="flex flex-col">
-          <label htmlFor="" className="font-dm text-white">
-            Name
-          </label>
+        <div className="flex flex-col gap-1">
+          <p className="font-dm text-md font-medium ">Name</p>
           <input
             onChange={(e) => setName(e.target.value)}
             type="text"
             placeholder="Enter your name"
             name="name"
-            className="bg-white p-3 rounded-xl"
+            className="bg-white p-3 outline-none border rounded-sm focus:border-blue-600 border-gray-400"
           />
           <p className="pl-2 mt-1 text-red-600">{errors && errors.name}</p>
         </div>
-        <div className="flex flex-col">
-          <label htmlFor="" className="font-dm text-white">
-            Email
-          </label>
+        <div className="flex flex-col gap-1">
+          <p className="font-dm text-md font-medium ">Email</p>
           <input
             onChange={(e) => setEmail(e.target.value)}
             type="email"
             name="email"
-            className="bg-white p-3 rounded-xl"
+            className="bg-white p-3 outline-none border rounded-sm focus:border-blue-600 border-gray-400"
             placeholder="Enter your email"
           />
           <p className="pl-2 mt-1 text-red-600">{errors && errors.email}</p>
         </div>
-        <div className="flex flex-col">
-          <label htmlFor="" className="font-dm text-white">
-            Password
-          </label>
+        <div className="flex flex-col gap-1">
+          <p className="font-dm text-md font-medium ">Password</p>
           <input
             onChange={(e) => setPassword(e.target.value)}
             type="password"
             name="password"
-            className="bg-white p-3 rounded-xl"
+            className="bg-white p-3 outline-none border rounded-sm focus:border-blue-600 border-gray-400"
             placeholder="Enter your password"
           />
           <p className="px-2 mt-1 text-red-600">{errors && errors.password}</p>
           <p className="px-2 mt-1 text-red-600">{errors && errors.checkPassword}</p>
         </div>
-        <div className="flex flex-col">
-          <label htmlFor="" className="font-dm text-white">
-            Compare password
-          </label>
+        <div className="flex flex-col gap-1">
+          <p className="font-dm text-md font-medium ">Compare password</p>
           <input
             onChange={(e) => setConfirmPassword(e.target.value)}
             name="confirmPassword"
             type="password"
-            className="bg-white p-3 rounded-xl"
+            className="bg-white p-3 outline-none border rounded-sm focus:border-blue-600 border-gray-400"
             placeholder="Re enter your password"
           />
           <p className="px-2 mt-1 text-red-600">{errors && errors.password}</p>
@@ -146,9 +144,7 @@ const SignUp = () => {
 
         <div className="flex justify-center gap-10 ">
           <div className="flex gap-3 items-center">
-            <label htmlFor="" className="text-white text-xl">
-              JOB_SEEKER
-            </label>
+            <p className="font-dm text-md font-medium ">JOB SEEKER</p>
             <input
               onChange={(e) => setRole(e.target.value as "job_seeker" | "recruiter")}
               checked={role === "job_seeker"}
@@ -159,9 +155,7 @@ const SignUp = () => {
             />
           </div>
           <div className="flex gap-3 items-center">
-            <label htmlFor="" className="text-white text-xl">
-              Recruiter
-            </label>
+            <p className="font-dm text-md font-medium ">RECRUITER</p>
             <input
               onChange={(e) => setRole(e.target.value as "job_seeker" | "recruiter")}
               value="recruiter"
@@ -178,14 +172,6 @@ const SignUp = () => {
           </button>
         </div>
       </form>
-
-      <p className="text-white text-center text-xl">
-        Have an account?
-        <Link to={"/sign-in"} className="underline">
-          {" "}
-          login
-        </Link>
-      </p>
     </div>
   );
 };

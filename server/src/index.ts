@@ -28,6 +28,7 @@ import {
 } from "./middlewares/security.middlewares";
 import { rateLimiter } from "./middlewares/rateLimit.middleware";
 import { emailValidator } from "./middlewares/emailValidation.middleware";
+import { shieldBotProtection } from "./middlewares/shieldBot.middleware";
 
 const BASE_PATH = config.BASE_PATH;
 
@@ -62,6 +63,7 @@ app.use(
   })
 );
 
+app.use(shieldBotProtection());
 app.use(rateLimiter({ requested: 1 }));
 
 app.get(

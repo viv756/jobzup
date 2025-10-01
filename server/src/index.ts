@@ -27,6 +27,7 @@ import {
   xssSanitizer,
 } from "./middlewares/security.middlewares";
 import { rateLimiter } from "./middlewares/rateLimit.middleware";
+import { emailValidator } from "./middlewares/emailValidation.middleware";
 
 const BASE_PATH = config.BASE_PATH;
 
@@ -72,7 +73,7 @@ app.get(
   })
 );
 
-app.use(`${BASE_PATH}/auth`, authRoutes);
+app.use(`${BASE_PATH}/auth`, emailValidator(), authRoutes);
 app.use(`${BASE_PATH}/user`, isAuthenticated, userRoutes);
 app.use(`${BASE_PATH}/company`, isAuthenticated, companyRoutes);
 app.use(`${BASE_PATH}/profile`, isAuthenticated, profileRoutes);

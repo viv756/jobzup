@@ -15,6 +15,8 @@ const appConfig = () => ({
   ARCJET_ENV: getEnv("ARCJET_ENV"),
   ARCJET_KEY: getEnv("ARCJET_KEY"),
 
+  HF_API_TOKEN:getEnv("HF_API_TOKEN"),
+
   FRONTEND_ORIGIN: getEnv("FRONTEND_ORIGIN", "localhost"),
 });
 

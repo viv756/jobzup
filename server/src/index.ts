@@ -24,6 +24,7 @@ import { noSqlInjectionSanitizer, xssSanitizer } from "./middlewares/security.mi
 import { rateLimiter } from "./middlewares/rateLimit.middleware";
 import { emailValidator } from "./middlewares/emailValidation.middleware";
 import { shieldBotProtection } from "./middlewares/shieldBot.middleware";
+import { main } from "./utils/hf-ai";
 
 const BASE_PATH = config.BASE_PATH;
 
@@ -85,6 +86,7 @@ app.use(errorHandler);
 server.listen(config.PORT, async () => {
   console.log(`Server listening on port ${config.PORT} in ${config.NODE_ENV}`);
   await connectDatabase();
+  main()
 });
 
 export default app;

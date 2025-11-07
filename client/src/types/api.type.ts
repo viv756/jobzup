@@ -234,6 +234,7 @@ export type CreateJobResponseType = {
 export type GetJobByIdResponse = {
   message: string;
   job: JobType;
+  matchScore:string
 };
 
 export type GetAllJobsResponse = {

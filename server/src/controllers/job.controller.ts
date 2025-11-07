@@ -36,13 +36,15 @@ export const createJobController = asyncHandler(async (req: Request, res: Respon
 });
 
 export const getJobByIdController = asyncHandler(async (req: Request, res: Response) => {
+  const userId = req.user?._id as string;
   const jobId = jobIdSchema.parse(req.params.jobId);
 
-  const { job } = await getJobByIdService(jobId);
+  const { job, matchScore } = await getJobByIdService(jobId, userId);
 
   return res.status(HTTPSTATUS.OK).json({
     message: "Job fetched successfully",
     job,
+    matchScore,
   });
 });
 

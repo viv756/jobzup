@@ -21,6 +21,7 @@ import { formatPhoneNumberIntl } from "react-phone-number-input";
 
 const JobDetails = () => {
   const [job, setJob] = useState<JobType>();
+  const [matchScore,setMatchScore] = useState<string>()
   const { jobId } = useParams();
 
   useEffect(() => {
@@ -29,6 +30,7 @@ const JobDetails = () => {
         const data = await getJobByIdApiFn(jobId as string);
         if (data) {
           setJob(data.job);
+          setMatchScore(data.matchScore)
         }
       };
       fetchPost();
@@ -40,8 +42,6 @@ const JobDetails = () => {
   if (!job) {
     return <div>Loading.....</div>;
   }
-
-  console.log(job);
 
   const jobInfo = () => {
     const items = [
@@ -134,6 +134,7 @@ const JobDetails = () => {
             jobId={jobId as string}
             companyId={job.company._id}
             recruiterId={job.createdBy}
+            matchScore={matchScore}
           />
 
           <div className="p-10 shadow-xl rounded-2xl mt-10 w-120 bg-white ">

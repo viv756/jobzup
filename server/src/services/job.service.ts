@@ -6,6 +6,7 @@ import JobModel from "../models/job.model";
 import { BadRequestException, NotFoundException, UnauthorizedException } from "../utils/appError";
 import { CreateJobType, UpdateJbType } from "../validation/job.validation";
 import UserModel from "../models/user.model";
+import { getJobMatchScore } from "../utils/hf-ai";
 
 export const createJobService = async (userId: string, body: CreateJobType) => {
   const user = await UserModel.findById(userId);
@@ -47,13 +48,23 @@ export const createJobService = async (userId: string, body: CreateJobType) => {
   return { job };
 };
 
-export const getJobByIdService = async (jobId: string) => {
+export const getJobByIdService = async (jobId: string, userId: string) => {
   const job = await JobModel.findById(jobId).populate("company");
   if (!job) {
     throw new BadRequestException("Job is not found");
   }
 
-  return { job };
+  const jobDescription = job.description;
+  
+  const candidate = await UserModel.findById(userId).populate("profile", "bio");
+  if (!candidate) {
+    throw new BadRequestException("User is not found");
+  }
+  const candidateProfile = (candidate.profile as any)?.bio;
+
+  const matchScore = await getJobMatchScore(candidateProfile, jobDescription);
+
+  return { job, matchScore };
 };
 
 export const getAllJobsService = async (

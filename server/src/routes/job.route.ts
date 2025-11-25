@@ -13,7 +13,7 @@ const jobRoutes = Router();
 
 jobRoutes.post("/create/new", isAuthenticated, createJobController);
 jobRoutes.get("/all", getAllJobsController);
-jobRoutes.get("/:jobId",isAuthenticated, getJobByIdController);
+jobRoutes.get("/:jobId", isAuthenticated, getJobByIdController);
 jobRoutes.put("/update/:jobId", isAuthenticated, updateJobController);
 jobRoutes.delete("/delete/:jobId", isAuthenticated, jobDeleteController);
 jobRoutes.get("/recruiter/jobs", isAuthenticated, getAllJobsOfRecruiterController);

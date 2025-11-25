@@ -11,6 +11,7 @@ import {
   Headset,
   Building2,
   type LucideIcon,
+  DollarSign,
 } from "lucide-react";
 
 import { useAppSelector } from "../hooks/useSelector";
@@ -45,6 +46,7 @@ const SideBar = () => {
     { label: "Company", path: "/profile/company", icon: Building2, roles: ["RECRUITER"] },
     { label: "Messages", path: "/profile/messages", icon: MessageSquareMore },
     { label: "Meetings", path: "/profile/meetings", icon: Headset },
+    // { label: "Pricing", path: "/profile/price", icon: DollarSign, roles: ["RECRUITER"] },
     { label: "Settings", path: "/profile/settings", icon: Settings },
   ];
 

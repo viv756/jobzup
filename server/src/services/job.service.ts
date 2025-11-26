@@ -7,6 +7,7 @@ import { BadRequestException, NotFoundException, UnauthorizedException } from ".
 import { CreateJobType, UpdateJbType } from "../validation/job.validation";
 import UserModel from "../models/user.model";
 import { getJobMatchScore } from "../utils/hf-ai";
+import { getSimilarityScore } from "../utils/gemini-ai";
 
 export const createJobService = async (userId: string, body: CreateJobType) => {
   const user = await UserModel.findById(userId);
@@ -55,14 +56,17 @@ export const getJobByIdService = async (jobId: string, userId: string) => {
   }
 
   const jobDescription = job.description;
-  
+
   const candidate = await UserModel.findById(userId).populate("profile", "bio");
   if (!candidate) {
     throw new BadRequestException("User is not found");
   }
-  const candidateProfile = (candidate.profile as any)?.bio;
 
-  const matchScore = await getJobMatchScore(candidateProfile, jobDescription);
+  let matchScore: number | null = null;
+  if (candidate.role === "JOB_SEEKER") {
+    const candidateProfile = (candidate.profile as any)?.bio;
+    matchScore = await getSimilarityScore(candidateProfile, jobDescription);
+  }
 
   return { job, matchScore };
 };

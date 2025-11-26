@@ -11,7 +11,6 @@ import {
   Headset,
   Building2,
   type LucideIcon,
-  DollarSign,
 } from "lucide-react";
 
 import { useAppSelector } from "../hooks/useSelector";

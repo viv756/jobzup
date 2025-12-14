@@ -1,4 +1,4 @@
-import { useRef } from "react";
+import { useRef, useState } from "react";
 import { Link, NavLink } from "react-router-dom";
 import {
   Contrast,
@@ -12,6 +12,7 @@ import {
   Building2,
   type LucideIcon,
 } from "lucide-react";
+import { GiHamburgerMenu } from "react-icons/gi";
 
 import { useAppSelector } from "../hooks/useSelector";
 import ConfirmModal from "./ConfirmModal";
@@ -29,6 +30,7 @@ type SidebarLink = {
 
 const SideBar = () => {
   const { currentUser } = useAppSelector((store) => store.user);
+  const [isOpen, setIsOpen] = useState(false);
   const handleLogout = useLogout();
 
   const sidebarLinks: SidebarLink[] = [
@@ -57,41 +59,69 @@ const SideBar = () => {
   const modalRef = useRef<ConfirmModalHandle>(null);
 
   return (
-    <div className=" bg-[#1844B5] min-h-screen min-w-[280px] fixed">
-      <div className="p-8 pt-10 flex flex-col gap-8">
-        <Link to={"/"}>
-          <img src={"/jobzup_logo_dark.svg"} className="" alt="" />
-        </Link>
-        <ul className="flex flex-col justify-center text-center gap-2 text-white">
-          {visibleLinks.map(({ label, path, icon: Icon }) => (
-            <li key={path}>
-              <NavLink
-                to={path}
-                className={({ isActive }) =>
-                  `rounded-md text-lg px-6 py-1 items-center transition duration-300 flex gap-2 font-dm
-                   ${isActive ? "bg-white text-[#0A65FC]" : "hover:bg-white hover:text-[#0A65FC]"}`
-                }>
-                <Icon /> {label}
-              </NavLink>
-            </li>
-          ))}
-
-          <li>
-            <button
-              onClick={() => modalRef.current?.open()}
-              className="rounded-md text-lg px-6 py-1 items-center transition duration-300 flex gap-2 font-dm hover:bg-white hover:text-[#0A65FC] w-full">
-              <LogOut />
-              Logout
-            </button>
-          </li>
-        </ul>
+    <>
+      {/* Hamburger */}
+      <div className="fixed top-80  z-50 sm:hidden">
+        <button onClick={() => setIsOpen(true)} className="bg-[#1844B5] p-1 rounded-md">
+          <GiHamburgerMenu size={22} color="#ffff" />
+        </button>
       </div>
-      <ConfirmModal
-        ref={modalRef}
-        message="Are you sure you want to log out?"
-        onConfirm={handleLogout}
-      />
-    </div>
+
+      {/* Overlay */}
+      {isOpen && (
+        <div
+          className="fixed inset-0 bg-black/40 z-40 sm:hidden"
+          onClick={() => setIsOpen(false)}
+        />
+      )}
+
+      {/* Sidebar */}
+      <div
+        className={`
+      fixed top-0 left-0 z-50
+      min-h-screen w-[280px] bg-[#1844B5]
+      transform transition-transform duration-300
+      ${isOpen ? "translate-x-0" : "-translate-x-full"}
+      sm:translate-x-0 sm:block
+    `}>
+        <div className="p-8 pt-10 flex flex-col gap-8">
+          <Link to="/">
+            <img src="/jobzup_logo_dark.svg" alt="" />
+          </Link>
+
+          <ul className="flex flex-col gap-2 text-white">
+            {visibleLinks.map(({ label, path, icon: Icon }) => (
+              <li key={path}>
+                <NavLink
+                  to={path}
+                  onClick={() => setIsOpen(false)} // auto close on mobile
+                  className={({ isActive }) =>
+                    `rounded-md text-lg px-6 py-2 flex gap-2 transition
+                ${isActive ? "bg-white text-[#0A65FC]" : "hover:bg-white hover:text-[#0A65FC]"}`
+                  }>
+                  <Icon /> {label}
+                </NavLink>
+              </li>
+            ))}
+
+            <li>
+              {" "}
+              <button
+                onClick={() => modalRef.current?.open()}
+                className="rounded-md text-lg px-6 py-1 items-center transition duration-300 flex gap-2 font-dm hover:bg-white hover:text-[#0A65FC] w-full">
+                {" "}
+                <LogOut /> Logout{" "}
+              </button>{" "}
+            </li>
+          </ul>
+        </div>
+        <ConfirmModal
+          ref={modalRef}
+          message="Are you sure you want to log out?"
+          onConfirm={handleLogout}
+        />
+      </div>
+    </>
   );
 };
 

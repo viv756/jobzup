@@ -68,6 +68,10 @@ JobzUp is an AI-powered job portal designed to connect job seekers and recruiter
 - JWT
 - OAuth (Google / GitHub)
 
+### DevOps
+- Docker
+- Docker Compose
+
 ### Deployment
 - Render / Vercel
 

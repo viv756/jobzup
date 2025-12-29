@@ -7,16 +7,15 @@ JobzUp is an AI-powered job portal designed to connect job seekers and recruiter
 
 ## 📌 Table of Contents
 
-- [Features](#features-)
-- [Tech Stack](#tech-stack-)
-- [Prerequisites](#prerequisites-)
-- [Installation](#installation-)
-- [Usage](#usage-)
-- [Configuration](#configuration-)
-- [Project Structure](#project-structure-)
-- [API Reference](#api-reference-)
-- [Contributing](#contributing-)
-- [Contact](#contact-)
+- [Features](#✨features-)
+- [Tech Stack](#🛠tech-stack-)
+- [Prerequisites](#📋prerequisites-)
+- [Installation](#🚀installation-)
+- [Configuration](#⚙️configuration-)
+- [Usage](#💻usage-)
+- [Project Structure](#📁project-structure-)
+- [Contributing](#🤝contributing-)
+- [Contact](#📧contact-)
 
 ---
 ## ✨ Features
@@ -278,7 +277,7 @@ jobzup/
 ```
 ---
 
-## Contributing
+## 🤝 Contributing
 1. Fork the project
 2. Create your feature branch
 

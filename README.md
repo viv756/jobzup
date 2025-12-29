@@ -97,12 +97,12 @@ cd jobzup
 
 #### Backend
 ```
-cd backend
+cd server
 npm install
 ```
 #### Frontend
 ```
-cd frontend
+cd client
 npm install
 ```
 

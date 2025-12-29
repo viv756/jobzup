@@ -188,76 +188,7 @@ docker-compose down
 | backend  | Node.js / Express API | 8000  |
 | mongodb  | MongoDB database      | 27017 |
 ```
-```
 
----
-
-## 2️⃣ Add Docker Files (Recommended Structure)
-
-Your repo should look like this:
-
-``` text
-jobzup/
-├── docker-compose.yml
-├── backend/
-│   ├── Dockerfile
-├── frontend/
-│   ├── Dockerfile
-
-```
-### 3️⃣ Sample docker-compose.yml
-```
-version: "3.9"
-services:
-  server:
-    build: ./server
-    ports:
-      - "8000:8000"
-    env_file:
-      - ./server/.env 
-  client:
-    build: ./client
-    ports:
-      - "5173:5173"
-    env_file:
-      - ./client/.env  
-    stdin_open: true
-    tty: true
-    depends_on:
-      - server
-
-```
-
-### 4️⃣ Backend Dockerfile
-```
-FROM node:18-alpine
-
-WORKDIR /app
-
-COPY package*.json ./
-RUN npm install
-
-COPY . .
-
-EXPOSE 5000
-
-CMD ["npm", "run", "dev"]
-```
-### 5️⃣ Frontend Dockerfile
-```
-FROM node:18-alpine
-
-WORKDIR /app
-
-COPY package*.json ./
-RUN npm install
-
-COPY . .
-
-EXPOSE 3000
-
-CMD ["npm", "run", "dev"]
-```
 ## 📁 Project Structure
 ```
 jobzup/

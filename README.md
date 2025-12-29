@@ -180,8 +180,8 @@ docker-compose down
 ```
 | Service  | Description           | Port  |
 | -------- | --------------------- | ----- |
-| frontend | React application     | 3000  |
-| backend  | Node.js / Express API | 5000  |
+| frontend | React application     | 5173  |
+| backend  | Node.js / Express API | 8000  |
 | mongodb  | MongoDB database      | 27017 |
 ```
 ```

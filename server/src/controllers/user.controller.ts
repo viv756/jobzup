@@ -8,7 +8,14 @@ import {
   passwordChangingSettingsService,
   userSettingsService,
 } from "../services/user.service";
-import { passwordChangingSchema, userSettingsSchema } from "../validation/user.validation";
+import {
+  passwordChangingSchema,
+  resumeMatchBodySchema,
+  userSettingsSchema,
+} from "../validation/user.validation";
+import { extractPdfText } from "../utils/pdf-parse";
+import { getResumeMatch } from "../utils/resume-analyze";
+import { BadRequestException } from "../utils/appError";
 
 export const getCurrentUserController = asyncHandler(async (req: Request, res: Response) => {
   if (!req.user || !req.user._id) {
@@ -61,6 +68,33 @@ export const passwordChangingSettingsController = asyncHandler(
     });
   }
 );
+
+export const resumeAnalyzerController = asyncHandler(async (req: Request, res: Response) => {
+  const file = req.file;
+  const jobDescription = resumeMatchBodySchema.parse(req.body.jobDescription);
+
+  let resumeText = "";
+
+  if (file) {
+    if (file.mimetype === "application/pdf") {
+      const result = await extractPdfText(file.buffer);
+      resumeText = result.text;
+    } else {
+      throw new BadRequestException("Unsupported file type");
+    }
+  }
+
+  const data = await getResumeMatch({ resumeText, jobDescription });
+
+  if (!data) {
+    throw new BadRequestException("Failed to analyze the resume");
+  }
+
+  return res.status(HTTPSTATUS.OK).json({
+    message: "Resume analyzed successfully",
+    data,
+  });
+});
 
 export const logoutController = asyncHandler(async (req: Request, res: Response) => {
   return res.clearCookie("access_token").status(HTTPSTATUS.OK).json({

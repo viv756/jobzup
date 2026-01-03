@@ -14,3 +14,8 @@ export const passwordChangingSchema = z.object({
   newPassword: z.string().trim().min(4),
   confirmPassword: z.string().trim().min(4),
 });
+
+export const resumeMatchBodySchema = z
+  .string()
+  .min(50, "Job description is too short")
+  .max(15000, "Job description is too long");

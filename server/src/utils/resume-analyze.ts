@@ -58,7 +58,6 @@ IMPORTANT:
 - Use ONLY skills explicitly mentioned.
 - Do NOT infer or generalize skills.
 - Do NOT reword skills.
-- Keep skill names exactly as written.
 
 RESUME:
 """${resumeText}"""

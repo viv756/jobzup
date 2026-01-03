@@ -72,7 +72,7 @@ const ResumeAnalyser = () => {
           </p>
         </div>
       </div>
-      <div className="grid sm:grid-cols-2 h-full sm:px-20 px-2 mt-10">
+      <div className="grid sm:grid-cols-2 h-full sm:px-20 px-2 mt-10 gap-5 sm:gap-0">
         <ResumeSection
           resumeFile={resumeFile}
           setResumeFile={setResumeFile}

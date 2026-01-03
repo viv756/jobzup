@@ -57,7 +57,7 @@ const AiAnalyzer = ({ result, loading }: Props) => {
       <div className="px-7 overflow-hidden">
         <div className="border-dashed h-[640px] w-full rounded-2xl border border-blue-600 pb-2 flex flex-col">
           <div className="flex h-full flex-col items-center justify-center gap-3">
-            <h1 className="text-3xl font-satoshi font-medium"> Ready to Analyze</h1>
+            <h1 className="text-4xl font-satoshi font-medium">Ready to Analyze</h1>
             <p className="text-gray-500 font-satoshi px-4 text-center">
               Upload your resume and paste the job description to see detailed insights here.
             </p>
@@ -78,10 +78,10 @@ const AiAnalyzer = ({ result, loading }: Props) => {
       : "#DC2626"; // red
 
   return (
-    <div className="px-7 overflow-hidden">
-      <div className="border-dashed h-[640px] w-full rounded-2xl border border-blue-600 pb-2 flex flex-col">
+    <div className=" sm:px-7 overflow-hidden w-full">
+      <div className="sm:mt-0 border-dashed h-[640px] w-full rounded-2xl border border-blue-600 pb-2 flex flex-col">
         {/* Header */}
-        <div className="flex  p-5 gap-6 items-center justify-center">
+        <div className="flex p-5 gap-6 items-center justify-center">
           <div>
             <div
               className="relative w-25 h-25 rounded-full flex items-center justify-center"
@@ -97,14 +97,14 @@ const AiAnalyzer = ({ result, loading }: Props) => {
           </div>
 
           <div className="mt-4">
-            <h2 className={`text-lg font-semibold ${feedback.color}`}>{feedback.title}</h2>
+            <h2 className={`text-lg font-semibold font-satoshi ${feedback.color}`}>{feedback.title}</h2>
             <p className="text-sm text-gray-600 mt-1">{feedback.message}</p>
           </div>
         </div>
 
         {/* Scrollable content */}
         <div className="flex-1 overflow-y-auto scrollbar-thin scrollbar-thumb-blue-400 p-4 font-satoshi border-t border-blue-400 border-dashed space-y-4 scroll-smooth">
-          <h3 className="font-medium">Matched Skills</h3>
+          <h3 className="font-medium font-satoshi">Matched Skills</h3>
           <div className="flex flex-wrap gap-1">
             {result.matched_skills.map((skill, i) => (
               <span key={i} className="badge badge-success">
@@ -113,7 +113,7 @@ const AiAnalyzer = ({ result, loading }: Props) => {
             ))}
           </div>
 
-          <h3 className="font-medium">Missing Skills</h3>
+          <h3 className="font-medium font-satoshi">Missing Skills</h3>
           <div className="flex flex-wrap gap-1">
             {result.missing_skills.map((skill, i) => (
               <span key={i} className="badge badge-error">
@@ -124,7 +124,6 @@ const AiAnalyzer = ({ result, loading }: Props) => {
 
           <h3 className="font-semibold text-base">Resume Match Summary</h3>
           <p>{result.resume_fit_summary}</p>
-
           <h3 className="font-semibold text-base">Recommended Improvements</h3>
           <ul className="list-disc list-inside space-y-2">
             {result.action_items.map((action, i) => (

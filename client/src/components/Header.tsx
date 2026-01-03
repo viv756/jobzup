@@ -13,9 +13,9 @@ import ConfirmModal from "./ConfirmModal";
 const NavLinks = [
   { name: "Home", path: "/" },
   { name: "Jobs", path: "/jobs/all" },
+  { name: "Resume analyser", path: "/resume-analyser" },
   { name: "About", path: "/about" },
   { name: "Contact", path: "/contact" },
-  { name: "Resume analyser", path: "/resume-analyser" },
 ];
 
 const Header = () => {

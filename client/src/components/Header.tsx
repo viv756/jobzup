@@ -15,6 +15,7 @@ const NavLinks = [
   { name: "Jobs", path: "/jobs/all" },
   { name: "About", path: "/about" },
   { name: "Contact", path: "/contact" },
+  { name: "Resume analyser", path: "/resume-analyser" },
 ];
 
 const Header = () => {

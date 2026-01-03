@@ -5,6 +5,7 @@ export const PUBLIC_ROUTES = {
   JOBS: "/jobs/all",
   JOBS_DETAILS: "/job/:jobId",
   MEETING_ROOM: "/meetings/room/:roomId",
+  RESUME_ANALYSER:"/resume-analyser"
 };
 
 export const AUTH_ROUTES = {

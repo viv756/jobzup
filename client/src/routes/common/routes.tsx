@@ -26,6 +26,7 @@ import {
 import MeetingRoom from "../../pages/profile/meetings/_components/MeetingRoom";
 import About from "../../pages/about";
 import Contact from "../../pages/contact";
+import ResumeAnalyser from "../../pages/resume-analyser";
 
 export const publicRoutePaths = [
   { path: PUBLIC_ROUTES.HOME, element: <LandingPage /> },
@@ -39,16 +40,20 @@ export const publicRoutePaths = [
   },
   {
     path: PUBLIC_ROUTES.ABOUT,
-    element: <About/>,
+    element: <About />,
   },
   {
     path: PUBLIC_ROUTES.CONTACT,
-    element: <Contact/>,
+    element: <Contact />,
   },
-  
+
   {
     path: PUBLIC_ROUTES.MEETING_ROOM,
     element: <MeetingRoom />,
+  },
+  {
+    path: PUBLIC_ROUTES.RESUME_ANALYSER,
+    element: <ResumeAnalyser />,
   },
 ];
 

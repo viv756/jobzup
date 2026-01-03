@@ -18,10 +18,11 @@ import InfoCard from "./components/InfoCard";
 import { List } from "./components/List";
 import ApplyToAJob from "./components/ApplyToAJob";
 import { formatPhoneNumberIntl } from "react-phone-number-input";
+import Loader from "../../components/Loader";
 
 const JobDetails = () => {
   const [job, setJob] = useState<JobType>();
-  const [matchScore,setMatchScore] = useState<string>()
+  const [matchScore, setMatchScore] = useState<string>();
   const { jobId } = useParams();
 
   useEffect(() => {
@@ -30,7 +31,7 @@ const JobDetails = () => {
         const data = await getJobByIdApiFn(jobId as string);
         if (data) {
           setJob(data.job);
-          setMatchScore(data.matchScore)
+          setMatchScore(data.matchScore);
         }
       };
       fetchPost();
@@ -40,7 +41,11 @@ const JobDetails = () => {
   }, []);
 
   if (!job) {
-    return <div>Loading.....</div>;
+    return (
+      <div className="min-h-screen flex justify-center items-center">
+        <Loader />
+      </div>
+    );
   }
 
   const jobInfo = () => {
@@ -62,7 +67,7 @@ const JobDetails = () => {
   };
 
   return (
-    <>
+    <div className="">
       {/* Header */}
       <div className="bg-[#2453CC] flex flex-col items-start sm:flex-row rounded-2xl min-h-[180px] sm:items-center p-5  sm:pl-13 gap-7 ">
         <div className="bg-white rounded-full p-3">
@@ -168,7 +173,7 @@ const JobDetails = () => {
           </div>
         </div>
       </div>
-    </>
+    </div>
   );
 };
 
